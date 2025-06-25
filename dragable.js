@@ -1,51 +1,53 @@
-
-// dragable float bar
+// dragabel float bar
 
 let isDrag = false;
 let offsX, offsY;
-let ab = null;
+let activeBox2 = null;
 
-function sd(target, x, y) {
+function startDrag2(target, x, y) {
   isDrag = true;
-  ab = target;
+  activeBox2 = target;
   const rect = target.getBoundingClientRect();
   offsX = x - rect.left;
   offsY = y - rect.top;
 }
 
-function d(x, y) {
-  if (!isDrag || !ab) return;
-  ab.style.left = `${x - offsX}px`;
-  ab.style.top = `${y - offsY}px`;
+function drag2(x, y) {
+  if (!isDrag || !activeBox2) return;
+  activeBox2.style.left = `${x - offsX}px`;
+  activeBox2.style.top = `${y - offsY}px`;
 }
 
-function stopDrag() {
+function stopDrag2() {
   isDrag = false;
-  ab = null;
+  activeBox2 = null;
 }
+
 // Attach events to all draggable boxes
 document.querySelectorAll('.drag-box').forEach(box => {
+  // Mouse events
+  box.addEventListener("mousedown", e => {
+    e.preventDefault();
+    startDrag2(box, e.clientX, e.clientY);
+  });
+
   // Touch events
   box.addEventListener("touchstart", e => {
     const touch = e.touches[0];
-    sd(box, touch.clientX, touch.clientY);
-  });
-  box.addEventListener("mousedown", e => {
-     sd(box, e.clientX, e.clientY);
+    startDrag2(box, touch.clientX, touch.clientY);
   });
 });
 
+// Global mouse/touch move and end
+document.addEventListener("mousemove", e => drag2(e.clientX, e.clientY));
+document.addEventListener("mouseup", stopDrag2);
+
 document.addEventListener("touchmove", e => {
   const touch = e.touches[0];
-  d(touch.clientX, touch.clientY);
+  drag2(touch.clientX, touch.clientY);
 }, { passive: false });
-document.addEventListener("mousemove", e => {
-   d(e.clientX, e.clientY);
-}, {passive: false});
 
-document.addEventListener("touchend", stopDrag);
-document.addEventListener("mouseup", stopDrag);
-
+document.addEventListener("touchend", stopDrag2);
 
 // dragable script 
 
