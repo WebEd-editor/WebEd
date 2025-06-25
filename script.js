@@ -1,3 +1,28 @@
+
+// dragable float bar
+
+let isDrag = false;
+let offsX, offsY;
+let ab = null;
+
+function sd(target, x, y) {
+  isDrag = true;
+  ab = target;
+  const rect = target.getBoundingClientRect();
+  offsX = x - rect.left;
+  offsY = y - rect.top;
+}
+
+function d(x, y) {
+  if (!isDrag || !ab) return;
+  ab.style.left = `${x - offsX}px`;
+  ab.style.top = `${y - offsY}px`;
+}
+
+function stopDrag() {
+  isDrag = false;
+  ab = null;
+}
 // Attach events to all draggable boxes
 document.querySelectorAll('.drag-box').forEach(box => {
   // Touch events
@@ -347,7 +372,7 @@ const arrowTR = `<svg width="20" height="20" viewBox="0 0 100 100"><path d="M 10
 
 function updateTree() {
   const tree = document.getElementById('tree');
-  tree.innerHTML = '';
+ // tree.innerHTML = '';
 
   function buildTree(el, container) {
     Array.from(el.children).forEach(child => {
@@ -456,7 +481,7 @@ function isValidDropTarget(target, dragged) {
 
 function treeIcon(){
    const treei = document.getElementById("iconTree");
-   treei.innerHTML ="";
+   //treei.innerHTML ="";
    
    function buildTreeIcon(Aa, Cc) {
      Array.from(Aa.children).forEach(child => {
@@ -1070,31 +1095,6 @@ function listAllProjects() {
       list.appendChild(li);
     });
   };
-}
-
-// dragable float bar
-
-let isDrag = false;
-let offsX, offsY;
-let ab = null;
-
-function sd(target, x, y) {
-  isDrag = true;
-  ab = target;
-  const rect = target.getBoundingClientRect();
-  offsX = x - rect.left;
-  offsY = y - rect.top;
-}
-
-function d(x, y) {
-  if (!isDrag || !ab) return;
-  ab.style.left = `${x - offsX}px`;
-  ab.style.top = `${y - offsY}px`;
-}
-
-function stopDrag() {
-  isDrag = false;
-  ab = null;
 }
 
 
