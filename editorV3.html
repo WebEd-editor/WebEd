@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="My one page dynamic editor. Edit HTML visually!">
+   <meta name="robots" content="index, follow">
+   <meta name="keywords" content="HTML Editor, One Page App, Free Website">
+   <title>editor with new ui</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@300;400;500;700&display=swap");
+:root{
+   --font: 'roboto', sans-sarif;
+   --w : #fff;
+   --fc : #919ad9;
+   --fs: #2e375c;
+   --tab: #1c2644;
+}
+body {
+   background: #0f1023;
+   color: white;
+   margin: 0;
+   font-family: var(--font);
+}
+#foo {
+   position: fixed;
+   z-index: 102;   
+   user-select: none;
+   touch-action: none;
+   cursor: grab;
+   background: #1c2644;
+   padding: 3px;border-radius: 4px;
+   transition: .3s margin-left;
+}
+
+.footerClose {
+   display: flex;flex-direction: column-reverse; margin: 10px;
+}
+footer > button, .tab > button, #projectList  button, #fileList  button {
+   border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white;font-weight: 300;
+
+}
+#fileList{display: flex;width: 100%; padding: 0; overflow: auto;}
+#fileList .fileNamecssjs{display: flex;}
+.fileNamecssjs button{margin: 0 0 0 10px;}
+
+#editor-wrapper, #editModal, #sidebar, #filesTab, #fileManager, #fullcodearea, #seticon, #iconEditor, #addSh, #treeTabForIcon, #previewIconTab, #iconEditorTab{
+   /*background: #1c2644;*/
+   background-color: rgba(90,74,140,.4);
+   backdrop-filter: blur(10px);
+   position: fixed;
+   left: 10px;top: 10px;
+   height: 90%; width: 80%;
+   overflow-x: auto;
+   border-radius: 5px;
+   display: none;
+   z-index: 100;
+   resize: both;
+}
+#editor-wrapper > #controls > button,
+#controls input,
+#controls  textarea,
+.tab textarea,
+#editor-wrapper > #controls > select {
+   border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white;width: 90%; margin: 2px; padding: 5px; 
+}
+#editor-wrapper > #controls{
+   text-align: center; 
+}
+#tree{ font-size: 14px; }
+.tab button {border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white; padding: 5px; }
+
+#canvas {
+      flex: 1;
+      background: #000;
+      overflow: auto;
+      border-radius: 0 0 6px 6px;
+      width: 100%;height: 100%;
+    }
+
+    .editable {
+      outline: 1px dashed #006cff;
+      min-height: 30px;
+      transition: border-color 0.3s ease;
+    }
+    .editable:hover {
+      border-color: #45528a;
+      outline: none;
+    }
+    .selected {
+      outline: 2px dashed darkgreen;
+    }
+
+    .tree-item {
+      padding-left: 10px;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 200;
+    }
+
+    .tree-label {
+      cursor: pointer;
+      color: #f1f1f1;
+    }
+
+    .tree-label:hover {
+      text-decoration: underline;
+      font-weight: 400;
+    }
+
+    .tree-actions button {
+      margin-left: 5px;
+      font-size: 14px;
+      padding: 2px 6px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .tree-actions button:hover {
+      background: #f1f1f1;
+    }
+
+details {
+   font-family: var(--font);
+   font-weight: 200;
+   color: rgb(200,200,200);
+   padding: 0 5px;
+}
+summary {
+   background: rgba(200,200,200,.1);
+   padding: 5px; margin: 0 0 5px 0;
+   font-weight: 400;
+   color: var(--w);
+}
+
+    details input,
+    .tab input[type="text"],
+    details select {
+      background-color: var(--fs);
+      font-family: 'roboto', sans-sarif;
+      color: #fff;
+      padding: 5px 8px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 4px;
+      width: 200px;
+    }
+
+    details input[type="color"] {
+      padding: 0;
+      border: none;
+      width: 40px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    details input[type="range"] {
+      width: 150px;
+    }
+    details input[type="button"]{
+       border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white;font-weight: 300;
+       
+    }
+
+    details select {
+      width: 150px;
+    }
+
+    ::placeholder {
+      color: #bbb;
+    }
+    
+.box-editor {
+  text-align: center;
+  margin: 0;
+  width: 50px;
+}
+
+.margin-box {
+  background: rgba(255, 165, 0, 0.2);
+  display: inline-block;
+  position: relative;
+}
+
+.padding-box {
+  background: rgba(173, 216, 230, 0.3);
+  display: inline-block;
+}
+
+.content-box {
+  background: black;
+  border: 1px solid #ccc;
+  padding: 0;
+  min-width: 50px;
+}
+
+.horizontal-inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="number"] {
+  width: 50px;
+  margin: 4px;
+  text-align: center;
+}
+
+.drag-handle{
+   background: var(--fc);
+   position: sticky;width: 100%;top: 0;
+   cursor: move;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+
+.popup {
+  background: white;
+  color: black;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.popup-icon {
+  font-size: 32px;
+  color: green;
+  background: #e6ffee;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 10px;
+}
+
+.popup-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.popup-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.accept {
+  background-color: #5b47fb;
+  color: white;
+}
+
+.cancel {
+  background-color: #eee;
+  color: #333;
+}
+
+   #iconList{
+       display: flex;
+        flex-wrap: wrap;
+        gap: 1px;
+        justify-content: space-around;
+        max-width: 960px;
+        margin: auto;
+    }
+
+.hidden {
+  display: none;
+}
+
+.fileNamecssjs{
+   background: #3c438f;
+   cursor: pointer;
+   padding: 5px 10px; margin: 10px;
+   list-style-type: none;
+   border: 1px solid #333;border-radius: 5px;
+   transition: .3s border;
+}
+.fileNamecssjs:hover{border: 1px solid #666;}
+
+.fullppppp{width: 100%; height: 100%; position: fixed;top: 0;left: 0;z-index: 9;}
+.fgfg{position: fixed;top: 0;left: 0;z-index: 1099;}
+</style>
+</head>
+<body>
+   
+<div id="notify" style="transition: .3s top;position: fixed;top: -50px;width: 70%;border-radius: 5px; background: darkgreen;padding: 10px; margin: 10px 10% 10px 10%;z-index: 101;";>Notification</div>
+   
+<div id="popup-overlay" class="popup-overlay hidden">
+  <div class="popup">
+    <div class="popup-icon">&#10004;</div>
+    <h2 id="popup-heading">Heading</h2>
+    <p id="popup-description">Description goes here</p>
+    <div class="popup-buttons">
+      <button id="popup-accept" class="popup-btn accept">OK</button>
+      <button id="popup-cancel" class="popup-btn cancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<footer id="foo" class="drag-box">
+   <button onclick="MyTabClose()">×</button>
+   <button onclick="MyOpen('editor-wrapper')" class="footBtn"><svg id="IconSvg" style="width: 15px; height: 15px;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path stroke="#ffffff" fill="none" stroke-width="6.5" d="M 65 20 L 95 50 L 65 80" stroke-linejoin="" stroke-linecap=""></path><path stroke="#ffffff" fill="none" stroke-width="6" d="M 35 20 L 5 50 L 35 80" stroke-linejoin="" stroke-linecap=""></path></svg></button>
+   <button onclick="MyOpen('sidebar')" class="footBtn">TR</button>
+   <button onclick="MyOpen('filesTab')" class="footBtn">CSS | JS</button>
+   <button onclick="MyOpen('fileManager')" class="footBtn">FM</button>
+   <button onclick="MyOpen('fullcodearea')" class="footBtn">FC</button>
+   <button onclick="undoEdit()" class="footBtn">undo</button>
+   <button onclick="redoEdit()" class="footBtn">redo</button>
+   <button id="fullScreenBtn">FS</button>
+</footer>
+
+<ppp style="background: #000;position: fixed;top: 5px;left: 5px;height: 90%;width: 90%;overflow: auto;border-radius: 5px;resize: both;" class="drag-el">
+   <div><div class="drag-handle">__</div>
+   <div onclick="document.getElementById('canvas').classList.toggle('fullppppp'); document.getElementById('fulltbtnnnn').classList.toggle('fgfg');" id="fulltbtnnnn" style="position: absolute;top: 0;left: 0;"><svg id="IconSvg" style="width: 20px; height: 20px;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" stroke-width="10"><path stroke="white" fill="none" d="M 30 10 L 10 10 L 10 30"></path><path stroke="white" fill="none" d="M 10 70 L 10 90 L 30 90"></path><path stroke="white" fill="none" d="M 70 10 L 90 10 L 90 30"></path><path stroke="white" fill="none" d="M 90 70 L 90 90 L 70 90"></path></svg></div>
+   </div>
+   <iframe id="canvas" sandbox="allow-scripts allow-same-origin allow-modals allow-forms allow-popups allow-downloads" style="width:100%;border: none;"></iframe>
+</ppp>
+
+<div id="editor-wrapper" class="tab drag-el">
+   <div class="drag-handle">__</div>
+   <button onclick="MyClose('editor-wrapper')">×</button>
+   <input type="checkbox" id="elementsOutlineCheck" checked>
+   <script>document.getElementById("elementsOutlineCheck").addEventListener('change', e => {document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.style.outline = e.target.checked ? "2px dashed blue" : "none";});});</script>
+  <div id="controls">
+    <button class="button" onclick="addElement('div')">Div</button>
+    <button class="button" onclick="addElement('section')">Section</button>
+    <button class="button" onclick="addElement('p')">Paragraph</button>
+    <button class="button" onclick="addElement('h1')">Heading</button>
+    <button class="button" onclick="addElement('button')">Button</button>
+    <button class="button" onclick="MyOpen('seticon')">SVG(Icon)</button>
+    <button class="button" onclick="addElement('aside')">Aside</button>
+    <button class="button" onclick="addElement('h2')">H2</button>
+    <button class="button" onclick="addElement('h3')">H3</button>
+    <button class="button" onclick="document.getElementById('mediaInput').click()">Upload Media</button>
+    
+    <input type="text" id="customId" placeholder="ID">
+    <input type="text" id="customClass" placeholder="Class">
+    <input type="text" id="customOnclick" placeholder="Onclick JS">
+    <input type="file" id="mediaInput" accept="image/*,video/*,audio/*" style="display: none;" onchange="handleMediaUpload(event)">
+  </div>
+</div>
+
+<div id="seticon" class="tab drag-el">
+   <div class="drag-handle">__</div>
+   <button onclick="MyClose('seticon')">×</button>
+   <button onclick="MyOpen('iconEditor')">Advanced</button><br>
+   <strong>Icons Gallery</strong>
+   <div id="iconList"></div>
+</div>
+
+<div id="iconEditor" class="tab drag-el">
+   <div class="drag-handle">__</div>
+   <button onclick="MyOpen('seticon')">×</button><br>
+   <button style="display: flex;">Show Grid <input style="margin: 0px;" type="checkbox" id="toggleGrid" checked></button>
+   <button onclick="MyOpen('addSh')">Add Shape</button>
+   <button onclick="resetCanvas()">clear canvas</button>
+   <button onclick="copyCode()">copy code</button>
+   <button onclick="MyOpen('previewIconTab')">preview</button>
+   <input type="file" id="addImgInBackSvg">
+   <button onclick="MyOpen('treeTabForIcon')">🌲</button>
+   <button onclick="pushIconInArray()">Save Icon</button>
+   <div id="iconGrid"><svg id="iconEditorArea" style="border: 1px solid white;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></svg></div>
+   <textarea id="svgCode" readonly></textarea>
+</div>
+   <div id="addSh" class="tab drag-el" style="width: 40%;height: 20%;left: 30px;top: 30px; background: #2d365a;">
+      <div class="drag-handle">---</div>
+      <button onclick="MyClose('addSh')">×</button>
+      <div style="text-align: center;width: 100%;">
+         <button onclick="addLine()">line</button><br><button onclick="addPathLine()">line join</button><button onclick="closePath()">close line</button><br><button onclick="addCircle()">circle</button><br><button onclick="addCurve()">curve</button><br><button onclick="addRectangle()">rectangle</button>
+         <select onchange="currentCommand = this.value">
+              <option value="L">Line (L)</option>
+              <option value="H">Horizontal (H)</option>
+              <option value="V">Vertical (V)</option>
+              <option value="C">Cubic Bezier (C)</option>
+         </select>
+      </div>
+   </div>
+   <div id="previewIconTab" class="tab drag-el" style="width: 200px;height: 200px;left: 50px;top: 40px; background: #2d365a;">
+      <div class="drag-handle">---</div>
+      <button onclick="MyClose('previewIconTab')">×</button>
+      <div id="previewIcon" style="padding: 5px; background: black;"></div>
+   </div>
+   <div id="treeTabForIcon" class="tab drag-el" style="top: 20px;right: 20px; height: 40%;"><div class="drag-handle">---</div><button onclick="MyClose('treeTabForIcon')">×</button><strong>Icon Tree</strong><br><div id="iconTree"></div></div>
+   <div id="iconEditorTab" class="tab drag-el" style="top: 60px;right: 60px; height: 40%; padding: 10px;"><div class="drag-handle">---</div><button onclick="MyClose('iconEditorTab')">×</button><button onclick="apllyIcon()">apply</button><br>
+      fill: <input id="iconFill" type="color"><input type="checkbox" id="iconFillN"><br>
+      stroke: <input id="iconStroke" type="color"><br>
+      stroke-width: <input id="iconStrWid" oninput="apllyIcon()" type="range" min="0.5" max="20" step="0.5" value="1"><br>
+      stroke-linejoin: <select id="linejoin"><option value="round">round</option><option value="none">none</option></select>
+      stroke-linecap: <select id="linecap"><option value="round">round</option><option value="none">none</option></select>
+   </div>
+
+<div id="sidebar" class="tab drag-el">
+   <div class="drag-handle">__</div>
+   <button onclick="MyClose('sidebar')">×</button>
+  <strong>Element Tree</strong>
+  <div id="tree"></div>
+</div>
+
+<div id="editModal" class="tab drag-el">
+   <div class="drag-handle">__</div>
+   <button class="buttonnn" onclick="applyEdit()" style="position: sticky;top: 20px;">Save</button>
+   <button class="buttonnn" style="background: #e74c3c;position: sticky;top: 20px;" onclick="MyClose('editModal')">Cancel</button>
+   <button class="buttonnn" onclick="copyStyle()">Copy</button>
+   <button class="buttonnn" onclick="pasteStyle()">Paste</button>
+ <div style="overflow: auto;">
+  <strong>Naming</strong>
+  <input class="inputtt" type="text" id="editId" placeholder="New ID">
+  <input class="inputtt" type="text" id="editClass" placeholder="New Class">
+  <input class="inputtt" type="text" id="editSrc" placeholder="Enter Source">
+  
+  <!-- TEXT & FONT -->
+  <details>
+    <summary>Text and Font Properties</summary>
+    color: <input type="color" id="clr" value="#ffffff"><br>
+    font-family: 
+    <select id="fnfml">
+      <option value="arial">Arial</option>
+      <option value="courier new">'Courier New'</option>
+      <option value="times new roman">'Times New Roman'</option>
+      <option value="roboto, sans-sarif">'Roboto'</option>
+      <option value="open sans">'Open Sans'</option>
+      <option value="nunito, sans-sarif">'nunito'</option>
+    </select><br>
+    font-size: <input type="range" oninput="applyEdit()" id="fnsz" min="1" max="30"> px<br>
+    font-weight: <input type="range" id="fnwet" min="100" max="900" step="100" value="200"> <br>
+    font-style: 
+    <select id="fnstl">
+      <option value="normal">normal</option>
+      <option value="italic">italic</option>
+      <option value="oblique">oblique</option>
+    </select><br>
+    text-align: 
+    <select id="txtalg">
+      <option value="left">left</option>
+      <option value="center">center</option>
+      <option value="right">right</option>
+      <option value="justify">justify</option>
+    </select><br>
+    text-decoration: 
+    <select id="txtdec">
+      <option value="none">none</option>
+      <option value="underline">underline</option>
+      <option value="line-through">line-through</option>
+      <option value="overline">overline</option>
+    </select><br>
+    text-transform: 
+    <select id="txttsfm">
+      <option value="none">none</option>
+      <option value="uppercase">uppercase</option>
+      <option value="lowercase">lowercase</option>
+      <option value="capitalize">capitalize</option>
+    </select><br>
+    line-height: <input id="lnhet" type="number" step="0.1" placeholder="e.g. 1.5"><br>
+    letter-spacing: <input id="ltsp" type="text" placeholder="e.g. 0.5px"> px<br>
+  </details>
+
+  <!-- BOX MODEL -->
+  <details>
+    <summary>Box Model (Spacing & Borders)</summary>
+    margin: <input id="mar" type="text" placeholder="e.g. 10"> px<br>
+    padding: <input id="pad" type="text" placeholder="e.g. 5 10"> px<br>
+    border: <input id="bor" type="text" placeholder="e.g. 1px solid #000"><br>
+    border-radius: <input id="borrd" type="number" placeholder="e.g. 5" min="0"> px<br>
+    box-sizing: 
+    <select id="bxsz">
+      <option value="content-box">content-box</option>
+      <option value="border-box">border-box</option>
+    </select><br>
+    width: <input id="wid" type="text" placeholder="e.g. 100px or 100%"><br>
+    height: <input id="hei" type="text" placeholder="e.g. auto, 50vh"><br>
+    max-width: <input id="mwid" type="text" placeholder="e.g. 1200px"><br>
+    min-height: <input id="mnhei" type="text" placeholder="e.g. 100px"><br>
+  </details>
+
+  <!-- BACKGROUND & COLORS -->
+  <details>
+    <summary>Background and Colors</summary>
+    background-color: <input id="bakcol" oninput="document.getElementById('bakcolt').value = document.getElementById('bakcol').value" type="color"><input id="bakcolt" oninput="applyEdit()" type="text"><br>
+    background-image: <input id="bakimg" type="text" placeholder="url('image.jpg')"><br>
+    background-size: 
+    <select id="baksz">
+      <option value="auto">auto</option>
+      <option value="cover">cover</option>
+      <option value="contain">contain</option>
+    </select><br>
+    background-position: <input id="bakpos" type="text" placeholder="e.g. center center"><br>
+    background-repeat: 
+    <select id="bakrep">
+      <option value="repeat">repeat</option>
+      <option value="no-repeat">no-repeat</option>
+      <option value="repeat-x">repeat-x</option>
+      <option value="repeat-y">repeat-y</option>
+    </select><br>
+    object-fit: 
+    <select id="objectFit">
+       <option value="cover">cover</option>
+       <option value="contain">contain</option>
+    </select><br>
+    opacity: <input id="opct" type="range" min="0" max="1" step="0.1"><br>
+  </details>
+
+  <!-- POSITIONING & LAYOUT -->
+  <details>
+    <summary>Positioning and Layout</summary>
+    position: 
+    <select id="editPosition">
+      <opretion value="">position</opretion>
+      <option value="static">static</option>
+      <option value="relative">relative</option>
+      <option value="absolute">absolute</option>
+      <option value="fixed">fixed</option>
+      <option value="sticky">sticky</option>
+    </select><br>
+    
+    <div class="box-editor">
+  <div class="margin-label">Margin</div>
+  <div class="margin-box">
+    <input type="number" id="mar-t" placeholder="Top">
+    <div class="horizontal-inputs">
+      <input type="number" id="mar-l" placeholder="Left">
+      <div class="padding-box">
+        <div class="padding-label">Padding</div>
+        <input type="number" id="pad-t" placeholder="Top">
+        <div class="horizontal-inputs">
+          <input type="number" id="pad-l" placeholder="Left">
+          <div class="content-box">Content</div>
+          <input type="number" id="pad-r" placeholder="Right">
+        </div>
+        <input type="number" id="pad-b" placeholder="Bottom">
+      </div>
+      <input type="number" id="mar-r" placeholder="Right">
+    </div>
+    <input type="number" id="mar-b" placeholder="Bottom">
+  </div>
+    </div>
+    
+    z-index: <input type="number" id="zindex"><br>
+    display: 
+    <select id="dspl">
+      <option value="block">block</option>
+      <option value="inline">inline</option>
+      <option value="inline-block">inline-block</option>
+      <option value="flex">flex</option>
+      <option value="grid">grid</option>
+      <option value="none">none</option>
+    </select><br>
+    float: 
+    <select id="flt">
+      <option value="none">none</option>
+      <option value="left">left</option>
+      <option value="right">right</option>
+    </select><br>
+    overflow: 
+    <select id="ovrfl">
+      <option value="visible">visible</option>
+      <option value="hidden">hidden</option>
+      <option value="scroll">scroll</option>
+      <option value="auto">auto</option>
+    </select><br>
+    visibility: 
+    <select id="vsblt">
+      <option value="visible">visible</option>
+      <option value="hidden">hidden</option>
+      <option value="collapse">collapse</option>
+    </select><br>
+  </details>
+
+  <!-- FLEXBOX & GRID -->
+  <details>
+    <summary>Flexbox and Grid</summary>
+    flex-direction: 
+    <select id="flxd">
+      <option value="row">row</option>
+      <option value="row-reverse">row-reverse</option>
+      <option value="column">column</option>
+      <option value="column-reverse">column-reverse</option>
+    </select><br>
+    justify-content: 
+    <select id="jstfc">
+      <option value="flex-start">flex-start</option>
+      <option value="flex-end">flex-end</option>
+      <option value="center">center</option>
+      <option value="space-between">space-between</option>
+      <option value="space-around">space-around</option>
+      <option value="space-evenly">space-evenly</option>
+    </select><br>
+    align-items: 
+    <select id="algni">
+      <option value="stretch">stretch</option>
+      <option value="flex-start">flex-start</option>
+      <option value="center">center</option>
+      <option value="flex-end">flex-end</option>
+      <option value="baseline">baseline</option>
+    </select><br>
+    flex-wrap: 
+    <select id="flxw">
+      <option value="nowrap">nowrap</option>
+      <option value="wrap">wrap</option>
+      <option value="wrap-reverse">wrap-reverse</option>
+    </select><br>
+    grid-template-columns: <input id="gtc" type="text" placeholder="e.g. 1fr 2fr"><br>
+    grid-template-rows: <input id="gtr" type="text" placeholder="e.g. 100px auto"><br>
+    gap: <input id="gap" type="text" placeholder="e.g. 10px"><br>
+  </details>
+
+  <!-- TRANSFORMS & ANIMATIONS -->
+  <details>
+    <summary>Transforms and Animations</summary>
+    transform: <input id="trnsfm" type="text" placeholder="e.g. rotate(45deg)"><br>
+    transition: <input id="trnstn" type="text" placeholder="e.g. all 0.3s ease-in-out"><br>
+    animation: <input id="anmtn" type="text" placeholder="e.g. bounce 2s infinite"><br>
+  </details>
+
+  <!-- MISCELLANEOUS -->
+  <details>
+    <summary>Miscellaneous Properties</summary>
+    cursor: 
+    <select id="cursor">
+      <option value="default">default</option>
+      <option value="pointer">pointer</option>
+      <option value="move">move</option>
+      <option value="text">text</option>
+      <option value="not-allowed">not-allowed</option>
+    </select><br>
+    box-shadow: <input id="bxshd" type="text" placeholder="e.g. 0px 4px 10px #000"><br>
+    filter: <input id="filter" type="text" placeholder="e.g. blur(4px)"><br>
+    user-select: 
+    <select id="usrslct">
+      <option value="auto">auto</option>
+      <option value="none">none</option>
+      <option value="text">text</option>
+      <option value="all">all</option>
+    </select><br>
+    pointer-events: 
+    <select id="pointerEvent">
+      <option value="auto">auto</option>
+      <option value="none">none</option>
+    </select><br>
+    clip-path: <input id="clipPath" type="text" placeholder="e.g. circle(50%)"><br>
+  </details>
+  <strong>Events</strong>
+  <textarea type="text" id="editOnclick" placeholder="New Onclick JS"></textarea>
+ </div>
+</div>
+
+<div id="filesTab" class="tab drag-el">
+   <div class="drag-handle">__</div>
+   <button onclick="MyClose('filesTab')">×</button>
+  <button onclick="createFile('js')">+ New JS File</button>
+  <button onclick="createFile('css')">+ New CSS File</button>
+  <ul id="fileList"></ul>
+  <textarea id="fileEditor" style="width: 95%;height: 50%;" placeholder="Write your code here..."></textarea>
+  <button onclick="applyFile()">Apply</button>
+ <!--  <button onclick="AddEvent()">Add Event</button>
+  <button onclick="visualEv()">Visualise Events</button> -->
+  <p id="errorTag" style="margin: 5px; padding: 5px;"></p>
+  <div id="visualEvent"></div>
+</div>
+
+<div id="fileManager" class="tab drag-el">
+   <div class="drag-handle">__</div>
+   <button onclick="MyClose('fileManager')">×</button>
+  <button onclick="saveProject()">Save Project</button>
+  <div id="projectList"></div>
+</div>
+
+<div id="fullcodearea" class="tab drag-el">
+   <div class="drag-handle">__</div>
+   <button onclick="MyClose('fullcodearea')">×</button>
+   <textarea id="htmlcssjs" readonly></textarea>
+   <button onclick="downloadAsImg()">download as image</button>
+   <button id="BtnBeautify">Beautify code</button>
+</div>
+
+<script>
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<style>
+     #tooltip {
+      position: fixed;
+      background: black;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-size: 13px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 1000;
+      transform: translateX(-50%) translateY(-100%);
+    }
+    .grid-lines line {
+        shape-rendering: crispEdges;
+        pointer-events: none;
+    }
+  </style>
+  <script>function beautify(code) {const html = code;console.log('code beautify');const tokens = html.replace(/></g, ">\n<").split("\n"); let output = "";let indent = 0;tokens.forEach(line => {line = line.trim();const isClosingTag = /^<\/[^>]+>/.test(line);const isOpeningTag = /^<[^!\/][^>]*[^\/]>$/.test(line); isSelfClosing = /\/>$/.test(line) || /^<!/.test(line); if (isClosingTag) indent--;output += "  ".repeat(indent) + line + "\n";if (isOpeningTag && !isSelfClosing) indent++;});document.getElementById("htmlcssjs").textContent = output.trim();}
+  function applyResponsiveStyles() { const wwww = screen.width; if (wwww >= 800) { document.querySelector("#foo").style.background = "black";} else {document.querySelector("footer").style.background = "#1c2644";}} window.addEventListener("load", applyResponsiveStyles); window.addEventListener("resize", applyResponsiveStyles);
+  </script>
+<style>.tree-label.drag-over {outline: 2px dashed #00aaff;background-color: #e6f7ff;}</style>
+
+</body>
+</html>
+
