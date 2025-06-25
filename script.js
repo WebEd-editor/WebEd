@@ -783,8 +783,6 @@ function pasteStyle() {
     showPopup("Styles pasted!","",true,false);
 }
 
-  updateTree();
-
 function AddEvent(){
    const evid = prompt("write id name");
    const evname = prompt("write Event Name");
