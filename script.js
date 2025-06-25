@@ -1,3 +1,80 @@
+// Attach events to all draggable boxes
+document.querySelectorAll('.drag-box').forEach(box => {
+  // Touch events
+  box.addEventListener("touchstart", e => {
+    const touch = e.touches[0];
+    sd(box, touch.clientX, touch.clientY);
+  });
+  box.addEventListener("mousedown", e => {
+     sd(box, e.clientX, e.clientY);
+  });
+});
+
+document.addEventListener("touchmove", e => {
+  const touch = e.touches[0];
+  d(touch.clientX, touch.clientY);
+}, { passive: false });
+document.addEventListener("mousemove", e => {
+   d(e.clientX, e.clientY);
+}, {passive: false});
+
+document.addEventListener("touchend", stopDrag);
+document.addEventListener("mouseup", stopDrag);
+
+
+// dragable script 
+
+let isDragging = false;
+let offsetX, offsetY;
+let activeBox = null;
+
+function startDrag(target, x, y) {
+  activeBox = target.closest('.drag-el');
+  if (!activeBox) return;
+  isDragging = true;
+
+  const rect = activeBox.getBoundingClientRect();
+  offsetX = x - rect.left;
+  offsetY = y - rect.top;
+}
+
+function drag(x, y) {
+  if (!isDragging || !activeBox) return;
+  activeBox.style.left = `${x - offsetX}px`;
+  activeBox.style.top = `${y - offsetY}px`;
+}
+
+function stopDrag() {
+  isDragging = false;
+  activeBox = null;
+}
+
+// Drag handle events
+document.querySelectorAll('.drag-handle').forEach(handle => {
+  handle.addEventListener("mousedown", e => {
+    e.preventDefault();
+    startDrag(e.target, e.clientX, e.clientY);
+  });
+
+  handle.addEventListener("touchstart", e => {
+    const touch = e.touches[0];
+    startDrag(e.target, touch.clientX, touch.clientY);
+  });
+});
+
+// Global drag
+document.addEventListener("mousemove", e => drag(e.clientX, e.clientY));
+document.addEventListener("mouseup", stopDrag);
+
+document.addEventListener("touchmove", e => {
+  const touch = e.touches[0];
+  drag(touch.clientX, touch.clientY);
+}, { passive: false });
+
+document.addEventListener("touchend", stopDrag);
+
+// dragable script end
+
 function MyTabClose(){
    document.querySelectorAll('.footBtn').forEach( fs => {
       fs.classList.toggle('hidden');
@@ -535,7 +612,7 @@ function redoEdit() {
     document.getElementById("canvas").contentDocument.body.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
   }
 
-   document.getElementById("opct").value = 1;
+   //document.getElementById("opct").value = 1;
   function openEdit(el) {
     currentEditingElement = el;
     document.getElementById('editId').value = el.id || '';
@@ -1020,28 +1097,8 @@ function stopDrag() {
   ab = null;
 }
 
-// Attach events to all draggable boxes
-document.querySelectorAll('.drag-box').forEach(box => {
-  // Touch events
-  box.addEventListener("touchstart", e => {
-    const touch = e.touches[0];
-    sd(box, touch.clientX, touch.clientY);
-  });
-  box.addEventListener("mousedown", e => {
-     sd(box, e.clientX, e.clientY);
-  });
-});
 
-document.addEventListener("touchmove", e => {
-  const touch = e.touches[0];
-  d(touch.clientX, touch.clientY);
-}, { passive: false });
-document.addEventListener("mousemove", e => {
-   d(e.clientX, e.clientY);
-}, {passive: false});
 
-document.addEventListener("touchend", stopDrag);
-document.addEventListener("mouseup", stopDrag);
 // icon editor 
 
   const svg = document.getElementById("iconEditorArea");
@@ -1480,58 +1537,7 @@ document.getElementById("toggleGrid").addEventListener("change", e => {
     });
   }
   
-  // dragable script 
-
-let isDragging = false;
-let offsetX, offsetY;
-let activeBox = null;
-
-function startDrag(target, x, y) {
-  activeBox = target.closest('.drag-el');
-  if (!activeBox) return;
-  isDragging = true;
-
-  const rect = activeBox.getBoundingClientRect();
-  offsetX = x - rect.left;
-  offsetY = y - rect.top;
-}
-
-function drag(x, y) {
-  if (!isDragging || !activeBox) return;
-  activeBox.style.left = `${x - offsetX}px`;
-  activeBox.style.top = `${y - offsetY}px`;
-}
-
-function stopDrag() {
-  isDragging = false;
-  activeBox = null;
-}
-
-// Drag handle events
-document.querySelectorAll('.drag-handle').forEach(handle => {
-  handle.addEventListener("mousedown", e => {
-    e.preventDefault();
-    startDrag(e.target, e.clientX, e.clientY);
-  });
-
-  handle.addEventListener("touchstart", e => {
-    const touch = e.touches[0];
-    startDrag(e.target, touch.clientX, touch.clientY);
-  });
-});
-
-// Global drag
-document.addEventListener("mousemove", e => drag(e.clientX, e.clientY));
-document.addEventListener("mouseup", stopDrag);
-
-document.addEventListener("touchmove", e => {
-  const touch = e.touches[0];
-  drag(touch.clientX, touch.clientY);
-}, { passive: false });
-
-document.addEventListener("touchend", stopDrag);
-
-
+  
 // popup script 
 function showPopup( heading, description, accept, cancel, n) {
   document.getElementById("popup-heading").innerText = heading;
