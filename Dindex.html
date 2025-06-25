@@ -1,6 +1,18 @@
-<div class="drag-box"><button onclick="alert('btn 1')">btn 1</button></div>
+<!-- <div class="drag-box"><button onclick="alert('btn 1')">btn 1</button></div>
 <div class="drag-box"><button>Box 2</button></div>
 <div class="drag-box"><button>btn 3</button></div>
+-->
+<footer id="foo" class="drag-box">
+   <button onclick="MyTabClose()">×</button>
+   <button onclick="alert('btn 1')" class="footBtn"><svg id="IconSvg" style="width: 15px; height: 15px;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path stroke="#ffffff" fill="none" stroke-width="6.5" d="M 65 20 L 95 50 L 65 80" stroke-linejoin="" stroke-linecap=""></path><path stroke="#ffffff" fill="none" stroke-width="6" d="M 35 20 L 5 50 L 35 80" stroke-linejoin="" stroke-linecap=""></path></svg></button>
+   <button onclick="MyOpen('sidebar')" class="footBtn">TR</button>
+   <button onclick="MyOpen('filesTab')" class="footBtn">CSS | JS</button>
+   <button onclick="MyOpen('fileManager')" class="footBtn">FM</button>
+   <button onclick="MyOpen('fullcodearea')" class="footBtn">FC</button>
+   <button onclick="undoEdit()" class="footBtn">undo</button>
+   <button onclick="redoEdit()" class="footBtn">redo</button>
+   <button id="fullScreenBtn">FS</button>
+</footer>
 
 <style>
   .drag-box {
