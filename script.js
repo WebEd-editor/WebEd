@@ -114,7 +114,7 @@ function rr() {
 
 // adding elements 
 
-  let selectedParent = document.getElementById('canvas');
+  let selectedParent = null;
   let currentEditingElement = null;
 
 function handleMediaUpload(event) {
