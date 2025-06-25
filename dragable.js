@@ -53,7 +53,7 @@ let isDragging = false;
 let offsetX, offsetY;
 let activeBox = null;
 
-function startDrag(target, x, y) {
+function startDrag2(target, x, y) {
   activeBox = target.closest('.drag-el');
   if (!activeBox) return;
   isDragging = true;
@@ -63,13 +63,13 @@ function startDrag(target, x, y) {
   offsetY = y - rect.top;
 }
 
-function drag(x, y) {
+function drag2(x, y) {
   if (!isDragging || !activeBox) return;
   activeBox.style.left = `${x - offsetX}px`;
   activeBox.style.top = `${y - offsetY}px`;
 }
 
-function stopDrag() {
+function stopDrag2() {
   isDragging = false;
   activeBox = null;
 }
@@ -78,24 +78,24 @@ function stopDrag() {
 document.querySelectorAll('.drag-handle').forEach(handle => {
   handle.addEventListener("mousedown", e => {
     e.preventDefault();
-    startDrag(e.target, e.clientX, e.clientY);
+    startDrag2(e.target, e.clientX, e.clientY);
   });
 
   handle.addEventListener("touchstart", e => {
     const touch = e.touches[0];
-    startDrag(e.target, touch.clientX, touch.clientY);
+    startDrag2(e.target, touch.clientX, touch.clientY);
   });
 });
 
 // Global drag
-document.addEventListener("mousemove", e => drag(e.clientX, e.clientY));
-document.addEventListener("mouseup", stopDrag);
+document.addEventListener("mousemove", e => drag2(e.clientX, e.clientY));
+document.addEventListener("mouseup", stopDrag2);
 
 document.addEventListener("touchmove", e => {
   const touch = e.touches[0];
-  drag(touch.clientX, touch.clientY);
+  drag2(touch.clientX, touch.clientY);
 }, { passive: false });
 
-document.addEventListener("touchend", stopDrag);
+document.addEventListener("touchend", stopDrag2);
 
 // dragable script end
