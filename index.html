@@ -1,0 +1,54 @@
+<div class="drag-box">Box 1</div>
+<div class="drag-box">Box 2</div>
+<div class="drag-box">Box 3</div>
+
+<script>
+let isDragging = false;
+let offsetX, offsetY;
+let activeBox = null;
+
+function startDrag(target, x, y) {
+  isDragging = true;
+  activeBox = target;
+  const rect = target.getBoundingClientRect();
+  offsetX = x - rect.left;
+  offsetY = y - rect.top;
+}
+
+function drag(x, y) {
+  if (!isDragging || !activeBox) return;
+  activeBox.style.left = `${x - offsetX}px`;
+  activeBox.style.top = `${y - offsetY}px`;
+}
+
+function stopDrag() {
+  isDragging = false;
+  activeBox = null;
+}
+
+// Attach events to all draggable boxes
+document.querySelectorAll('.drag-box').forEach(box => {
+  // Mouse events
+  box.addEventListener("mousedown", e => {
+    e.preventDefault();
+    startDrag(box, e.clientX, e.clientY);
+  });
+
+  // Touch events
+  box.addEventListener("touchstart", e => {
+    const touch = e.touches[0];
+    startDrag(box, touch.clientX, touch.clientY);
+  });
+});
+
+// Global mouse/touch move and end
+document.addEventListener("mousemove", e => drag(e.clientX, e.clientY));
+document.addEventListener("mouseup", stopDrag);
+
+document.addEventListener("touchmove", e => {
+  const touch = e.touches[0];
+  drag(touch.clientX, touch.clientY);
+}, { passive: false });
+
+document.addEventListener("touchend", stopDrag);
+</script>
