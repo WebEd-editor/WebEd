@@ -106,6 +106,16 @@ function addElement(type) {
   });
 
   selectedParent.appendChild(el);
+
+  const iframe = document.getElementById("canvas");
+       const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+       const link = iframeDoc.createElement("link");
+       link.rel = "stylesheet";
+       link.href = "https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@300;400;500;700&display=swap";
+
+       iframeDoc.head.appendChild(link);
+  
   updateTree();
   saveHistory();
 
