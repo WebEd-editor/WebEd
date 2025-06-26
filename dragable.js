@@ -1,104 +1,89 @@
-// dragabel float bar
+// ✅ Float bar drag
+let isFloatDragging = false;
+let floatOffsetX, floatOffsetY;
+let floatTarget = null;
 
-let isDrag = false;
-let offsX, offsY;
-let activeBox2 = null;
-
-function startDrag2(target, x, y) {
-  isDrag = true;
-  activeBox2 = target;
+function startFloatDrag(target, x, y) {
+  isFloatDragging = true;
+  floatTarget = target;
   const rect = target.getBoundingClientRect();
-  offsX = x - rect.left;
-  offsY = y - rect.top;
+  floatOffsetX = x - rect.left;
+  floatOffsetY = y - rect.top;
 }
 
-function drag2(x, y) {
-  if (!isDrag || !activeBox2) return;
-  activeBox2.style.left = `${x - offsX}px`;
-  activeBox2.style.top = `${y - offsY}px`;
-  alert('move drag');
+function dragFloat(x, y) {
+  if (!isFloatDragging || !floatTarget) return;
+  floatTarget.style.left = `${x - floatOffsetX}px`;
+  floatTarget.style.top = `${y - floatOffsetY}px`;
 }
 
-function stopDrag2() {
-  isDrag = false;
-  activeBox2 = null;
+function stopFloatDrag() {
+  isFloatDragging = false;
+  floatTarget = null;
 }
 
-// Attach events to all draggable boxes
+// Apply to float bars
 document.querySelectorAll('.drag-box').forEach(box => {
-  // Mouse events
   box.addEventListener("mousedown", e => {
     e.preventDefault();
-    startDrag2(box, e.clientX, e.clientY);
+    startFloatDrag(box, e.clientX, e.clientY);
   });
 
-  // Touch events
   box.addEventListener("touchstart", e => {
     const touch = e.touches[0];
-    startDrag2(box, touch.clientX, touch.clientY);
+    startFloatDrag(box, touch.clientX, touch.clientY);
   });
 });
 
-// Global mouse/touch move and end
-document.addEventListener("mousemove", e => drag2(e.clientX, e.clientY));
-document.addEventListener("mouseup", stopDrag2);
-
+document.addEventListener("mousemove", e => dragFloat(e.clientX, e.clientY));
+document.addEventListener("mouseup", stopFloatDrag);
 document.addEventListener("touchmove", e => {
-  const touch = e.touches[0];
-  drag2(touch.clientX, touch.clientY);
+  dragFloat(e.touches[0].clientX, e.touches[0].clientY);
 }, { passive: false });
+document.addEventListener("touchend", stopFloatDrag);
 
-document.addEventListener("touchend", stopDrag2);
-
-// dragable script 
-
-let isDragging = false;
+// ✅ Drag Handle system
+let isHandleDragging = false;
 let offsetX, offsetY;
 let activeBox = null;
 
-function startDrag2(target, x, y) {
+function startHandleDrag(target, x, y) {
   activeBox = target.closest('.drag-el');
   if (!activeBox) return;
-  isDragging = true;
+  isHandleDragging = true;
 
   const rect = activeBox.getBoundingClientRect();
   offsetX = x - rect.left;
   offsetY = y - rect.top;
 }
 
-function drag2(x, y) {
-  if (!isDragging || !activeBox) return;
+function dragHandle(x, y) {
+  if (!isHandleDragging || !activeBox) return;
   activeBox.style.left = `${x - offsetX}px`;
   activeBox.style.top = `${y - offsetY}px`;
 }
 
-function stopDrag2() {
-  isDragging = false;
+function stopHandleDrag() {
+  isHandleDragging = false;
   activeBox = null;
 }
 
-// Drag handle events
 document.querySelectorAll('.drag-handle').forEach(handle => {
   handle.addEventListener("mousedown", e => {
     e.preventDefault();
-    startDrag2(e.target, e.clientX, e.clientY);
+    startHandleDrag(e.target, e.clientX, e.clientY);
   });
 
   handle.addEventListener("touchstart", e => {
     const touch = e.touches[0];
-    startDrag2(e.target, touch.clientX, touch.clientY);
+    startHandleDrag(e.target, touch.clientX, touch.clientY);
   });
 });
 
-// Global drag
-document.addEventListener("mousemove", e => drag2(e.clientX, e.clientY));
-document.addEventListener("mouseup", stopDrag2);
-
+document.addEventListener("mousemove", e => dragHandle(e.clientX, e.clientY));
+document.addEventListener("mouseup", stopHandleDrag);
 document.addEventListener("touchmove", e => {
-  const touch = e.touches[0];
-  drag2(touch.clientX, touch.clientY);
+  dragHandle(e.touches[0].clientX, e.touches[0].clientY);
 }, { passive: false });
+document.addEventListener("touchend", stopHandleDrag);
 
-document.addEventListener("touchend", stopDrag2);
-
-// dragable script end
