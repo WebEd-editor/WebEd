@@ -16,6 +16,7 @@ function drag2(x, y) {
   if (!isDrag || !activeBox2) return;
   activeBox2.style.left = `${x - offsX}px`;
   activeBox2.style.top = `${y - offsY}px`;
+  alert('move drag');
 }
 
 function stopDrag2() {
@@ -27,14 +28,12 @@ function stopDrag2() {
 document.querySelectorAll('.drag-box').forEach(box => {
   // Mouse events
   box.addEventListener("mousedown", e => {
-    alert('start drag');
     e.preventDefault();
     startDrag2(box, e.clientX, e.clientY);
   });
 
   // Touch events
   box.addEventListener("touchstart", e => {
-    alert('start drag touch');
     const touch = e.touches[0];
     startDrag2(box, touch.clientX, touch.clientY);
   });
