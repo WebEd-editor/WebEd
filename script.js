@@ -1356,3 +1356,33 @@ function Notify(str, r){
    setTimeout(nn,2500);
 } 
 function nn(){n.style.top="-50px";}
+document.getElementById("fullScreenBtn").addEventListener("click", function () {
+      alert("User touched the screen! full screen mode On.");
+      
+      // Example: Try fullscreen (only works on user interaction)
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+    });
+    document.addEventListener("keydown", function(e) {
+      if(e.altKey && e.shiftKey && e.key.toLowerCase() === "f"){
+        e.preventDefault();
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        }
+      }
+    });
+    
+function downloadAsImg() {
+   var idN = prompt('please write id name to capture the area for convert image');
+   var imgName = prompt('please write image name');
+  
+  
+     html2canvas(document.getElementById(idN)).then(canvas => {
+       const link = document.createElement("a");
+       link.download = imgName+".png";
+       link.href = canvas.toDataURL("image/png");
+       link.click();
+     });
+  
+}
