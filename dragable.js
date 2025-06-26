@@ -27,12 +27,14 @@ function stopDrag2() {
 document.querySelectorAll('.drag-box').forEach(box => {
   // Mouse events
   box.addEventListener("mousedown", e => {
+    alert('start drag');
     e.preventDefault();
     startDrag2(box, e.clientX, e.clientY);
   });
 
   // Touch events
   box.addEventListener("touchstart", e => {
+    alert('start drag touch');
     const touch = e.touches[0];
     startDrag2(box, touch.clientX, touch.clientY);
   });
