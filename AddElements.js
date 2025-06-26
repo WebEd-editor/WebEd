@@ -106,14 +106,6 @@ function addElement(type) {
   });
 
   selectedParent.appendChild(el);
-
-  const iframeD = document.getElementById("canvas").contentDocument || iframe.contentWindow.document;
-
-       const lin = iframeD.createElement("link");
-       lin.rel = "stylesheet";
-       lin.href = "https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@300;400;500;700&display=swap";
-
-       iframeD.head.appendChild(lin);
   
   updateTree();
   saveHistory();
