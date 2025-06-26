@@ -93,7 +93,7 @@ function iconListDisplay() {
 
   request.onsuccess = () => {
     const icons = request.result;
-    iconL.innerHTML = "";
+    iconL.innerHTML = "somthing...";
     icons.forEach((Ic) => {
       const wrapper = document.createElement("div");
     wrapper.style = `
@@ -887,7 +887,7 @@ function listAllProjects() {
   const fileInput = document.getElementById("addImgInBackSvg");
   let svgBackImg;
 
-fileInput.addEventListener('change', () => {
+/*fileInput.addEventListener('change', () => {
   const file = fileInput.files[0];
   if (!file) return;
 
@@ -898,7 +898,7 @@ fileInput.addEventListener('change', () => {
   };
   reader.readAsDataURL(file);
 });
-
+*/
   function updateCode() {
     const clone = svg.cloneNode(true);
     clone.id="IconSvg";
