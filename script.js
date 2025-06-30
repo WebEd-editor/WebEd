@@ -420,7 +420,7 @@ function redoEdit() {
     document.getElementById("canvas").contentDocument.body.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
   }
 
-   //document.getElementById("opct").value = 1;
+   document.getElementById("opct").value = 1;
   function openEdit(el) {
     currentEditingElement = el;
     document.getElementById('editId').value = el.id || '';
