@@ -711,52 +711,72 @@ function createFile(type) {
   updateFileList();
 }
 
-// Update file list UI
+let eee = ace.edit("fileEditor");
+      eee.setTheme("ace/theme/monokai");
+      eee.setOptions({
+          fontSize: "15px",
+          showPrintMargin: true,
+          useSoftTabs: true,
+          wrap: false
+      });
+      
+// ✅ Update file list UI
 function updateFileList() {
   const list = document.getElementById('fileList');
   list.innerHTML = '';
+
   for (const file in customFiles) {
     const li = document.createElement('li');
     li.className = "fileNamecssjs";
     li.textContent = file;
+
+    // File click: Load content into editor
     li.onclick = () => {
       currentFile = file;
-      document.getElementById('fileEditor').value = customFiles[file].content;
+      let editor = ace.edit('fileEditor');
+      editor.setValue(customFiles[file].content || '', -1); // -1 to prevent cursor reset
+      editor.session.setMode(`ace/mode/${customFiles[file].type}`);
     };
+
+    // Delete button
     const del = document.createElement('button');
     del.textContent = 'X';
-    del.onclick = e => {
+    del.onclick = (e) => {
       e.stopPropagation();
       deleteFile(file);
     };
+
     li.appendChild(del);
     list.appendChild(li);
   }
 }
 
-// Save file content and inject
+// ✅ Save file content and inject into iframe
 function applyFile() {
   if (!currentFile) return;
-  const content = document.getElementById('fileEditor').value;
+
+  const editor = ace.edit('fileEditor');
+  const content = editor.getValue();
+  //editor.setTheme("ace/theme/monokai");
   const type = customFiles[currentFile].type;
   customFiles[currentFile].content = content;
-
-  // 🔁 STEP 1: Target iframe document
+  
   const iframe = document.getElementById('canvas');
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-  // 🔁 STEP 2: Remove old tag (if exists) with same filename marker
-  const existing = iframeDoc.querySelector(`${type === 'js' ? 'script' : 'style'}[data-file="${currentFile}"]`);
+  // ✅ Remove old tag (if exists)
+  const selector = `${type === 'js' ? 'script' : 'style'}[data-file="${currentFile}"]`;
+  const existing = iframeDoc.querySelector(selector);
   if (existing) existing.remove();
 
-  // ✅ STEP 3: Create new tag
+  // ✅ Create new tag
   const tag = iframeDoc.createElement(type === 'js' ? 'script' : 'style');
   tag.textContent = content;
-  tag.dataset.custom = 'true';
-  tag.dataset.file = currentFile;  // 🔖 Use data-file attribute to uniquely identify
+  tag.dataset.file = currentFile; // For unique reference
 
-  iframeDoc.head.appendChild(tag); // Better: inject in <head>
+  iframeDoc.head.appendChild(tag);
   updateFileList();
+
   runUserCode(content);
 }
 
@@ -765,7 +785,7 @@ function runUserCode(code) {
     new Function(code)(); // safer than eval
   } catch (e) {
     var ertag = document.getElementById("errorTag");
-    ertag.textContent = e.message;
+    //ertag.textContent = e.message;
     console.error(e);
   }
 }
