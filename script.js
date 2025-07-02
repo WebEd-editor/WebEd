@@ -36,6 +36,14 @@ function rr() {
   document.getElementById("BtnBeautify").addEventListener('click', beautify(newHtml3));
 }
 
+// links for css fonts
+       const iframe = document.getElementById("canvas");
+       const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+       const link = iframeDoc.createElement("link");
+       link.rel = "stylesheet";
+       link.href = "https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@300;400;500;700&display=swap";
+       iframeDoc.head.appendChild(link);
+
 // icon data base
 let iconDb;
 const Icon_request = indexedDB.open("iconDataBase", 2);
