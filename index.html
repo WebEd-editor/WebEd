@@ -375,7 +375,7 @@ input[type="number"] {
    <input type="checkbox" id="elementsOutlineCheck" checked>
    <script>document.getElementById("elementsOutlineCheck").addEventListener('change', e => {
    document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.style.outline = e.target.checked ? "1px solid green" : "none";});
-   document.getElementById('canvas').contentDocument.body.querySelectorAll('.selected').forEach(edel => {edel.style.outline = e.target.checked ? "1px solid blue" : "none";}
+   document.getElementById('canvas').contentDocument.body.querySelectorAll('.selected').forEach(edel => {edel.style.outline = e.target.checked ? "1px solid blue" : "none";});
 });</script>
   <div id="controls">
     <button class="button" onclick="addElement('div')">Div</button>
