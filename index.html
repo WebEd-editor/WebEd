@@ -468,10 +468,7 @@ input[type="number"] {
     font-family: 
     <select id="fnfml">
       <option value="arial">Arial</option>
-      <option value="courier new">'Courier New'</option>
-      <option value="times new roman">'Times New Roman'</option>
       <option value="roboto, sans-sarif">'Roboto'</option>
-      <option value="open sans">'Open Sans'</option>
       <option value="nunito, sans-sarif">'nunito'</option>
     </select><br>
     font-size: <input type="range" oninput="applyEdit()" id="fnsz" min="1" max="30"> px<br>
@@ -752,6 +749,13 @@ input[type="number"] {
   </style>
   <script>function beautify(code) {const html = code;console.log('code beautify');const tokens = html.replace(/></g, ">\n<").split("\n"); let output = "";let indent = 0;tokens.forEach(line => {line = line.trim();const isClosingTag = /^<\/[^>]+>/.test(line);const isOpeningTag = /^<[^!\/][^>]*[^\/]>$/.test(line); isSelfClosing = /\/>$/.test(line) || /^<!/.test(line); if (isClosingTag) indent--;output += "  ".repeat(indent) + line + "\n";if (isOpeningTag && !isSelfClosing) indent++;});document.getElementById("htmlcssjs").textContent = output.trim();}
   function applyResponsiveStyles() { const wwww = screen.width; if (wwww >= 800) { document.querySelector("#foo").style.background = "black";} else {document.querySelector("footer").style.background = "#1c2644";}} window.addEventListener("load", applyResponsiveStyles); window.addEventListener("resize", applyResponsiveStyles);
+  // links for css fonts
+       const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+       const link = iframeDoc.createElement("link");
+       link.rel = "stylesheet";
+       link.href = "https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@300;400;500;700&display=swap";
+       iframeDoc.head.appendChild(link);
+     
   </script>
 <style>.tree-label.drag-over {outline: 2px dashed #00aaff;background-color: #e6f7ff;}</style>
 
