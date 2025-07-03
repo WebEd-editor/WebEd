@@ -192,6 +192,9 @@ function updateTree() {
         selectedParent = child;
         clearSelected();
         child.classList.add('selected');
+        document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.style.outline = "none";});
+        document.getElementById('canvas').contentDocument.body.querySelectorAll('.selected').forEach(edel => {edel.style.outline = "1px solid blue";});
+        updateTree();
       };
 
       const actions = document.createElement('span');
