@@ -77,6 +77,19 @@ function addElement(type) {
      el.innerHTML = icode; // assuming `icode` is defined somewhere globally
   }
 
+  // for details tag
+  else if (type === 'details') {
+     el = document.createElement(type);
+     el.classList.add('editable');
+     el.textContent = "new details tag";
+     el.setAttribute('contenteditable', 'true');
+     const sss = document.createElement("summary");
+     sss.classList.add('editable');
+     sss.textContent = "new summary tag";
+     sss.setAttribute('contenteditable', 'true');
+     el.appendChild(sss);
+  }
+    
   // --- Regular HTML Elements ---
   else {
     el = document.createElement(type);
