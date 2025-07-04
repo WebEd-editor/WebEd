@@ -6,7 +6,7 @@ function MyTabClose(){
 } 
 function MyOpen(id){
    document.querySelectorAll('.tab').forEach( v => {
-      v.style.display="none";
+      v.style.display="none";v.style.top="10%";v.style.right="10%";
    });
    document.getElementById(id).style.display="block";
    if (id == "fullcodearea") rr();
