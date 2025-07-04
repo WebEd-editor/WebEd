@@ -101,7 +101,7 @@ function iconListDisplay() {
 
   request.onsuccess = () => {
     const icons = request.result;
-    iconL.innerHTML = "somthing...";
+    iconL.innerHTML = "";
     icons.forEach((Ic) => {
       const wrapper = document.createElement("div");
     wrapper.style = `
