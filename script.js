@@ -633,8 +633,8 @@ function applyEdit() {
     //currentEditingElement = null;
   //  document.getElementById('editModal').style.display = 'none';
     updateTree();
-   // saveHistory();    
-    Notify("Applying All css Properties", "s");
+    saveHistory();    
+   // Notify("Applying All css Properties", "s");
   }
 
   function closeEdit() {
