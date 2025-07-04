@@ -756,17 +756,17 @@ input[type="number"] {
     }
   </style>
   <script>function beautify(code) {const html = code;console.log('code beautify');const tokens = html.replace(/></g, ">\n<").split("\n"); let output = "";let indent = 0;tokens.forEach(line => {line = line.trim();const isClosingTag = /^<\/[^>]+>/.test(line);const isOpeningTag = /^<[^!\/][^>]*[^\/]>$/.test(line); isSelfClosing = /\/>$/.test(line) || /^<!/.test(line); if (isClosingTag) indent--;output += "  ".repeat(indent) + line + "\n";if (isOpeningTag && !isSelfClosing) indent++;});document.getElementById("htmlcssjs").textContent = output.trim();}
-  function applyResponsiveStyles() { 
+  //function applyResponsiveStyles() { 
      const wwww = screen.width; 
      if (wwww >= 1020) { 
         let ff = document.querySelector("#foo");
         ff.style.background = "black";ff.style.left="30%";ff.style.top="90%";
-        document.querySelectorAll('.tab').forEach(t => {t.style.width="30%";t.style.right="10px";t.style.top="10px";});
+        document.querySelectorAll('.tab').forEach(t => {t.style.width="30%";t.style.right="5%";t.style.top="10px";});
      } else {
         document.querySelector("footer").style.background = "#1c2644";
      }
-  } 
-  window.addEventListener("load", applyResponsiveStyles); window.addEventListener("resize", applyResponsiveStyles);
+  //} 
+  //window.addEventListener("load", applyResponsiveStyles); window.addEventListener("resize", applyResponsiveStyles);
   document.addEventListener("keydown", function(e) {
       if(e.key === "f"){
         alert("User touched the screen! full screen mode On.");
