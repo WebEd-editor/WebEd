@@ -379,7 +379,7 @@ input[type="number"] {
    <script>document.getElementById("elementsOutlineCheck").addEventListener('change', e => {
    document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.style.outline = e.target.checked ? "1px solid green" : "none";});
    document.getElementById('canvas').contentDocument.body.querySelectorAll('.selected').forEach(edel => {edel.style.outline = e.target.checked ? "1px solid blue" : "none";});
-});</script>
+   });</script>
   <div id="controls">
     <button class="button" onclick="addElement('div')">Div</button>
     <button class="button" onclick="addElement('section')">Section</button>
@@ -472,96 +472,96 @@ input[type="number"] {
   <!-- TEXT & FONT -->
   <details>
     <summary>Text and Font Properties</summary>
-    color: <input type="color" id="clr" value="#ffffff"><br>
+    color: <input id="clrt" oninput="document.getElementById('clr').value = document.getElementById('clrt').value" type="color"><input id="clr" oninput="applyEdit()" type="text"><br>
     font-family: 
-    <select id="fnfml">
+    <select id="fnfml" onchange="applyEdit()">
       <option value="arial">Arial</option>
       <option value="roboto, sans-sarif">'Roboto'</option>
       <option value="nunito, sans-sarif">'nunito'</option>
     </select><br>
-    font-size: <input type="range" oninput="applyEdit()" id="fnsz" min="1" max="30"> px<br>
-    font-weight: <input type="range" id="fnwet" min="100" max="900" step="100" value="200"> <br>
+    font-size: <input oninput="applyEdit()" type="range" oninput="applyEdit()" id="fnsz" min="1" max="30"> px<br>
+    font-weight: <input oninput="applyEdit()" type="range" id="fnwet" min="100" max="900" step="100" value="200"> <br>
     font-style: 
-    <select id="fnstl">
+    <select id="fnstl" onchange="applyEdit()">
       <option value="normal">normal</option>
       <option value="italic">italic</option>
       <option value="oblique">oblique</option>
     </select><br>
     text-align: 
-    <select id="txtalg">
+    <select id="txtalg" onchange="applyEdit()">
       <option value="left">left</option>
       <option value="center">center</option>
       <option value="right">right</option>
       <option value="justify">justify</option>
     </select><br>
     text-decoration: 
-    <select id="txtdec">
+    <select id="txtdec" onchange="applyEdit()">
       <option value="none">none</option>
       <option value="underline">underline</option>
       <option value="line-through">line-through</option>
       <option value="overline">overline</option>
     </select><br>
     text-transform: 
-    <select id="txttsfm">
+    <select id="txttsfm" onchange="applyEdit()">
       <option value="none">none</option>
       <option value="uppercase">uppercase</option>
       <option value="lowercase">lowercase</option>
       <option value="capitalize">capitalize</option>
     </select><br>
-    line-height: <input id="lnhet" type="number" step="0.1" placeholder="e.g. 1.5"><br>
-    letter-spacing: <input id="ltsp" type="text" placeholder="e.g. 0.5px"> px<br>
+    line-height: <input oninput="applyEdit()" id="lnhet" type="number" step="0.1" placeholder="e.g. 1.5"><br>
+    letter-spacing: <input oninput="applyEdit()" id="ltsp" type="text" placeholder="e.g. 0.5px"> px<br>
   </details>
 
   <!-- BOX MODEL -->
   <details>
     <summary>Box Model (Spacing & Borders)</summary>
-    margin: <input id="mar" type="text" placeholder="e.g. 10"> px<br>
-    padding: <input id="pad" type="text" placeholder="e.g. 5 10"> px<br>
-    border: <input id="bor" type="text" placeholder="e.g. 1px solid #000"><br>
-    border-radius: <input id="borrd" type="number" placeholder="e.g. 5" min="0"> px<br>
+    margin: <input oninput="applyEdit()" id="mar" type="text" placeholder="e.g. 10"> px<br>
+    padding: <input oninput="applyEdit()" id="pad" type="text" placeholder="e.g. 5 10"> px<br>
+    border: <input oninput="applyEdit()" id="bor" type="text" placeholder="e.g. 1px solid #000"><br>
+    border-radius: <input oninput="applyEdit()" id="borrd" type="number" placeholder="e.g. 5" min="0"> px<br>
     box-sizing: 
-    <select id="bxsz">
+    <select id="bxsz" onchange="applyEdit()">
       <option value="content-box">content-box</option>
       <option value="border-box">border-box</option>
     </select><br>
-    width: <input id="wid" type="text" placeholder="e.g. 100px or 100%"><br>
-    height: <input id="hei" type="text" placeholder="e.g. auto, 50vh"><br>
-    max-width: <input id="mwid" type="text" placeholder="e.g. 1200px"><br>
-    min-height: <input id="mnhei" type="text" placeholder="e.g. 100px"><br>
+    width: <input oninput="applyEdit()" id="wid" type="text" placeholder="e.g. 100px or 100%"><br>
+    height: <input oninput="applyEdit()" id="hei" type="text" placeholder="e.g. auto, 50vh"><br>
+    max-width: <input oninput="applyEdit()" id="mwid" type="text" placeholder="e.g. 1200px"><br>
+    min-height: <input oninput="applyEdit()" id="mnhei" type="text" placeholder="e.g. 100px"><br>
   </details>
 
   <!-- BACKGROUND & COLORS -->
   <details>
     <summary>Background and Colors</summary>
-    background-color: <input id="bakcol" oninput="document.getElementById('bakcolt').value = document.getElementById('bakcol').value" type="color"><input id="bakcolt" oninput="applyEdit()" type="text"><br>
-    background-image: <input id="bakimg" type="text" placeholder="url('image.jpg')"><br>
+    background-color: <input oninput="applyEdit()" id="bakcol" oninput="document.getElementById('bakcolt').value = document.getElementById('bakcol').value" type="color"><input id="bakcolt" oninput="applyEdit()" type="text"><br>
+    background-image: <input oninput="applyEdit()" id="bakimg" type="text" placeholder="url('image.jpg')"><br>
     background-size: 
-    <select id="baksz">
+    <select id="baksz" onchange="applyEdit()">
       <option value="auto">auto</option>
       <option value="cover">cover</option>
       <option value="contain">contain</option>
     </select><br>
-    background-position: <input id="bakpos" type="text" placeholder="e.g. center center"><br>
+    background-position: <input oninput="applyEdit()" id="bakpos" type="text" placeholder="e.g. center center"><br>
     background-repeat: 
-    <select id="bakrep">
+    <select id="bakrep" onchange="applyEdit()">
       <option value="repeat">repeat</option>
       <option value="no-repeat">no-repeat</option>
       <option value="repeat-x">repeat-x</option>
       <option value="repeat-y">repeat-y</option>
     </select><br>
     object-fit: 
-    <select id="objectFit">
+    <select id="objectFit" onchange="applyEdit()">
        <option value="cover">cover</option>
        <option value="contain">contain</option>
     </select><br>
-    opacity: <input id="opct" type="range" min="0" max="1" step="0.1"><br>
+    opacity: <input oninput="applyEdit()" id="opct" type="range" min="0" max="1" step="0.1"><br>
   </details>
 
   <!-- POSITIONING & LAYOUT -->
   <details>
     <summary>Positioning and Layout</summary>
     position: 
-    <select id="editPosition">
+    <select id="editPosition" onchange="applyEdit()">
       <opretion value="">position</opretion>
       <option value="static">static</option>
       <option value="relative">relative</option>
@@ -573,28 +573,28 @@ input[type="number"] {
     <div class="box-editor">
   <div class="margin-label">Margin</div>
   <div class="margin-box">
-    <input type="number" id="mar-t" placeholder="Top">
+    <input oninput="applyEdit()" type="number" id="mar-t" placeholder="Top">
     <div class="horizontal-inputs">
-      <input type="number" id="mar-l" placeholder="Left">
+      <input oninput="applyEdit()" type="number" id="mar-l" placeholder="Left">
       <div class="padding-box">
         <div class="padding-label">Padding</div>
-        <input type="number" id="pad-t" placeholder="Top">
+        <input oninput="applyEdit()" type="number" id="pad-t" placeholder="Top">
         <div class="horizontal-inputs">
-          <input type="number" id="pad-l" placeholder="Left">
+          <input oninput="applyEdit()" type="number" id="pad-l" placeholder="Left">
           <div class="content-box">Content</div>
-          <input type="number" id="pad-r" placeholder="Right">
+          <input oninput="applyEdit()" type="number" id="pad-r" placeholder="Right">
         </div>
-        <input type="number" id="pad-b" placeholder="Bottom">
+        <input oninput="applyEdit()" type="number" id="pad-b" placeholder="Bottom">
       </div>
-      <input type="number" id="mar-r" placeholder="Right">
+      <input oninput="applyEdit()" type="number" id="mar-r" placeholder="Right">
     </div>
-    <input type="number" id="mar-b" placeholder="Bottom">
+    <input oninput="applyEdit()" type="number" id="mar-b" placeholder="Bottom">
   </div>
     </div>
     
-    z-index: <input type="number" id="zindex"><br>
+    z-index: <input oninput="applyEdit()" type="number" id="zindex"><br>
     display: 
-    <select id="dspl">
+    <select id="dspl" onchange="applyEdit()">
       <option value="block">block</option>
       <option value="inline">inline</option>
       <option value="inline-block">inline-block</option>
@@ -603,20 +603,20 @@ input[type="number"] {
       <option value="none">none</option>
     </select><br>
     float: 
-    <select id="flt">
+    <select id="flt" onchange="applyEdit()">
       <option value="none">none</option>
       <option value="left">left</option>
       <option value="right">right</option>
     </select><br>
     overflow: 
-    <select id="ovrfl">
+    <select id="ovrfl" onchange="applyEdit()">
       <option value="visible">visible</option>
       <option value="hidden">hidden</option>
       <option value="scroll">scroll</option>
       <option value="auto">auto</option>
     </select><br>
     visibility: 
-    <select id="vsblt">
+    <select id="vsblt" onchange="applyEdit()">
       <option value="visible">visible</option>
       <option value="hidden">hidden</option>
       <option value="collapse">collapse</option>
@@ -627,14 +627,14 @@ input[type="number"] {
   <details>
     <summary>Flexbox and Grid</summary>
     flex-direction: 
-    <select id="flxd">
+    <select id="flxd" onchange="applyEdit()">
       <option value="row">row</option>
       <option value="row-reverse">row-reverse</option>
       <option value="column">column</option>
       <option value="column-reverse">column-reverse</option>
     </select><br>
     justify-content: 
-    <select id="jstfc">
+    <select id="jstfc" onchange="applyEdit()">
       <option value="flex-start">flex-start</option>
       <option value="flex-end">flex-end</option>
       <option value="center">center</option>
@@ -643,7 +643,7 @@ input[type="number"] {
       <option value="space-evenly">space-evenly</option>
     </select><br>
     align-items: 
-    <select id="algni">
+    <select id="algni" onchange="applyEdit()">
       <option value="stretch">stretch</option>
       <option value="flex-start">flex-start</option>
       <option value="center">center</option>
@@ -651,50 +651,50 @@ input[type="number"] {
       <option value="baseline">baseline</option>
     </select><br>
     flex-wrap: 
-    <select id="flxw">
+    <select id="flxw" onchange="applyEdit()">
       <option value="nowrap">nowrap</option>
       <option value="wrap">wrap</option>
       <option value="wrap-reverse">wrap-reverse</option>
     </select><br>
-    grid-template-columns: <input id="gtc" type="text" placeholder="e.g. 1fr 2fr"><br>
-    grid-template-rows: <input id="gtr" type="text" placeholder="e.g. 100px auto"><br>
-    gap: <input id="gap" type="text" placeholder="e.g. 10px"><br>
+    grid-template-columns: <input oninput="applyEdit()" id="gtc" type="text" placeholder="e.g. 1fr 2fr"><br>
+    grid-template-rows: <input oninput="applyEdit()" id="gtr" type="text" placeholder="e.g. 100px auto"><br>
+    gap: <input oninput="applyEdit()" id="gap" type="text" placeholder="e.g. 10px"><br>
   </details>
 
   <!-- TRANSFORMS & ANIMATIONS -->
   <details>
     <summary>Transforms and Animations</summary>
-    transform: <input id="trnsfm" type="text" placeholder="e.g. rotate(45deg)"><br>
-    transition: <input id="trnstn" type="text" placeholder="e.g. all 0.3s ease-in-out"><br>
-    animation: <input id="anmtn" type="text" placeholder="e.g. bounce 2s infinite"><br>
+    transform: <input oninput="applyEdit()" id="trnsfm" type="text" placeholder="e.g. rotate(45deg)"><br>
+    transition: <input oninput="applyEdit()" id="trnstn" type="text" placeholder="e.g. all 0.3s ease-in-out"><br>
+    animation: <input oninput="applyEdit()" id="anmtn" type="text" placeholder="e.g. bounce 2s infinite"><br>
   </details>
 
   <!-- MISCELLANEOUS -->
   <details>
     <summary>Miscellaneous Properties</summary>
     cursor: 
-    <select id="cursor">
+    <select id="cursor" onchange="applyEdit()">
       <option value="default">default</option>
       <option value="pointer">pointer</option>
       <option value="move">move</option>
       <option value="text">text</option>
       <option value="not-allowed">not-allowed</option>
     </select><br>
-    box-shadow: <input id="bxshd" type="text" placeholder="e.g. 0px 4px 10px #000"><br>
-    filter: <input id="filter" type="text" placeholder="e.g. blur(4px)"><br>
+    box-shadow: <input oninput="applyEdit()" id="bxshd" type="text" placeholder="e.g. 0px 4px 10px #000"><br>
+    filter: <input oninput="applyEdit()" id="filter" type="text" placeholder="e.g. blur(4px)"><br>
     user-select: 
-    <select id="usrslct">
+    <select id="usrslct" onchange="applyEdit()">
       <option value="auto">auto</option>
       <option value="none">none</option>
       <option value="text">text</option>
       <option value="all">all</option>
     </select><br>
     pointer-events: 
-    <select id="pointerEvent">
+    <select id="pointerEvent" onchange="applyEdit()">
       <option value="auto">auto</option>
       <option value="none">none</option>
     </select><br>
-    clip-path: <input id="clipPath" type="text" placeholder="e.g. circle(50%)"><br>
+    clip-path: <input oninput="applyEdit()" id="clipPath" type="text" placeholder="e.g. circle(50%)"><br>
   </details>
   <strong>Events</strong>
   <textarea type="text" id="editOnclick" placeholder="New Onclick JS"></textarea>
@@ -725,7 +725,7 @@ input[type="number"] {
 <div id="fullcodearea" class="tab drag-el">
    <div class="drag-handle">__</div>
    <button onclick="MyClose('fullcodearea')">×</button>
-   <textarea id="htmlcssjs" readonly></textarea>
+   <textarea id="htmlcssjs" readonly style="height:70%;"></textarea>
    <button onclick="downloadAsImg()">download as image</button>
    <!-- <button id="BtnBeautify">Beautify code</button> -->
    <div>
@@ -761,13 +761,21 @@ input[type="number"] {
      if (wwww >= 1020) { 
         let ff = document.querySelector("#foo");
         ff.style.background = "black";ff.style.left="30%";ff.style.top="70%";
-        document.querySelectorAll('.tab').forEach(t => t.style.width="30%");
+        document.querySelectorAll('.tab').forEach(t => t.style.width="30%";t.style.left="10px";t.style.top="10px";);
      } else {
         document.querySelector("footer").style.background = "#1c2644";
      }
   } 
   window.addEventListener("load", applyResponsiveStyles); window.addEventListener("resize", applyResponsiveStyles);
-  
+  document.addEventListener("keydown", function(e) {
+      if(e.key === "f"){
+        alert("User touched the screen! full screen mode On.");
+        e.preventDefault();
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        }
+      }
+  });
   </script>
 <style>.tree-label.drag-over {outline: 2px dashed #00aaff;background-color: #e6f7ff;}</style>
 
