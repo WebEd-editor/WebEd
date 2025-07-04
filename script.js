@@ -441,7 +441,7 @@ function redoEdit() {
     document.getElementById('editOnclick').value = el.getAttribute('onclick') || '';
     
     // 1. 
-    document.getElementById('clr').value = RGBtoHEX(el.style.color) || '';
+    document.getElementById('clr').value = el.style.color || '';
     document.getElementById('fnfml').value = el.style.fontFamily || '';
     document.getElementById('fnsz').value = el.style.fontSize.replace('px', '') || '';
     document.getElementById('fnwet').value = el.style.fontWeight || '';
@@ -464,7 +464,6 @@ function redoEdit() {
     document.getElementById('mnhei').value = el.style.minHeight || '';
     
     // 3.
-    document.getElementById('bakcol').value = RGBtoHEX(el.style.backgroundColor) || '';
     document.getElementById('bakcolt').value = el.style.backgroundColor || '';
     document.getElementById('bakpos').value = el.style.backgroundPosition || '';
     document.getElementById('baksz').value = el.style.backgroundSize || '';
