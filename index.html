@@ -86,11 +86,14 @@ summary:hover{background:rgba(0,0,0,.3);cursor:pointer;}
    left: 10px;top: 10px;
    height: 90%; width: 80%;
    overflow-x: auto;
+   scrollbar-width: none;
    border-radius: 5px;
    display: none;
    z-index: 100;
    resize: both;
 }
+   .tab::-webkit-scrollbar{display: none;}
+   
 #editor-wrapper > #controls > button,
 #controls input,
 #controls  textarea,
@@ -753,7 +756,17 @@ input[type="number"] {
     }
   </style>
   <script>function beautify(code) {const html = code;console.log('code beautify');const tokens = html.replace(/></g, ">\n<").split("\n"); let output = "";let indent = 0;tokens.forEach(line => {line = line.trim();const isClosingTag = /^<\/[^>]+>/.test(line);const isOpeningTag = /^<[^!\/][^>]*[^\/]>$/.test(line); isSelfClosing = /\/>$/.test(line) || /^<!/.test(line); if (isClosingTag) indent--;output += "  ".repeat(indent) + line + "\n";if (isOpeningTag && !isSelfClosing) indent++;});document.getElementById("htmlcssjs").textContent = output.trim();}
-  function applyResponsiveStyles() { const wwww = screen.width; if (wwww >= 800) { document.querySelector("#foo").style.background = "black";} else {document.querySelector("footer").style.background = "#1c2644";}} window.addEventListener("load", applyResponsiveStyles); window.addEventListener("resize", applyResponsiveStyles);
+  function applyResponsiveStyles() { 
+     const wwww = screen.width; 
+     if (wwww >= 1020) { 
+        var vv = document.querySelector("#foo");
+        ff.style.background = "black";ff.style.left="30%";ff.style.top="70%";
+        document.querySelectorAll('.tab').forEach(t => t.style.width="30%");
+     } else {
+        document.querySelector("footer").style.background = "#1c2644";
+     }
+  } 
+  window.addEventListener("load", applyResponsiveStyles); window.addEventListener("resize", applyResponsiveStyles);
   
   </script>
 <style>.tree-label.drag-over {outline: 2px dashed #00aaff;background-color: #e6f7ff;}</style>
