@@ -474,10 +474,10 @@ function redoEdit() {
     
     // 4.
     document.getElementById('editPosition').value = el.style.position || '';
-    document.getElementById('mar-t').value = el.style.marginTop.replace('px', '') || '';
-    document.getElementById('mar-r').value = el.style.marginRight.replace('px', '') || '';
-    document.getElementById('mar-b').value = el.style.marginBottom.replace('px', '') || '';
-    document.getElementById('mar-l').value = el.style.marginLeft.replace('px', '') || '';
+    document.getElementById('mar-t').value = el.style.top.replace('px', '') || '';
+    document.getElementById('mar-r').value = el.style.right.replace('px', '') || '';
+    document.getElementById('mar-b').value = el.style.bottom.replace('px', '') || '';
+    document.getElementById('mar-l').value = el.style.left.replace('px', '') || '';
     document.getElementById('pad-t').value = el.style.paddingTop.replace('px', '') || '';
     document.getElementById('pad-r').value = el.style.paddingRight.replace('px', '') || '';
     document.getElementById('pad-b').value = el.style.paddingBottom.replace('px', '') || '';
@@ -596,10 +596,10 @@ function applyEdit() {
     
 
     currentEditingElement.style.position = newPos || '';
-    currentEditingElement.style.marginTop = mt || '';
-    currentEditingElement.style.marginRight = mr || '';
-    currentEditingElement.style.marginBottom = mb || '';
-    currentEditingElement.style.marginLeft = ml || '';
+    currentEditingElement.style.top = mt || '';
+    currentEditingElement.style.right = mr || '';
+    currentEditingElement.style.bottom = mb || '';
+    currentEditingElement.style.left = ml || '';
     currentEditingElement.style.paddingTop = pt || '';
     currentEditingElement.style.paddingRight = pr || '';
     currentEditingElement.style.paddingBottom = pb || '';
