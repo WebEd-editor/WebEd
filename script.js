@@ -651,6 +651,121 @@ function loadGoogleFont(fontN) {
   iframeDoc.head.appendChild(link);
 }
 
+// links for Google icons integration 
+const ICONS = [
+  "home", "menu", "search", "account_circle", "delete", "add", "edit", "favorite",
+  "star", "settings", "check", "close", "visibility", "lock", "camera", "send",
+  "download", "info", "warning", "help", "language", "face", "phone", "email"
+];
+
+// CDN links
+const cdnLinks = {
+  filled: "https://fonts.googleapis.com/icon?family=Material+Icons",
+  outlined: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined",
+  rounded: "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+};
+   
+// Initial CDN load
+loadCDN("filled");
+
+function loadCDN() {
+  /*const cdnLinks = {
+    filled: "https://fonts.googleapis.com/icon?family=Material+Icons",
+    outlined: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined",
+    rounded: "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+  };*/
+
+  const iframe = document.getElementById("canvas");
+  if (!iframe) return console.warn("❌ iframe #canvas not found");
+
+  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+  // Clean old links if already present
+  ["material-icon-cdn-filled", "material-icon-cdn-outlined", "material-icon-cdn-rounded"].forEach(id => {
+    const old = iframeDoc.getElementById(id);
+    if (old) old.remove();
+  });
+
+  // Inject all styles
+  Object.entries(cdnLinks).forEach(([style, href]) => {
+    const link = iframeDoc.createElement("link");
+    link.id = `material-icon-cdn-${style}`;
+    link.rel = "stylesheet";
+    link.href = href;
+    iframeDoc.head.appendChild(link);
+  });
+}
+
+function showTab(tabId) {
+  document.getElementById("icons-tab").style.display = (tabId === 'icons-tab') ? 'block' : 'none';
+  document.getElementById("preview-tab").style.display = (tabId === 'preview-tab') ? 'block' : 'none';
+
+  document.getElementById("tab-btn-icons").style.background = (tabId === 'icons-tab') ? 'var(--bg)' : 'var(--surface)';
+  document.getElementById("tab-btn-preview").style.background = (tabId === 'preview-tab') ? 'var(--bg)' : 'var(--surface)';
+}
+
+function renderIcons() {
+  const list = document.getElementById("icon-list");
+  const query = document.getElementById("icon-search").value.toLowerCase();
+  const style = document.getElementById("icon-style").value;
+  loadCDN(style);
+
+  list.innerHTML = "";
+  ICONS.filter(name => name.includes(query)).forEach(iconName => {
+    const el = document.createElement("span");
+    el.innerText = iconName;
+    el.className = style === "filled" ? "material-icons" : `material-symbols-${style}`;
+    el.style.fontSize = "24px";
+    el.style.cursor = "pointer";
+    el.title = iconName;
+
+    el.onclick = () => {
+      document.getElementById("icon-preview").className = el.className;
+      document.getElementById("icon-preview").innerText = iconName;
+      document.getElementById("preview-name").innerText = iconName;
+      showTab("preview-tab");
+    };
+
+    list.appendChild(el);
+  });
+}
+
+// When settings are changed → update preview live
+["icon-style", "font-size", "icon-color"].forEach(id => {
+  document.getElementById(id).addEventListener("input", updatePreview);
+  document.getElementById(id).addEventListener("change", updatePreview);
+});
+
+function updatePreview() {
+  const style = document.getElementById("icon-style").value;
+  const fontSize = document.getElementById("font-size").value + "px";
+  const color = document.getElementById("icon-color").value;
+  const iconName = document.getElementById("icon-preview").innerText;
+
+  loadCDN(style);
+  const preview = document.getElementById("icon-preview");
+  preview.className = style === "filled" ? "material-icons" : `material-symbols-${style}`;
+  preview.innerText = iconName;
+  preview.style.fontSize = fontSize;
+  preview.style.color = color;
+}
+
+// Insert btn → console output of final HTML
+document.getElementById("insert-btn").onclick = () => {
+  const style = document.getElementById("icon-style").value;
+  const iconName = document.getElementById("icon-preview").innerText;
+  const fontSize = document.getElementById("font-size").value + "px";
+  const color = document.getElementById("icon-color").value;
+
+  const className = style === "filled" ? "material-icons" : `material-symbols-${style}`;
+  const html = `<span class="${className}" style="font-size: ${fontSize}; color: ${color};">${iconName}</span>`;
+  iconInsert(html);
+  //console.log("✅ Icon HTML:\n", html);
+};
+
+document.getElementById("icon-search").addEventListener("input", renderIcons);
+window.addEventListener("DOMContentLoaded", renderIcons);
+
 function applyFont(fontName) {
   if (!fontName) return;
 
