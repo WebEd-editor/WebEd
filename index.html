@@ -728,6 +728,54 @@ input[type="number"] {
  </div>
 </div>
 
+<!-- ✅ Google Icons Panel -->
+<div id="google-icons-panel" style="display: none; position: fixed; left: 5%; right: 5%; top: 3%; width: 90%; height: 95%; background: var(--bg); color: var(--font-color); border: 1px solid #ccc; border-radius: 10px; padding: 0; font-family: sans-serif; z-index: 99999; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden;">
+  
+  <!-- Tab Header -->
+  <div style="display: flex; border-bottom: 1px solid #ddd;">
+    <button onclick="showTab('icons-tab')" id="tab-btn-icons" style="flex:1; padding: 10px; border: none; background: var(--bg); color: var(--font-color); cursor: pointer;">🎨 Icons</button>
+    <button onclick="showTab('preview-tab')" id="tab-btn-preview" style="flex:1; padding: 10px; border: none; background: var(--surface); color: var(--font-color); cursor: pointer;">🔍 Preview</button>
+    <button onclick="document.getElementById('google-icons-panel').style.display='none'" id="tab-btn-preview-cls" style="flex:1; padding: 10px; border: none; background: var(--surface); color: var(--font-color); cursor: pointer;">Close</button>
+  </div>
+
+  <!-- Tabs -->
+  <div id="icons-tab" style="padding: 10px; display: block;">
+    <input type="text" id="icon-search" placeholder="Search icons..." style="width: 100%; padding: 6px 10px; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 10px;">
+
+    <div id="icon-list" style="height: auto; overflow-y: auto; display: flex; flex-wrap: wrap; gap: 8px;"></div>
+  </div>
+
+  <div id="preview-tab" style="padding: 10px; display: none;">
+    <div style="text-align: center; margin-bottom: 10px;">
+      <div id="icon-preview" style="font-size: 48px; color: #333;"></div>
+      <div id="preview-name" style="font-size: 13px; margin-top: 4px;"></div>
+    </div>
+
+    <label style="display:flex; align-items: center; margin-bottom: 8px;">
+      Style:
+      <select id="icon-style" style="width: 50%; margin: 0 0 0 10px; padding: 6px;">
+        <option value="filled">Filled</option>
+        <option value="outlined">Outlined</option>
+        <option value="rounded">Rounded</option>
+      </select>
+    </label>
+
+    <label style="display:flex; align-items: center; margin-bottom: 8px;">
+      Font Size:
+      <input id="font-size" type="number" value="36" min="12" max="128" style="width: 50%; margin: 0 0 0 10px; padding: 6px;">
+    </label>
+
+    <label style="display:flex; align-items: center; margin-bottom: 12px;">
+      Color:
+      <input type="color" id="icon-color" value="#333" style="width: 50%; margin: 0 0 0 10px; padding: 6px;">
+    </label>
+
+    <button id="insert-btn" style="width: 100%; padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer;">
+      ➕ Insert Icon
+    </button>
+  </div>
+</div>
+
 <div id="filesTab" class="tab drag-el">
    <div class="drag-handle">__</div>
    <button onclick="MyClose('filesTab')">×</button>
