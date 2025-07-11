@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head data-theme="dark">
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="52lNMZ2osB98NaWxE3jh5RUJQKjvdNdHIK7uYUV1GOc" />
@@ -45,6 +45,19 @@
    --fc : #919ad9;
    --fs: #2e375c;
    --tab: #1c2644;
+}
+[data-theme="dark"] {
+  --bg: #121212;
+  --surface: #1e1e1e;
+  --accent: #bb86fc;
+  --head-tab: #272727;
+  --elements-tab: #1f1f1f;
+  --tab-button: #2a2a2a;
+  --input-bg: #2c2c2c;
+  --input-border: #444;
+  --select-bg: #333;
+  --font-color: #e0e0e0;
+  --font-color-home: #ffffff;
 }
 html body {
    background: #0f1023 !important;
@@ -414,8 +427,9 @@ input[type="number"] {
 <div id="seticon" class="tab drag-el">
    <div class="drag-handle">__</div>
    <button onclick="MyClose('seticon')">×</button>
-   <button onclick="MyOpen('iconEditor')">Advanced</button><br>
-   <strong>Icons Gallery</strong>
+   <button onclick="MyOpen('iconEditor')">Custom</button>
+   <button onclick="document.getElementById('google-icons-panel').style.display='block'">Google icons</button><br>
+   <strong>Your icons</strong>
    <div id="iconList"></div>
 </div>
 
