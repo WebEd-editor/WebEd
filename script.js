@@ -655,7 +655,7 @@ function loadGoogleFont(fontN) {
 const ICONS = [
   "home", "menu", "search", "account_circle", "delete", "add", "edit", "favorite",
   "star", "settings", "check", "close", "visibility", "lock", "camera", "send",
-  "download", "info", "warning", "help", "language", "face", "phone", "email"
+  "download", "info", "warning", "help", "language", "face", "phone", "email", "subscription", "add_circle"
 ];
 
 // CDN links
