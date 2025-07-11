@@ -469,7 +469,9 @@ function redoEdit() {
     document.getElementById('baksz').value = el.style.backgroundSize || '';
     document.getElementById('bakrep').value = el.style.backgroundRepeat || '';
     document.getElementById('objectFit').value = el.style.objectFit || '';
-    document.getElementById('bakimg').value = el.style.backgroundImage || '';
+    const cssUrl = el.style.backgroundImage;
+    const extractedUrl = cssUrl.slice(5, -2);
+    document.getElementById('bakimg').value = extractedUrl || '';
     //document.getElementById('opct').value = el.style.opacity || '';
     
     // 4.
