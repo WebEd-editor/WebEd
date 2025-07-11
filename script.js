@@ -442,7 +442,7 @@ function redoEdit() {
     
     // 1. 
     document.getElementById('clr').value = el.style.color || '';
-    document.getElementById('fnfml').value = el.style.fontFamily || '';
+   // document.getElementById('fnfml').value = el.style.fontFamily || '';
     document.getElementById('fnsz').value = el.style.fontSize.replace('px', '') || '';
     document.getElementById('fnwet').value = el.style.fontWeight || '';
     document.getElementById('fnstl').value = el.style.fontStyle || '';
@@ -557,7 +557,7 @@ function applyEdit() {
     }
 
     currentEditingElement.style.color = document.getElementById('clr').value || '';
-    currentEditingElement.style.fontFamily = document.getElementById('fnfml').value || '';
+   // currentEditingElement.style.fontFamily = document.getElementById('fnfml').value || '';
     currentEditingElement.style.fontSize = document.getElementById('fnsz').value +'px' || '';
     currentEditingElement.style.fontWeight = document.getElementById('fnwet').value || '';
     currentEditingElement.style.fontStyle = document.getElementById('fnstl').value || '';
@@ -636,6 +636,31 @@ function applyEdit() {
     saveHistory();    
    // Notify("Applying All css Properties", "s");
   }
+
+// links for css fonts
+function loadGoogleFont(fontN) {
+  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+  const fontLinkId = `google-font-${fontN.replace(/\s+/g, '-')}`;
+  // Avoid duplicate loads
+  if (iframeDoc.getElementById(fontLinkId)) return;
+  
+  const link = document.createElement("link");
+  link.id = fontLinkId;
+  link.href = `https://fonts.googleapis.com/css2?family=${fontN.replace(/\s+/g, '+')}&display=swap`;
+  link.rel = "stylesheet";
+  iframeDoc.head.appendChild(link);
+}
+
+function applyFont(fontName) {
+  if (!fontName) return;
+
+  loadGoogleFont(fontName); // Load the font dynamically
+
+  const selected = currentEditingElement;
+  if (selected) {
+    selected.style.fontFamily = `'${fontName}', sans-serif`;
+  }
+}
 
   function closeEdit() {
     currentEditingElement = null;
