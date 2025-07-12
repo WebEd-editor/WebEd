@@ -176,7 +176,7 @@ function updateTree() {
       const label = document.createElement('span');
       label.className = 'tree-label';
 
-      const id = child.id ? #${child.id} : '';
+      const id = child.id ? `#${child.id}` : '';
 
       let classString = '';
       if (typeof child.className === 'string') {
