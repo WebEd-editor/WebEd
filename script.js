@@ -184,7 +184,7 @@ function updateTree() {
       } else if (child.className && typeof child.className.baseVal === 'string') {
         classString = child.className.baseVal;
       }
-      const cls = classString ? .${classString.split(' ').join('.')} : '';
+      const cls = classString ? `.${classString.split(' ').join('.')}` : '';
       const tagLabel = ${child.tagName.toLowerCase()} ${id}${cls};
       label.innerHTML = arrowTR + "< " + String(tagLabel) + " >";
 
