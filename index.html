@@ -502,7 +502,7 @@ input[type="number"] {
   <!-- TEXT & FONT -->
   <details>
     <summary>Text and Font Properties</summary>
-    color: <input id="clrt" oninput="document.getElementById('clr').value = document.getElementById('clrt').value" type="color"><input id="clr" oninput="applyEdit()" type="text"><br>
+    color: <input id="clrt" oninput="document.getElementById('clr').value = document.getElementById('clrt').value; applyEdit();" type="color"><input id="clr" oninput="applyEdit()" type="text"><br>
     font-family:
     <select onchange="applyFont(this.value)">
   <option value="Roboto">Roboto</option>
@@ -580,7 +580,7 @@ input[type="number"] {
   <!-- BACKGROUND & COLORS -->
   <details>
     <summary>Background and Colors</summary>
-    background-color: <input id="bakcol" oninput="document.getElementById('bakcolt').value = document.getElementById('bakcol').value" type="color"><input id="bakcolt" oninput="applyEdit()" type="text"><br>
+    background-color: <input id="bakcol" oninput="document.getElementById('bakcolt').value = document.getElementById('bakcol').value; applyEdit();" type="color"><input id="bakcolt" oninput="applyEdit()" type="text"><br>
     background-image: <input oninput="applyEdit()" id="bakimg" type="text" placeholder="url('image.jpg')"><br>
     background-size: 
     <select id="baksz" onchange="applyEdit()">
