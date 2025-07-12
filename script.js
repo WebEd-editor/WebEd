@@ -185,7 +185,7 @@ function updateTree() {
         classString = child.className.baseVal;
       }
       const cls = classString ? `.${classString.split(' ').join('.')}` : '';
-      const tagLabel = ${child.tagName.toLowerCase()} ${id}${cls};
+      const tagLabel = `${child.tagName.toLowerCase()} ${id}${cls}`;
       label.innerHTML = arrowTR + "< " + String(tagLabel) + " >";
 
       // 👇 Element select action
