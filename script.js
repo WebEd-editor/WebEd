@@ -161,6 +161,9 @@ function iconInsert(svgC) {
 
 const arrowTR = `<svg width="20" height="20" viewBox="0 0 100 100"><path d="M 10 10 L 10 50 Z M 10 50 L 70 50 Z M 40 20 L 70 50 Z M 40 80 L 70 50 Z" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
+let copiedElement = null;
+let isCopied = false;
+
 function updateTree() {
   const tree = document.getElementById('tree');
   tree.innerHTML = '';
@@ -173,26 +176,24 @@ function updateTree() {
       const label = document.createElement('span');
       label.className = 'tree-label';
 
-      const id = child.id ? `#${child.id}` : '';
+      const id = child.id ? #${child.id} : '';
 
-      // ✅ Safe class handling for HTML and SVG
       let classString = '';
       if (typeof child.className === 'string') {
         classString = child.className;
       } else if (child.className && typeof child.className.baseVal === 'string') {
-        classString = child.className.baseVal; // For SVG elements
+        classString = child.className.baseVal;
       }
-      const cls = classString ? `.${classString.split(' ').join('.')}` : '';
-
-      var tagLabel = `${child.tagName.toLowerCase()} ${id}${cls}`;
-      label.innerHTML = arrowTR + "< "+String(tagLabel)+" >";
+      const cls = classString ? .${classString.split(' ').join('.')} : '';
+      const tagLabel = ${child.tagName.toLowerCase()} ${id}${cls};
+      label.innerHTML = arrowTR + "< " + String(tagLabel) + " >";
 
       // 👇 Element select action
       label.onclick = () => {
         selectedParent = child;
         clearSelected();
         child.classList.add('selected');
-        document.getElementById('canvas').contentDocument.body.querySelectorAll('span, svg, div, line, path, circle, curve, rec').forEach(edel => {edel.style.outline = "none";edel.classList.add('editable');});
+        document.getElementById('canvas').contentDocument.body.querySelectorAll('svg, span, div, line, path, circle, curve, rec').forEach(edel => {edel.style.outline = "none";edel.classList.add('editable');});
         document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.style.outline = "none";});
         document.getElementById('canvas').contentDocument.body.querySelectorAll('.selected').forEach(edel => {edel.style.outline = "1px solid blue";});
         updateTree();
@@ -201,62 +202,90 @@ function updateTree() {
       const actions = document.createElement('span');
       actions.className = 'tree-actions';
 
+      // ✏️ Edit button
+      const editBtn = document.createElement('button');
+      editBtn.textContent = '✏️';
+      editBtn.title = "Edit element";
+      editBtn.onclick = () => openEdit(child);
+
+      // 🗑 Delete button
       const delBtn = document.createElement('button');
       delBtn.textContent = '🗑';
+      delBtn.title = "Delete element";
       delBtn.onclick = () => {
         if (selectedParent === child) {
           selectedParent = document.getElementById('canvas');
           clearSelected();
         }
         child.remove();
-        updateTree();saveHistory();
+        updateTree(); saveHistory();
       };
 
-      const editBtn = document.createElement('button');
-      editBtn.textContent = '✏️';
-      editBtn.onclick = () => openEdit(child);
+      // 📋 Copy/Paste button
+      const cpBtn = document.createElement('button');
+      cpBtn.textContent = isCopied ? '📥' : '📋';
+      cpBtn.title = isCopied ? 'Paste copied element' : 'Copy this element';
+      cpBtn.onclick = () => {
+        if (!isCopied) {
+          copiedElement = child.cloneNode(true);
+          isCopied = true;
+          cpBtn.textContent = '📥';
+          cpBtn.title = 'Paste copied element';
+        } else {
+          if (selectedParent) {
+            const pasted = copiedElement.cloneNode(true);
+            selectedParent.appendChild(pasted);
+            isCopied = false;
+            copiedElement = null;
+            cpBtn.textContent = '📋';
+            cpBtn.title = 'Copy this element';
+            updateTree();
+            saveHistory();
+          }
+        }
+      };
 
+      // Add buttons
       actions.appendChild(editBtn);
+      actions.appendChild(cpBtn);
       actions.appendChild(delBtn);
-      if(child.tagName.toLowerCase() === 'body'){actions.removeChild(delBtn)}
-
+      if (child.tagName.toLowerCase() === 'body') {
+        actions.removeChild(delBtn);
+        actions.removeChild(cpBtn);
+      }
+      // Tree item setup
       item.appendChild(label);
       item.appendChild(actions);
-      container.appendChild(item);
-      if(child.tagName.toLowerCase() === 'head'){container.removeChild(item)}
 
+      if (child.tagName.toLowerCase() !== 'head') {
+        container.appendChild(item);
+      }
+
+      // Recursive tree
       if (child.children.length > 0) {
         buildTree(child, item);
       }
-      
+
+      // Drag-and-drop support
       label.draggable = true;
-
-      // Store the dragged element
       label.addEventListener('dragstart', (e) => {
-        e.dataTransfer.setData('text/plain', child.getAttribute('data-id') || '');
-        draggedElement = child;
-        label.style.outline="2px solid green";
+        e.dataTransfer.setData('text/plain', child.getAttribute('data-id') || '');draggedElement = child;
+        label.style.outline = "2px solid green";
       });
-
-      // Allow drop
       label.addEventListener('dragover', (e) => {
         e.preventDefault();
-        if(isValidDropTarget(child, draggedElement)){
-           label.classList.add('drag-over');
+        if (isValidDropTarget(child, draggedElement)) {
+          label.classList.add('drag-over');
         }
       });
-
       label.addEventListener('dragleave', () => {
         label.classList.remove('drag-over');
       });
-
-      // Handle drop
       label.addEventListener('drop', (e) => {
         e.preventDefault();
         label.classList.remove('drag-over');
-
         if (!draggedElement || draggedElement.contains(child)) return;
-        label.style.outline="2px solid yellow";
+        label.style.outline = "2px solid yellow";
         child.appendChild(draggedElement);
         updateTree();
         saveHistory();
@@ -264,9 +293,10 @@ function updateTree() {
     });
   }
 
-  buildTree(document.getElementById('canvas').contentDocument.documentElement, tree);
+  const canvasDoc = document.getElementById('canvas').contentDocument;
+  buildTree(canvasDoc.documentElement, tree);
+}
 
-}  
 function isValidDropTarget(target, dragged) {
   if (!target || !dragged) return false;
   if (dragged.contains(target)) return false; // prevent nesting into own child
