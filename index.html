@@ -562,6 +562,17 @@
   </script>
 <style>.tree-label.drag-over {outline: 2px dashed #00aaff;background-color: #e6f7ff;}</style>
 
+<script>
+   // servise workers
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(reg => console.log('SW registered ✅', reg))
+        .catch(err => console.log('SW registration failed ❌', err));
+    });
+  }
+</script>
+   
 </body>
 </html>
 
