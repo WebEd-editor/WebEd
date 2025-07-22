@@ -24,6 +24,7 @@ html body {
    color: white;
    margin: 0;
    font-family: var(--font);
+   overscroll-behavior-y: contain;
 }
 /*.drag-box {
   background: red;
