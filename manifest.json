@@ -5,6 +5,7 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1e1e1e",
+  "description": "WebEd is a simple website builder using drag-drop and mobile device support."
   "icons": [
     {
       "src": "logo.png",
