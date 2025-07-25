@@ -8,8 +8,8 @@
   "description": "WebEd is a simple website builder using drag-drop and mobile device support.",
   "icons": [
     {
-      "src": "logo.png",
-      "sizes": "192×192",
+      "src": "webed-icon-512.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
