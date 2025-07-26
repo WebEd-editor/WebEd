@@ -49,6 +49,7 @@ html body {
    padding: 3px;border-radius: 4px;
    transition: .3s margin-left;
 }
+#foo svg{color: white;}
 
 footer > button, .tab > button, #projectList  button, #fileList  button {
    border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white;font-weight: 300;
