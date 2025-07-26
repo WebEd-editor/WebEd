@@ -1,4 +1,5 @@
-    @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@300;400;500;700&display=swap");
+
 :root{
    --font: 'roboto', sans-sarif;
    --w : #fff;
@@ -6,6 +7,7 @@
    --fs: #2e375c;
    --tab: #1c2644;
 }
+
 [data-theme="dark"] {
   --bg: #121212;
   --surface: #1e1e1e;
@@ -19,97 +21,101 @@
   --font-color: #e0e0e0;
   --font-color-home: #ffffff;
 }
+[data-theme="brite"] {
+  --bg: #ffffff;
+  --surface: #f4f4f4;
+  --accent: #2979ff;
+  --head-tab: #e0e0e0;
+  --elements-tab: #f0f0f0;
+  --tab-button: #d9d9d9;
+  --input-bg: #ffffff;
+  --input-border: #ccc;
+  --select-bg: #fafafa;
+  --font-color: #333333;
+  --font-color-home: #111111;
+}
+[data-theme="purple"]{
+  --bg: purple;
+  --surface: #795dba;
+  --accent: #2979ff;
+  --head-tab: #584487;
+  --elements-tab: #372b55;
+  --tab-button: #4c3b75;
+  --input-bg: #4c3b75;
+  --input-border: #222;
+  --select-bg: #4c3b75;
+  --font-color: white;
+  --font-color-home: #111111;
+}
+
 html body {
-   background: #0f1023 !important;
+   background: var(--bg);
    color: white;
    margin: 0;
    font-family: var(--font);
-   overscroll-behavior-y: contain;
 }
-/*.drag-box {
-  background: red;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  touch-action: none;
-  cursor: grab;
-  position: fixed;
-  top: 100px;
-  left: 100px;
-  margin: 10px;
-}*/
 #foo {
    position: fixed;
    z-index: 102;   
    user-select: none;
    touch-action: none;
    cursor: grab;
-   background: #1c2644;
+   background: var(--surface);
    padding: 3px;border-radius: 4px;
-   transition: .3s margin-left;
+   top: 90%;left: 10%;
 }
 
-.footerClose {
-   display: flex;flex-direction: column-reverse; margin: 10px;
+footer > button, .tab button, #projectList  button, #fileList  button {
+   border: none; background: var(--tab-button);font-family: 'roboto', sans-sarif;color: var(--font-color);font-weight: 400;
 }
-footer > button, .tab > button, #projectList  button, #fileList  button {
-   border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white;font-weight: 300;
 
+#projectList li{
+   list-style-type: none; background: #222; margin: 5px 10px; padding: 5px 15px; border-radius: 2px;
 }
+#projectList li button {
+   margin: 0 10px;float: right;background: transparent;
+}
+
 #fileList{display: flex;width: 100%; padding: 0; overflow: auto;}
 #fileList .fileNamecssjs{display: flex;}
 .fileNamecssjs button{margin: 0 0 0 10px;}
-button:hover{background:rgba(0,0,0,.3);cursor:pointer;}
-summary:hover{background:rgba(0,0,0,.3);cursor:pointer;}
+
 #editor-wrapper, #editModal, #sidebar, #filesTab, #fileManager, #fullcodearea, #seticon, #iconEditor, #addSh, #treeTabForIcon, #previewIconTab, #iconEditorTab{
    /*background: #1c2644;*/
-   background-color: rgba(90,74,140,.4);
+   background-color: var(--elements-tab);
+   color: var(--font-color);
    backdrop-filter: blur(10px);
    position: fixed;
-   left: 10px;top: 10px;
+   right: 5%;top: 5%;
    height: 90%; width: 80%;
    overflow-x: auto;
-   scrollbar-width: none;
    border-radius: 5px;
    display: none;
    z-index: 100;
    resize: both;
 }
-   .tab::-webkit-scrollbar{display: none;}
-   
 #editor-wrapper > #controls > button,
 #controls input,
 #controls  textarea,
 .tab textarea,
 #editor-wrapper > #controls > select {
-   border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white;width: 90%; margin: 2px; padding: 5px; 
+   border: 1px solid var(--input-border); background: var(--input-bg);font-family: 'roboto', sans-sarif;color: var(--font-color);width: 90%; margin: 2px; padding: 5px; 
 }
 #editor-wrapper > #controls{
    text-align: center; 
 }
-#tree{ font-size: 14px; }
-.tab button {border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white; padding: 5px; }
+#tree{ font-size: 14px; overflow: auto; }
+.tab button {border: none; background: var(--tab-button);font-family: 'roboto', sans-sarif;color: var(--font-color); padding: 5px; }
+svg{stroke: var(--font-color);}
 
 #canvas {
       flex: 1;
-      background: #000;
+      background: var(--bg);
+      color: var(--font-color);
       overflow: auto;
       border-radius: 0 0 6px 6px;
       width: 100%;height: 100%;
-    }
-
-    .editable {
-      outline: 1px dashed #006cff;
-      min-height: 30px;
-      transition: border-color 0.3s ease;
-    }
-    .editable:hover {
-      border-color: #45528a;
-      outline: none;
-    }
-    .selected {
-      outline: 2px dashed darkgreen;
+      margin: 0;padding: 0;
     }
 
     .tree-item {
@@ -121,7 +127,7 @@ summary:hover{background:rgba(0,0,0,.3);cursor:pointer;}
 
     .tree-label {
       cursor: pointer;
-      color: #f1f1f1;
+      color: var(--font-color);
     }
 
     .tree-label:hover {
@@ -139,34 +145,37 @@ summary:hover{background:rgba(0,0,0,.3);cursor:pointer;}
     }
 
     .tree-actions button:hover {
-      background: #f1f1f1;
+      background: var(--font-color);
     }
 
 details {
    font-family: var(--font);
    font-weight: 200;
-   color: rgb(200,200,200);
+   color: var(--font-color);
    padding: 0 5px;
 }
 summary {
-   background: rgba(200,200,200,.1);
+   background: var(--surface);
    padding: 5px; margin: 0 0 5px 0;
    font-weight: 400;
-   color: var(--w);
+   color: var(--font-color);
 }
 
     details input,
     .tab input[type="text"],
     details select {
-      background-color: var(--fs);
+      background-color: var(--input-bg);
       font-family: 'roboto', sans-sarif;
-      color: #fff;
+      color: var(--font-color-tab);
       padding: 5px 8px;
       margin: 5px 0;
-      border: none;
+      border: 1px solid var(--input-border);
       border-radius: 4px;
+      outline: none;
       width: 200px;
+      transition: all .2s;
     }
+    .tab input[type="text"]:hover{border:1px solid #555;}
 
     details input[type="color"] {
       padding: 0;
@@ -229,7 +238,7 @@ input[type="number"] {
 }
 
 .drag-handle{
-   background: var(--fc);
+   background: var(--head-tab);
    position: sticky;width: 100%;top: 0;
    cursor: move;
 }
@@ -240,7 +249,7 @@ input[type="number"] {
   width: 100%; height: 100%;
   background: rgba(0, 0, 0, 0.6);
   display: flex; align-items: center; justify-content: center;
-  z-index: 9999;
+  z-index: 103;
 }
 
 .popup {
@@ -301,16 +310,84 @@ input[type="number"] {
   display: none;
 }
 
-.fileNamecssjs{
-   background: #3c438f;
-   cursor: pointer;
-   padding: 5px 10px; margin: 10px;
-   list-style-type: none;
-   border: 1px solid #333;border-radius: 5px;
-   transition: .3s border;
-}
-.fileNamecssjs:hover{border: 1px solid #666;}
+.sw{margin: 5px 10px;background: #111;color: #fff;display: flex;flex-direction: row;border-bottom: 2px solid transparent;}
+.tty{background: #333; padding: 5px;text-transform: uppercase;}
+.fileNamecssjs{list-style-type: none; padding: 5px;}
+.sw:hover{background: #222;border-bottom: 2px solid #6274c3;}
 
-.fullppppp{width: 100%; height: 100%; position: fixed;top: 0;left: 0;z-index: 9;}
-.fgfg{position: fixed;top: 0;left: 0;z-index: 1099;}
+.fullppppp{width: 100%; height: 100%; position: fixed;top: 0;left: 0;z-index: 9; overflow: auto;}
+.fgfg{position: fixed;top: 0;left: 0;z-index: 104;}
+
+#controls button:hover{ background: black; }
+
+.options{
+   background: rgba(50,44,100,.2); margin: 0 0 0 5px; padding: 2px;border-radius: 5px;align-items: center;
+}
+.options svg{background: rgba(50,44,100,.2); padding: 3px; transition: all .3s;}
+.options svg:hover{background: rgba(50,44,100,.5);}
+
+[tab="menu"]{
+   display: block;background: black;color: white; position: fixed;top: 0;left:0; width:100%;height: 100%;z-index: 102;
+   overflow: auto;
+}
+#fileEditor{font-size: 13px;}
+.ttt button, .ttt input, .ttt textarea{
+   background: #222;color: #999;padding: 5px;border-radius: 2px;outline: none;font-family: 'roboto', sans-sarif; border: none;
+}
+.ttt textarea{height: 435px;width: 90%;color: white; padding: 10px; margin: 5px;}
+.tt2 input{color: #fff;}
+.tt2 input:placeholder{color: #999;}
+
+.tt2 button:hover, .tt3 button:hover, .tt4 button:hover {
+   color: #999;border-bottom: 1px solid #888;
+}
+.btnhover {
+   color: #fff !important;
+   border-bottom: 1px solid #fff !important;
+}
+
+#splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    z-index: 9999;
+    transition: opacity 0.2s ease;
+  }
+
+  #splash.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #main-content {
+    display: none;
+    padding: 20px;
+  }
+
+  #main-content.show {
+    display: block;
+  }
+  
+.welcome {
+   /*background-image: url('https://images.pexels.com/photos/943096/pexels-photo-943096.jpeg?auto=compress&cs=tinysrgb&h=650&w=940');
+   */height: 500px; width: 100%;
+   background-size: cover;
+   background-position: center top;
+}
+.welcome h1{
+   font-weight: 400; padding: 30px 15px 10px 15px; 
+}
+.welcome p{font-weight: 200; padding: 0px 15px 0px 15px;}
+.welcome .bbbttt {background: #384c70; color: #fff; padding: 10px 20px; margin: 10px 15px 0px 15px;border-radius: 5px; transition: all .2s ease-in-out;}
+.welcome .bbbttt:hover {background: #fff;color: #000;}
+.welcome div div{margin-top: 10px;}
+.welcome div div video{display: none;width: 310px;height: 200px; margin: 15px; border-radius: 10px;}
 
