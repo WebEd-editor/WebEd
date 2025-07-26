@@ -53,10 +53,10 @@ function addElement(type) {
   if (!selectedParent || !iframe.contentDocument.body.contains(selectedParent)) {
     selectedParent = iframe.contentDocument.body;
   }
-
+/*
   const id = document.getElementById('customId').value.trim();
   const className = document.getElementById('customClass').value.trim();
-  const onclickCode = document.getElementById('customOnclick').value.trim();
+  const onclickCode = document.getElementById('customOnclick').value.trim();*/
 
   let el;
 
@@ -76,7 +76,7 @@ function addElement(type) {
      el = document.createElement("div");
      el.innerHTML = icode; // assuming `icode` is defined somewhere globally
   }
-
+  
   // for details tag
   else if (type === 'details') {
      el = document.createElement(type);
@@ -89,7 +89,32 @@ function addElement(type) {
      sss.setAttribute('contenteditable', 'true');
      el.appendChild(sss);
   }
-    
+  
+  // for inputs types  
+ else if (type === 'input') {
+  const select = document.getElementById("inputType");
+  select.style.display = "block";
+  select.focus();
+  select.onchange = function () {
+    const inputType = select.value;
+    const el = document.createElement("input");
+    el.type = inputType;
+    el.placeholder = "type " + inputType;
+    el.classList.add("editable");
+
+    select.style.display = "none"; // hide again
+    select.onchange = null; // remove handler
+    selectedParent.appendChild(el);
+     updateTree();
+     saveHistory();
+  };
+ }
+  
+  /*<header class=""  data-="true" style="outline: none; color: rgb(0, 0, 0); font-size: 16px; font-weight: 500; opacity: 1; background-color: rgb(196, 196, 196); width: 100%; display: flex; flex-direction: row; justify-content: center;" id="">
+      <div class=""  data-="true" id="" style="outline: none; color: rgb(0, 0, 0); font-size: 16px; font-weight: 500; width: 50%; opacity: 1; float: right;">Left hand side&nbsp;</div>
+      <div class=" selected"  data-="true" id="" style="outline: blue solid 1px; color: rgb(0, 0, 0); font-size: 16px; font-weight: 500; width: 50%; opacity: 1; float: right; display: flex; justify-content: flex-end; align-items: flex-end;">Right hand side&nbsp;</div>
+    </header>*/
+  
   // --- Regular HTML Elements ---
   else {
     el = document.createElement(type);
@@ -97,8 +122,8 @@ function addElement(type) {
     el.classList.add('editable');
     el.setAttribute('contenteditable', 'true');
     el.setAttribute('data-editable', 'true');
-  }
-
+  }  
+/*
   if (id) el.id = id;
   if (className) el.className += ' ' + className;
 
@@ -108,7 +133,7 @@ function addElement(type) {
     } catch {
       alert("Invalid onclick code");
     }
-  }
+  }*/
 
   // 🔁 CHANGE 2: Add event listener and mark element in iframe
   el.addEventListener('click', (e) => {
@@ -119,13 +144,11 @@ function addElement(type) {
   });
 
   selectedParent.appendChild(el);
-  
   updateTree();
   saveHistory();
 
-  // Clear input fields
+  /* Clear input fields
   document.getElementById('customId').value = '';
   document.getElementById('customClass').value = '';
-  document.getElementById('customOnclick').value = '';
+  document.getElementById('customOnclick').value = '';*/
 }
-
