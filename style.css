@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@300;400;500;700&display=swap");
-
+    @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@300;400;500;700&display=swap");
 :root{
    --font: 'roboto', sans-sarif;
    --w : #fff;
@@ -7,7 +6,6 @@
    --fs: #2e375c;
    --tab: #1c2644;
 }
-
 [data-theme="dark"] {
   --bg: #121212;
   --surface: #1e1e1e;
@@ -21,52 +19,40 @@
   --font-color: #e0e0e0;
   --font-color-home: #ffffff;
 }
-[data-theme="brite"] {
-  --bg: #ffffff;
-  --surface: #f4f4f4;
-  --accent: #2979ff;
-  --head-tab: #e0e0e0;
-  --elements-tab: #f0f0f0;
-  --tab-button: #d9d9d9;
-  --input-bg: #ffffff;
-  --input-border: #ccc;
-  --select-bg: #fafafa;
-  --font-color: #333333;
-  --font-color-home: #111111;
-}
-[data-theme="purple"]{
-  --bg: purple;
-  --surface: #795dba;
-  --accent: #2979ff;
-  --head-tab: #584487;
-  --elements-tab: #372b55;
-  --tab-button: #4c3b75;
-  --input-bg: #4c3b75;
-  --input-border: #222;
-  --select-bg: #4c3b75;
-  --font-color: white;
-  --font-color-home: #111111;
-}
-
 html body {
-   background: var(--bg);
+   background: #0f1023 !important;
    color: white;
    margin: 0;
    font-family: var(--font);
+   overscroll-behavior-y: contain;
 }
+/*.drag-box {
+  background: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  touch-action: none;
+  cursor: grab;
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  margin: 10px;
+}*/
 #foo {
    position: fixed;
    z-index: 102;   
    user-select: none;
    touch-action: none;
    cursor: grab;
-   background: var(--surface);
+   background: #1c2644;
    padding: 3px;border-radius: 4px;
-   top: 90%;left: 10%;
+   transition: .3s margin-left;
 }
 
-footer > button, .tab button, #projectList  button, #fileList  button {
-   border: none; background: var(--tab-button);font-family: 'roboto', sans-sarif;color: var(--font-color);font-weight: 400;
+footer > button, .tab > button, #projectList  button, #fileList  button {
+   border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white;font-weight: 300;
+
 }
 
 #projectList li{
@@ -79,43 +65,56 @@ footer > button, .tab button, #projectList  button, #fileList  button {
 #fileList{display: flex;width: 100%; padding: 0; overflow: auto;}
 #fileList .fileNamecssjs{display: flex;}
 .fileNamecssjs button{margin: 0 0 0 10px;}
-
+button:hover{background:rgba(0,0,0,.3);cursor:pointer;}
+summary:hover{background:rgba(0,0,0,.3);cursor:pointer;}
 #editor-wrapper, #editModal, #sidebar, #filesTab, #fileManager, #fullcodearea, #seticon, #iconEditor, #addSh, #treeTabForIcon, #previewIconTab, #iconEditorTab{
    /*background: #1c2644;*/
-   background-color: var(--elements-tab);
-   color: var(--font-color);
+   background-color: rgba(90,74,140,.4);
    backdrop-filter: blur(10px);
    position: fixed;
-   right: 5%;top: 5%;
+   left: 10px;top: 10px;
    height: 90%; width: 80%;
    overflow-x: auto;
+   scrollbar-width: none;
    border-radius: 5px;
    display: none;
    z-index: 100;
    resize: both;
 }
+   .tab::-webkit-scrollbar{display: none;}
+   
 #editor-wrapper > #controls > button,
 #controls input,
 #controls  textarea,
 .tab textarea,
 #editor-wrapper > #controls > select {
-   border: 1px solid var(--input-border); background: var(--input-bg);font-family: 'roboto', sans-sarif;color: var(--font-color);width: 90%; margin: 2px; padding: 5px; 
+   border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white;width: 90%; margin: 2px; padding: 5px; 
 }
 #editor-wrapper > #controls{
    text-align: center; 
 }
-#tree{ font-size: 14px; overflow: auto; }
-.tab button {border: none; background: var(--tab-button);font-family: 'roboto', sans-sarif;color: var(--font-color); padding: 5px; }
-svg{stroke: var(--font-color);}
+#tree{ font-size: 14px; }
+.tab button {border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white; padding: 5px; }
 
 #canvas {
       flex: 1;
-      background: var(--bg);
-      color: var(--font-color);
+      background: #000;
       overflow: auto;
       border-radius: 0 0 6px 6px;
       width: 100%;height: 100%;
-      margin: 0;padding: 0;
+    }
+
+    .editable {
+      outline: 1px dashed #006cff;
+      min-height: 30px;
+      transition: border-color 0.3s ease;
+    }
+    .editable:hover {
+      border-color: #45528a;
+      outline: none;
+    }
+    .selected {
+      outline: 2px dashed darkgreen;
     }
 
     .tree-item {
@@ -127,7 +126,7 @@ svg{stroke: var(--font-color);}
 
     .tree-label {
       cursor: pointer;
-      color: var(--font-color);
+      color: #f1f1f1;
     }
 
     .tree-label:hover {
@@ -145,37 +144,34 @@ svg{stroke: var(--font-color);}
     }
 
     .tree-actions button:hover {
-      background: var(--font-color);
+      background: #f1f1f1;
     }
 
 details {
    font-family: var(--font);
    font-weight: 200;
-   color: var(--font-color);
+   color: rgb(200,200,200);
    padding: 0 5px;
 }
 summary {
-   background: var(--surface);
+   background: rgba(200,200,200,.1);
    padding: 5px; margin: 0 0 5px 0;
    font-weight: 400;
-   color: var(--font-color);
+   color: var(--w);
 }
 
     details input,
     .tab input[type="text"],
     details select {
-      background-color: var(--input-bg);
+      background-color: var(--fs);
       font-family: 'roboto', sans-sarif;
-      color: var(--font-color-tab);
+      color: #fff;
       padding: 5px 8px;
       margin: 5px 0;
-      border: 1px solid var(--input-border);
+      border: none;
       border-radius: 4px;
-      outline: none;
       width: 200px;
-      transition: all .2s;
     }
-    .tab input[type="text"]:hover{border:1px solid #555;}
 
     details input[type="color"] {
       padding: 0;
@@ -238,7 +234,7 @@ input[type="number"] {
 }
 
 .drag-handle{
-   background: var(--head-tab);
+   background: var(--fc);
    position: sticky;width: 100%;top: 0;
    cursor: move;
 }
@@ -249,7 +245,7 @@ input[type="number"] {
   width: 100%; height: 100%;
   background: rgba(0, 0, 0, 0.6);
   display: flex; align-items: center; justify-content: center;
-  z-index: 103;
+  z-index: 9999;
 }
 
 .popup {
@@ -315,7 +311,7 @@ input[type="number"] {
 .fileNamecssjs{list-style-type: none; padding: 5px;}
 .sw:hover{background: #222;border-bottom: 2px solid #6274c3;}
 
-.fullppppp{width: 100%; height: 100%; position: fixed;top: 0;left: 0;z-index: 9; overflow: auto;}
+.fullppppp{width: 100%; height: 100%; position: fixed;top: 0;left: 0;z-index: 9;}
 .fgfg{position: fixed;top: 0;left: 0;z-index: 104;}
 
 #controls button:hover{ background: black; }
