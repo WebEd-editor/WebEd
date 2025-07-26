@@ -31,22 +31,19 @@ function createFile(type) {
   customFiles[filename] = { type, content: '' };
   updateFileList();
 }
-
-let eee = ace.edit("fileEditor");
-      eee.setTheme("ace/theme/monokai");
-      eee.setOptions({
-          fontSize: "15px",
-          showPrintMargin: true,
-          useSoftTabs: true,
-          wrap: false
-      });
-      
+ 
 // ✅ Update file list UI
 function updateFileList() {
   const list = document.getElementById('fileList');
   list.innerHTML = '';
 
   for (const file in customFiles) {
+    const sw = document.createElement('div');
+    sw.className="sw";
+    const tty = document.createElement('div');
+    tty.className="tty";
+    tty.textContent = customFiles[file].type;
+    tty.style.color = (customFiles[file].type === 'js') ? 'yellow' : 'lightgreen';
     const li = document.createElement('li');
     li.className = "fileNamecssjs";
     li.textContent = file;
@@ -55,8 +52,26 @@ function updateFileList() {
     li.onclick = () => {
       currentFile = file;
       let editor = ace.edit('fileEditor');
+      editor.setTheme("ace/theme/github_dark");
+      var t;
+      t = (customFiles[file].type === 'js') ? 'javascript' : 'css' ;
+      editor.session.setMode(`ace/mode/${t}`);
       editor.setValue(customFiles[file].content || '', -1); // -1 to prevent cursor reset
-      editor.session.setMode(`ace/mode/${customFiles[file].type}`);
+      document.getElementById("eundo").onclick = () => {editor.undo()}
+      document.getElementById("eredo").onclick = () => {editor.redo()}
+      document.getElementById("gotoline").oninput = () => {editor.gotoLine(document.getElementById("gotoline").value)}
+      let lastSearch = "";
+      let searchOptions = {
+          needle: "",
+          wrap: true,
+          caseSensitive: false,
+          wholeWord: false,
+          regExp: false,
+          backwards: false
+      };
+      document.getElementById("searchText").oninput = () => { const text = document.getElementById("searchText").value; if (text && text !== lastSearch) { searchOptions.needle = text; editor.find(text, searchOptions); lastSearch = text; } }
+      document.getElementById("findNext").onclick = () => { searchOptions.backwards = false; editor.findNext(searchOptions); }
+      document.getElementById("findPrev").onclick = () => { searchOptions.backwards = true; editor.findPrevious(searchOptions); }
     };
 
     // Delete button
@@ -67,8 +82,10 @@ function updateFileList() {
       deleteFile(file);
     };
 
-    li.appendChild(del);
-    list.appendChild(li);
+    sw.appendChild(tty);
+    sw.appendChild(li);
+    sw.appendChild(del);
+    list.appendChild(sw);
   }
 }
 
@@ -78,10 +95,12 @@ function applyFile() {
 
   const editor = ace.edit('fileEditor');
   const content = editor.getValue();
-  //editor.setTheme("ace/theme/monokai");
+  editor.setTheme("ace/theme/github_dark");
+  editor.getSession().getUndoManager().reset();
+
   const type = customFiles[currentFile].type;
   customFiles[currentFile].content = content;
-  
+
   const iframe = document.getElementById('canvas');
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
@@ -90,15 +109,74 @@ function applyFile() {
   const existing = iframeDoc.querySelector(selector);
   if (existing) existing.remove();
 
-  // ✅ Create new tag
-  const tag = iframeDoc.createElement(type === 'js' ? 'script' : 'style');
+  if (type === 'js') {
+    // ❌ JS file: Do not append to iframe, only save content
+    updateFileList(); // Still update UI
+    return;
+  }
+
+  // ✅ Append CSS only (not JS)
+  const tag = iframeDoc.createElement('style');
   tag.textContent = content;
-  tag.dataset.file = currentFile; // For unique reference
+  tag.dataset.file = currentFile;
 
   iframeDoc.head.appendChild(tag);
   updateFileList();
+}
 
-  runUserCode(content);
+function saveHTMLBeforePreview() {
+  sessionStorage.setItem('customFilesBackup', JSON.stringify(customFiles));
+  sessionStorage.setItem('currentFileBackup', currentFile);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = sessionStorage.getItem('customFilesBackup');
+  const file = sessionStorage.getItem('currentFileBackup');
+
+  if (saved && file) {
+    customFiles = JSON.parse(saved);
+    currentFile = file;
+
+    // Restore editor
+    if (customFiles[currentFile]) {
+      ace.edit('fileEditor').setValue(customFiles[currentFile].content, -1);
+    }
+
+    alert("✅ Editor state restored successfully!");
+  }
+});
+
+function openFullPreview() {
+  saveHTMLBeforePreview();
+  const iframe = document.getElementById("canvas");
+  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+  // ✅ Append missing JS files temporarily
+  for (let fileName in customFiles) {
+    const file = customFiles[fileName];
+    if (file.type === 'js') {
+      // Check if already exists
+      const exists = iframeDoc.querySelector(`script[data-temp="${fileName}"]`);
+      if (!exists) {
+        const script = iframeDoc.createElement('script');
+        script.textContent = file.content;
+        script.dataset.temp = fileName; // mark as temporary
+        iframeDoc.body.appendChild(script);
+      }
+    }
+  }
+
+  // ✅ Now get full HTML (with temp JS scripts)
+  const fullHTML = '<!DOCTYPE html>\n' + iframeDoc.documentElement.outerHTML;
+  ffcode = fullHTML;
+  // ✅ Remove temp JS after capture (cleanup)
+  const tempScripts = iframeDoc.querySelectorAll('script[data-temp]');
+  tempScripts.forEach(tag => tag.remove());
+
+  // ✅ Blob + open new tab
+  const blob = new Blob([fullHTML], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
 }
 
 function runUserCode(code) {
