@@ -19,21 +19,72 @@ function MyOpen(id){
 function MyClose(id){
    document.getElementById(id).style.display="none";
 }
+
+let ffcode;
 function rr() {
   const iframe = document.getElementById("canvas");
   const iframeDoc = iframe.contentDocument.documentElement || iframe.contentWindow.document;
 
   // Get the body HTML from iframe
   let html = iframeDoc.innerHTML;
+  
+  if (ffcode){ html = ffcode;alert(ffcode);}
 
   // Clean up editor-related attributes
   let newHtml = html.replace(/contenteditable="true"/g, '');
   let newHtml2 = newHtml.replace(/editable/g, '');
-  let newHtml3 = newHtml2.replace(/data-editable="true"/g, '');
+  let newHtml3 = newHtml2.replace(/data-="true"/g, '');
 
   // Set cleaned HTML to display area
-  document.getElementById("htmlcssjs").textContent = newHtml3;
-  document.getElementById("BtnBeautify").addEventListener('click', beautify(newHtml3));
+ // document.getElementById("htmlcssjs").textContent = newHtml3;
+    beautify(newHtml3);
+}
+
+function beautify(htmlString) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
+
+  let result = '<!-- full code made in WebEd tool -->\n';
+  result += formatNode(doc.documentElement, 0);
+
+  document.getElementById("htmlcssjs").textContent = result.trim();
+}
+
+function formatNode(node, level) {
+  const indent = '  '.repeat(level);
+  let result = '';
+
+  node.childNodes.forEach(child => {
+    if (child.nodeType === Node.ELEMENT_NODE) {
+      const tagName = child.tagName.toLowerCase();
+
+      const attrs = Array.from(child.attributes)
+        .map(attr => `${attr.name}="${attr.value}"`)
+        .join(' ');
+      const openTag = attrs ? `<${tagName} ${attrs}>` : `<${tagName}>`;
+
+      const isSelfClosing = child.childNodes.length === 0;
+
+      if (isSelfClosing && ['meta', 'link', 'img', 'br', 'hr', 'input'].includes(tagName)) {
+        // Format as self-closing if applicable
+        result += `${indent}<${tagName}${attrs ? ' ' + attrs : ''} />\n`;
+      } else {
+        result += `${indent}${openTag}\n`;
+        result += formatNode(child, level + 1);
+        result += `${indent}</${tagName}>\n`;
+      }
+
+    } else if (child.nodeType === Node.TEXT_NODE) {
+      const text = child.textContent.trim();
+      if (text) {
+        result += `${indent}${text}\n`;
+      }
+    } else if (child.nodeType === Node.COMMENT_NODE) {
+      result += `${indent}<!-- ${child.textContent.trim()} -->\n`;
+    }
+  });
+
+  return result;
 }
 
 // links for css fonts
