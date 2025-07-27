@@ -4,7 +4,7 @@ function menuload(){
    <div style="box-shadow: rgba(200, 200, 200, 0.4) 0px 4px 10px;width: 100%;margin-bottom: 10px;">
      <header class="" id="" style="color: rgb(0, 0, 0); font-size: 16px; outline: none; display: flex; justify-content: space-between;">      
        <div class="" style="outline: none; color: rgb(255, 255, 255); font-size: 16px; font-weight: 500; opacity: 1; display: flex; justify-content: center; align-items: center;" id="">
-         <img src="logo.png" alt="Uploaded Image" class="" content="false" id="" style="max-width: 100%; margin: 5px; opacity: 1; width: 40px; height: 40px; outline: none; border-radius: 5px; font-size: 16px; font-weight: 500; visibility: visible; display: block;" />
+         <img src="https://raw.githubusercontent.com/WebEd-editor/WebEd/refs/heads/main/logo.png" alt="Uploaded Image" class="" content="false" id="" style="max-width: 100%; margin: 5px; opacity: 1; width: 40px; height: 40px; outline: none; border-radius: 5px; font-size: 16px; font-weight: 500; visibility: visible; display: block;" />
          <p class="" id="" style="color: rgb(255, 255, 255); font-size: 27px; font-weight: 300; opacity: 1; margin: 0px; outline: none;">
            WebEd
          </p>
