@@ -184,7 +184,6 @@ function openFullPreview() {
 
   // ✅ 2. Clean DOM directly before capturing outerHTML
   const allElements = iframeDoc.querySelectorAll("*");
-    alert("error on *");
   allElements.forEach((el) => {
     if (el.hasAttribute("class") && el.getAttribute("class").trim() === "") {
       el.removeAttribute("class");
