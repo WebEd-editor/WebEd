@@ -168,6 +168,29 @@ function openFullPreview() {
 
   // ✅ Now get full HTML (with temp JS scripts)
   const fullHTML = '<!DOCTYPE html>\n' + iframeDoc.documentElement.outerHTML;
+  
+  // Step 1: Walk through all elements recursively
+  const allElements = fullHTML.querySelectorAll("*");
+
+  allElements.forEach((el) => {
+    // Step 2: Remove empty class or id attributes
+    if (el.hasAttribute("class") && el.getAttribute("class").trim() === "") {
+      el.removeAttribute("class");
+    }
+
+    if (el.hasAttribute("id") && el.getAttribute("id").trim() === "") {
+      el.removeAttribute("id");
+    }
+
+    // Step 3: Remove specific unwanted attributes like contenteditable
+    const unwantedAttributes = ["contenteditable", "data-temp", "data-editing"];
+    unwantedAttributes.forEach((attr) => {
+      if (el.hasAttribute(attr)) {
+        el.removeAttribute(attr);
+      }
+    });
+  });
+  
   ffcode = fullHTML;
   // ✅ Remove temp JS after capture (cleanup)
   const tempScripts = iframeDoc.querySelectorAll('script[data-temp]');
