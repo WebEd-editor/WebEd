@@ -192,8 +192,8 @@
   <!-- TEXT & FONT -->
   <details>
     <summary>Text and Font Properties</summary>
-    <div>color: <input id="clrt" oninput="document.getElementById('clr').value = document.getElementById('clrt').value; applyEdit();" type="color"><input id="clr" oninput="applyEdit()" type="text"></div>
-    <div>font-family:
+    <div>color <input id="clrt" oninput="document.getElementById('clr').value = document.getElementById('clrt').value; applyEdit();" type="color"><input id="clr" oninput="applyEdit()" type="text"></div>
+    <div>font family
     <select onchange="applyFont(this.value)">
   <option value="Roboto">Roboto</option>
   <option value="Open Sans">Open Sans</option>
@@ -216,88 +216,88 @@
   <option value="Pacifico">Pacifico</option>
   <option value="Lobster">Lobster</option>
    </select></div>
-    <div>font-size: <input oninput="applyEdit()" type="range" oninput="applyEdit()" id="fnsz" min="1" max="30"> px</div>
-    <div>font-weight: <input oninput="applyEdit()" type="range" id="fnwet" min="100" max="900" step="100" value="200"> </div>
-    <div>font-style: 
+    <div>font size <input oninput="applyEdit()" type="range" oninput="applyEdit()" id="fnsz" min="1" max="30"> px</div>
+    <div>font weight <input oninput="applyEdit()" type="range" id="fnwet" min="100" max="900" step="100" value="200"> </div>
+    <div>font style 
     <select id="fnstl" onchange="applyEdit()">
       <option value="normal">normal</option>
       <option value="italic">italic</option>
       <option value="oblique">oblique</option>
     </select></div>
-    <div>text-align: 
+    <div>text align 
     <select id="txtalg" onchange="applyEdit()">
       <option value="left">left</option>
       <option value="center">center</option>
       <option value="right">right</option>
       <option value="justify">justify</option>
     </select></div>
-    <div>text-decoration: 
+    <div>text decoration 
     <select id="txtdec" onchange="applyEdit()">
       <option value="none">none</option>
       <option value="underline">underline</option>
       <option value="line-through">line-through</option>
       <option value="overline">overline</option>
     </select></div>
-    <div>text-transform: 
+    <div>text transform  
     <select id="txttsfm" onchange="applyEdit()">
       <option value="none">none</option>
       <option value="uppercase">uppercase</option>
       <option value="lowercase">lowercase</option>
       <option value="capitalize">capitalize</option>
     </select></div>
-    <div>line-height: <input oninput="applyEdit()" id="lnhet" type="number" step="0.1" placeholder="e.g. 1.5"></div>
-    <div>letter-spacing: <input oninput="applyEdit()" id="ltsp" type="text" placeholder="e.g. 0.5px"> px</div>
+    <div>line height <input oninput="applyEdit()" id="lnhet" type="number" step="0.1" placeholder="e.g. 1.5"></div>
+    <div>letter spacing <input oninput="applyEdit()" id="ltsp" type="text" placeholder="e.g. 0.5px"> px</div>
   </details>
 
   <!-- BOX MODEL -->
   <details>
     <summary>Box Model (Spacing & Borders)</summary>
-    <div>margin: <input oninput="applyEdit()" id="mar" type="text" placeholder="e.g. 10"> px</div>
-    <div>padding: <input oninput="applyEdit()" id="pad" type="text" placeholder="e.g. 5 10"> px</div>
-    <div>border: <input oninput="applyEdit()" id="bor" type="text" placeholder="e.g. 1px solid #000"></div>
-    <div>border-radius: <input oninput="applyEdit()" id="borrd" type="range" placeholder="e.g. 5" min="0" max="1000" step="5"> px</div>
-    <div>box-sizing: 
+    <div>margin <input oninput="applyEdit()" id="mar" type="text" placeholder="e.g. 10"> px</div>
+    <div>padding <input oninput="applyEdit()" id="pad" type="text" placeholder="e.g. 5 10"> px</div>
+    <div>border <input oninput="applyEdit()" id="bor" type="text" placeholder="e.g. 1px solid #000"></div>
+    <div>border radius <input oninput="applyEdit()" id="borrd" type="range" placeholder="e.g. 5" min="0" max="100" step="5"> px</div>
+    <div>box sizing 
     <select id="bxsz" onchange="applyEdit()">
       <option value="content-box">content-box</option>
       <option value="border-box">border-box</option>
     </select></div>
-    <div>width: <input oninput="applyEdit()" id="wid" type="text" placeholder="e.g. 100px or 100%">
-       height: <input oninput="applyEdit()" id="hei" type="text" placeholder="e.g. auto, 50vh"></div>
-    <div>max-width: <input oninput="applyEdit()" id="mwid" type="text" placeholder="e.g. 1200px">
-       min-height: <input oninput="applyEdit()" id="mnhei" type="text" placeholder="e.g. 100px"></div>
+    <div>width <input oninput="applyEdit()" id="wid" type="text" placeholder="e.g. 100px or 100%">
+       height <input oninput="applyEdit()" id="hei" type="text" placeholder="e.g. auto, 50vh"></div>
+    <div>max-width <input oninput="applyEdit()" id="mwid" type="text" placeholder="e.g. 1200px">
+       min-height <input oninput="applyEdit()" id="mnhei" type="text" placeholder="e.g. 100px"></div>
   </details>
 
   <!-- BACKGROUND & COLORS -->
   <details>
     <summary>Background and Colors</summary>
-    <div>background-color: <input id="bakcol" oninput="document.getElementById('bakcolt').value = document.getElementById('bakcol').value; applyEdit();" type="color"><input id="bakcolt" oninput="applyEdit()" type="text"></div>
-    <div>background-image: <input oninput="applyEdit()" id="bakimg" type="text" placeholder="url('image.jpg')"></div>
-    <div>background-size: 
+    <div>background <input id="bakcol" oninput="document.getElementById('bakcolt').value = document.getElementById('bakcol').value; applyEdit();" type="color"><input id="bakcolt" oninput="applyEdit()" type="text"></div>
+    <div>background image <input oninput="applyEdit()" id="bakimg" type="text" placeholder="url('image.jpg')"></div>
+    <div>background size 
     <select id="baksz" onchange="applyEdit()">
       <option value="auto">auto</option>
       <option value="cover">cover</option>
       <option value="contain">contain</option>
     </select></div>
-    <div>background-position: <input oninput="applyEdit()" id="bakpos" type="text" placeholder="e.g. center center"></div>
-    <div>background-repeat: 
+    <div>background position <input oninput="applyEdit()" id="bakpos" type="text" placeholder="e.g. center center"></div>
+    <div>background repeat
     <select id="bakrep" onchange="applyEdit()">
       <option value="repeat">repeat</option>
       <option value="no-repeat">no-repeat</option>
       <option value="repeat-x">repeat-x</option>
       <option value="repeat-y">repeat-y</option>
     </select></div>
-    <div>object-fit: 
+    <div>object fit 
     <select id="objectFit" onchange="applyEdit()">
        <option value="cover">cover</option>
        <option value="contain">contain</option>
     </select></div>
-    <div>opacity: <input oninput="applyEdit()" id="opct" type="range" min="0" max="1" step="0.1"></div>
+    <div>opacity <input oninput="applyEdit()" id="opct" type="range" min="0" max="1" step="0.1"></div>
   </details>
 
   <!-- POSITIONING & LAYOUT -->
   <details>
     <summary>Positioning and Layout</summary>
-    <div>position: 
+    <div>position 
     <select id="editPosition" onchange="applyEdit()">
       <opretion value="">position</opretion>
       <option value="static">static</option>
@@ -329,8 +329,8 @@
   </div>
     </div>
     
-    <div>z-index: <input oninput="applyEdit()" type="number" id="zindex"></div>
-    <div>display: 
+    <div>z-index <input oninput="applyEdit()" type="number" id="zindex"></div>
+    <div>display 
     <select id="dspl" onchange="applyEdit()">
       <option value="block">block</option>
       <option value="inline">inline</option>
@@ -339,20 +339,20 @@
       <option value="grid">grid</option>
       <option value="none">none</option>
     </select></div>
-    <div>float: 
+    <div>float
     <select id="flt" onchange="applyEdit()">
       <option value="none">none</option>
       <option value="left">left</option>
       <option value="right">right</option>
     </select></div>
-    <div>overflow: 
+    <div>overflow 
     <select id="ovrfl" onchange="applyEdit()">
       <option value="visible">visible</option>
       <option value="hidden">hidden</option>
       <option value="scroll">scroll</option>
       <option value="auto">auto</option>
     </select></div>
-    <div>visibility: 
+    <div>visibility 
     <select id="vsblt" onchange="applyEdit()">
       <option value="visible">visible</option>
       <option value="hidden">hidden</option>
@@ -363,14 +363,14 @@
   <!-- FLEXBOX & GRID -->
   <details>
     <summary>Flexbox and Grid</summary>
-    <div>flex-direction: 
+    <div>flex direction 
     <select id="flxd" onchange="applyEdit()">
       <option value="row">row</option>
       <option value="row-reverse">row-reverse</option>
       <option value="column">column</option>
       <option value="column-reverse">column-reverse</option>
     </select></div>
-    <div>justify-content: 
+    <div>justify content 
     <select id="jstfc" onchange="applyEdit()">
       <option value="flex-start">flex-start</option>
       <option value="flex-end">flex-end</option>
@@ -379,7 +379,7 @@
       <option value="space-around">space-around</option>
       <option value="space-evenly">space-evenly</option>
     </select></div>
-    <div>align-items: 
+    <div>align items
     <select id="algni" onchange="applyEdit()">
       <option value="stretch">stretch</option>
       <option value="flex-start">flex-start</option>
@@ -387,29 +387,29 @@
       <option value="flex-end">flex-end</option>
       <option value="baseline">baseline</option>
     </select></div>
-    <div>flex-wrap: 
+    <div>flex wrap 
     <select id="flxw" onchange="applyEdit()">
       <option value="nowrap">nowrap</option>
       <option value="wrap">wrap</option>
       <option value="wrap-reverse">wrap-reverse</option>
     </select></div>
-    <div>grid-template-columns: <input oninput="applyEdit()" id="gtc" type="text" placeholder="e.g. 1fr 2fr"></div>
-    <div>grid-template-rows: <input oninput="applyEdit()" id="gtr" type="text" placeholder="e.g. 100px auto"></div>
-    <div>gap: <input oninput="applyEdit()" id="gap" type="text" placeholder="e.g. 10px"></div>
+    <div>grid-template-columns <input oninput="applyEdit()" id="gtc" type="text" placeholder="e.g. 1fr 2fr"></div>
+    <div>grid-template-rows <input oninput="applyEdit()" id="gtr" type="text" placeholder="e.g. 100px auto"></div>
+    <div>gap <input oninput="applyEdit()" id="gap" type="text" placeholder="e.g. 10px"></div>
   </details>
 
   <!-- TRANSFORMS & ANIMATIONS -->
   <details>
     <summary>Transforms and Animations</summary>
-    <div>transform: <input oninput="applyEdit()" id="trnsfm" type="text" placeholder="e.g. rotate(45deg)"></div>
-    <div>transition: <input oninput="applyEdit()" id="trnstn" type="text" placeholder="e.g. all 0.3s ease-in-out"></div>
-    <div>animation: <input oninput="applyEdit()" id="anmtn" type="text" placeholder="e.g. bounce 2s infinite"><div>
+    <div>transform <input oninput="applyEdit()" id="trnsfm" type="text" placeholder="e.g. rotate(45deg)"></div>
+    <div>transition <input oninput="applyEdit()" id="trnstn" type="text" placeholder="e.g. all 0.3s ease-in-out"></div>
+    <div>animation <input oninput="applyEdit()" id="anmtn" type="text" placeholder="e.g. bounce 2s infinite"></div>
   </details>
 
   <!-- MISCELLANEOUS -->
   <details>
     <summary>Miscellaneous Properties</summary>
-    <div>cursor: 
+    <div>cursor
     <select id="cursor" onchange="applyEdit()">
       <option value="default">default</option>
       <option value="pointer">pointer</option>
@@ -417,21 +417,21 @@
       <option value="text">text</option>
       <option value="not-allowed">not-allowed</option>
     </select></div>
-    <div>box-shadow: <input oninput="applyEdit()" id="bxshd" type="text" placeholder="e.g. 0px 4px 10px #000"></div>
-    <div>filter: <input oninput="applyEdit()" id="filter" type="text" placeholder="e.g. blur(4px)"></div>
-    <div>user-select: 
+    <div>box shadow <input oninput="applyEdit()" id="bxshd" type="text" placeholder="e.g. 0px 4px 10px #000"></div>
+    <div>filter <input oninput="applyEdit()" id="filter" type="text" placeholder="e.g. blur(4px)"></div>
+    <div>user select 
     <select id="usrslct" onchange="applyEdit()">
       <option value="auto">auto</option>
       <option value="none">none</option>
       <option value="text">text</option>
       <option value="all">all</option>
     </select></div>
-    <div>pointer-events: 
+    <div>pointer events 
     <select id="pointerEvent" onchange="applyEdit()">
       <option value="auto">auto</option>
       <option value="none">none</option>
     </select></div>
-    <div>clip-path: <input oninput="applyEdit()" id="clipPath" type="text" placeholder="e.g. circle(50%)"></div>
+    <div>clip path <input oninput="applyEdit()" id="clipPath" type="text" placeholder="e.g. circle(50%)"></div>
   </details>
   <strong>Events</strong>
   <textarea type="text" id="editOnclick" placeholder="New Onclick JS"></textarea>
