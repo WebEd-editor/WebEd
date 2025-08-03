@@ -217,7 +217,7 @@ function openFullPreview() {
   const allElements2 = iframeDoc.querySelectorAll("*");
   allElements2.forEach((el) => {
       contenteditable.forEach((att) => {
-           el.setAttribute(attr);
+           el.setAttribute(attr, 'true');
       });
   });
 }
