@@ -146,71 +146,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-function openFullPreview() {
-  saveHTMLBeforePreview();
-  const iframe = document.getElementById("canvas");
-  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-  // ✅ Append missing JS files temporarily
-  for (let fileName in customFiles) {
-    const file = customFiles[fileName];
-    if (file.type === 'js') {
-      // Check if already exists
-      const exists = iframeDoc.querySelector(`script[data-temp="${fileName}"]`);
-      if (!exists) {
-        const script = iframeDoc.createElement('script');
-        script.textContent = file.content;
-        script.dataset.temp = fileName; // mark as temporary
-        iframeDoc.body.appendChild(script);
-      }
-    }
-  }
-
-  // ✅ Now get full HTML (with temp JS scripts)
-  const fullHTML = '<!DOCTYPE html>\n' + iframeDoc.documentElement.outerHTML;
-  
-  // Step 1: Walk through all elements recursively
-  const allElements = fullHTML.querySelectorAll("*");
-
-  allElements.forEach((el) => {
-    // Step 2: Remove empty class or id attributes
-    if (el.hasAttribute("class") && el.getAttribute("class").trim() === "") {
-      el.removeAttribute("class");
-    }
-
-    if (el.hasAttribute("id") && el.getAttribute("id").trim() === "") {
-      el.removeAttribute("id");
-    }
-
-    // Step 3: Remove specific unwanted attributes like contenteditable
-    const unwantedAttributes = ["contenteditable", "data-temp", "data-editing"];
-    unwantedAttributes.forEach((attr) => {
-      if (el.hasAttribute(attr)) {
-        el.removeAttribute(attr);
-      }
-    });
-  });
-  
-  ffcode = fullHTML;
-  // ✅ Remove temp JS after capture (cleanup)
-  const tempScripts = iframeDoc.querySelectorAll('script[data-temp]');
-  tempScripts.forEach(tag => tag.remove());
-
-  // ✅ Blob + open new tab
-  const blob = new Blob([fullHTML], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  window.open(url, '_blank');
-}
-
-function runUserCode(code) {
-  try {
-    new Function(code)(); // safer than eval
-  } catch (e) {
-    var ertag = document.getElementById("errorTag");
-    //ertag.textContent = e.message;
-    console.error(e);
-  }
-}
 
 // Delete file
 function deleteFile(filename) {
@@ -224,6 +160,59 @@ function deleteFile(filename) {
     document.getElementById('fileEditor').value = '';
   }
   updateFileList();
+}
+
+function openFullPreview() {
+  saveHTMLBeforePreview();
+
+  const iframe = document.getElementById("canvas");
+  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+  // ✅ 1. Append missing JS files temporarily
+  for (let fileName in customFiles) {
+    const file = customFiles[fileName];
+    if (file.type === 'js') {
+      const exists = iframeDoc.querySelector(`script[data-temp="${fileName}"]`);
+      if (!exists) {
+        const script = iframeDoc.createElement('script');
+        script.textContent = file.content;
+        script.dataset.temp = fileName;
+        iframeDoc.body.appendChild(script);
+      }
+    }
+  }
+
+  // ✅ 2. Clean DOM directly before capturing outerHTML
+  const allElements = iframeDoc.querySelectorAll("*");
+  allElements.forEach((el) => {
+    if (el.hasAttribute("class") && el.getAttribute("class").trim() === "") {
+      el.removeAttribute("class");
+    }
+
+    if (el.hasAttribute("id") && el.getAttribute("id").trim() === "") {
+      el.removeAttribute("id");
+    }
+
+    const unwantedAttributes = ["contenteditable", "data-temp", "data-editing"];
+    unwantedAttributes.forEach((attr) => {
+      if (el.hasAttribute(attr)) {
+        el.removeAttribute(attr);
+      }
+    });
+  });
+
+  // ✅ 3. Capture cleaned HTML
+  const fullHTML = '<!DOCTYPE html>\n' + iframeDoc.documentElement.outerHTML;
+  ffcode = fullHTML;
+
+  // ✅ 4. Remove temporary scripts (cleanup)
+  const tempScripts = iframeDoc.querySelectorAll('script[data-temp]');
+  tempScripts.forEach(tag => tag.remove());
+
+  // ✅ 5. Preview in new tab
+  const blob = new Blob([fullHTML], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
 }
 
 // Save full project
