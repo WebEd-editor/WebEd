@@ -1,7 +1,7 @@
 function menuload(){
    const menupage = document.getElementById("webedmenu");
    menupage.innerHTML = `
-   <div style="box-shadow: rgba(200, 200, 200, 0.4) 0px 4px 10px;width: 100%;margin-bottom: 10px;">
+   <div style="position: fixed;top: 0;left: 0;box-shadow: rgba(200, 200, 200, 0.4) 0px 4px 10px;width: 100%;margin-bottom: 10px;">
      <header class="" id="" style="color: rgb(0, 0, 0); font-size: 16px; outline: none; display: flex; justify-content: space-between;">      
        <div class="" style="outline: none; color: rgb(255, 255, 255); font-size: 16px; font-weight: 500; opacity: 1; display: flex; justify-content: center; align-items: center;" id="">
          <img src="https://webed-editor.github.io/WebEd/logo.png" alt="Uploaded Image" class="" content="false" id="" style="max-width: 100%; margin: 5px; opacity: 1; width: 40px; height: 40px; outline: none; border-radius: 5px; font-size: 16px; font-weight: 500; visibility: visible; display: block;" />
@@ -46,7 +46,7 @@ function menuload(){
            </div>
         </div>
     </div>
-    <div class="ttt tt2" style="width: 100%;">
+    <div class="ttt tt2" style="width: 100%; margin-top: 110px;">
         <button onclick="createFile('js')">+ JS File</button>
         <button onclick="createFile('css')">+ CSS File</button>
         <button onclick="applyFile()">Run</button>
@@ -68,11 +68,11 @@ function menuload(){
         <ul id="fileList"></ul>
         <div id="fileEditor" style="position: sticky;top: 0;left: 0;width: 100%;height: 400px;">/* write your code here. */</div>
     </div>
-    <div class="ttt tt3" style="width: 100%;">
+    <div class="ttt tt3" style="width: 100%;margin-top: 110px;">
        <button onclick="saveProject()">Save Project</button>
        <div id="projectList"></div>
     </div>
-    <div class="ttt tt4" style="width: 100%;">
+    <div class="ttt tt4" style="width: 100%;margin-top: 110px;">
        <textarea id="htmlcssjs" style="user-select: none;" readonly></textarea>
        <button onclick="downloadAsImg()">download as image</button>
        <div>wrap text: <input id="wrapCodeFull" onchange='document.getElementById("htmlcssjs").wrap = document.getElementById("wrapCodeFull").checked ? "off" : "hard";' type="checkbox"></div>
@@ -98,7 +98,7 @@ function menuload(){
         }
       });
     </script>
-    <div class="ttt tt5" style="width: 100%;">help page</div>
+    <div class="ttt tt5" style="width: 100%;margin-top: 110px;">help page</div>
    
    `;
 }
