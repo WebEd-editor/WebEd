@@ -193,7 +193,7 @@ function openFullPreview() {
       el.removeAttribute("id");
     }
 
-    const unwantedAttributes = ["contenteditable", "data-temp", "data-editing"];
+    const unwantedAttributes = ["contenteditable"];
     unwantedAttributes.forEach((attr) => {
       if (el.hasAttribute(attr)) {
         el.removeAttribute(attr);
@@ -213,6 +213,13 @@ function openFullPreview() {
   const blob = new Blob([fullHTML], { type: 'text/html' });
   const url = URL.createObjectURL(blob);
   window.open(url, '_blank');
+
+  const allElements2 = iframeDoc.querySelectorAll("*");
+  allElements2.forEach((el) => {
+      contenteditable.forEach((att) => {
+           el.setAttribute(attr);
+      });
+  });
 }
 
 // Save full project
