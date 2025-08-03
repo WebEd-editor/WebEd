@@ -181,10 +181,30 @@ function openFullPreview() {
       }
     }
   }
-  
-    // ✅ 3. Capture cleaned HTML
+
+  // ✅ 2. Clean DOM directly before capturing outerHTML
+  const allElements = iframeDoc.querySelectorAll("*");
+    alert("error on *");
+  allElements.forEach((el) => {
+    if (el.hasAttribute("class") && el.getAttribute("class").trim() === "") {
+      el.removeAttribute("class");
+    }
+
+    if (el.hasAttribute("id") && el.getAttribute("id").trim() === "") {
+      el.removeAttribute("id");
+    }
+
+    const unwantedAttributes = ["contenteditable", "data-temp", "data-editing"];
+    unwantedAttributes.forEach((attr) => {
+      if (el.hasAttribute(attr)) {
+        el.removeAttribute(attr);
+      }
+    });
+  });
+
+  // ✅ 3. Capture cleaned HTML
   const fullHTML = '<!DOCTYPE html>\n' + iframeDoc.documentElement.outerHTML;
-  ffcode = fullHTML;
+  ffcode = fullHTML;alert("fullHTML");
 
   // ✅ 4. Remove temporary scripts (cleanup)
   const tempScripts = iframeDoc.querySelectorAll('script[data-temp]');
