@@ -245,7 +245,7 @@ function updateTree() {
         clearSelected();
         child.classList.add('selected');
         document.getElementById('canvas').contentDocument.body.querySelectorAll('svg, span, div, line, path, circle, curve, rec').forEach(edel => {edel.style.outline = "none";edel.classList.add('editable');});
-        document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.style.outline = "none";});
+        document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.style.outline = "none";edel.setAttribute('contenteditable','true')});
         document.getElementById('canvas').contentDocument.body.querySelectorAll('.selected').forEach(edel => {edel.style.outline = "1px solid blue";});
         updateTree();
       };
