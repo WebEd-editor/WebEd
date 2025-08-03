@@ -160,7 +160,12 @@ summary {
    font-weight: 400;
    color: var(--w);
 }
-
+details div {
+    display: flex;justify-content: space-between;align-items: center;gap: 10px;
+}
+details div input, details div select{
+    width: 50%;
+}
     details input,
     .tab input[type="text"],
     details select {
@@ -171,7 +176,6 @@ summary {
       margin: 5px 0;
       border: none;
       border-radius: 4px;
-      width: 200px;
     }
 
     details input[type="color"] {
