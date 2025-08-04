@@ -39,7 +39,7 @@ function menuload(){
            <div style="position: relative;top: 120px; height: 100%; width: 100%; background: linear-gradient(0deg, #000, transparent, transparent);">
               <h1>Welcome to our Website builder tool</h1>
               <p>Make a site likes easy way, use WebEd for creating a website.</p>
-              <button class="bbbttt">Try Now</button>
+              <button class="bbbttt" id="installAppBtn">Try Now As App</button>
               <div>
                  <video autoplay muted loop src="file:///storage/emulated/0/Android/data/com.teejay.trebedit/files/TrebEdit user files/Sample project - Acme/video /spider video.mp4"></video>
               </div>
@@ -133,6 +133,33 @@ function ooo(idd, btn){
    document.querySelector("."+btn).classList.add('btnhover');
 } 
 ooo('tt1', 'bb1');
+
+  let deferredPrompt;
+  const installBtn = document.getElementById('installAppBtn');
+
+  // Triggered only if PWA is installable
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();              // Stop default mini prompt
+    deferredPrompt = e;             // Save the event for later
+    installBtn.style.display = 'inline-block';  // Show the install button
+  });
+
+  // On click, prompt the user
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();      // Show the browser install popup
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User response: ${outcome}`);
+      deferredPrompt = null;
+      installBtn.style.display = 'none'; // Hide button after choice
+    }
+  });
+
+  // Optional: Hide the button if already installed
+  window.addEventListener('appinstalled', () => {
+    console.log('✅ App installed');
+    installBtn.style.display = 'none';
+  });
 
 
 
