@@ -8,9 +8,9 @@ function dek(){
 			allt.style.top = "5px";
 			allt.style.right = "5px";
 			allt.style.resize = "none";
-			document.querySelector("#editor-wrapper").style.display = "block";
-			document.querySelector("#sidebar").style.display = "block";
 		});
+		document.querySelector("#editor-wrapper").style.display = "block";
+		document.querySelector("#sidebar").style.display = "block";
 		document.querySelectorAll('summary').forEach(s => {s.style.fontSize = "13px";})
 		document.querySelector('#editor-wrapper').style.left = "10px";
 		const footer = document.querySelector('#foo');
