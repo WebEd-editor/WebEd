@@ -4,9 +4,10 @@ function MyTabClose(){
       fs.classList.toggle('hidden');
    });
 } 
+
 function MyOpen(id){
    document.querySelectorAll('.tab').forEach( v => {
-      v.style.display="none";v.style.top="10%";v.style.right="10%";
+      v.style.display="none";v.style.top="5%";v.style.right="10px";
    });
    document.getElementById(id).style.display="block";
    if (id == "fullcodearea") rr();
@@ -14,6 +15,7 @@ function MyOpen(id){
    if (id == "sidebar") updateTree();
    if (id == "iconEditorTab" || id == "addSh" || id == "treeTabForIcon" || id == "previewIconTab") document.getElementById("iconEditor").style.display ="block";
    if (id == "iconEditor") document.getElementById("iconEditor").style.width="90%";
+   dek();
 }
 
 function MyClose(id){
