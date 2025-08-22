@@ -11,6 +11,7 @@ function dek(){
 		});
 		document.querySelector("#editor-wrapper").style.display = "block";
 		document.querySelector("#sidebar").style.display = "block";
+	    document.querySelector("#sidebar").style.right = "5px";
 		document.querySelectorAll('summary').forEach(s => {s.style.fontSize = "13px";})
 		document.querySelector('#editor-wrapper').style.left = "10px";
 		const footer = document.querySelector('#foo');
