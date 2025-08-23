@@ -174,7 +174,7 @@ async function loadCurrentUser() {
         document.getElementById("username").innerText = "Welcome, " + data.username;
       }
     } catch (err) {
-      alert("Error loading profile:", err);
+      console.error("Error loading profile:", err);
     }
   }
 
