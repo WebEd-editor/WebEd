@@ -38,6 +38,8 @@ function menuload(){
            <video autoplay muted loop style="position: absolute;top: 100px; opacity: 0.5;width: 100%;" src="https://videos.pexels.com/video-files/7438482/7438482-sd_360_624_30fps.mp4"></video>
            <div style="position: relative;top: 120px; height: 100%; width: 100%; background: linear-gradient(0deg, #000, transparent, transparent);">
               <h1>Welcome to our Website builder tool</h1>
+              <a href="https://auth-p1ny.onrender.com" style="text-decoration: none;color: black; background: white; padding: 10px;">Login</a>
+              <p id="username"></p>
               <p>Make a site likes easy way, use WebEd for creating a website.</p>
               <button class="bbbttt" id="installAppBtn">Try Now As App</button>
               <div>
@@ -161,6 +163,21 @@ ooo('tt1', 'bb1');
     installBtn.style.display = 'none';
   });
 
+async function loadCurrentUser() {
+    try {
+      const res = await fetch("/api/me");
+      const data = await res.json();
 
+      if (data.error) {
+        document.getElementById("username").innerText = "Not logged in";
+      } else {
+        document.getElementById("username").innerText = "Welcome, " + data.username;
+      }
+    } catch (err) {
+      alert("Error loading profile:", err);
+    }
+  }
+
+  loadCurrentUser();
 
 
