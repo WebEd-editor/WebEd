@@ -163,21 +163,23 @@ ooo('tt1', 'bb1');
     installBtn.style.display = 'none';
   });
 
-async function loadCurrentUser() {
-    try {
-      const res = await fetch("/api/me");
-      const data = await res.json();
+async function getUser() {
+  try {
+    let res = await fetch("https://auth-p1ny.onrender.com/api/me", {
+      method: "GET",
+      credentials: "include" // cookies/session bhejne ke liye zaroori
+    });
 
-      if (data.error) {
-        document.getElementById("username").innerText = "Not logged in";
-      } else {
-        document.getElementById("username").innerText = "Welcome, " + data.username;
-      }
-    } catch (err) {
-      console.error("Error loading profile:", err);
+    if (!res.ok) {
+      document.getElementById("username").innerText = "Not logged in";
+      return;
     }
-  }
 
-  loadCurrentUser();
+    let data = await res.json();
+    document.getElementById("username").innerText = "Welcome, " + data.username;
+  } catch (err) {
+    console.error("Error fetching user:", err);
+  }
+}
 
 
