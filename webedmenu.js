@@ -172,7 +172,7 @@ fetch("https://auth-p1ny.onrender.com/api/me", {
 .then(res => {
   if (res.status === 401) {
     // agar session expire hai → login page pe bhej do
-    window.location.href = "https://webed-editor.github.io/WebEd/";
+    
   }
   return res.json();
 })
