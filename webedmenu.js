@@ -163,11 +163,10 @@ ooo('tt1', 'bb1');
     installBtn.style.display = 'none';
   });
 
-async function getUser() {
+async function fetchUser() {
   try {
-    let res = await fetch("https://auth-p1ny.onrender.com/api/me", {
-      method: "GET",
-      credentials: "include" // cookies/session bhejne ke liye zaroori
+    const res = await fetch("https://auth-p1ny.onrender.com/api/me", {
+      credentials: "include"  // 👈 session cookie send karega
     });
 
     if (!res.ok) {
@@ -175,12 +174,15 @@ async function getUser() {
       return;
     }
 
-    let data = await res.json();
+    const data = await res.json();
     document.getElementById("username").innerText = "Welcome, " + data.username;
   } catch (err) {
-    console.error("Error fetching user:", err);
+    console.error(err);
+    document.getElementById("username").innerText = "Error fetching user";
   }
 }
-getUser();
+
+// Page load hote hi run ho
+window.onload = fetchUser;
 
 
