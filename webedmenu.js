@@ -181,5 +181,6 @@ async function getUser() {
     console.error("Error fetching user:", err);
   }
 }
+getUser();
 
 
