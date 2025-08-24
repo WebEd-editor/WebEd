@@ -163,26 +163,22 @@ ooo('tt1', 'bb1');
     installBtn.style.display = 'none';
   });
 
-async function fetchUser() {
-  try {
-    const res = await fetch("https://auth-p1ny.onrender.com/api/me", {
-      credentials: "include"  // 👈 session cookie send karega
-    });
 
-    if (!res.ok) {
-      document.getElementById("username").innerText = "Not logged in";
-      return;
-    }
-
-    const data = await res.json();
-    document.getElementById("username").innerText = "Welcome, " + data.username;
-  } catch (err) {
-    console.error(err);
-    document.getElementById("username").innerText = "Error fetching user";
+// ✅ check session & get user
+fetch("https://auth-p1ny.onrender.com/api/me", {
+  method: "GET",
+  credentials: "include"   // 👈 session cookie bhejega
+})
+.then(res => {
+  if (res.status === 401) {
+    // agar session expire hai → login page pe bhej do
+    window.location.href = "https://webed-editor.github.io/login.html";
   }
-}
-
-// Page load hote hi run ho
-window.onload = fetchUser;
-
+  return res.json();
+})
+.then(user => {
+  if (user.username) {
+    document.getElementById("username").innerText = user.username;
+  }
+});
 
