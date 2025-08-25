@@ -164,21 +164,31 @@ ooo('tt1', 'bb1');
   });
 
 
-// ✅ check session & get user
-fetch("https://auth-p1ny.onrender.com/api/me", {
-  method: "GET",
-  credentials: "include"   // 👈 session cookie bhejega
-})
-.then(res => {
-  if (res.status === 401) {
-    // agar session expire hai → login page pe bhej do
-    
-  }
-  return res.json();
-})
-.then(user => {
-  if (user.username) {
-    document.getElementById("username").innerText = user.username;
-  }
-});
+// Ye function user ko fetch karega aur menu me username show karega
+function fetchUser() {
+  fetch("https://auth-p1ny.onrender.com/api/me", {
+    method: "GET",
+    credentials: "include" // 🔹 cookie bhejega
+  })
+  .then(async res => {
+    if (res.status === 401) {
+      // User not logged in
+      document.getElementById("username").innerText = "Not logged in";
+      return { error: true };
+    }
+    return res.json();
+  })
+  .then(user => {
+    if (user && user.username) {
+      document.getElementById("username").innerText = "Welcome, " + user.username;
+    }
+  })
+  .catch(err => {
+    console.error("Fetch error:", err);
+    document.getElementById("username").innerText = "Error loading user";
+  });
+}
+
+// Menu load hote hi call kar do
+document.addEventListener("DOMContentLoaded", fetchUser);
 
