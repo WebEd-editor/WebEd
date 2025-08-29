@@ -1408,29 +1408,17 @@ document.getElementById("fullScreenBtn").addEventListener("click", function () {
         }
       }
     });
-    /*
+    
 function downloadAsImg() {
-   var idN = prompt('please write id name to capture the area for convert image');
+   //var idN = prompt('please write id name to capture the area for convert image');
    var imgName = prompt('please write image name');
   
   
-     html2canvas(document.getElementById(idN)).then(canvas => {
+     html2canvas(document.getElementById('canvas)).then(canvas => {
        const link = document.createElement("a");
        link.download = imgName+".png";
        link.href = canvas.toDataURL("image/png");
        link.click();
      });
   
-}
-*/
-const ctxt = document.getElementById("canvas").getContext("2d");
-ctxt.fillStyle = "red";
-ctxt.fillRect(20, 20, 100, 100);
-
-function downloadAsImg() {
-    const canvas = document.getElementById("canvas");
-    const link = document.createElement("a");
-    link.download = "canvas-image.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
 }
