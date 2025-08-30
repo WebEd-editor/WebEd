@@ -1414,12 +1414,15 @@ function downloadAsImg() {
    var imgName = prompt('please write image name');
   
   
-     //html2canvas(document.getElementById('canvas')).then(canvas => {
-       var canvas = document.getElementById('canvas');
-       const link = document.createElement("a");
-       link.download = imgName+".png";
-       link.href = canvas.toDataURL("image/png");
-       link.click();
-     //});
+     let iframe = document.getElementById("canvas");
+  let iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+  html2canvas(iframeDoc.body).then(canvas => {
+    const link = document.createElement("a");
+    link.download = imgName+".png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
   
 }
+
