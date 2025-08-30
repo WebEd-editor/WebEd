@@ -1417,7 +1417,7 @@ function downloadAsImg() {
      let iframe = document.getElementById("canvas");
   let iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-  html2canvas(iframeDoc.body, {backgroundColor: null}).then(canvas => {
+  html2canvas(iframeDoc.body, {backgroundColor: document.getElementById("bakcolt").value}).then(canvas => {
     const link = document.createElement("a");
     link.download = imgName+".png";
     link.href = canvas.toDataURL("image/png");
