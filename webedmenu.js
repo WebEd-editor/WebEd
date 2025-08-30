@@ -28,9 +28,9 @@ function menuload(){
       <button class="bb bb4" onclick="ooo('tt4','bb4'); rr()" class="" id="" style=" font-size: 16px; opacity: 1; cursor: pointer; font-family: Roboto, sans-serif; padding: 5px 10px; outline: none; background-color: rgb(23, 23, 23); color: #888; border: none;border-bottom: 1px solid transparent">
         Code_View
       </button>
-      <button class="bb bb5" class="" id="" style=" font-size: 16px; opacity: 1; cursor: pointer; font-family: Roboto, sans-serif; padding: 5px 10px; outline: none; background-color: rgb(23, 23, 23); color: #888; border: none;border-bottom: 1px solid transparent">
-        <a href="about.html">About</a>
-      </button>
+      <a href="about.html"><button class="bb bb5" class="" id="" style=" font-size: 16px; opacity: 1; cursor: pointer; font-family: Roboto, sans-serif; padding: 5px 10px; outline: none; background-color: rgb(23, 23, 23); color: #888; border: none;border-bottom: 1px solid transparent; text-decoration: none;">
+        About
+      </button></a>
     </div>
    </div>
     <div class="ttt tt1" style="width: 100%;">
