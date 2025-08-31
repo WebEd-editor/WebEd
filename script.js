@@ -526,11 +526,11 @@ function redoEdit() {
     // 1. 
     document.getElementById('clr').value = el.style.color || '';
    // document.getElementById('fnfml').value = el.style.fontFamily || '';
-    document.getElementById('fnsz').value = el.style.fontSize.replace('px', '') || '';
-    document.getElementById('fnwet').value = el.style.fontWeight || '';
-    document.getElementById('fnstl').value = el.style.fontStyle || '';
-    document.getElementById('txtalg').value = el.style.textAlign || '';
-    document.getElementById('txtdec').value = el.style.textDecoration || '';
+   // document.getElementById('fnsz').value = el.style.fontSize.replace('px', '') || '';
+   // document.getElementById('fnwet').value = el.style.fontWeight || '';
+    //document.getElementById('fnstl').value = el.style.fontStyle || '';
+   // document.getElementById('txtalg').value = el.style.textAlign || '';
+   // document.getElementById('txtdec').value = el.style.textDecoration || '';
     document.getElementById('txttsfm').value = el.style.textTransform || '';
     document.getElementById('lnhet').value = el.style.lineHeight || '';
     document.getElementById('ltsp').value = el.style.letterSpacing.replace('px', '') || '';
@@ -643,11 +643,11 @@ function applyEdit() {
 
     currentEditingElement.style.color = document.getElementById('clr').value || '';
    // currentEditingElement.style.fontFamily = document.getElementById('fnfml').value || '';
-    currentEditingElement.style.fontSize = document.getElementById('fnsz').value +'px' || '';
-    currentEditingElement.style.fontWeight = document.getElementById('fnwet').value || '';
-    currentEditingElement.style.fontStyle = document.getElementById('fnstl').value || '';
-    currentEditingElement.style.textAlign = document.getElementById('txtalg').value || '';
-    currentEditingElement.style.textDecoration = document.getElementById('txtdec').value || '';
+   // currentEditingElement.style.fontSize = document.getElementById('fnsz').value +'px' || '';
+    //currentEditingElement.style.fontWeight = document.getElementById('fnwet').value || '';
+    //currentEditingElement.style.fontStyle = document.getElementById('fnstl').value || '';
+   // currentEditingElement.style.textAlign = document.getElementById('txtalg').value || '';
+   // currentEditingElement.style.textDecoration = document.getElementById('txtdec').value || '';
     currentEditingElement.style.textTransform = document.getElementById('txttsfm').value || '';
     currentEditingElement.style.lineHeight = document.getElementById('lnhet').value || '';
     currentEditingElement.style.letterSpacing = document.getElementById('ltsp').value +'px' || '';
@@ -721,6 +721,30 @@ function applyEdit() {
     saveHistory();    
    // Notify("Applying All css Properties", "s");
   }
+  function apply_txtalg(vv){
+     currentEditingElement.style.textAlign = document.querySelector('.'+vv).getAttribute('txt-alg') || '';
+     saveHistory();
+  }
+function fontS(sig) {
+  let t = currentEditingElement;
+  let currentSize = window.getComputedStyle(t, null).getPropertyValue('font-size');
+  let size = parseFloat(currentSize); // removes 'px'
+
+  if (sig === "incr") {
+    size += 2;
+  } else if (sig === "decr") {
+    size -= 2;
+  }
+  t.style.fontSize = size + "px";
+  saveHistory();
+}
+function txtdec(val){
+   currentEditingElement.style.textDecoration = val;
+   saveHistory();
+}
+function fnstl(){currentEditingElement.style.fontStyle = (currentEditingElement.style.fontStyle === 'normal') ? 'italic' : 'normal'; if(currentEditingElement.style.fontStyle === 'normal'){document.getElementById('fnstlbtn').style.background='transparent'}else{document.getElementById('fnstlbtn').style.background='rgba(100,100,100,.5)'}} 
+function fnwet(){currentEditingElement.style.fontWeight = (currentEditingElement.style.fontWeight < 600) ? '600' : '500'; if(currentEditingElement.style.fontWeight < 600){document.getElementById('fnwetbtn').style.background='transparent'}else{document.getElementById('fnwetbtn').style.background='rgba(100,100,100,.5)'} }
+
 
 // links for css fonts
 function loadGoogleFont(fontN) {
