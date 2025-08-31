@@ -163,6 +163,12 @@ summary {
 details div {
     display: flex;justify-content: space-between;align-items: center;gap: 10px;
 }
+details icoopt{
+   background: rgba(0,0,0,.3); margin: 5px 0; display: flex; justify-content: center;align-items: center;gap: 2px;border-radius: 5px;
+}
+details icoopt svg{padding: 5px;}
+details icoopt svg:hover{background: rgba(100,100,100,.5);}
+
 details div input, details div select{
     width: 50%;
 }
