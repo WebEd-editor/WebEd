@@ -112,11 +112,6 @@ function addElement(type) {
   };
  }
   
-  /*<header class=""  data-="true" style="outline: none; color: rgb(0, 0, 0); font-size: 16px; font-weight: 500; opacity: 1; background-color: rgb(196, 196, 196); width: 100%; display: flex; flex-direction: row; justify-content: center;" id="">
-      <div class=""  data-="true" id="" style="outline: none; color: rgb(0, 0, 0); font-size: 16px; font-weight: 500; width: 50%; opacity: 1; float: right;">Left hand side&nbsp;</div>
-      <div class=" selected"  data-="true" id="" style="outline: blue solid 1px; color: rgb(0, 0, 0); font-size: 16px; font-weight: 500; width: 50%; opacity: 1; float: right; display: flex; justify-content: flex-end; align-items: flex-end;">Right hand side&nbsp;</div>
-    </header>*/
-  
   // --- Regular HTML Elements ---
   else {
     el = document.createElement(type);
