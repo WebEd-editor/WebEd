@@ -143,6 +143,7 @@ function addElement(type) {
     selectedParent = el;
     clearSelected();
     el.classList.add('selected');
+    showOverlay(el);
   });
 
   selectedParent.appendChild(el);
