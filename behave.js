@@ -1,13 +1,13 @@
 
-//const iframe = document.getElementById("canvas");
-// iframe.srcdoc = "<body style='min-height:100vh;'></body>";
+const iframee = document.getElementById("canvas");
+// iframee.srcdoc = "<body style='min-height:100vh;'></body>";
 
 let selectedEl = null;
 let overlay = null;
 
 /* / ✅ Add Element Function
 function addElement(type) {
-  const doc = iframe.contentDocument;
+  const doc = iframee.contentDocument;
   const body = doc.body;
 
   let el = doc.createElement(type);
@@ -31,7 +31,7 @@ function addElement(type) {
 function showOverlay(target) {
   removeOverlay();
   selectedEl = target;
-  const doc = iframe.contentDocument;
+  const doc = iframee.contentDocument;
 
   overlay = doc.createElement("div");
   overlay.style.position = "absolute";
@@ -249,7 +249,7 @@ function behAddDrag(el, onDrag) {
     doc.removeEventListener("touchend", end);
   }
 
-  const doc = iframe.contentDocument;
+  const doc = iframee.contentDocument;
   el.addEventListener("mousedown", start);
   el.addEventListener("touchstart", start, { passive: false });
 }
