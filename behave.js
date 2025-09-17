@@ -1,17 +1,16 @@
-
-const iframee = document.getElementById("canvas");
-// iframee.srcdoc = "<body style='min-height:100vh;'></body>";
+const iframe = document.getElementById("canvas");
+// iframe.srcdoc = "<body style='min-height:100vh;'></body>";
 
 let selectedEl = null;
 let overlay = null;
 
 /* / ✅ Add Element Function
 function addElement(type) {
-  const doc = iframee.contentDocument;
+  const doc = iframe.contentDocument;
   const body = doc.body;
 
   let el = doc.createElement(type);
-  el.textContent = type === "button" ? "Click Me" : `New ${type}`;
+  el.textContent = type === "button" ? "Click Me" : New ${type};
   el.classList.add("editable");
   el.style.display = "inline-block";
   el.style.minWidth = "50px";
@@ -27,13 +26,21 @@ function addElement(type) {
   body.appendChild(el);
 }*/
 
+function clickShowOverlay(){
+   const docc = iframe.contentDocument || iframe.contentWindow.document;
+   docc.querySelectorAll('.editable').forEach(ell => {
+      ell.onclick = () => {overlay = docc.createElement("div"); showOverlay(ell);};
+   });
+   removeOverlay();
+}
+
 // ✅ Overlay Function
 function showOverlay(target) {
   removeOverlay();
   selectedEl = target;
-  const doc = iframee.contentDocument;
+  const doc = iframe.contentDocument;  
 
-  overlay = doc.createElement("div");
+  if(!overlay) overlay = doc.createElement("div");
   overlay.style.position = "absolute";
   overlay.style.border = "2px dashed #3F3760";
   overlay.style.pointerEvents = "none"; 
@@ -82,6 +89,19 @@ function showOverlay(target) {
   styleBtn(dBtn, "tomato");
   controls.appendChild(dBtn);
   
+  const cpBtn = doc.createElement("button");
+  cpBtn.textContent = "cp";
+  cpBtn.onclick = () => {
+     let copiedElement = null;
+     copiedElement = target.cloneNode(true);
+     copiedElement.removeAttribute("id");
+     doc.body.appendChild(copiedElement);
+     showOverlay(copiedElement);
+     copiedElement.onclick = () => {showOverlay(copiedElement);}
+  }
+  styleBtn(cpBtn, "khaki");
+  controls.appendChild(cpBtn);
+  
   const Wlabel = doc.createElement("div");
   Wlabel.style.position = "absolute";
   Wlabel.style.top = "25px";
@@ -110,81 +130,69 @@ function showOverlay(target) {
     if (corner.includes("e")) handle.style.right = "-5px";
 
     overlay.appendChild(handle);
-
     behAddDrag(handle, (dx, dy) => {
-                const rect = target.getBoundingClientRect();
-                const parentWidth = target.parentElement.getBoundingClientRect().width;
-                const parentHeight = target.parentElement.getBoundingClientRect().height;
+        const parent = target.offsetParent || target.parentElement;
+        const parentWidth = parent.offsetWidth;
+        const parentHeight = parent.offsetHeight;
 
-                let newWidth = rect.width + dx;
-                let newHeight = rect.height + dy;
+        const startWidth = target.offsetWidth;
+        const startHeight = target.offsetHeight;
+        const startLeft = target.offsetLeft;
+        const startTop = target.offsetTop;
 
-                const snapPoints = [.25, .5, .75, 1];
-                let snapped = false;
+        let newWidth = startWidth + dx;
+        let newHeight = startHeight + dy;
 
-                snapPoints.forEach(sp => {
-                        if (Math.abs((parentWidth * sp) - newWidth) < 10) {
-                                if (sp === .25) target.style.width = "25%";
-                                if (sp === .5) target.style.width = "50%";
-                                if (sp === .75) target.style.width = "75%";
-                                if (sp === 1) target.style.width = "100%";
+        const snapPoints = [.25, .5, .75, 1];
+        let snapped = false;
 
-                                showSnapGuide(parentWidth, target, sp);
-                                snapped = true;
-                        }
-                        if (corner === "se") {
-                                target.style.height = Math.round(rect.height + dy) + "px";
-                        }
-                        if (corner === "sw") {
-                                target.style.height = Math.round(rect.height + dy) + "px";
-                                target.style.left = Math.round(rect.left + dx) + "px";
-                        }
-                        if (corner === "ne") {
-                                target.style.height = Math.round(rect.height - dy) + "px";
-                                target.style.top = Math.round(rect.top + dy) + "px";
-                        }
-                        if (corner === "nw") {
-                                target.style.height = Math.round(rect.height - dy) + "px";
-                                target.style.left = Math.round(rect.left + dx) + "px";
-                                target.style.top = Math.round(rect.top + dy) + "px";
-                        }
-                        Wlabel.textContent = target.style.width;
-                });
-
-                // agar snap nahi mila to normal resize
-                if (!snapped) {
-                        if (corner === "se") {
-                                target.style.width = Math.round(rect.width + dx) + "px";
-                                target.style.height = Math.round(rect.height + dy) + "px";
-                        }
-                        if (corner === "sw") {
-                                target.style.width = Math.round(rect.width - dx) + "px";
-                                target.style.height = Math.round(rect.height + dy) + "px";
-                                target.style.left = Math.round(rect.left + dx) + "px";
-                        }
-                        if (corner === "ne") {
-                                target.style.width = Math.round(rect.width + dx) + "px";
-                                target.style.height = Math.round(rect.height - dy) + "px";
-                                target.style.top = Math.round(rect.top + dy) + "px";
-                        }
-                        if (corner === "nw") {
-                                target.style.width = Math.round(rect.width - dx) + "px";
-                                target.style.height = Math.round(rect.height - dy) + "px";
-                                target.style.left = Math.round(rect.left + dx) + "px";
-                                target.style.top = Math.round(rect.top + dy) + "px";
-                        }
-                        hideSnapGuide();
+        snapPoints.forEach(sp => {
+                if (Math.abs((parentWidth * sp) - newWidth) < 10) {
+                        target.style.width = (sp * 100) + "%";
+                        showSnapGuide(parentWidth, target, sp);
+                        snapped = true;
                 }
+        });
+
+        if (!snapped) {
+                if (corner === "se") {
+                        target.style.width = newWidth + "px";
+                        target.style.height = newHeight + "px";
+                }
+                if (corner === "sw") {
+                        target.style.width = (startWidth - dx) + "px";
+                        target.style.height = newHeight + "px";
+                        target.style.left = (startLeft + dx) + "px";
+                }
+                if (corner === "ne") {
+                        target.style.width = newWidth + "px";
+                        target.style.height = (startHeight - dy) + "px";
+                        target.style.top = (startTop + dy) + "px";
+                }
+                if (corner === "nw") {
+                        target.style.width = (startWidth - dx) + "px";
+                        target.style.height = (startHeight - dy) + "px";
+                        target.style.left = (startLeft + dx) + "px";
+                        target.style.top = (startTop + dy) + "px";
+                }
+                hideSnapGuide();
+        }
+
+        Wlabel.textContent = target.style.width;
         updateOverlay();
     });
   });
 
-  // ✅ Move Dragging
+  // ✅ Move Dragging (fixed)
   behAddDrag(moveBtn, (dx, dy) => {
-    const rect = target.getBoundingClientRect();
-    // target.style.position = "absolute";
-    target.style.left = Math.round(rect.left + dx) + "px";
-    target.style.top = Math.round(rect.top + dy) + "px";
+    const parent = target.offsetParent || target.parentElement;
+    const startLeft = target.offsetLeft;
+    const startTop = target.offsetTop;
+
+    target.style.position = "absolute";
+    target.style.left = startLeft + dx + "px";
+    target.style.top = startTop + dy + "px";
+
     updateOverlay();
   });
 
@@ -205,6 +213,8 @@ function showOverlay(target) {
     }
   }, { once: true });
 }
+
+
 
 // ✅ Helper: Style Button
 function styleBtn(btn, color="blue") {
@@ -248,8 +258,7 @@ function behAddDrag(el, onDrag) {
     doc.removeEventListener("touchmove", move);
     doc.removeEventListener("touchend", end);
   }
-
-  const doc = iframee.contentDocument;
+  const doc = iframe.contentDocument;
   el.addEventListener("mousedown", start);
   el.addEventListener("touchstart", start, { passive: false });
 }
@@ -309,5 +318,3 @@ function hideSnapGuide() {
     snapLine = null;
   }
 }
-
-    
