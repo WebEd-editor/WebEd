@@ -152,6 +152,26 @@ function showOverlay(target) {
                         showSnapGuide(parentWidth, target, sp);
                         snapped = true;
                 }
+                if (corner === "se") {
+                        //target.style.width = newWidth + "px";
+                        target.style.height = newHeight + "px";
+                }
+                if (corner === "sw") {
+                        //target.style.width = (startWidth - dx) + "px";
+                        target.style.height = newHeight + "px";
+                        target.style.left = (startLeft + dx) + "px";
+                }
+                if (corner === "ne") {
+                        //target.style.width = newWidth + "px";
+                        target.style.height = (startHeight - dy) + "px";
+                        target.style.top = (startTop + dy) + "px";
+                }
+                if (corner === "nw") {
+                        // target.style.width = (startWidth - dx) + "px";
+                        target.style.height = (startHeight - dy) + "px";
+                        target.style.left = (startLeft + dx) + "px";
+                        target.style.top = (startTop + dy) + "px";
+                }
         });
 
         if (!snapped) {
