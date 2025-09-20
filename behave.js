@@ -198,7 +198,7 @@ function showOverlay(target) {
                 hideSnapGuide();
         }
 
-        Wlabel.textContent = target.style.width;
+        Wlabel.textContent = "W "+target.style.width+" × "+" H "+target.style.height;
         updateOverlay();
     });
   });
