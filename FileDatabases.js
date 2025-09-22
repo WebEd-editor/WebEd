@@ -222,10 +222,14 @@ function openFullPreview() {
   });
 }
 
+let currentPro = null;       // Current project ka naam
+let saveInterval = null;     // Auto-save ka reference
+
 // Save full project
 function saveProject() {
-  const name = prompt("project name:");
-  if (!name) return;
+  if (!currentPro) return;   // agar project ka naam hi nahi to kuch save nahi karna
+
+  console.log("Auto-saved:", currentPro);
 
   const iframeDoc = document.getElementById("canvas").contentDocument;
   const fullHTML = iframeDoc.documentElement.outerHTML;
@@ -234,13 +238,33 @@ function saveProject() {
   const store = tx.objectStore('projects');
 
   store.put({
-    name,
-    html: fullHTML,          // 💾 Save full iframe HTML
-    files: customFiles       // 💾 Save JS/CSS files
+    name: currentPro,
+    html: fullHTML,
+    files: customFiles
   }).onsuccess = () => {
-    showPopup("Saved", `Your Project (${name}) was Saved.`, true, false);
+    // showPopup("Saved", `Your Project (${currentPro}) was auto-saved.`, true, false);
     listAllProjects();
   };
+}
+
+// Start auto-save for a project
+function startAutoSave(name) {
+  // Pehle ka interval clear kar do (agar koi chal raha ho)
+  if (saveInterval) {
+    clearInterval(saveInterval);
+  }
+
+  currentPro = name; // naye project ka naam set
+  saveInterval = setInterval(saveProject, 1000); // har 1 sec me save
+  // console.log("Auto-save started for:", name);
+}
+
+// New Project banana
+function createNewProject() {
+  const name = prompt("Enter new project name:");
+  if (!name) return;
+
+  startAutoSave(name);
 }
 
 // Load project by name
@@ -273,6 +297,7 @@ function loadProject(name) {
     }
 
     updateFileList();
+    startAutoSave(name);
     showPopup("Project Loaded", `Your Project ${name} was Loaded`, true, false);
   };
 }
