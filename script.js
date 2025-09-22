@@ -765,7 +765,7 @@ const ICONS = [
   "home", "menu", "search", "account_circle", "delete", "add", "edit", "favorite",
   "star", "settings", "check", "close", "visibility", "lock", "camera", "send",
   "download", "info", "warning", "help", "language", "face", "phone", "email", "subscription", "add_circle",
-  "thumb_down", "thumb_up","share"
+  "thumb_down", "thumb_up","share","arrow_back","shopping_cart"
 ];
 
 // CDN links
