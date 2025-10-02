@@ -202,7 +202,7 @@ function openFullPreview() {
   });
 
   // ✅ 3. Capture cleaned HTML
-  const fullHTML = '<!DOCTYPE html>\n' + iframeDoc.documentElement.outerHTML;
+  const fullHTML = '<!DOCTYPE html>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n' + iframeDoc.documentElement.outerHTML;
   ffcode = fullHTML;alert("fullHTML");
 
   // ✅ 4. Remove temporary scripts (cleanup)
