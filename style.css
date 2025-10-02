@@ -23,9 +23,10 @@ html body {
    background: #0f1023 !important;
    color: white;
    margin: 0;
-   font-family: var(--font);
+   font-family: 'Roboto', sans-sarif;
    overscroll-behavior-y: contain;
 }
+button{font-family: 'Roboto', sans-sarif;}
 /*.drag-box {
   background: red;
   display: flex;
@@ -39,6 +40,16 @@ html body {
   left: 100px;
   margin: 10px;
 }*/
+body::-webkit-scrollbar, #webedmenu::-webkit-scrollbar{
+  display: none;
+}
+ppp::-webkit-scrollbar{
+  /*display: none;*/
+  width: 5px;background: grey;
+}
+ppp::-webkit-scrollbar-thumb{
+  background: #304073;border-radius: 10px;
+}
 #foo {
    position: fixed;
    z-index: 102;   
@@ -55,6 +66,8 @@ footer > button, .tab > button, #projectList  button, #fileList  button {
    border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white;font-weight: 300;
 
 }
+.headDec button, .menuCode{margin: 0 5px; background: #304073;font-family: 'roboto', sans-sarif;color: white;font-weight: 300;padding: 3px 10px;border: none;}
+.actm{display: flex !important;}
 
 #projectList li{
    list-style-type: none; background: #222; margin: 5px 10px; padding: 5px 15px; border-radius: 2px;
@@ -397,4 +410,7 @@ input[type="number"] {
 .welcome .bbbttt:hover {background: #fff;color: #000;}
 .welcome div div{margin-top: 10px;}
 .welcome div div video{display: none;width: 310px;height: 200px; margin: 15px; border-radius: 10px;}
+.openEdBtn{transition: background .9s easy;}
+.openEdBtn:hover{ background: #384c70; color: white !important;}
+
 
