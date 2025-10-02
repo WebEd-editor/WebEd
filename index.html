@@ -69,6 +69,26 @@
   </div>
 </div>
 
+
+<div class="headDec" style="display: none;">
+   <div>
+      <button onclick="precon('1024')">L</button>
+      <button onclick="precon('768')">T</button>
+      <button onclick="precon('320')">P</button>
+      <button onclick="openFullPreview()">Play</button>
+   </div>
+   <div>
+      <div class="mc">
+         <button class="menuCode" onclick="document.querySelector('.m').classList.toggle('actm')">+ Code</button>
+         <div class="m" style="display:none;flex-direction: column; z-index: 102;position: absolute;top: 100%;right: 0;">
+            <button class="menuCode" onclick="document.getElementById('webedmenu').style.display='block';ooo('tt2','bb2')">Custom Code</button>
+            <button class="menuCode" onclick="document.getElementById('webedmenu').style.display='block';ooo('tt4','bb4'); rr();">Source</button>
+            <button class="menuCode">About</button>
+         </div>
+      </div>
+   </div>   
+</div>
+
 <footer id="foo" class="drag-box">
    <button onclick="document.getElementById('webedmenu').style.display='block'; history.pushState({menuOpen: true}, 'Menu', '#webedmenu');"><svg style="width: 15px; height: 15px;" stroke="white" stroke-width="6" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="90" x2="90" y2="90"></line><line x1="10" y1="50" x2="90" y2="50"></line><line x1="10" y1="10" x2="90" y2="10"></line></svg></button>
    <button onclick="MyOpen('editor-wrapper')" class="footBtn"><svg style="width: 15px; height: 15px;" stroke="white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-width="6.5" d="M 65 20 L 95 50 L 65 80" stroke-linejoin="" stroke-linecap=""></path><path fill="none" stroke-width="6" d="M 35 20 L 5 50 L 35 80" stroke-linejoin="" stroke-linecap=""></path></svg></button>
