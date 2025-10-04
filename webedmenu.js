@@ -71,7 +71,7 @@ function menuload(){
         <div id="fileEditor" style="position: sticky;top: 0;left: 0;width: 100%;height: 400px;">/* write your code here. */</div>
     </div>
     <div class="ttt tt3" style="width: 100%;margin-top: 110px;">
-       <button onclick="saveProject()">Save Project</button>
+       <button onclick="createNewProject()">Save Project</button>
        <div id="projectList"></div>
     </div>
     <div class="ttt tt4" style="width: 100%;margin-top: 110px;">
