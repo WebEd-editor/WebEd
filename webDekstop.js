@@ -41,8 +41,10 @@ preDec();
 
 // dekstop header
 function headDec(){
+  if(1020 < screen.width){
 	 const h = document.querySelector('.headDec');
 	 h.style = "border-bottom: 1px solid #000;z-index:102;display: flex;justify-content: space-between;position: fixed; top: 0; background: #1c2644;color: white; width: 100%; padding: 5px;";
+  }
 }
 headDec();
 
