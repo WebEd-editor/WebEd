@@ -223,6 +223,7 @@ function updateTree() {
 
   function buildTree(el, container) {
     Array.from(el.children).forEach(child => {
+      if (child.classList && child.classList.contains('behOverlay')) return;
       const item = document.createElement('div');
       item.className = 'tree-item';
 
