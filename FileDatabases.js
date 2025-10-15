@@ -321,24 +321,37 @@ function listAllProjects() {
     const list = document.getElementById('projectList');
     list.innerHTML = '';
     projects.forEach(p => {
-      const li = document.createElement('li');
-      li.textContent = p.name;
-      li.style.margin = '10px 0';
+      const dp = document.createElement('div');
+      dp.textContent = p.name.charAt(0).toUpperCase();
+      const wh ="20px";
+      dp.style="border-radius: 100%; padding: 10px; margin: 10px; display: flex; justify-content: center; align-items: center; background: linear-gradient(45deg, #556dff, purple); color: #40dffe; width: "+wh+"; height: "+wh+";";
+      
+      const namePro = document.createElement('h4');
+      namePro.textContent = p.name;
+      
+      const d = document.createElement('div');
+      const dd = document.createElement('div');
+      const ddd = document.createElement('div');
+      d.style="display: flex;";dd.style="display: flex";
+      ddd.style="background: #222; border-radius: 5px; border: 1px solid #444;";
 
       const loadBtn = document.createElement('button');
-      loadBtn.textContent = 'Open';
-      loadBtn.style.margin = '0 10px';
+      loadBtn.textContent = 'Open';loadBtn.style.margin='5px 10px';loadBtn.style.background='#006dd7';
       loadBtn.onclick = () => loadProject(p.name);
 
       const delBtn = document.createElement('button');
-      delBtn.textContent = 'X';
-      delBtn.onclick = () => showPopup("Conferm","Want Delete Your Project ",true,true,p.name);
+      delBtn.textContent = 'Delete';delBtn.style.margin='5px 10px';delBtn.style.background='#d73e00'
+      delBtn.onclick = () => showPopup("Confirm","Want Delete Your Project ",true,true,p.name);
 
-      li.appendChild(loadBtn);
-      li.appendChild(delBtn);
-      list.appendChild(li);
+      d.appendChild(dp);
+      d.appendChild(namePro);
+      dd.appendChild(loadBtn);
+      dd.appendChild(delBtn);
+      ddd.appendChild(d);
+      ddd.appendChild(dd);
+      list.appendChild(ddd);
+      list.style="display: grid;grid-template-columns: repeat(2, 1fr);gap: 5px;padding: 10px;";
     });
   };
 }
-
 
