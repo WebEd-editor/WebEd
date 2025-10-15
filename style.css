@@ -19,6 +19,52 @@
   --font-color: #e0e0e0;
   --font-color-home: #ffffff;
 }
+
+[data-title] {
+  position: relative;
+  cursor: pointer;
+}
+
+[data-title]::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px); /* niche se start hoga */
+  background: black;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  font-size: 14px;
+  z-index: 1000;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.3);
+  pointer-events: none; /* invisible hone par click na ho */
+  transition: all 0.3s ease; /* smooth animation */
+}
+
+/* Tooltip arrow */
+[data-title]::before {
+  content: "";
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  border-width: 6px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+[data-title]:hover::after,
+[data-title]:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0); /* upar ki taraf halka sa move */
+}
+
 html body {
    background: #0f1023 !important;
    color: white;
