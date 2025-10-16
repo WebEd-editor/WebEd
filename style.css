@@ -266,6 +266,9 @@ details div input, details div select{
     ::placeholder {
       color: #bbb;
     }
+
+    .actbtn{ display:none; }
+    .act:hover .actbtn{ display:block;position:relative;top:0;right:10px; }
     
 .box-editor {
   text-align: center;
