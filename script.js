@@ -760,13 +760,47 @@ function loadGoogleFont(fontN) {
   link.rel = "stylesheet";
   iframeDoc.head.appendChild(link);
 }
-
+/*
 // links for Google icons integration 
 const ICONS = [
   "home", "menu", "search", "account_circle", "delete", "add", "edit", "favorite",
   "star", "settings", "check", "close", "visibility", "lock", "camera", "send",
   "download", "info", "warning", "help", "language", "face", "phone", "email", "subscription", "add_circle",
   "thumb_down", "thumb_up","share","arrow_back","shopping_cart"
+];*/
+
+const ICONS = [
+  "home","search","menu","settings","account_circle","favorite","favorite_border","delete","add","close",
+  "arrow_back","arrow_forward","check","star","star_border","info","warning","camera_alt","shopping_cart","email",
+  "lock","visibility","visibility_off","share","edit","download","upload","phone","calendar_today","alarm",
+  "battery_full","map","location_on","directions_car","local_cafe","wifi","bluetooth","cloud","play_arrow","pause",
+  "stop","volume_up","volume_off","person","groups","school","work","light_mode","dark_mode","analytics","build",
+  "book","brightness_medium","calendar_month","chat","chat_bubble","check_circle","construction","credit_card","currency_rupee",
+  "directions","done_all","event","expand_more","file_copy","folder","globe","help","launch","link","list","location_city",
+  "lock_open","logout","looks_one","more_vert","notifications","offline_bolt","paid","pets","print","refresh","save","schedule",
+  "send","settings_applications","shopping_bag","speaker","thumb_up","thumb_down","timer","translate","visibility","workspaces",
+  "account_box","android","announcement","badge","backup","battery_alert","beenhere","border_all","brightness_high","brush",
+  "business","cached","cake","call","camera","cancel","card_giftcard","card_membership","card_travel","change_history",
+  "check_box","check_circle_outline","chrome_reader_mode","class","close_fullscreen","cloud_circle","code","collections",
+  "color_lens","comment","compare","dashboard","date_range","delete_forever","description","desktop_windows","directions_bike",
+  "directions_boat","directions_bus","directions_railway","directions_walk","disc_full","dns","done","donut_large","donut_small",
+  "drafts","eco","edit_location","eject","emoji_events","event_available","event_busy","event_note","exit_to_app",
+  "explore","extension","face","fast_forward","fast_rewind","fiber_manual_record","file_download","file_upload","filter_list",
+  "flag","flare","flash_auto","folder_special","format_align_center","format_bold","format_italic","forum","forward","gesture",
+  "grade","group_add","g_translate","handyman","hdr_off","headset","hearing","help_outline","highlight","history","home_work",
+  "hotel","hourglass_empty","https","image","import_contacts","import_export","inbox","indeterminate_check_box","info_outline",
+  "input","invert_colors","keyboard","keyboard_alt","keyboard_arrow_down","keyboard_backspace","keyboard_tab","kitchen",
+  "label","label_outline","language","launch","leadership","lightbulb","line_style","link_off","live_help","local_hospital",
+  "lock_outline","looks","loop","mail_outline","map_outlined","markunread","maximize","memory","menu_open","merge_type","minimize",
+  "money_off","monochrome_photos","mood","more_horiz","motorcycle","movie","mp","multiline_chart","music_note","nature",
+  "navigate_before","navigate_next","note","notifications_off","ondemand_video","opacity","open_in_new","outlined_flag","palette",
+  "panorama","pause_circle_filled","people","perm_camera_mic","person_add","phone_android","phonelink_off","pie_chart",
+  "play_circle_filled","policy","polymer","poll","power_settings_new","pregnant_woman","print_disabled","public","push_pin",
+  "radio_button_checked","receipt","redo","remove_circle","report_problem","restore","room","rowing","rss_feed","sale","schedule_send",
+  "school","score","screen_rotation","search_off","security","select_all","send_and_archive","sentiment_dissatisfied","share_off",
+  "shopping_cart_checkout","shuffle","signal_cellular_alt","skip_next","slideshow","smartphone","sms","sort","spa","spellcheck",
+  "star_half","stop_circle","store","subject","swap_horiz","sync","table_chart","tag","text_fields","thumb_down_off_alt",
+  "timer_off","toggle_off","train","tram","trending_up","tty","tv","undo","usb","videocam","volume_down","wallpaper"
 ];
 
 // CDN links
