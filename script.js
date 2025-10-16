@@ -224,6 +224,7 @@ function updateTree() {
   function buildTree(el, container) {
     Array.from(el.children).forEach(child => {
       if (child.classList && child.classList.contains('behOverlay')) return;
+      if (child.tagName && child.tagName==='script') return;
       const item = document.createElement('div');
       item.className = 'tree-item';
 
@@ -240,17 +241,17 @@ function updateTree() {
       }
       const cls = classString ? `.${classString.split(' ').join('.')}` : '';
       const tagLabel = `${child.tagName.toLowerCase()} ${id}${cls}`;
-      label.innerHTML = arrowTR + "< " + String(tagLabel) + " >";
+      label.innerHTML = /*arrowTR +*/ "< " + String(tagLabel) + " >";
 
       // 👇 Element select action
       label.onclick = () => {
         selectedParent = child;
         clearSelected();
         child.classList.add('selected');
-        document.getElementById('canvas').contentDocument.body.querySelectorAll('svg, span, div, line, path, circle, curve, rec').forEach(edel => {edel.style.outline = "none";edel.classList.add('editable');});
-        document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.style.outline = "none";edel.setAttribute('contenteditable','true')});
+        document.getElementById('canvas').contentDocument.body.querySelectorAll('svg, span, div, line, path, circle, curve, rec, img, video').forEach(edel => {edel.style.outline = "none";edel.classList.add('editable');});
+        document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.style.outline = "none";});
         document.getElementById('canvas').contentDocument.body.querySelectorAll('.selected').forEach(edel => {edel.style.outline = "1px solid blue";});
-        updateTree();
+        //updateTree();
       };
 
       const actions = document.createElement('span');
@@ -259,13 +260,14 @@ function updateTree() {
       // ✏️ Edit button
       const editBtn = document.createElement('button');
       editBtn.textContent = '✏️';
-      editBtn.title = "Edit element";
+      editBtn.dataset.title = 'Edit';
       editBtn.onclick = () => openEdit(child);
+      document.getElementById("addAnimBtn").onclick = () => loadEditorEl(child);
 
       // 🗑 Delete button
       const delBtn = document.createElement('button');
       delBtn.textContent = '🗑';
-      delBtn.title = "Delete element";
+      delBtn.dataset.title = "Delete element";
       delBtn.onclick = () => {
         if (selectedParent === child) {
           selectedParent = document.getElementById('canvas');
@@ -278,13 +280,13 @@ function updateTree() {
       // 📋 Copy/Paste button
       const cpBtn = document.createElement('button');
       cpBtn.textContent = isCopied ? '📥' : '📋';
-      cpBtn.title = isCopied ? 'Paste copied element' : 'Copy this element';
+      cpBtn.dataset.title = isCopied ? 'Paste copied element' : 'Copy this element';
       cpBtn.onclick = () => {
         if (!isCopied) {
           copiedElement = child.cloneNode(true);
           isCopied = true;
           cpBtn.textContent = '📥';
-          cpBtn.title = 'Paste copied element';
+          cpBtn.dataset.title = 'Paste copied element';
         } else {
           if (selectedParent) {
             const pasted = copiedElement.cloneNode(true);
@@ -292,9 +294,10 @@ function updateTree() {
             isCopied = false;
             copiedElement = null;
             cpBtn.textContent = '📋';
-            cpBtn.title = 'Copy this element';
+            cpBtn.dataset.title = 'Copy this element';
             updateTree();
             saveHistory();
+            showOverlay(pasted);
           }
         }
       };
@@ -307,23 +310,29 @@ function updateTree() {
         actions.removeChild(delBtn);
         actions.removeChild(cpBtn);
       }
-      // Tree item setup
-      item.appendChild(label);
-      item.appendChild(actions);
-
+      
+      const ss = document.createElement('summary');
+      const dd = document.createElement('details');
+      ss.appendChild(label);
+      ss.appendChild(actions);
+      dd.appendChild(ss);
+      dd.setAttribute('open', 'true');
+      dd.style="margin-left: 10px; background: rgba(0,0,0,.3); padding: 5px;";
+      
       if (child.tagName.toLowerCase() !== 'head') {
-        container.appendChild(item);
+        container.appendChild(dd);
       }
 
       // Recursive tree
       if (child.children.length > 0) {
-        buildTree(child, item);
+        buildTree(child, dd);
       }
 
       // Drag-and-drop support
       label.draggable = true;
       label.addEventListener('dragstart', (e) => {
-        e.dataTransfer.setData('text/plain', child.getAttribute('data-id') || '');draggedElement = child;
+        e.dataTransfer.setData('text/plain', child.getAttribute('data-id') || '');
+        draggedElement = child;
         label.style.outline = "2px solid green";
       });
       label.addEventListener('dragover', (e) => {
