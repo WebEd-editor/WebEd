@@ -262,7 +262,6 @@ function updateTree() {
       editBtn.textContent = '✏️';
       editBtn.dataset.title = 'Edit';
       editBtn.onclick = () => openEdit(child);
-      document.getElementById("addAnimBtn").onclick = () => loadEditorEl(child);
 
       // 🗑 Delete button
       const delBtn = document.createElement('button');
