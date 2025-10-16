@@ -217,6 +217,7 @@ const arrowTR = `<svg width="20" height="20" viewBox="0 0 100 100"><path d="M 10
 let copiedElement = null;
 let isCopied = false;
 
+
 function updateTree() {
   const tree = document.getElementById('tree');
   tree.innerHTML = '';
@@ -259,12 +260,14 @@ function updateTree() {
 
       // ✏️ Edit button
       const editBtn = document.createElement('button');
+      editBtn.className = "actbtn";
       editBtn.textContent = '✏️';
       editBtn.dataset.title = 'Edit';
       editBtn.onclick = () => openEdit(child);
 
       // 🗑 Delete button
       const delBtn = document.createElement('button');
+      delBtn.className = "actbtn";
       delBtn.textContent = '🗑';
       delBtn.dataset.title = "Delete element";
       delBtn.onclick = () => {
@@ -278,6 +281,7 @@ function updateTree() {
 
       // 📋 Copy/Paste button
       const cpBtn = document.createElement('button');
+      cpBtn.className = "actbtn";
       cpBtn.textContent = isCopied ? '📥' : '📋';
       cpBtn.dataset.title = isCopied ? 'Paste copied element' : 'Copy this element';
       cpBtn.onclick = () => {
@@ -301,13 +305,18 @@ function updateTree() {
         }
       };
 
+      const act = document.createElement('button');
+      act.textContent = "...";
+      act.className = "act";
+
       // Add buttons
-      actions.appendChild(editBtn);
-      actions.appendChild(cpBtn);
-      actions.appendChild(delBtn);
+      act.appendChild(editBtn);
+      act.appendChild(cpBtn);
+      act.appendChild(delBtn);
+      actions.appendChild(act);
       if (child.tagName.toLowerCase() === 'body') {
-        actions.removeChild(delBtn);
-        actions.removeChild(cpBtn);
+        act.removeChild(delBtn);
+        act.removeChild(cpBtn);
       }
       
       const ss = document.createElement('summary');
