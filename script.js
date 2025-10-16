@@ -770,7 +770,7 @@ const ICONS = [
 ];*/
 
 const ICONS = [
-  "home","search","menu","settings","account_circle","favorite","favorite_border","delete","add","close",
+  "home","search","bookmark","menu","settings","account_circle","favorite","favorite_border","delete","add","close",
   "arrow_back","arrow_forward","check","star","star_border","info","warning","camera_alt","shopping_cart","email",
   "lock","visibility","visibility_off","share","edit","download","upload","phone","calendar_today","alarm",
   "battery_full","map","location_on","directions_car","local_cafe","wifi","bluetooth","cloud","play_arrow","pause",
