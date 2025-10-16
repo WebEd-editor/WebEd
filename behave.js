@@ -41,6 +41,7 @@ function showOverlay(target) {
   const doc = iframe.contentDocument;  
 
   if(!overlay) overlay = doc.createElement("div");
+  overlay.className = 'behOverlay';
   overlay.style.position = "absolute";
   overlay.style.border = "2px dashed #3F3760";
   overlay.style.pointerEvents = "none"; 
