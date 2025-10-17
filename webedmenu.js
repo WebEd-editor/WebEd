@@ -2,7 +2,7 @@ function menuload(){
    const menupage = document.getElementById("webedmenu");
    menupage.innerHTML = `
    <div style="position: fixed;top: 0;left: 0;box-shadow: rgba(200, 200, 200, 0.4) 0px 4px 10px;width: 100%;margin-bottom: 10px;">
-     <header class="" id="" style="color: rgb(0, 0, 0); font-size: 16px; outline: none; display: flex; justify-content: space-between;">      
+     <header class="" id="" style="background: black; color: rgb(0, 0, 0); font-size: 16px; outline: none; display: flex; justify-content: space-between;">      
        <div class="" style="outline: none; color: rgb(255, 255, 255); font-size: 16px; font-weight: 500; opacity: 1; display: flex; justify-content: center; align-items: center;" id="">
          <img src="https://webed-editor.github.io/WebEd/logo.png" alt="Uploaded Image" class="" content="false" id="" style="max-width: 100%; margin: 5px; opacity: 1; width: 40px; height: 40px; outline: none; border-radius: 5px; font-size: 16px; font-weight: 500; visibility: visible; display: block;" />
          <p class="" id="" style="color: rgb(255, 255, 255); font-size: 27px; font-weight: 300; opacity: 1; margin: 0px; outline: none;">
@@ -36,11 +36,11 @@ function menuload(){
     <div class="ttt tt1" style="width: 100%;">
         <div class="welcome">
            <video autoplay muted loop style="position: absolute;top: 100px; opacity: 0.5;width: 100%;" src="https://videos.pexels.com/video-files/7438482/7438482-sd_360_624_30fps.mp4"></video>
-           <div style="position: relative;top: 120px; height: 100%; width: 100%; background: linear-gradient(0deg, #000, transparent, transparent);">
+           <div style="position: relative;top: 120px; height: 120%; width: 100%; background: linear-gradient(0deg, #000, transparent, transparent);">
               <h1>Welcome to our Website builder tool</h1>
               <a href="https://auth-p1ny.onrender.com" style="text-decoration: none;color: black; background: white; padding: 10px;">Login</a>
               <p id="username"></p>
-              <p>Make a site likes easy way, use WebEd for creating a website.</p>
+              <p>What will you design today?, use WebEd for creating a website.</p>
               <button class="bbbttt" id="installAppBtn">Try Now As App</button>
               <div>
                  <video autoplay muted loop src="file:///storage/emulated/0/Android/data/com.teejay.trebedit/files/TrebEdit user files/Sample project - Acme/video /spider video.mp4"></video>
