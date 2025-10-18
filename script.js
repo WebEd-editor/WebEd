@@ -217,7 +217,6 @@ const arrowTR = `<svg width="20" height="20" viewBox="0 0 100 100"><path d="M 10
 let copiedElement = null;
 let isCopied = false;
 
-
 function updateTree() {
   const tree = document.getElementById('tree');
   tree.innerHTML = '';
@@ -309,14 +308,18 @@ function updateTree() {
       act.textContent = "...";
       act.className = "act";
 
+      const actw = document.createElement('div');
+      actw.className="actw";
+
       // Add buttons
-      act.appendChild(editBtn);
-      act.appendChild(cpBtn);
-      act.appendChild(delBtn);
+      actw.appendChild(editBtn);
+      actw.appendChild(cpBtn);
+      actw.appendChild(delBtn);
+      act.appendChild(actw);
       actions.appendChild(act);
       if (child.tagName.toLowerCase() === 'body') {
-        act.removeChild(delBtn);
-        act.removeChild(cpBtn);
+        actw.removeChild(delBtn);
+        actw.removeChild(cpBtn);
       }
       
       const ss = document.createElement('summary');
