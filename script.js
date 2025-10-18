@@ -615,7 +615,7 @@ function redoEdit() {
     document.getElementById('usrslct').value = el.style.userSelect || '';
     document.getElementById('pointerEvent').value = el.style.pointerEvent || '';
     document.getElementById('clipPath').value = el.style.clipPath || '';
-    
+    editBackgroundForElement(el);
     document.getElementById('editModal').style.display = 'block';
   }
   
