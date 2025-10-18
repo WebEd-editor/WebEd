@@ -568,15 +568,15 @@ function redoEdit() {
     document.getElementById('mnhei').value = el.style.minHeight || '';
     
     // 3.
-    document.getElementById('bakcolt').value = el.style.backgroundColor || '';
+    /*document.getElementById('bakcolt').value = el.style.backgroundColor || '';*/
     document.getElementById('bakpos').value = el.style.backgroundPosition || '';
     document.getElementById('baksz').value = el.style.backgroundSize || '';
     document.getElementById('bakrep').value = el.style.backgroundRepeat || '';
     document.getElementById('objectFit').value = el.style.objectFit || '';
-    const cssUrl = el.style.backgroundImage;
+    /*const cssUrl = el.style.backgroundImage;
     const extractedUrl = cssUrl.slice(5, -2);
     document.getElementById('bakimg').value = extractedUrl || '';
-    //document.getElementById('opct').value = el.style.opacity || '';
+    //document.getElementById('opct').value = el.style.opacity || '';*/
     
     // 4.
     document.getElementById('editPosition').value = el.style.position || '';
@@ -683,13 +683,13 @@ function applyEdit() {
     currentEditingElement.style.maxWidth = document.getElementById('mwid').value || '';
     currentEditingElement.style.minHeight = document.getElementById('mnhei').value || ''; 
     
-    currentEditingElement.style.backgroundColor = document.getElementById('bakcolt').value || '';
+    //currentEditingElement.style.backgroundColor = document.getElementById('bakcolt').value || '';
     //currentEditingElement.style.backgroundColor = document.getElementById('bakcol').value || '';
     currentEditingElement.style.backgroundPosition = document.getElementById('bakpos').value || '';
     currentEditingElement.style.backgroundSize = document.getElementById('baksz').value || '';
     currentEditingElement.style.backgroundRepeat = document.getElementById('bakrep').value || '';
     currentEditingElement.style.objectFit = document.getElementById('objectFit').value || '';
-    function MygetUrl(){
+    /*function MygetUrl(){
        var url = document.getElementById('bakimg').value;
        var bk = document.getElementById("bakimg");
        bk.value="";
@@ -697,7 +697,7 @@ function applyEdit() {
        bk.value = url;
        return `url('${url}')`;
     }
-    currentEditingElement.style.backgroundImage = MygetUrl() || '';
+    currentEditingElement.style.backgroundImage = MygetUrl() || '';*/
     currentEditingElement.style.opacity = document.getElementById('opct').value || '';
     
 
