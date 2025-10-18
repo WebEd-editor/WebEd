@@ -461,4 +461,9 @@ input[type="number"] {
 .openEdBtn{transition: background .9s easy;}
 .openEdBtn:hover{ background: #384c70; color: white !important;}
 
+/* bg new all bg sets as layer*/
 
+#layers{ display:flex;flex-direction:column;width: 100%; overflow:auto; }
+.layer{ display:flex;flex-direction:column;border:2px solid black; }
+.gradient-controls{ display:flex;flex-direction:column; }
+.gradient-controls > div{ width: 120px;display:flex;overflow:auto; }
