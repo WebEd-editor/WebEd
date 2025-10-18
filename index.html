@@ -289,9 +289,19 @@
   </details>
 
   <!-- BACKGROUND & COLORS -->
+    <script src="st/bg.js" defer></script>
   <details>
     <summary>Background and Colors</summary>
-    <div>background <input id="bakcol" oninput="document.getElementById('bakcolt').value = document.getElementById('bakcol').value; applyEdit();" type="color"><input id="bakcolt" oninput="applyEdit()" type="text"></div>
+    <!-- <div>background <input id="bakcol" oninput="document.getElementById('bakcolt').value = document.getElementById('bakcol').value; applyEdit();" type="color"><input id="bakcolt" oninput="applyEdit()" type="text"></div>
+     -->
+    <script src="bg.js" defer></script>
+    <div style="display:flex;flex-direction: column;">
+       <div>
+          <button id="addLayer">+ add background</button>
+          <button id="removeAll">remove background</button>
+       </div>
+       <div id="layers"></div>
+    </div>
     <div>background image <input oninput="applyEdit()" id="bakimg" type="text" placeholder="url('image.jpg')"></div>
     <div>background size 
     <select id="baksz" onchange="applyEdit()">
