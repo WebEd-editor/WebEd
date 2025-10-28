@@ -112,6 +112,7 @@
    <script>document.getElementById("elementsOutlineCheck").addEventListener('change', e => {
    document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.style.outline = e.target.checked ? "1px solid green" : "none";});
    document.getElementById('canvas').contentDocument.body.querySelectorAll('.selected').forEach(edel => {edel.style.outline = e.target.checked ? "1px solid blue" : "none";});
+   document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.setAttribute('contenteditable','true')});
    
    });
    </script>
