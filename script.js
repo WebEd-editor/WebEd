@@ -224,7 +224,10 @@ function updateTree() {
   function buildTree(el, container) {
     Array.from(el.children).forEach(child => {
       if (child.classList && child.classList.contains('behOverlay')) return;
+      if (child.id && child.id.includes('scriptDragDropEl')) return;
       if (child.tagName && child.tagName==='script') return;
+      if (child.tagName && child.tagName==='style') return;
+      
       const item = document.createElement('div');
       item.className = 'tree-item';
 
