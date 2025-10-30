@@ -27,6 +27,9 @@ function rr() {
   const iframe = document.getElementById("canvas");
   const iframeDoc = iframe.contentDocument.documentElement || iframe.contentWindow.document;
 
+  if (iframeDoc.querySelector('#scriptDragDropEl')) iframeDoc.querySelector('#scriptDragDropEl').remove();
+  if (iframeDoc.querySelector('.behOverlay')) iframeDoc.querySelector('.behOverlay').remove();
+
   // Get the body HTML from iframe
   let html = iframeDoc.innerHTML;
   
