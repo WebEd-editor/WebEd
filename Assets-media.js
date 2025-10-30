@@ -107,27 +107,42 @@ function renderPixelMedia(data) {
 
   if (pixelMode === "image" && data.photos) {
     data.photos.forEach(photo => {
+      const d = document.createElement("div");
       const img = document.createElement("img");
+      const dd = document.createElement("div");
+      const b = document.createElement("button");
+      d.style="border-radius: 5px; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid rgb(0, 100, 200); padding: 10px 0px; background-color: rgb(20, 20, 20); margin: 10px;";
+      dd.style="border-radius: 50px; opacity: 1; display: flex; outline: none; width: 100%; justify-content: flex-end; margin: 10px 20px; padding: 0px";
+      b.style="background-color: rgb(26, 86, 135); padding: 5px 10px; border-radius: 5px; opacity: 1; border: none; font-family: Roboto, sans-serif; color: white; font-size: 15.3333px; margin: 0px 10px 0px 0px";
       img.src = photo.src.medium;
-      img.style.width = "100%";
-      img.style.borderRadius = "10px";
-      img.style.cursor = "pointer";
-      img.onclick = () => insertToEditor("img", photo.src.large);
-      container.appendChild(img);
+      img.style = "margin: 0px; width: 100%; object-fit: contain; height: 100%";
+      b.style.cursor = "pointer";
+      b.textContent="Insert";
+      b.onclick = () => insertToEditor("img", photo.src.large);
+      d.appendChild(img);
+      dd.appendChild(b);
+      d.appendChild(dd);
+      container.appendChild(d);
     });
   } else if (pixelMode === "video" && data.videos) {
     data.videos.forEach(video => {
+      const d = document.createElement("div");
       const vid = document.createElement("video");
-      const btn = document.createElement("button");
-      btn.textContent = "Insert";
+      const dd = document.createElement("div");
+      const b = document.createElement("button");
+      b.textContent = "Insert";
+      d.style="border-radius: 5px; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid rgb(0, 100, 200); padding: 10px 0px; background-color: rgb(20, 20, 20); margin: 10px;";
+      dd.style="border-radius: 50px; opacity: 1; display: flex; outline: none; width: 100%; justify-content: flex-end; margin: 10px 20px; padding: 0px";
+      b.style="background-color: rgb(26, 86, 135); padding: 5px 10px; border-radius: 5px; opacity: 1; border: none; font-family: Roboto, sans-serif; color: white; font-size: 15.3333px; margin: 0px 10px 0px 0px";
       vid.src = video.video_files[0].link;
       vid.controls = true;
-      vid.style.width = "100%";
-      vid.style.borderRadius = "10px";
-      vid.style.cursor = "pointer";
-      btn.onclick = () => insertToEditor("video", video.video_files[0].link);
-      container.appendChild(vid);
-      container.appendChild(btn);
+      vid.style = "margin: 0px; width: 100%; object-fit: contain; height: 100%";
+      b.style.cursor = "pointer";
+      b.onclick = () => insertToEditor("video", video.video_files[0].link);
+      d.appendChild(vid);
+      dd.appendChild(b);
+      d.appendChild(dd);
+      container.appendChild(d);
     });
   }
 }
@@ -140,7 +155,6 @@ function insertToEditor(type, src) {
   const doc = iframe.contentDocument;
   const el = doc.createElement(type);
   el.src = src;
-  el.style.margin = "10px";
   el.style.width = type === "img" ? "300px" : "400px";
   if (type === "video") el.controls = true;
 
