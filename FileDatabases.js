@@ -306,7 +306,10 @@ function loadProject(name) {
 function deleteProject(name) {
   const tx = db.transaction('projects', 'readwrite');
   tx.objectStore('projects').delete(name).onsuccess = () => {
-    var dic = "Your Project (" + name + ") was Deleted."
+    var dic = "Your Project (" + name + ") was Deleted.";
+    if(saveInterval){
+        clearInterval(saveInterval);
+    }
     showPopup("Delete",dic,true,false);    
     listAllProjects();
   };
