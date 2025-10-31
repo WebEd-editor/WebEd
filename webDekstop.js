@@ -25,6 +25,9 @@
 	  s.style.left = "80%";
    const ed = document.getElementById("editModal");
    ed.style.left="80%";
+
+   const icoed = document.getElementById("seticon");
+   icoed.style="width:90%; height:80%; z-index:103; left: 50%; transform: translateX(-50%);";
 		document.querySelectorAll('summary').forEach(s => {s.style.fontSize = "13px";})
 		
 		const footer = document.querySelector('#foo');
