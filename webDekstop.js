@@ -22,7 +22,10 @@
   a.style.width="100px";
 		const s = document.querySelector("#sidebar");
 		s.style.display = "block"; //sidebar tree, editor-wrapper add elements
-	  s.style.left = "80%"; 
+	  s.style.left = "80%";
+   const ed = document.getElementById("editModal");
+   ed.style.left="";
+   ed.style.right="10px";
 		document.querySelectorAll('summary').forEach(s => {s.style.fontSize = "13px";})
 		
 		const footer = document.querySelector('#foo');
