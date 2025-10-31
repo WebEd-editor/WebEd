@@ -16,12 +16,15 @@
 			allt.style.right = "5px";
 			allt.style.resize = "none";
 		});
-		document.querySelector("#editor-wrapper").style.display = "block";
+		const a = document.querySelector("#editor-wrapper");
+  a.style.display = "block";
+  a.style.left= "20px";
+  a.style.width="100px";
 		const s = document.querySelector("#sidebar");
 		s.style.display = "block"; //sidebar tree, editor-wrapper add elements
 	  s.style.left = "80%"; 
 		document.querySelectorAll('summary').forEach(s => {s.style.fontSize = "13px";})
-		document.querySelector('#editor-wrapper').style.left = "10px";
+		
 		const footer = document.querySelector('#foo');
 		footer.style = "position: fixed;left: 0;top: 50%;z-index: 102;transform: translateY(-50%);display:flex;flex-direction: column;";
 		footer.classList.remove('drag-box');
