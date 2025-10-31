@@ -24,8 +24,7 @@
 		s.style.display = "block"; //sidebar tree, editor-wrapper add elements
 	  s.style.left = "80%";
    const ed = document.getElementById("editModal");
-   ed.style.left="";
-   ed.style.right="10px";
+   ed.style.left="80%";
 		document.querySelectorAll('summary').forEach(s => {s.style.fontSize = "13px";})
 		
 		const footer = document.querySelector('#foo');
