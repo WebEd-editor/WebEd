@@ -18,7 +18,7 @@
 		});
 		const a = document.querySelector("#editor-wrapper");
   a.style.display = "block";
-  a.style.left= "20px";
+  a.style.left= "42px";
   a.style.width="100px";
 		const s = document.querySelector("#sidebar");
 		s.style.display = "block"; //sidebar tree, editor-wrapper add elements
