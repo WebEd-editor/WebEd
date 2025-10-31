@@ -10,7 +10,7 @@ function menuload(){
          </p>
        </div>
        <div class="" style="outline: none; color: rgb(255, 255, 255); font-size: 16px; font-weight: 500; opacity: 1; display: flex; justify-content: center; align-items: center;">
-         <button onclick="closewebedmenu()" class="" id="" style="font-family: 'roboto', sans-serif; color: rgb(0, 0, 0); font-size: 16px; opacity: 1; top: 10px; right: 10px; margin: 10px; padding: 5px; border: none; border-radius: 5px; outline: none; cursor: pointer;">
+         <button onclick="closewebedmenu()" class="" id="" style="font-family: 'roboto', sans-serif; color: rgb(0, 0, 0); background: white;font-size: 16px; opacity: 1; top: 10px; right: 10px; margin: 10px; padding: 5px; border: none; border-radius: 5px; outline: none; cursor: pointer;">
            Open Editor
          </button>
        </div>
