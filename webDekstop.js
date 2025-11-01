@@ -3,7 +3,7 @@
   	MyOpen = function (id) {
   		document.getElementById(id).style.display = "block";
   		if(id === 'sidebar') updateTree();
-    if(id === 'setIcon'){
+    if(id === 'seticon'){
         ['addSh','previewIconTab','treeTabForIcon','iconEditor'].forEach(t => {
           document.getElementById(t).style.display="none";
        });
