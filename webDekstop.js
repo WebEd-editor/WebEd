@@ -3,6 +3,11 @@
   	MyOpen = function (id) {
   		document.getElementById(id).style.display = "block";
   		if(id === 'sidebar') updateTree();
+    if(id === 'setIcon'){
+        ['addSh','previewIconTab','treeTabForIcon','iconEditor'].forEach(t => {
+          document.getElementById(t).style.display="none";
+       });
+    }
   	}
   	startFloatDrag = function () {
   		console.log('d3d3d3d3d3');
