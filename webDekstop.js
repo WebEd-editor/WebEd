@@ -28,7 +28,11 @@
 
    const icoed = document.getElementById("seticon");
    icoed.style="width:90%; height:80%; z-index:103; top: 50px; left: 50%; transform: translateX(-50%);";
-   document.getElementById("iconEditor").style="width:90%; height:80%; z-index:103; top: 50px; left: 50%; transform: translateX(-50%);";
+   document.getElementById("iconEditor").style="width:400px; height:500px; z-index:103; top: 50px; left:40px;";
+   document.getElementById("iconGrid").style.width = "300px";
+   document.getElementById("addSh").style="width: 100px; height: 130px; top: 50px; left: 450px;";
+   document.getElementById("treeTabForIcon").style="top: 50px; left: 510px; width: 100px; height: 120px;";
+   document.getElementById("previewIconTab").style="top: 50px; left: 620px; width: 100px; height: 120px;";
 		document.querySelectorAll('summary').forEach(s => {s.style.fontSize = "13px";})
 		
 		const footer = document.querySelector('#foo');
