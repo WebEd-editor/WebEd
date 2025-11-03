@@ -43,7 +43,7 @@ function handleMediaUpload(event) {
     selectedParent.appendChild(el);
     updateTree();
     saveHistory();
-    showOverlay(el);
+    el.onclick =()=> showOverlay(el);
   }
 }
 
