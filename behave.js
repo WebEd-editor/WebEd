@@ -225,7 +225,8 @@ function showOverlay(target) {
     target.style.borderRadius = Math.round(r) + "px";
     updateOverlay();
   });
-
+  
+  Wlabel.textContent = target.style.width +" × "+ target.style.height;
   updateOverlay();
 
   doc.addEventListener("click", (e) => {
@@ -235,7 +236,27 @@ function showOverlay(target) {
   }, { once: true });
 }
 
-
+function showClickOver() {
+   const doc = iframe.contentDocument || iframe.contentWindow.document;
+   const els = doc.body.querySelectorAll('*');
+   
+   els.forEach(el => {
+     el.addEventListener('click', (e) => {
+       e.preventDefault();   // link ya button ka default action roke
+       e.stopPropagation();  // event bubbling roke
+       e.currentTarget.contentEditable=false;
+       showOverlay(e.currentTarget);
+     });
+   });
+   els.forEach(el => {
+     el.addEventListener('dblclick', (e) => {
+       e.preventDefault();
+       e.stopPropagation();
+       e.currentTarget.contentEditable = true;
+       e.currentTarget.focus();
+     });
+   });
+}
 
 // ✅ Helper: Style Button
 function styleBtn(btn, color="blue") {
