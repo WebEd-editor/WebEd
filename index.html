@@ -115,6 +115,7 @@
    document.getElementById('canvas').contentDocument.body.querySelectorAll('.selected').forEach(edel => {edel.style.outline = e.target.checked ? "1px solid blue" : "none";});
    document.getElementById('canvas').contentDocument.body.querySelectorAll('.editable').forEach(edel => {edel.setAttribute('contenteditable','true')});
    enableDragAndNest(document.getElementById("canvas"));
+   showClickOver();
    
    });
    </script>
