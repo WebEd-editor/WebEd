@@ -230,9 +230,9 @@ function showOverlay(target) {
   updateOverlay();
 
   doc.addEventListener("click", (e) => {
-    if (!overlay.contains(e.target) && e.target !== target) {
+    //if (!overlay.contains(e.target) && e.target !== target) {
       removeOverlay();
-    }
+   // }
   }, { once: true });
 }
 
