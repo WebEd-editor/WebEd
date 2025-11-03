@@ -168,6 +168,16 @@ function openFullPreview() {
   const iframe = document.getElementById("canvas");
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
+  // removing unnecessary
+  const els = iframeDoc.querySelectorAll('*');
+  els.forEach(el => {
+     if(el.id ===''){el.removeAttribute('id')}
+     if(el.className ===''){el.removeAttribute('class')}
+     if(el.draggable){el.removeAttribute('draggable')}
+     if(el.className==='behOverlay'){el.remove()}
+     if(el.style.outline){el.style.outline=""}
+  });
+
   // ✅ 1. Append missing JS files temporarily
   for (let fileName in customFiles) {
     const file = customFiles[fileName];
