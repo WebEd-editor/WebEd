@@ -548,7 +548,6 @@ function redoEdit() {
     document.getElementById('editId').value = el.id || '';
     document.getElementById('editClass').value = el.className || '';
     document.getElementById('editSrc').value = el.src || '';
-    document.getElementById('editOnclick').value = el.getAttribute('onclick') || '';
     
     // 1. 
     document.getElementById('clr').value = el.style.color || '';
@@ -645,7 +644,6 @@ function applyEdit() {
     currentEditingElement.id = document.getElementById('editId').value.trim();
     currentEditingElement.className = document.getElementById('editClass').value.trim();
     currentEditingElement.src = document.getElementById('editSrc').value.trim();
-    const onclickCode = document.getElementById('editOnclick').value.trim();
     
     const newPos = document.getElementById('editPosition').value;
     const mt = document.getElementById('mar-t').value +'px';
@@ -657,16 +655,6 @@ function applyEdit() {
     const pb = document.getElementById('pad-b').value +'px';
     const pl = document.getElementById('pad-l').value +'px';
     
-
-    if (onclickCode) {
-      try {
-        currentEditingElement.onclick = new Function(onclickCode);
-      } catch {
-        alert("Invalid onclick code");
-      }
-    } else {
-      currentEditingElement.removeAttribute('onclick');
-    }
 
     currentEditingElement.style.color = document.getElementById('clr').value || '';
    // currentEditingElement.style.fontFamily = document.getElementById('fnfml').value || '';
