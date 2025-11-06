@@ -61,7 +61,7 @@ function showOverlay(target) {
 
   // ✅ Move Handle (Left)
   const moveBtn = doc.createElement("button");
-  moveBtn.textContent = "⇕";
+  moveBtn.innerHTML = dragIcon;
   styleBtn(moveBtn);
   controls.appendChild(moveBtn);
 
@@ -72,13 +72,13 @@ function showOverlay(target) {
   controls.appendChild(radiusBtn);
   
   const eBtn = doc.createElement("button");
-  eBtn.textContent = "✏️";
+  eBtn.innerHTML = editIcon;
   eBtn.onclick = () => openEdit(target);
   styleBtn(eBtn, "yellow");
   controls.appendChild(eBtn);
   
   const dBtn = doc.createElement("button");
-  dBtn.textContent = "🗑️";
+  dBtn.innerHTML = deleteicon;
   dBtn.onclick = () => {
         if (selectedParent === target) {
           selectedParent = document.getElementById('canvas');
@@ -91,7 +91,7 @@ function showOverlay(target) {
   controls.appendChild(dBtn);
   
   const cpBtn = doc.createElement("button");
-  cpBtn.textContent = "cp";
+  cpBtn.innerHTML = copyIcon;
   cpBtn.onclick = () => {
      let copiedElement = null;
      copiedElement = target.cloneNode(true);
@@ -260,7 +260,7 @@ function showClickOver() {
 
 // ✅ Helper: Style Button
 function styleBtn(btn, color="blue") {
-  btn.style.background = color;
+  btn.style.background = "#222";
   btn.style.color = "white";
   btn.style.border = "none";
   btn.style.borderRadius = "4px";
