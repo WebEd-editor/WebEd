@@ -157,6 +157,6 @@ function insertToEditor(type, src) {
   el.src = src;
   el.style.width = type === "img" ? "300px" : "400px";
   if (type === "video") el.controls = true;
-  el.onclick =()=> showOverlay(el);
+  showClickOver();
   selectedParent.appendChild(el);
 }
