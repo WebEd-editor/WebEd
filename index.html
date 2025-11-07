@@ -90,13 +90,30 @@
    </div>   
 </div>
 
-<footer id="foo" class="drag-box">
-   <button onclick="document.getElementById('webedmenu').style.display='block'; history.pushState({menuOpen: true}, 'Menu', '#webedmenu');"><svg style="width: 15px; height: 15px;" stroke="white" stroke-width="6" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="90" x2="90" y2="90"></line><line x1="10" y1="50" x2="90" y2="50"></line><line x1="10" y1="10" x2="90" y2="10"></line></svg></button>
-   <button onclick="MyOpen('editor-wrapper')" class="footBtn"><svg style="width: 15px; height: 15px;" stroke="white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-width="6.5" d="M 65 20 L 95 50 L 65 80" stroke-linejoin="" stroke-linecap=""></path><path fill="none" stroke-width="6" d="M 35 20 L 5 50 L 35 80" stroke-linejoin="" stroke-linecap=""></path></svg></button>
-   <button onclick="MyOpen('sidebar')" class="footBtn"><svg id="IconSvg" style="width: 15px; height: 15px;" stroke="white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="85" r="5" fill="none" stroke-width="2"></circle><rect x="15" y="10" width="70" height="10" fill="none" stroke stroke-width="2"></rect><line x1="50" y1="20" x2="50" y2="80" stroke stroke-width="2"></line><line x1="15" y1="65" x2="85" y2="65" stroke stroke-width="2"></line><line x1="15" y1="65" x2="15" y2="80" stroke stroke-width="2"></line><line x1="85" y1="65" x2="85" y2="80" stroke stroke-width="2"></line><circle cx="15" cy="85" r="5" stroke fill="none" stroke-width="2"></circle><circle cx="85" cy="85" r="5" stroke fill="none" stroke-width="2"></circle><line x1="25" y1="20" x2="25" y2="45" stroke stroke-width="2"></line><line x1="75" y1="20" x2="75" y2="45" stroke stroke-width="2"></line><circle cx="25" cy="50" r="5" stroke fill="none" stroke-width="2"></circle><circle cx="75" cy="50" r="5" stroke fill="none" stroke-width="2"></circle></svg></button>
-   <button onclick="undoEdit()" class="footBtn"><svg style="width: 15px; height: 15px;" stroke="white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-width="5" d="M 10 55 L 5 75 L 25 75 L 5 75 C 30 40, 70 40, 90 70" stroke-linejoin="round" stroke-linecap="round"></path></svg></button>
-   <button onclick="redoEdit()" class="footBtn"><svg style="width: 15px; height: 15px;" stroke="white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-width="5" d="M 90 55 L 95 75 L 75 75 L 95 75 C 70 40, 30 40, 5 70" stroke-linejoin="round" stroke-linecap="round"></path></svg></button>
-   <button id="fullScreenBtn"><svg style="width: 15px; height: 15px;" stroke="white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" stroke-width="10"><path stroke fill="none" d="M 30 10 L 10 10 L 10 30"></path><path stroke fill="none" d="M 10 70 L 10 90 L 30 90"></path><path stroke fill="none" d="M 70 10 L 90 10 L 90 30"></path><path stroke fill="none" d="M 90 70 L 90 90 L 70 90"></path></svg></button>
+<footer id="foo" style="left: 50%;transform: translateX(-50%);width: auto;">
+   <button data-title="Menu" onclick="document.getElementById('webedmenu').style.display='block'; history.pushState({menuOpen: true}, 'Menu', '#webedmenu');">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M144-264v-72h672v72H144Zm0-180v-72h672v72H144Zm0-180v-72h672v72H144Z"/></svg>
+   </button>
+   
+   <button data-title="Add Elements" onclick="MyOpen('editor-wrapper')" class="footBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M444-189v-270L216-591v270l228 132Zm72 0 228-131v-270L516-459v270Zm-36-333 235-135-236-135-234 135 235 135ZM180-258q-17.1-9.88-26.55-26.06Q144-300.23 144-320v-320q0-19.77 9.45-35.94Q162.9-692.12 180-702l263-152q17-10 37-10t37 10l263 152q17.1 9.88 26.55 26.06Q816-659.77 816-640v320q0 19.77-9.45 35.94Q797.1-267.88 780-258L516-105q-17.13 10-36.07 10Q461-95 444-105L180-258Zm300-222Z"/></svg>
+   </button>
+   
+   <button data-title="Tree" id="IconSvg" onclick="MyOpen('sidebar')" class="footBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M144-96v-240h108v-180h192v-108H336v-240h288v240H516v108h192v180h108v240H528v-240h108v-108H324v108h108v240H144Zm264-600h144v-96H408v96ZM216-168h144v-96H216v96Zm384 0h144v-96H600v96ZM480-691ZM360-264Zm240 0Z"/></svg>
+   </button>
+   
+   <button onclick="undoEdit()" class="footBtn" data-title="undo">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M288-192v-72h288q50 0 85-35t35-85q0-50-35-85t-85-35H330l93 93-51 51-180-180 180-180 51 51-93 93h246q80 0 136 56t56 136q0 80-56 136t-136 56H288Z"/></svg>
+   </button>
+   
+   <button onclick="redoEdit()" class="footBtn" data-title="redo">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M384-192q-80 0-136-56t-56-136q0-80 56-136t136-56h246l-93-93 51-51 180 180-180 180-51-51 93-93H384q-50 0-85 35t-35 85q0 50 35 85t85 35h288v72H384Z"/></svg>
+   </button>
+   
+   <button data-title="Full Screen Editor" id="fullScreenBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M144-144v-192h72v120h120v72H144Zm480 0v-72h120v-120h72v192H624ZM144-624v-192h192v72H216v120h-72Zm600 0v-120H624v-72h192v192h-72Z"/></svg>
+   </button>
 </footer>
 
 <ppp style="background: #000;position: fixed;top: 5px;left: 5px;height: 90%;width: 90%;overflow: auto;border-radius: 5px;resize: both;" class="drag-el">
