@@ -305,17 +305,16 @@ function behAddDrag(el, onDrag) {
   el.addEventListener("touchstart", start, { passive: false });
 }
 
-function updateOverlay() {
+function updateOverlay(){
   if (!overlay || !selectedEl) return;
 
   const rect = selectedEl.getBoundingClientRect();
-  const parentRect = selectedEl.offsetParent.getBoundingClientRect();
-
   overlay.style.position = "absolute";
-  overlay.style.top = rect.top - parentRect.top + 8 + "px";
-  overlay.style.left = rect.left - parentRect.left + 8 + "px";
-  overlay.style.width = rect.width + "px";
-  overlay.style.height = rect.height + "px";
+  overlay.style.top = rect.y+"px";
+  overlay.style.left = rect.x+"px";
+  overlay.style.width = rect.width - 2 + "px";
+  overlay.style.height = rect.height - 2 + "px";
+ 
 }
 
 // ✅ Remove Overlay
