@@ -43,7 +43,7 @@ function handleMediaUpload(event) {
     selectedParent.appendChild(el);
     updateTree();
     saveHistory();
-    el.onclick =()=> showOverlay(el);
+    showClickOver();
   }
 }
 
@@ -108,7 +108,7 @@ function addElement(type) {
     selectedParent.appendChild(el);
      updateTree();
      saveHistory();
-     showOverlay(el);
+     showOverlay(el);showClickOver();
   };
  }
   
@@ -145,6 +145,7 @@ function addElement(type) {
   updateTree();
   saveHistory();
   showOverlay(el);
+  showClickOver();
 
   /* Clear input fields
   document.getElementById('customId').value = '';
