@@ -19,12 +19,16 @@ function openPixelMedia() {
     overflow-y: auto;
   `;
 
+  const h = document.createElement('div');
+  h.style = "position: sticky;top:0;left:0; width: 100%; background: grey;";
+  panel.appendChild(h);
+
   // Close Button
   const closeBtn = document.createElement("button");
   closeBtn.innerText = "✖ Close";
   closeBtn.style.cssText = `float: right; margin-bottom: 10px;`;
   closeBtn.onclick = () => panel.remove();
-  panel.appendChild(closeBtn);
+  h.appendChild(closeBtn);
 
   // Search input
   const search = document.createElement("input");
@@ -32,18 +36,18 @@ function openPixelMedia() {
   search.id = "pixelSearch";
   search.placeholder = "Search images or videos...";
   search.style.cssText = "width:60%;padding:5px;margin-bottom:10px;";
-  panel.appendChild(search);
+  h.appendChild(search);
 
   // Tabs
   const btnImg = document.createElement("button");
   btnImg.innerText = "Images";
   btnImg.onclick = () => setPixelMode("image");
-  panel.appendChild(btnImg);
+  h.appendChild(btnImg);
 
   const btnVid = document.createElement("button");
   btnVid.innerText = "Videos";
   btnVid.onclick = () => setPixelMode("video");
-  panel.appendChild(btnVid);
+  h.appendChild(btnVid);
 
   // Result grid
   const results = document.createElement("div");
