@@ -309,20 +309,63 @@ function updateOverlay() {
   if (!overlay || !selectedEl) return;
 
   const rect = selectedEl.getBoundingClientRect();
-  const parentRect = selectedEl.offsetParent.getBoundingClientRect();
+  const parent = selectedEl.offsetParent;
+  const parentRect = parent ? parent.getBoundingClientRect() : { top: 0, left: 0 };
 
+  const style = getComputedStyle(selectedEl);
+  const parentStyle = parent ? getComputedStyle(parent) : null;
+
+  let top = 0, left = 0;
+
+  // Agar parent absolute ya relative hai (dragging case me)
+  if (parentStyle && (parentStyle.position === "absolute" || parentStyle.position === "relative")) {
+    // OffsetParent ke respect me directly offsetTop/offsetLeft use karte hain
+    top = selectedEl.offsetTop;
+    left = selectedEl.offsetLeft;
+  } else {
+    // Warna viewport ke respect me parentRect ke offset ke sath calc karte hain
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    const scrollX = window.scrollX || document.documentElement.scrollLeft;
+    top = rect.top + scrollY - parentRect.top;
+    left = rect.left + scrollX - parentRect.left;
+  }
+
+  // Margin handle kar lein agar static element ho
+  if (style.position === "" || style.position === "static") {
+    const marginTop = parseFloat(style.marginTop) || 0;
+    const marginLeft = parseFloat(style.marginLeft) || 0;
+    top += marginTop;
+    left += marginLeft;
+  }
+  
+  if (parentStyle.position === 'absolute' && style.position === 'absolute') {
+     // Convert "41px" etc. into numbers (remove 'px' and parse)
+     const parentTop = parseFloat(parentStyle.top) || 0;
+     const parentLeft = parseFloat(parentStyle.left) || 0;
+     const childTop = parseFloat(style.top) || 0;
+     const childLeft = parseFloat(style.left) || 0;
+
+     top = parentTop + childTop;
+     left = parentLeft + childLeft;
+  }
+  
+  if (parentStyle.position === 'absolute' && style.position === 'static' ||
+      parentStyle.position === 'absolute' && style.position === '' ||
+      parentStyle.position === 'fixed' && style.position === 'static' ||
+      parentStyle.position === 'fixed' && style.position === ''){
+     const parentTop = parseFloat(parentStyle.top) || 0;
+     const parentLeft = parseFloat(parentStyle.left) || 0;
+
+     top = parentTop;
+     left = parentLeft;
+  }
+
+  // Overlay ko update karo
   overlay.style.position = "absolute";
-  overlay.style.top = rect.top - parentRect.top + 8 + "px";
-  overlay.style.left = rect.left - parentRect.left + 8 + "px";
+  overlay.style.top = top + "px";
+  overlay.style.left = left + "px";
   overlay.style.width = rect.width + "px";
   overlay.style.height = rect.height + "px";
-  
-  if(selectedEl.style.position === "" || selectedEl.style.position === "static"){
-     overlay.style.top = rect.marginTop + parentRect.top + "px";
-     overlay.style.left = rect.marginLeft + parentRect.left + "px";
-     overlay.style.width = rect.width + "px";
-     overlay.style.height = rect.height + "px";
-  }
 }
 
 // ✅ Remove Overlay
