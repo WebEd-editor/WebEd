@@ -47,7 +47,28 @@ function showOverlay(target) {
   overlay.style.pointerEvents = "none"; 
   overlay.style.zIndex = "9999";
 
-  doc.body.appendChild(overlay);
+  const parent = selectedEl.offsetParent;
+  const childst = getComputedStyle(selectedEl);
+  const parentst = parent ? getComputedStyle(parent) : null;
+  
+  const pPos = parentst.position;
+  const cPos = childst.position;
+
+  const isPPositioned = pPos === 'absolute' || pPos === 'fixed' || pPos === 'relative';
+  const isCStatic = cPos === 'static' || cPos === '';
+
+  if (
+      parentst.position === 'static' ||
+      parentst.position === '' && childst.position === 'absolute'
+     ) {
+      doc.body.appendChild(overlay);
+  }else{
+     if(target.tagName.toLowerCase() === 'img'){
+        doc.body.appendChild(overlay)
+     }else{
+        selectedEl.appendChild(overlay);
+     }
+  }
 
   // Controls container (👇 bottom center)
   const controls = doc.createElement("div");
@@ -349,7 +370,7 @@ function updateOverlay() {
      left = parentLeft + childLeft;
   }
   
-  if (parentStyle.position === 'absolute' && style.position === 'static' ||
+  /*if (parentStyle.position === 'absolute' && style.position === 'static' ||
       parentStyle.position === 'absolute' && style.position === '' ||
       parentStyle.position === 'fixed' && style.position === 'static' ||
       parentStyle.position === 'fixed' && style.position === ''){
@@ -358,6 +379,21 @@ function updateOverlay() {
 
      top = parentTop;
      left = parentLeft;
+  }*/
+  
+  const parentPos = parentStyle.position;
+  const childPos = style.position;
+
+  const isParentPositioned = parentPos === 'absolute' || parentPos === 'fixed' || parentPos === 'relative';
+  const isChildStatic = childPos === 'static' || childPos === '';
+
+  if (isParentPositioned && isChildStatic) {
+     const parentRect = parent.getBoundingClientRect();
+     const childRect = selectedEl.getBoundingClientRect();
+
+     // Child ka offset parent ke andar
+     top = childRect.top - parentRect.top + parent.scrollTop;
+     left = childRect.left - parentRect.left + parent.scrollLeft;
   }
 
   // Overlay ko update karo
