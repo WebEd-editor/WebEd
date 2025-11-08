@@ -262,7 +262,7 @@ function showClickOver() {
 function styleBtn(btn, color="blue") {
   btn.style.background = "#222";
   btn.style.color = "white";
-  btn.style.border = "none";
+  btn.style.border = "1px solid #444";
   btn.style.borderRadius = "4px";
   btn.style.padding = "2px 6px";
   btn.style.cursor = "grab";
