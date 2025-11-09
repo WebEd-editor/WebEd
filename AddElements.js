@@ -116,6 +116,7 @@ function addElement(type) {
   else {
     el = document.createElement(type);
     el.textContent = type === 'button' ? 'Click Me' : `New ${type}`;
+    if(type === 'button'){el.style="background:#f2f2f2;color:black; font-family: 'roboto',sans-sarif;";}
     el.classList.add('editable');
     el.setAttribute('contenteditable', 'true');
     el.setAttribute('data-editable', 'true');
