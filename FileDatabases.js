@@ -146,20 +146,21 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-
-
 // Delete file
 function deleteFile(filename) {
+ if(confirm("confirm your file is delete")){
   document.querySelectorAll(filename.endsWith('.js') ? 'script' : 'style')
     .forEach(el => {
       if (el.textContent === customFiles[filename].content && el.dataset.custom === 'true') el.remove();
     });
   delete customFiles[filename];
-  if (currentFile === filename) {
-    currentFile = null;
-    document.getElementById('fileEditor').value = '';
-  }
-  updateFileList();
+     if (currentFile === filename) {
+       currentFile = null;
+       document.getElementById('fileEditor').value = '';
+     }
+     updateFileList();
+     ace.edit('fileEditor').setValue('', -1);
+ }
 }
 
 function openFullPreview() {
