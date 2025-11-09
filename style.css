@@ -153,6 +153,9 @@ summary:hover{background:rgba(0,0,0,.3);cursor:pointer;}
 #editor-wrapper > #controls{
    text-align: center; 
 }
+#editor-wrapper{
+   right: 5px;top: 5px; height: 80%; width: 100px;
+}
 #tree{ font-size: 14px; }
 .tab button {border: none; background: #304073;font-family: 'roboto', sans-sarif;color: white; padding: 5px; }
 
