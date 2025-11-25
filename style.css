@@ -272,35 +272,69 @@ details div input, details div select{
     .actw{ display:none;position:absolute; }
     .act:hover .actw{ display:block; }
     
-.box-editor {
-  text-align: center;
-  margin: 0;
-  width: 50px;
-}
+  
+  .outer-box {
+    position: relative;
+    width: 100%;           /* relative to parent width */
+    height: 200px;          /* relative to parent height */
+    background: lightgreen;
+    outline: 0.5% solid green;
+    border-radius: 2%;
+    background: #474747;
+  }
 
-.margin-box {
-  background: rgba(255, 165, 0, 0.2);
-  display: inline-block;
-  position: relative;
-}
+  .outer-box input {
+    position: absolute;
+    width: 15%;           /* responsive input width */
+    padding: 1%;
+    text-align: center;
+    background: white;
+    outline: 0.3% solid green;
+    border: none;
+    border-radius: 8%;
+    font-size: 90%;
+    background: #2c2c2c;
+  }
 
-.padding-box {
-  background: rgba(173, 216, 230, 0.3);
-  display: inline-block;
-}
+  /* Outer inputs (positions in %) */
+  .top-center { top: 3%; left: 50%; transform: translateX(-50%); }
+  .left-center { top: 50%; left: 3%; transform: translateY(-50%); }
+  .right-center { top: 50%; right: 3%; transform: translateY(-50%); }
+  .bottom-center { bottom: 3%; left: 50%; transform: translateX(-50%); }
 
-.content-box {
-  background: black;
-  border: 1px solid #ccc;
-  padding: 0;
-  min-width: 50px;
-}
+  /* Inner box */
+  .inner-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 55%;           /* inner box takes 55% of outer */
+    height: 55%;
+    transform: translate(-50%, -50%);
+    background: cyan;
+    outline: 0.5% solid green;
+    border-radius: 3%;
+    background: #1a1a1a;
+  }
 
-.horizontal-inputs {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  .inner-box input {
+    position: absolute;
+    width: 30%;           /* relative to inner box */
+    padding: 3%;
+    margin: 0;
+    text-align: center;
+    background: white;
+    border-radius: 8%;
+    outline: 0.3% solid blue;
+    font-size: 90%;
+    background: #2c2c2c;
+  }
+
+  /* Inner inputs */
+  .inner-top { top: 5%; left: 50%; transform: translateX(-50%); }
+  .inner-right { top: 50%; right: 5%; transform: translateY(-50%); }
+  .inner-bottom { bottom: 5%; left: 50%; transform: translateX(-50%); }
+  .inner-left { top: 50%; left: 5%; transform: translateY(-50%); }
+
 
 input[type="number"] {
   width: 50px;
