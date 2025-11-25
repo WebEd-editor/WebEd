@@ -359,27 +359,19 @@
       <option value="sticky">sticky</option>
     </select></div>
     
-    <div class="box-editor">
-  <div class="margin-label">Margin</div>
-  <div class="margin-box">
-    <input oninput="applyEdit()" type="number" id="mar-t" placeholder="Top">
-    <div class="horizontal-inputs">
-      <input oninput="applyEdit()" type="number" id="mar-l" placeholder="Left">
-      <div class="padding-box">
-        <div class="padding-label">Padding</div>
-        <input oninput="applyEdit()" type="number" id="pad-t" placeholder="Top">
-        <div class="horizontal-inputs">
-          <input oninput="applyEdit()" type="number" id="pad-l" placeholder="Left">
-          <div class="content-box">Content</div>
-          <input oninput="applyEdit()" type="number" id="pad-r" placeholder="Right">
-        </div>
-        <input oninput="applyEdit()" type="number" id="pad-b" placeholder="Bottom">
-      </div>
-      <input oninput="applyEdit()" type="number" id="mar-r" placeholder="Right">
+    <div class="outer-box">
+    <input type="number" id="mar-l" oninput="applyEdit()" class="left-center" placeholder="left" />
+    <input type="number" id="mar-t" oninput="applyEdit()" class="top-center" placeholder="top" />
+    <input type="number" id="mar-r" oninput="applyEdit()" class="right-center" placeholder="right"/>
+    <input type="number" id="mar-b" oninput="applyEdit()" class="bottom-center" placeholder="bottom"/>
+
+    <div class="inner-box">
+      <input type="number" id="pad-t" oninput="applyEdit()" class="inner-top" placeholder="top"/>
+      <input type="number" id="pad-r" oninput="applyEdit()" class="inner-right" placeholder="right"/>
+      <input type="number" id="pad-b" oninput="applyEdit()" class="inner-bottom" placeholder="bottom"/>
+      <input type="number" id="pad-l" oninput="applyEdit()" class="inner-left" placeholder="left"/>
     </div>
-    <input oninput="applyEdit()" type="number" id="mar-b" placeholder="Bottom">
   </div>
-    </div>
     
     <div>z-index <input oninput="applyEdit()" type="number" id="zindex"></div>
     <div>display 
