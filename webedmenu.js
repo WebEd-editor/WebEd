@@ -42,6 +42,7 @@ function menuload(){
               <p id="username"></p>
               <p>What will you design today?, use WebEd for creating a website.</p>
               <button class="bbbttt" id="installAppBtn">Try Now As App</button>
+              <div id="templateList"></div>
               <div>
                  <video autoplay muted loop src="file:///storage/emulated/0/Android/data/com.teejay.trebedit/files/TrebEdit user files/Sample project - Acme/video /spider video.mp4"></video>
               </div>
@@ -191,4 +192,28 @@ function fetchUser() {
 
 // Menu load hote hi call kar do
 document.addEventListener("DOMContentLoaded", fetchUser);
+
+async function loadTemplates() {
+  console.log('entered');
+  const res = await fetch("https://template-backend.onrender.com/api/templates");
+  const data = await res.json();
+
+  const div = document.getElementById("templateList");
+
+  data.forEach(t => {
+    div.innerHTML += `
+      <div style="border:1px solid #ddd; padding:10px; margin:10px;">
+        <h3>${t.name}</h3>
+        <p>Category: ${t.category}</p>
+        <button onclick='useTemplate(${JSON.stringify(t.html)})'>Use</button>
+      </div>
+    `;
+  });
+}
+
+loadTemplates();
+
+function useTemplate(htmlCode) {
+  console.log("Template HTML:", htmlCode);
+}
 
