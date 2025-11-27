@@ -74,7 +74,7 @@ function showOverlay(target) {
      copiedElement.removeAttribute("id");
      doc.body.appendChild(copiedElement);
      showOverlay(copiedElement);
-     copiedElement.onclick = () => {showOverlay(copiedElement);}
+     copiedElement.onclick = () => {showOverlay(copiedElement);showClickOver();}
   }
   styleBtn(cpBtn, "khaki");
   controls.appendChild(cpBtn);
