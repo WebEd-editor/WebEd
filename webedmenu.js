@@ -193,7 +193,7 @@ function fetchUser() {
 // Menu load hote hi call kar do
 document.addEventListener("DOMContentLoaded", fetchUser);
 
-async function loadTemplates() {
+function loadTemplates() {
   alert('entered');
   const res = await fetch("https://template-backend.onrender.com/api/templates");
   const data = await res.json();
@@ -211,9 +211,9 @@ async function loadTemplates() {
   });
 }
 
-loadTemplates();
+document.addEventListener("DOMContentLoaded", loadTemplates);
 
 function useTemplate(htmlCode) {
-  console.log("Template HTML:", htmlCode);
+  alert("Template HTML:", htmlCode);
 }
 
