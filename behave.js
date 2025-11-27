@@ -72,9 +72,13 @@ function showOverlay(target) {
      let copiedElement = null;
      copiedElement = target.cloneNode(true);
      copiedElement.removeAttribute("id");
+     copiedElement.querySelectorAll(".behOverlay").forEach(e => e.remove());
      doc.body.appendChild(copiedElement);
      showOverlay(copiedElement);
-     copiedElement.onclick = () => {showOverlay(copiedElement);showClickOver();}
+     copiedElement.onclick = () => {
+showOverlay(copiedElement);
+showClickOver();
+}
   }
   styleBtn(cpBtn, "khaki");
   controls.appendChild(cpBtn);
