@@ -194,12 +194,12 @@ function fetchUser() {
 document.addEventListener("DOMContentLoaded", fetchUser);
 
 async function loadTemplates() {
-  console.log('entered');
+  alert('entered');
   const res = await fetch("https://template-backend.onrender.com/api/templates");
   const data = await res.json();
 
   const div = document.getElementById("templateList");
-
+  alert('t er');
   data.forEach(t => {
     div.innerHTML += `
       <div style="border:1px solid #ddd; padding:10px; margin:10px;">
