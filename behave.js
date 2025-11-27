@@ -4,28 +4,6 @@
 let selectedEl = null;
 let overlay = null;
 
-/* / ✅ Add Element Function
-function addElement(type) {
-  const doc = iframe.contentDocument;
-  const body = doc.body;
-
-  let el = doc.createElement(type);
-  el.textContent = type === "button" ? "Click Me" : New ${type};
-  el.classList.add("editable");
-  el.style.display = "inline-block";
-  el.style.minWidth = "50px";
-  el.style.minHeight = "30px";
-  el.style.border = "1px solid #ccc";
-  el.style.padding = "5px";
-
-  el.addEventListener("click", (e) => {
-    e.stopPropagation();
-    showOverlay(el);
-  });
-
-  body.appendChild(el);
-}*/
-
 function clickShowOverlay(){
    const docc = iframe.contentDocument || iframe.contentWindow.document;
    docc.querySelectorAll('.editable').forEach(ell => {
@@ -46,29 +24,6 @@ function showOverlay(target) {
   overlay.style.border = "2px dashed #3F3760";
   overlay.style.pointerEvents = "none"; 
   overlay.style.zIndex = "9999";
-
-  const parent = selectedEl.offsetParent;
-  const childst = getComputedStyle(selectedEl);
-  const parentst = parent ? getComputedStyle(parent) : null;
-  
-  const pPos = parentst.position;
-  const cPos = childst.position;
-
-  const isPPositioned = pPos === 'absolute' || pPos === 'fixed' || pPos === 'relative';
-  const isCStatic = cPos === 'static' || cPos === '';
-
-  if (
-      parentst.position === 'static' ||
-      parentst.position === '' && childst.position === 'absolute'
-     ) {
-      doc.body.appendChild(overlay);
-  }else{
-     if(target.tagName.toLowerCase() === 'img'){
-        doc.body.appendChild(overlay)
-     }else{
-        selectedEl.appendChild(overlay);
-     }
-  }
 
   // Controls container (👇 bottom center)
   const controls = doc.createElement("div");
@@ -327,81 +282,61 @@ function behAddDrag(el, onDrag) {
 }
 
 function updateOverlay() {
-  if (!overlay || !selectedEl) return;
-
-  const rect = selectedEl.getBoundingClientRect();
-  const parent = selectedEl.offsetParent;
-  const parentRect = parent ? parent.getBoundingClientRect() : { top: 0, left: 0 };
-
-  const style = getComputedStyle(selectedEl);
-  const parentStyle = parent ? getComputedStyle(parent) : null;
-
-  let top = 0, left = 0;
-
-  // Agar parent absolute ya relative hai (dragging case me)
-  if (parentStyle && (parentStyle.position === "absolute" || parentStyle.position === "relative")) {
-    // OffsetParent ke respect me directly offsetTop/offsetLeft use karte hain
-    top = selectedEl.offsetTop;
-    left = selectedEl.offsetLeft;
-  } else {
-    // Warna viewport ke respect me parentRect ke offset ke sath calc karte hain
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
-    const scrollX = window.scrollX || document.documentElement.scrollLeft;
-    top = rect.top + scrollY - parentRect.top;
-    left = rect.left + scrollX - parentRect.left;
-  }
-
-  // Margin handle kar lein agar static element ho
-  if (style.position === "" || style.position === "static") {
-    const marginTop = parseFloat(style.marginTop) || 0;
-    const marginLeft = parseFloat(style.marginLeft) || 0;
-    top += marginTop;
-    left += marginLeft;
-  }
-  
-  if (parentStyle.position === 'absolute' && style.position === 'absolute') {
-     // Convert "41px" etc. into numbers (remove 'px' and parse)
-     const parentTop = parseFloat(parentStyle.top) || 0;
-     const parentLeft = parseFloat(parentStyle.left) || 0;
-     const childTop = parseFloat(style.top) || 0;
-     const childLeft = parseFloat(style.left) || 0;
-
-     top = parentTop + childTop;
-     left = parentLeft + childLeft;
-  }
-  
-  /*if (parentStyle.position === 'absolute' && style.position === 'static' ||
-      parentStyle.position === 'absolute' && style.position === '' ||
-      parentStyle.position === 'fixed' && style.position === 'static' ||
-      parentStyle.position === 'fixed' && style.position === ''){
-     const parentTop = parseFloat(parentStyle.top) || 0;
-     const parentLeft = parseFloat(parentStyle.left) || 0;
-
-     top = parentTop;
-     left = parentLeft;
-  }*/
-  
-  const parentPos = parentStyle.position;
-  const childPos = style.position;
-
-  const isParentPositioned = parentPos === 'absolute' || parentPos === 'fixed' || parentPos === 'relative';
-  const isChildStatic = childPos === 'static' || childPos === '';
-
-  if (isParentPositioned && isChildStatic) {
-     const parentRect = parent.getBoundingClientRect();
-     const childRect = selectedEl.getBoundingClientRect();
-
-     // Child ka offset parent ke andar
-     top = childRect.top - parentRect.top + parent.scrollTop;
-     left = childRect.left - parentRect.left + parent.scrollLeft;
-  }
-
-  // Overlay ko update karo
-  overlay.style.position = "absolute";
-  overlay.style.top = top + "px";
-  overlay.style.left = left + "px";
-  overlay.style.width = rect.width + "px";
-  overlay.style.height = rect.height + "px";
+   let p = selectedEl.parentElement;
+   let pp = getComputedStyle(p).position;
+   let cp = getComputedStyle(selectedEl).position;
+   let r = selectedEl.getBoundingClientRect();
+   
+   let o = overlay;
+   o.style.position='absolute';o.style.border='2px solid black';
+   
+   //✅
+   if(pp === 'absolute' && cp === 'absolute' || 
+      pp === 'fixed' && cp === 'fixed' || 
+      pp === 'sticky' && cp === 'sticky' ||
+      pp === 'fixed' && cp === 'absolute' || 
+      pp === 'fixed' && cp === 'sticky' || 
+      pp === 'sticky' && cp === 'fixed' ||
+      pp === 'sticky' && cp === 'absolute' || 
+      pp === 'absolute' && cp === 'fixed' || 
+      pp === 'absolute' && cp === 'sticky'){
+      o.style.top=0;
+      o.style.left=0;
+   }
+   //✅
+   else if(pp === 'static' && cp === 'static'){
+      o.style.top=(parseInt(r.y)+parseInt(getComputedStyle(selectedEl).borderWidth))+'px';
+      o.style.left=(parseInt(r.x)+parseInt(getComputedStyle(selectedEl).borderWidth))+'px';
+   }
+      //✅
+      else if(pp === 'relative' && cp === 'relative'){
+         o.style.top='0px';
+         o.style.left='0px';
+      }
+   //✅
+   else if(pp === 'static' && cp === 'absolute' ||
+           pp === 'static' && cp === 'fixed' || 
+           pp === 'static' && cp === 'sticky' ||
+           pp === 'relative' && cp === 'absolute' ||
+           pp === 'relative' && cp === 'fixed' || 
+           pp === 'relative' && cp === 'sticky'){
+      o.style.top='0px';
+      o.style.left='0px';
+   }
+   //✅
+   else if(pp === 'absolute' && cp === 'static' ||
+           pp === 'fixed' && cp === 'static' || 
+           pp === 'sticky' && cp === 'static' ||
+           pp === 'absolute' && cp === 'relative' ||
+           pp === 'fixed' && cp === 'relative' || 
+           pp === 'sticky' && cp === 'relative'){
+      selectedEl.style.position='relative';
+      o.style.top='0px';
+      o.style.left='0px';
+   }
+   o.style.width = parseInt(selectedEl.clientWidth) -4+ "px";
+   o.style.height = parseInt(selectedEl.clientHeight) -4+ "px"; 
+   selectedEl.appendChild(o);
 }
 
 // ✅ Remove Overlay
