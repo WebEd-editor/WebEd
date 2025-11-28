@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", fetchUser);
 async function loadTemplates() {
   alert('entered');
   
-  const res = await fetch("https://template-backend.onrender.com/api/templates");
+  const res = await fetch("https://template-back-o4fm.onrender.com/api/templates");
   const data = await res.json();
 
   const div = document.getElementById("templateList");
