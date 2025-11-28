@@ -192,7 +192,7 @@ function fetchUser() {
 
 // Menu load hote hi call kar do
 document.addEventListener("DOMContentLoaded", fetchUser);
-
+/*
 async function loadTemplates() {
   alert('entered');
   
@@ -218,3 +218,4 @@ document.addEventListener("DOMContentLoaded", loadTemplates);
 function useTemplate(htmlCode) {
   alert("Template HTML: " + htmlCode);
 }
+*/
