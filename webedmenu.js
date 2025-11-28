@@ -193,13 +193,15 @@ function fetchUser() {
 // Menu load hote hi call kar do
 document.addEventListener("DOMContentLoaded", fetchUser);
 
-function loadTemplates() {
+async function loadTemplates() {
   alert('entered');
+  
   const res = await fetch("https://template-backend.onrender.com/api/templates");
   const data = await res.json();
 
   const div = document.getElementById("templateList");
   alert('t er');
+
   data.forEach(t => {
     div.innerHTML += `
       <div style="border:1px solid #ddd; padding:10px; margin:10px;">
@@ -214,6 +216,5 @@ function loadTemplates() {
 document.addEventListener("DOMContentLoaded", loadTemplates);
 
 function useTemplate(htmlCode) {
-  alert("Template HTML:", htmlCode);
+  alert("Template HTML: " + htmlCode);
 }
-
