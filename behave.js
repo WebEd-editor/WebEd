@@ -98,10 +98,10 @@ showClickOver();
   ["nw","ne","sw","se"].forEach(corner => {
     const handle = doc.createElement("div");
     handle.dataset.corner = corner;
-    handle.style.width = "10px";
-    handle.style.height = "10px";
-    handle.style.background = "#3F3760";
-    handle.style.border = "2px solid white";
+    handle.style.width = "5px";
+    handle.style.height = "5px";
+    handle.style.background = "purple";
+    handle.style.border = "1px solid white";
     handle.style.position = "absolute";
     handle.style.pointerEvents = "auto";
 
@@ -292,7 +292,7 @@ function updateOverlay() {
    let r = selectedEl.getBoundingClientRect();
    
    let o = overlay;
-   o.style.position='absolute';o.style.border='2px solid black';
+   o.style.position='absolute';o.style.border='1.5px dashed #444';
    
    //✅
    if(pp === 'absolute' && cp === 'absolute' || 
