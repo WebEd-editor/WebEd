@@ -1,7 +1,7 @@
 function menuload(){
    const menupage = document.getElementById("webedmenu");
    menupage.innerHTML = `
-   <div style="position: fixed;top: 0;left: 0;box-shadow: rgba(200, 200, 200, 0.4) 0px 4px 10px;width: 100%;margin-bottom: 10px;">
+   <div style="z-index: 20;position: fixed;top: 0;left: 0;box-shadow: rgba(200, 200, 200, 0.4) 0px 4px 10px;width: 100%;margin-bottom: 10px;">
      <header class="" id="" style="background: black; color: rgb(0, 0, 0); font-size: 16px; outline: none; display: flex; justify-content: space-between;">      
        <div class="" style="outline: none; color: rgb(255, 255, 255); font-size: 16px; font-weight: 500; opacity: 1; display: flex; justify-content: center; align-items: center;" id="">
          <img src="https://webed-editor.github.io/WebEd/logo.png" alt="Uploaded Image" class="" content="false" id="" style="max-width: 100%; margin: 5px; opacity: 1; width: 40px; height: 40px; outline: none; border-radius: 5px; font-size: 16px; font-weight: 500; visibility: visible; display: block;" />
