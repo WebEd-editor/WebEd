@@ -204,7 +204,7 @@ async function loadTemplates() {
       <div style="border:1px solid #ddd; padding:10px; margin:10px;">
         <h3>${t.name}</h3>
         <p>Category: ${t.category}</p>
-        <button onclick='useTemplate(${JSON.stringify(t.html)})'>Use</button>
+        <button onclick='useTemplate(${t.name}, ${JSON.stringify(t.html)})'>Use</button>
       </div>
     `;
   });
@@ -212,6 +212,12 @@ async function loadTemplates() {
 
 document.addEventListener("DOMContentLoaded", loadTemplates);
 
-function useTemplate(htmlCode) {
-  alert("Template HTML: " + htmlCode);
+function useTemplate(name, htmlCode) {
+  const iframe = document.getElementById("canvas");
+   const doc = iframe.contentDocument || iframe.contentWindow.document;
+   const fixedForSingleQuit = htmlCode.replace(/url\("([^"]*)"\)/g, "url('$1')");
+   doc.open();
+   doc.write(fixedForSingleQuit);
+   doc.close();
+   alert(name + ' Template Loaded');
 }
