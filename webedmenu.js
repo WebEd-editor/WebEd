@@ -192,15 +192,12 @@ function fetchUser() {
 
 // Menu load hote hi call kar do
 document.addEventListener("DOMContentLoaded", fetchUser);
-/*
+
 async function loadTemplates() {
-  alert('entered');
-  
   const res = await fetch("https://template-back-o4fm.onrender.com/api/templates");
   const data = await res.json();
 
   const div = document.getElementById("templateList");
-  alert('t er');
 
   data.forEach(t => {
     div.innerHTML += `
@@ -218,4 +215,3 @@ document.addEventListener("DOMContentLoaded", loadTemplates);
 function useTemplate(htmlCode) {
   alert("Template HTML: " + htmlCode);
 }
-*/
