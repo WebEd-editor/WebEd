@@ -42,6 +42,23 @@ function menuload(){
               <p id="username"></p>
               <p>What will you design today?, use WebEd for creating a website.</p>
               <button class="bbbttt" id="installAppBtn">Try Now As App</button>
+<style>
+   #templateList {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+#templateList div {
+  background: #444;
+  padding: 20px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 8px;
+  width: 180px;
+}
+</style>
               <div id="templateList"></div>
               <div>
                  <video autoplay muted loop src="file:///storage/emulated/0/Android/data/com.teejay.trebedit/files/TrebEdit user files/Sample project - Acme/video /spider video.mp4"></video>
