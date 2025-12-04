@@ -222,8 +222,8 @@ function showClickOver() {
    
    els.forEach(el => {
      el.addEventListener('click', (e) => {
-       e.preventDefault();   // link ya button ka default action roke
-       e.stopPropagation();  // event bubbling roke
+       e.preventDefault(); 
+       e.stopPropagation();
        e.currentTarget.contentEditable=false;
        showOverlay(e.currentTarget);
      });
