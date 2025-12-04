@@ -146,6 +146,7 @@ function addElement(type) {
   updateTree();
   saveHistory();
   showOverlay(el);
+  enableDragAndNest(document.getElementById("canvas"));
   showClickOver();
 
   /* Clear input fields
