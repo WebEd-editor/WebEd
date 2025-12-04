@@ -240,5 +240,6 @@ function useTemplate(name, htmlCode) {
    els.forEach(el => {
       el.classList.add('editable');
    });
+   showClickOver();
    alert(name + ' Template Loaded');
 }
