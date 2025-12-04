@@ -364,7 +364,7 @@ function listAllProjects() {
       ddd.appendChild(d);
       ddd.appendChild(dd);
       list.appendChild(ddd);
-      list.style="display: grid;grid-template-columns: repeat(2, 1fr);gap: 5px;padding: 10px;";
+      list.style="display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: 5px;padding: 10px;";
     });
   };
 }
