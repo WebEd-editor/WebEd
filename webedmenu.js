@@ -236,5 +236,9 @@ function useTemplate(name, htmlCode) {
    doc.open();
    doc.write(fixedForSingleQuit);
    doc.close();
+   const els = doc.body.querySelectorAll('*');
+   els.forEach(el => {
+      el.classList.add('editable');
+   });
    alert(name + ' Template Loaded');
 }
