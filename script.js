@@ -1483,14 +1483,12 @@ document.getElementById("fullScreenBtn").addEventListener("click", function () {
     });
     
 function downloadAsImg() {
-   //var idN = prompt('please write id name to capture the area for convert image');
-   var imgName = prompt('please write image name');
-  
+   var imgName = prompt('Write image name');
   
      let iframe = document.getElementById("canvas");
   let iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-  html2canvas(iframeDoc.body, {backgroundColor: document.getElementById("bakcolt").value}).then(canvas => {
+  html2canvas(iframeDoc.body).then(canvas => {
     const link = document.createElement("a");
     link.download = imgName+".png";
     link.href = canvas.toDataURL("image/png");
