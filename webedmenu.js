@@ -247,7 +247,8 @@ async function loadTemplates() {
   // Load preview HTML into iframe
   setTimeout(() => {
     let iframe = document.getElementById(iframeId);
-    iframe.srcDoc = t.html;
+    let idoc = iframe.contentDocument || iframe.contentWindow.document;
+    idoc.open();idoc.write(t.html);idoc.close();
   }, 20);
 
   });
