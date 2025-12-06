@@ -217,13 +217,39 @@ async function loadTemplates() {
   const div = document.getElementById("templateList");
 
   data.forEach(t => {
-    div.innerHTML += `
-      <div style="border:1px solid #ddd; padding:10px; margin:10px;">
-        <h3>${t.name}</h3>
-        <p>Category: ${t.category}</p>
-        <button onclick='useTemplate("${t.name}", ${JSON.stringify(t.html)})'>Use</button>
-      </div>
-    `;
+
+  const iframeId = "thumb_" + crypto.randomUUID();
+
+  div.innerHTML += `
+    <div style="border:1px solid #ddd; padding:10px; margin:10px; background:#f5f5f5;">
+      
+      <iframe id="${iframeId}"
+        style="
+          width:100%; 
+          height:160px; 
+          border:1px solid #ccc; 
+          background:white;
+          pointer-events:none;
+          overflow:hidden;
+          transform:scale(0.7);
+          transform-origin:0 0;
+        ">
+      </iframe>
+
+      <h3>${t.name}</h3>
+      <p>Category: ${t.category}</p>
+      <button onclick='useTemplate(${JSON.stringify(t.name)}, ${JSON.stringify(t.html)})'>
+        Use
+      </button>
+    </div>
+  `;
+
+  // Load preview HTML into iframe
+  setTimeout(() => {
+    let iframe = document.getElementById(iframeId);
+    iframe.contentDocument.body.innerHTML = t.html;
+  }, 20);
+
   });
 }
 
