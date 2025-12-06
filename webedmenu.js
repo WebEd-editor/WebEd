@@ -221,7 +221,7 @@ async function loadTemplates() {
   const iframeId = "thumb_" + crypto.randomUUID();
 
   div.innerHTML += `
-    <div style="border:1px solid #ddd; padding:10px; margin:10px; background:#f5f5f5;">
+    <div style="border:1px solid #444; padding:10px; margin:10px; background:#222; width: 200px;">
       
       <iframe id="${iframeId}"
         style="
@@ -231,7 +231,7 @@ async function loadTemplates() {
           background:white;
           pointer-events:none;
           overflow:hidden;
-          transform:scale(0.7);
+          transform:scale(0.1);
           transform-origin:0 0;
         ">
       </iframe>
