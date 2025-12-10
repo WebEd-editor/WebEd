@@ -621,6 +621,8 @@ function redoEdit() {
     document.getElementById('pointerEvent').value = el.style.pointerEvent || '';
     document.getElementById('clipPath').value = el.style.clipPath || '';
     editBackgroundForElement(el);
+    document.getElementById("addPresets").onclick = () => addPresets(el);
+    
     document.getElementById('editModal').style.display = 'block';
   }
   
