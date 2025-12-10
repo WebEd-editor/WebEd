@@ -164,6 +164,13 @@
   </div>
 </div>
 
+<div id="presets" style="display: none;background: rgba(0,0,0,.4); width: 100%; height: 100%; position: fixed; top: 0; left: 0;">
+   <div style="width: 85%; height: 85%; background: #222; border-radius: 5px; border: 2px solid #555; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+      <div style="display:flex; justify-content: space-between; align-items: center; padding: 0 10px;border-bottom: 2px solid #555;"><h3>Your Presets</h3><div onclick="document.getElementById('presets').style.display='none';">×</div></div>
+      <div id="presetsList" style="width: 100%; height: 86%; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); overflow: auto;"></div>
+   </div>
+</div>
+
 <div id="seticon" class="tab drag-el">
    <div class="drag-handle">__</div>
    <button onclick="MyClose('seticon')">×</button>
@@ -227,6 +234,7 @@
    <button class="buttonnn" style="background: #e74c3c;position: sticky;top: 20px;" onclick="MyClose('editModal')">Cancel</button>
    <button class="buttonnn" onclick="copyStyle()">Copy</button>
    <button class="buttonnn" onclick="pasteStyle()">Paste</button>
+   <button class="buttonnn" id="addPresets">Add Preset</button>
  <div style="overflow: auto;">
   <strong>Naming</strong>
   <input class="inputtt" type="text" id="editId" placeholder="New ID">
