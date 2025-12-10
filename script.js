@@ -979,7 +979,7 @@ function pasteStyle() {
     showPopup("Styles pasted!","",true,false);
 }
 
-let deferredPrompt = null;
+//let deferredPrompt = null;
 
 window.addEventListener("beforeinstallprompt", (e) => {
    e.preventDefault();
