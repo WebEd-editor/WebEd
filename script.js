@@ -977,6 +977,156 @@ function pasteStyle() {
     showPopup("Styles pasted!","",true,false);
 }
 
+let presetdb;
+let presetrequest = indexedDB.open("WebEdPresetsDB", 1);
+
+presetrequest.onupgradeneeded = function (e) {
+   presetdb = e.target.result;
+
+   if (!presetdb.objectStoreNames.contains("presets")) {
+      presetdb.createObjectStore("presets", { keyPath: "id", autoIncrement: true });
+   }
+};
+
+presetrequest.onsuccess = function (e) {
+   presetdb = e.target.result;
+   loadPresets();
+};
+
+presetrequest.onerror = () => console.log("DB Error");
+
+function addPresets(el) {
+   let name = prompt('Name of preset');
+
+   let overlay = el.querySelector('.behOverlay');
+   if (overlay) {
+      console.log(overlay.outerHTML);
+      overlay.remove();
+      console.log("behOverlay found!");
+   }
+
+   let presetHTML = el.outerHTML;
+
+   let object = { n: name, p: presetHTML };
+
+   pre.push(object);
+
+   let tx = presetdb.transaction("presets", "readwrite");
+   let store = tx.objectStore("presets");
+   store.add(object);
+   tx.oncomplete = () => console.log("Preset saved to IndexedDB");
+
+   renderPresetList();
+}
+
+function insertPreset(obj) {
+   let canvas = document.getElementById("canvas"); // iframe
+   let doc = canvas.contentDocument || canvas.contentWindow.document;
+
+   // Insert preset HTML
+   doc.body.insertAdjacentHTML("beforeend", obj.p);
+
+   console.log("Preset inserted inside canvas iframe");
+}
+
+function deletePreset(id, index) {
+   // 1. Array se delete
+   pre.splice(index, 1);
+
+   // 2. IndexedDB se delete
+   let tx = presetdb.transaction("presets", "readwrite");
+   let store = tx.objectStore("presets");
+
+   store.delete(id);
+
+   tx.oncomplete = () => {
+      console.log("Preset removed");
+      renderPresetList();
+   };
+}
+
+function renderPresetList() {
+   const list = document.getElementById("presetsList");
+   list.innerHTML = '';
+
+   pre.forEach((e, index) => {
+      let id = "thumb_" + crypto.randomUUID();
+
+      list.innerHTML += `
+        <div class="presetCard" style="
+            margin: 5px; 
+            width: 85%; 
+            height: 240px; 
+            background: #222; 
+            border: 1px solid #444; 
+            padding: 5px;
+            position: relative;
+        ">
+           <iframe id="${id}" 
+              style="
+                 width: 100%; 
+                 height: 160px; 
+                 border: none; 
+                 background: white;
+                 pointer-events: none;
+                 overflow: hidden;
+              ">
+           </iframe>
+
+           <p class="presetName" style="color:white; margin-top:5px">${e.n}</p>
+
+           <div style="display:flex; gap:10px; margin-top:8px;">
+              <button class="insertBtn" data-index="${index}" 
+                 style="flex:1; padding:5px; background:#4CAF50; color:white; border:none; border-radius:5px;">
+                 Insert
+              </button>
+
+              <button class="delBtn" data-id="${e.id}" data-index="${index}"
+                 style="flex:1; padding:5px; background:#E53935; color:white; border:none; border-radius:5px;">
+                 Delete
+              </button>
+           </div>
+        </div>
+      `;
+
+      // Render iframe thumbnail
+      setTimeout(() => {
+         let iframe = document.getElementById(id);
+         iframe.contentDocument.body.innerHTML = e.p;
+      }, 50);
+   });
+
+   // Insert button actions
+   document.querySelectorAll(".insertBtn").forEach(btn => {
+      btn.addEventListener("click", function () {
+         let index = this.dataset.index;
+         insertPreset(pre[index]);
+      });
+   });
+
+   // Delete button actions
+   document.querySelectorAll(".delBtn").forEach(btn => {
+      btn.addEventListener("click", function () {
+         let id = Number(this.dataset.id);
+         let index = this.dataset.index;
+         deletePreset(id, index);
+      });
+   });
+}
+
+function loadPresets() {
+   let tx = presetdb.transaction("presets", "readonly");
+   let store = tx.objectStore("presets");
+
+   let getReq = store.getAll();
+
+   getReq.onsuccess = () => {
+      pre = getReq.result;
+      renderPresetList();
+   };
+}
+
+
 function AddEvent(){
    const evid = prompt("write id name");
    const evname = prompt("write Event Name");
