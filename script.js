@@ -979,7 +979,17 @@ function pasteStyle() {
     showPopup("Styles pasted!","",true,false);
 }
 
+let deferredPrompt = null;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+   e.preventDefault();
+   deferredPrompt = e;
+   console.log("PWA install prompt saved");
+});
+
 let presetdb;
+let pre = [];
+
 let presetrequest = indexedDB.open("WebEdPresetsDB", 1);
 
 presetrequest.onupgradeneeded = function (e) {
@@ -997,14 +1007,24 @@ presetrequest.onsuccess = function (e) {
 
 presetrequest.onerror = () => console.log("DB Error");
 
+
 function addPresets(el) {
+
+   if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(res => {
+         console.log("User Install:", res.outcome);
+      });
+      deferredPrompt = null; // reset
+   }
+
+
    let name = prompt('Name of preset');
 
    let overlay = el.querySelector('.behOverlay');
    if (overlay) {
       console.log(overlay.outerHTML);
       overlay.remove();
-      console.log("behOverlay found!");
    }
 
    let presetHTML = el.outerHTML;
