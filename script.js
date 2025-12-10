@@ -984,7 +984,7 @@ function pasteStyle() {
 window.addEventListener("beforeinstallprompt", (e) => {
    e.preventDefault();
    deferredPrompt = e;
-   console.log("PWA install prompt saved");
+   //console.log("PWA install prompt saved");
 });
 
 let presetdb;
@@ -1023,7 +1023,6 @@ function addPresets(el) {
 
    let overlay = el.querySelector('.behOverlay');
    if (overlay) {
-      console.log(overlay.outerHTML);
       overlay.remove();
    }
 
@@ -1042,13 +1041,13 @@ function addPresets(el) {
 }
 
 function insertPreset(obj) {
-   let canvas = document.getElementById("canvas"); // iframe
+   let canvas = document.getElementById("canvas");
    let doc = canvas.contentDocument || canvas.contentWindow.document;
 
    // Insert preset HTML
    doc.body.insertAdjacentHTML("beforeend", obj.p);
 
-   console.log("Preset inserted inside canvas iframe");
+   alert("Preset inserted inside canvas iframe");
 }
 
 function deletePreset(id, index) {
@@ -1062,7 +1061,7 @@ function deletePreset(id, index) {
    store.delete(id);
 
    tx.oncomplete = () => {
-      console.log("Preset removed");
+      alert("Preset removed");
       renderPresetList();
    };
 }
@@ -1147,19 +1146,6 @@ function loadPresets() {
       renderPresetList();
    };
 }
-
-
-function AddEvent(){
-   const evid = prompt("write id name");
-   const evname = prompt("write Event Name");
-   const fun = prompt("write Function name 'funName()'");
-   console.log(`${evid}, ${evname}, ${fun}`);
-   
-   const content = `document.getElementById('${evid}').addEventListener('${evname}', ${fun}());`;
-   customFiles[filename].content = content;
-   console.log(currentFile);
-}
-
 
 // icon editor 
 
