@@ -21,7 +21,7 @@ function showOverlay(target) {
   if(!overlay) overlay = doc.createElement("div");
   overlay.className = 'behOverlay';
   overlay.style.position = "absolute";
-  overlay.style.border = "2px dashed #3F3760";
+  overlay.style.border = "2px solid #304073";
   overlay.style.pointerEvents = "none"; 
   overlay.style.zIndex = "9999";
 
@@ -100,7 +100,7 @@ showClickOver();
     handle.dataset.corner = corner;
     handle.style.width = "5px";
     handle.style.height = "5px";
-    handle.style.background = "purple";
+    handle.style.background = "#304073";
     handle.style.border = "1px solid white";
     handle.style.position = "absolute";
     handle.style.pointerEvents = "auto";
@@ -292,7 +292,7 @@ function updateOverlay() {
    let r = selectedEl.getBoundingClientRect();
    
    let o = overlay;
-   o.style.position='absolute';o.style.border='1.5px dashed #444';
+   o.style.position='absolute';o.style.border='2px solid #304073';
    
    //✅
    if(pp === 'absolute' && cp === 'absolute' || 
