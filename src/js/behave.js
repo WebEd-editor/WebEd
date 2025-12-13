@@ -36,11 +36,13 @@ function showOverlay(target) {
   // ✅ Border Radius Handle (Green Btn Right)
   const radiusBtn = doc.createElement("button");
   radiusBtn.textContent = "◉";
+  moveBtn.style.cursor="ew-resize"; 
   styleBtn(radiusBtn, "green");
   controls.appendChild(radiusBtn);
   
   const eBtn = doc.createElement("button");
   eBtn.innerHTML = editIcon;
+  moveBtn.style.cursor="pointer"; 
   eBtn.onclick = () => openEdit(target);
   styleBtn(eBtn, "yellow");
   controls.appendChild(eBtn);
@@ -48,11 +50,13 @@ function showOverlay(target) {
   // ✅ Move Handle (Left)
   const moveBtn = doc.createElement("button");
   moveBtn.innerHTML = dragIcon;
+  moveBtn.style.cursor="move";
   styleBtn(moveBtn);
   controls.appendChild(moveBtn);
    
   const dBtn = doc.createElement("button");
   dBtn.innerHTML = deleteicon;
+  moveBtn.style.cursor="pointer"; 
   dBtn.onclick = () => {
         if (selectedParent === target) {
           selectedParent = document.getElementById('canvas');
@@ -66,6 +70,7 @@ function showOverlay(target) {
   
   const cpBtn = doc.createElement("button");
   cpBtn.innerHTML = copyIcon;
+  moveBtn.style.cursor="pointer";
   cpBtn.onclick = () => {
      let copiedElement = null;
      copiedElement = target.cloneNode(true);
@@ -243,7 +248,6 @@ function styleBtn(btn, color="blue") {
   btn.style.border = "1px solid #444";
   btn.style.borderRadius = "4px";
   btn.style.padding = "2px 6px";
-  btn.style.cursor = "grab";
   btn.style.pointerEvents = "auto";
 }
 
