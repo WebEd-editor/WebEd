@@ -1,5 +1,3 @@
-//const iframe = document.getElementById("canvas");
-// iframe.srcdoc = "<body style='min-height:100vh;'></body>";
 
 let selectedEl = null;
 let overlay = null;
@@ -35,12 +33,6 @@ function showOverlay(target) {
   controls.style.gap = "5px";
   overlay.appendChild(controls);
 
-  // ✅ Move Handle (Left)
-  const moveBtn = doc.createElement("button");
-  moveBtn.innerHTML = dragIcon;
-  styleBtn(moveBtn);
-  controls.appendChild(moveBtn);
-
   // ✅ Border Radius Handle (Green Btn Right)
   const radiusBtn = doc.createElement("button");
   radiusBtn.textContent = "◉";
@@ -52,7 +44,13 @@ function showOverlay(target) {
   eBtn.onclick = () => openEdit(target);
   styleBtn(eBtn, "yellow");
   controls.appendChild(eBtn);
-  
+
+  // ✅ Move Handle (Left)
+  const moveBtn = doc.createElement("button");
+  moveBtn.innerHTML = dragIcon;
+  styleBtn(moveBtn);
+  controls.appendChild(moveBtn);
+   
   const dBtn = doc.createElement("button");
   dBtn.innerHTML = deleteicon;
   dBtn.onclick = () => {
