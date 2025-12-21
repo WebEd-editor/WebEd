@@ -35,7 +35,7 @@ async function rr() {
   
   if (ffcode){ html = ffcode;alert(ffcode);}
 
-  let resultHead = iframeDoc.head.innerHTML;
+  let resultHead = iframeDoc.head;
   //resultHead += formatNode(iframeDoc.head, 0);
 
   // Clean up editor-related attributes
