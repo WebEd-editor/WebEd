@@ -35,14 +35,39 @@ function rr() {
   
   if (ffcode){ html = ffcode;alert(ffcode);}
 
+  let resultHead = '';
+  resultHead += formatNode(iframeDoc.head, 0);
+
   // Clean up editor-related attributes
   let newHtml = html.replace(/contenteditable="true"/g, '');
-  let newHtml2 = newHtml.replace(/editable/g, '');
-  let newHtml3 = newHtml2.replace(/data-="true"/g, '');
+  newHtml = newHtml.replace(/editable/g, '');
+  newHtml = newHtml.replace(/data-="true"/g, '');
+
+   const API_URL = "https://code-generator-836m.onrender.com/api/generate-code";
+
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ newHtml })
+    });
+
+    const data = await res.json();
+
+    const html4 = `<!DOCTYPE html>\n<html>\n<head>\n${resultHead}\n<style>\n${data.css}\n</style>\n</head>\n${data.html}\n</html>`;
+
+    console.log("Conversion stats:", data.stats);
+
+  } catch (err) {
+    console.error(err);
+    alert("Failed to generate code");
+  }
 
   // Set cleaned HTML to display area
  // document.getElementById("htmlcssjs").textContent = newHtml3;
-    beautify(newHtml3);
+   // beautify(newHtml);
 }
 
 function beautify(htmlString) {
