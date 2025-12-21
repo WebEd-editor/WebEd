@@ -91,6 +91,7 @@ function menuload(){
     <div class="ttt tt3" style="width: 100%;margin-top: 110px;">
        <button onclick="createNewProject()">Save Project</button>
        <div id="projectList"></div>
+       <div id="webed-extracted-css" style="display: none"></div>
     </div>
     <div class="ttt tt4" style="width: 100%;margin-top: 110px;">
        <textarea id="htmlcssjs" style="user-select: none;" readonly></textarea>
