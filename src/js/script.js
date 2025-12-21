@@ -23,7 +23,7 @@ function MyClose(id){
 }
 
 let ffcode;
-function rr() {
+async function rr() {
   const iframe = document.getElementById("canvas");
   const iframeDoc = iframe.contentDocument.documentElement || iframe.contentWindow.document;
 
@@ -51,7 +51,7 @@ function rr() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ newHtml })
+      body: JSON.stringify({ html: newHtml })
     });
 
     const data = await res.json();
