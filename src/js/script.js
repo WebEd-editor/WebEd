@@ -35,8 +35,8 @@ async function rr() {
   
   if (ffcode){ html = ffcode;alert(ffcode);}
 
-  let resultHead = '';
-  resultHead += formatNode(iframeDoc.head, 0);
+  let resultHead = iframeDoc.head.innerHTML;
+  //resultHead += formatNode(iframeDoc.head, 0);
 
   // Clean up editor-related attributes
   let newHtml = html.replace(/contenteditable="true"/g, '');
