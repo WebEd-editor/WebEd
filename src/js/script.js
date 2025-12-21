@@ -61,16 +61,7 @@ async function rr() {
 
     const data = await res.json();
 
-    const html4 = `<!DOCTYPE html>
-<html>
-<head>
-${resultHead}
-<style>
-${data.css}
-</style>
-</head>
-${data.html}
-</html>`;
+    const html4 = `<!DOCTYPE html>\n${data.html}`;
 
     document.getElementById("htmlcssjs").textContent = html4;
 
