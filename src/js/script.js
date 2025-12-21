@@ -41,17 +41,14 @@ async function rr() {
     html = ffcode;
   }
 
-  let resultHead = "";
-  resultHead += formatNode(iframeDoc.head, 0);
-
+  let resultHead = iframeDoc.head;
   // Clean editor attributes
   let newHtml = html
     .replace(/contenteditable="true"/g, "")
     .replace(/editable/g, "")
     .replace(/data-="true"/g, "");
 
-  const API_URL =
-    "https://code-generator-836m.onrender.com/api/generate-code";
+  const API_URL = "https://code-generator-836m.onrender.com/api/generate-code";
 
   try {
     const res = await fetch(API_URL, {
