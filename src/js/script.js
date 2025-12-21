@@ -55,15 +55,14 @@ function rr() {
     });
 
     const data = await res.json();
-
     const html4 = `<!DOCTYPE html>\n<html>\n<head>\n${resultHead}\n<style>\n${data.css}\n</style>\n</head>\n${data.html}\n</html>`;
-
     console.log("Conversion stats:", data.stats);
 
   } catch (err) {
     console.error(err);
     alert("Failed to generate code");
   }
+  document.getElementById("htmlcssjs").textContent = html4;
 
   // Set cleaned HTML to display area
  // document.getElementById("htmlcssjs").textContent = newHtml3;
