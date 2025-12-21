@@ -25,25 +25,33 @@ function MyClose(id){
 let ffcode;
 async function rr() {
   const iframe = document.getElementById("canvas");
-  const iframeDoc = iframe.contentDocument.documentElement || iframe.contentWindow.document;
+  const iframeDoc =
+    iframe.contentDocument.documentElement || iframe.contentWindow.document;
 
-  if (iframeDoc.querySelector('#scriptDragDropEl')) iframeDoc.querySelector('#scriptDragDropEl').remove();
-  if (iframeDoc.querySelector('.behOverlay')) iframeDoc.querySelector('.behOverlay').remove();
+  if (iframeDoc.querySelector("#scriptDragDropEl"))
+    iframeDoc.querySelector("#scriptDragDropEl").remove();
 
-  // Get the body HTML from iframe
+  if (iframeDoc.querySelector(".behOverlay"))
+    iframeDoc.querySelector(".behOverlay").remove();
+
+  // Full HTML
   let html = iframeDoc.innerHTML;
-  
-  if (ffcode){ html = ffcode;alert(ffcode);}
 
-  let resultHead = iframeDoc.head;
-  //resultHead += formatNode(iframeDoc.head, 0);
+  if (typeof ffcode !== "undefined" && ffcode) {
+    html = ffcode;
+  }
 
-  // Clean up editor-related attributes
-  let newHtml = html.replace(/contenteditable="true"/g, '');
-  newHtml = newHtml.replace(/editable/g, '');
-  newHtml = newHtml.replace(/data-="true"/g, '');
+  let resultHead = "";
+  resultHead += formatNode(iframeDoc.head, 0);
 
-   const API_URL = "https://code-generator-836m.onrender.com/api/generate-code";
+  // Clean editor attributes
+  let newHtml = html
+    .replace(/contenteditable="true"/g, "")
+    .replace(/editable/g, "")
+    .replace(/data-="true"/g, "");
+
+  const API_URL =
+    "https://code-generator-836m.onrender.com/api/generate-code";
 
   try {
     const res = await fetch(API_URL, {
@@ -55,18 +63,26 @@ async function rr() {
     });
 
     const data = await res.json();
-    const html4 = `<!DOCTYPE html>\n<html>\n<head>\n${resultHead}\n<style>\n${data.css}\n</style>\n</head>\n${data.html}\n</html>`;
+
+    const html4 = `<!DOCTYPE html>
+<html>
+<head>
+${resultHead}
+<style>
+${data.css}
+</style>
+</head>
+${data.html}
+</html>`;
+
+    document.getElementById("htmlcssjs").textContent = html4;
+
     console.log("Conversion stats:", data.stats);
 
   } catch (err) {
     console.error(err);
     alert("Failed to generate code");
   }
-  document.getElementById("htmlcssjs").textContent = html4;
-
-  // Set cleaned HTML to display area
- // document.getElementById("htmlcssjs").textContent = newHtml3;
-   // beautify(newHtml);
 }
 
 function beautify(htmlString) {
