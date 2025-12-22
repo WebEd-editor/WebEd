@@ -47,6 +47,7 @@ async function rr() {
     .replace(/contenteditable="true"/g, "")
     .replace(/editable/g, "")
     .replace(/data-="true"/g, "");
+   document.getElementById("htmlcssjs").textContent = 'please wait a moment';
 
   const API_URL = "https://code-generator-836m.onrender.com/api/generate-code";
 
@@ -61,8 +62,8 @@ async function rr() {
 
     const data = await res.json();
 
-    const html4 = `<!DOCTYPE html>\n${data.html}`;
-
+    const html4 = `<!-- this code made in webed -->\n${data.html}`;
+    document.getElementById("htmlcssjs").textContent = '';
     document.getElementById("htmlcssjs").textContent = html4;
 
     console.log("Conversion stats:", data.stats);
@@ -71,53 +72,6 @@ async function rr() {
     console.error(err);
     alert("Failed to generate code");
   }
-}
-
-function beautify(htmlString) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, 'text/html');
-
-  let result = '<!-- full code made in WebEd tool -->\n';
-  result += formatNode(doc.documentElement, 0);
-
-  document.getElementById("htmlcssjs").textContent = result.trim();
-}
-
-function formatNode(node, level) {
-  const indent = '  '.repeat(level);
-  let result = '';
-
-  node.childNodes.forEach(child => {
-    if (child.nodeType === Node.ELEMENT_NODE) {
-      const tagName = child.tagName.toLowerCase();
-
-      const attrs = Array.from(child.attributes)
-        .map(attr => `${attr.name}="${attr.value}"`)
-        .join(' ');
-      const openTag = attrs ? `<${tagName} ${attrs}>` : `<${tagName}>`;
-
-      const isSelfClosing = child.childNodes.length === 0;
-
-      if (isSelfClosing && ['meta', 'link', 'img', 'br', 'hr', 'input'].includes(tagName)) {
-        // Format as self-closing if applicable
-        result += `${indent}<${tagName}${attrs ? ' ' + attrs : ''} />\n`;
-      } else {
-        result += `${indent}${openTag}\n`;
-        result += formatNode(child, level + 1);
-        result += `${indent}</${tagName}>\n`;
-      }
-
-    } else if (child.nodeType === Node.TEXT_NODE) {
-      const text = child.textContent.trim();
-      if (text) {
-        result += `${indent}${text}\n`;
-      }
-    } else if (child.nodeType === Node.COMMENT_NODE) {
-      result += `${indent}<!-- ${child.textContent.trim()} -->\n`;
-    }
-  });
-
-  return result;
 }
 
 // links for css fonts
