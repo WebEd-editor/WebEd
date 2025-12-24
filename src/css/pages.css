@@ -1,0 +1,271 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Inter', sans-serif; background:#f8f9fb; color:#222; }
+
+/* Header Container */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f2f2f2;
+    color: #000;
+    z-index: 999;
+    transition: 0.35s ease;
+}
+
+/* Logo */
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* Nav Links */
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #444;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #007aff;
+}
+
+/* Try Now Button */
+.try-btn {
+    padding: 10px 20px;
+    background: #0078ff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.try-btn:hover {
+    background: #0a6de2;
+}
+
+/* Mobile Menu Button */
+.menu-btn {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Header Hide */
+.hide-header {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+/* Floating Editor Button */
+.floating-editor-btn {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: #0078ff;
+    color: white;
+    padding: 14px 22px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: 0.35s ease;
+    z-index: 9999;
+}
+
+.show-float-btn {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Responsive for Mobile */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        right: 20px;
+        top: 70px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .try-btn {
+        display: none;
+    }
+}
+
+    /* HERO */
+    .hero {
+        padding:150px 40px 80px; text-align:center;
+        background:linear-gradient(to bottom,#ffffff,#eef1f7);
+    }
+    .hero h1{ font-size:54px; max-width:900px; margin:auto; font-weight:700; line-height:1.2; }
+    .hero p{ margin-top:20px; font-size:20px; color:#555; max-width:750px; margin:auto; line-height:1.5; }
+    .hero button{
+        margin-top:40px; padding:16px 40px; font-size:18px; border:none;
+        border-radius:14px; background:#0077ff; color:white; cursor:pointer;
+        font-weight:600; box-shadow:0 4px 12px rgba(0,119,255,0.3);
+    }
+    .hero button:hover { background:#0060d6; }
+    .hero img { width:100%; max-width:900px; margin-top:40px; border-radius:20px; box-shadow:0 8px 30px rgba(0,0,0,0.15); }
+
+    /* FEATURES */
+    .section { padding:80px 40px; text-align:center; }
+    .section h2 { font-size:40px; margin-bottom:15px; }
+    .features {
+        display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+        gap:35px; margin-top:50px;
+    }
+    .card {
+        background:white; padding:30px; border-radius:16px;
+        box-shadow:0 6px 20px rgba(0,0,0,0.08);
+        transition:transform .2s;
+    }
+    .card:hover { transform:translateY(-6px); }
+    .card h3 { margin-bottom:10px; font-size:22px; }
+    .card p { color:#555; }
+
+    /* PREVIEW */
+    .preview-img {
+        width:100%; max-width:850px; border-radius:18px;
+        margin-top:40px; box-shadow:0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    /* FAQ */
+    .faq { max-width:800px; margin:auto; text-align:left; margin-top:40px; }
+    .faq-item { margin-bottom:22px; }
+    .faq-item strong { font-size:18px; }
+
+    footer {
+        background:#0f0f11; padding:50px; color:#ccc; text-align:center;
+        margin-top:80px; font-size:15px;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:800px) {
+        header { padding:18px 25px; }
+        .hero h1 { font-size:34px; }
+        .hero p { font-size:14px; }
+    }
+
+    /* MOBILE MENU */
+    .menu-btn {
+        display:none; font-size:26px; background:none; border:none;
+        cursor:pointer; color:#222;
+    }
+
+    @media(max-width:800px) {
+        nav {
+            position:fixed; top:70px; right:-100%; width:200px;
+            background:white; padding:20px; box-shadow:0 4px 15px rgba(0,0,0,0.1);
+            border-radius:12px; display:flex; flex-direction:column;
+            transition:0.3s; gap:15px;
+        }
+        body.show-menu nav { right:20px; }
+        .menu-btn { display:block; }
+        nav a { margin-left:0; font-size:18px; }
+    }
+    
+    .feature-section {
+    max-width: 1200px;
+    margin: 70px auto;
+    padding: 0 20px;
+}
+
+/* Each feature box */
+.feature-box {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+/* Reverse layout for alternating sections */
+.feature-box.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Image */
+.feature-img img {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+}
+
+/* Content */
+.feature-content h2 {
+    font-size: 32px;
+    margin-bottom: 14px;
+}
+
+.feature-content p {
+    color: #666;
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 500px;
+}
+
+/* Responsive: mobile column layout */
+@media (max-width: 768px) {
+    .feature-box,
+    .feature-box.reverse {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .feature-content p {
+        margin: auto;
+    }
+}
+    
+    .footer-container {
+        display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+        gap:40px; max-width:1200px; margin:auto; padding-bottom:40px;
+    }
+    .footer-col h3 { font-size:24px; margin-bottom:10px; color:#fff; }
+    .footer-col h4 { font-size:18px; margin-bottom:12px; color:#fff; }
+    .footer-col p { color:#bbb; line-height:1.6; }
+    .footer-col a {
+        display:block; margin-bottom:8px; color:#bbb; text-decoration:none;
+        font-size:15px; transition:0.2s;
+    }
+    .footer-col a:hover { color:white; }
+    .footer-bottom { margin-top:35px; text-align:center; color:#999; font-size:14px; }
+    
+
+    @media(max-width:600px){ .footer-container{ text-align:center; } }
+
+
