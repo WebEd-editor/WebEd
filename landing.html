@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>WebEd - website editor</title>
+   <link rel="stylesheet" href="src/css/page.css">
+</head>
+<body>
+
+<header class="main-header">
+    <div class="logo">WebEd</div>
+
+    <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#preview">Preview</a>
+        <a href="#faq">FAQ</a>
+        <a href="#" style="color:#0077ff;font-weight:600;">Open Editor</a>
+    </nav>
+
+    <div class="menu-btn" onclick="toggleMenu()">
+        ☰
+    </div>
+</header>
+
+<button id="floatingEditorBtn" class="floating-editor-btn" onclick="location.href='tool.html'">
+    Open Editor
+</button>
+
+<section class="hero">
+    <h1>Create & Edit Websites Visually – Without Writing Code</h1>
+    <p>WebEd is a modern, fast and professional-grade visual editor In which drag & drop and live preview. Beginners and developers – Both are perfect.</p>
+    <button onclick="location.href='tool.html'">Start Editing</button><br>
+    <img src="C:\Users\LENOVO\Videos\Captures\WebEd - Website editor - Profile 1 - Microsoft​ Edge 11-12-2025 05_11_49.png" alt="WebEd Demo Animation" />
+</section>
+
+<section id="features" class="feature-section">
+    <div class="feature-box">
+        <div class="feature-img">
+            <img src="C:\Users\LENOVO\Videos\Captures\WebEd - Website editor - Profile 1 - Microsoft​ Edge 11-12-2025 05_11_49.png" alt="Visual Editor">
+        </div>
+
+        <div class="feature-content">
+            <h2>Powerful Visual Editor</h2>
+            <p>
+                Design your entire webpage visually with drag-and-drop, element tree,
+                inline editing, and real-time preview. No coding skills required.
+            </p>
+        </div>
+    </div>
+
+    <div class="feature-box reverse">
+        <div class="feature-img">
+            <img src="C:\Users\LENOVO\Videos\Captures\WebEd - Website editor - Profile 1 - Microsoft​ Edge 11-12-2025 05_11_49.png" alt="Responsive Controls">
+        </div>
+
+        <div class="feature-content">
+            <h2>World’s First Truly Responsive Web Editor</h2>
+            <p>
+               Build and edit real HTML, CSS, and JavaScript directly in your browser.
+               WebEd works smoothly on mobile and desktop with a clean, adaptive interface.
+               Create websites anytime, anywhere with a truly responsive web editor.
+            </p>
+        </div>
+    </div>
+
+    <div class="feature-box">
+        <div class="feature-img">
+            <img src="C:\Users\LENOVO\Videos\Captures\WebEd - Website editor - Profile 1 - Microsoft​ Edge 11-12-2025 05_11_49.png" alt="Instant Export">
+        </div>
+
+        <div class="feature-content">
+            <h2>Best Web Editor for Small Web Apps</h2>
+            <p>
+               WebEd lets you write JavaScript and CSS directly in the code space without restrictions.
+               Build, test, and tweak small web apps instantly in your browser.
+               Perfect for fast prototyping, experiments, and lightweight projects.
+            </p>
+        </div>
+    </div>
+</section>
+<hr>
+<section id="preview" class="section">
+    <h2>How WebEd Works</h2>
+    <div class="steps" style="max-width:900px; margin:auto; text-align:left; font-size:20px; line-height:1.6;">
+        <div>1. Start a new blank project</div>
+        <div>2. Add elements visually, edit styles & apply responsive overrides</div>
+        <div>3. Export complete HTML + CSS + JS build with a single click</div>
+    </div>
+    <img class="preview-img" src="C:\Users\LENOVO\Videos\Captures\WebEd - Website editor - Profile 1 - Microsoft​ Edge 11-12-2025 05_11_49.png" alt="WebEd UI Preview" />
+</section>
+<hr>
+<section id="faq" class="section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+        <div class="faq-item"><strong>Does WebEd run completely in the browser?</strong><br>Yes. WebEd is a 100% browser-based, client-side web editor with no server dependency.</div>
+        <div class="faq-item"><strong>Are my projects safe in WebEd?</strong><br>Absolutely. WebEd uses an auto-save system powered by IndexedDB to prevent data loss.</div>
+        <div class="faq-item"><strong>Can I use WebEd on mobile devices?</strong><br>Yes. WebEd is fully responsive and optimized for touch-friendly mobile usage.</div>
+        <div class="faq-item"><strong>In which format can I export my projects?</strong><br>You can export complete HTML, CSS, and JavaScript files — ready to upload anywhere.</div>
+    </div>
+</section>
+
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>WebEd</h3>
+            <p>Modern visual editor to build responsive websites without coding. Fast, simple & powerful.</p>
+        </div>
+        
+        <div class="footer-col">
+           <h4>Product</h4>
+           <a href="#features">Features</a>
+           <a href="#preview">How It Works</a>
+           <a href="#">Open Editor</a>
+        </div>
+
+       <div class="footer-col">
+           <h4>Company</h4>
+           <a href="#about">About Us</a>
+           <a href="#contact">Contact</a>
+       </div>
+
+       <div class="footer-col">
+           <h4>Resources</h4>
+           <a href="#faq">FAQ</a>
+       </div>
+    </div>
+    <div class="footer-bottom">© 2025 WebEd • All Rights Reserved</div>
+</footer>
+
+<script>
+
+function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("show");
+}
+
+window.addEventListener("scroll", function () {
+    const header = document.querySelector(".main-header");
+    const footer = document.querySelector(".main-footer");
+    const floatBtn = document.getElementById("floatingEditorBtn");
+    const hero = document.querySelector(".hero"); // Your hero section
+
+    if (!hero) return;
+
+    const heroHeight = hero.offsetHeight;
+    const scrolled = window.scrollY;
+
+    if (scrolled > heroHeight * 0.5) {
+        header.classList.add("hide-header");
+        floatBtn.classList.add("show-float-btn");
+    } else {
+        header.classList.remove("hide-header");
+        floatBtn.classList.remove("show-float-btn");
+    }
+    if (!footer) return;
+    if (scrolled > footer.offsetHeight * 4) {
+       floatBtn.classList.remove("show-float-btn");
+    }
+});
+</script>
+
+</body>
+</html>
