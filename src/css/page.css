@@ -139,7 +139,7 @@
         font-weight:600; box-shadow:0 4px 12px rgba(0,119,255,0.3);
     }
     .hero button:hover { background:#0060d6; }
-    .hero img { width:100%; max-width:900px; margin-top:40px; border-radius:20px; box-shadow:0 8px 30px rgba(0,0,0,0.15); }
+    .hero img, .hero video { width:100%; max-width:900px; margin-top:40px; border-radius:20px; box-shadow:0 8px 30px rgba(0,0,0,0.15); }
 
     /* FEATURES */
     .section { padding:80px 40px; text-align:center; }
@@ -218,7 +218,7 @@
 }
 
 /* Image */
-.feature-img img {
+.feature-img img, .feature-img video {
     width: 100%;
     max-width: 520px;
     border-radius: 14px;
