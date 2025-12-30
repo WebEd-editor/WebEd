@@ -1,46 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- 🏠 Home Page -->
   <url>
-    <loc>https://webed-editor.github.io/WebEd/</loc>
-    <lastmod>2025-11-01</lastmod>
+    <loc>https://webed.in/</loc>
     <priority>1.0</priority>
   </url>
 
-  <!-- ℹ️ About Page -->
   <url>
-    <loc>https://webed-editor.github.io/WebEd/about.html</loc>
-    <lastmod>2025-11-01</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- ⚙️ Features Page -->
-  <url>
-    <loc>https://webed-editor.github.io/WebEd/features.html</loc>
-    <lastmod>2025-11-01</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- 📚 Documentation Page (agar hai) -->
-  <url>
-    <loc>https://webed-editor.github.io/WebEd/docs.html</loc>
-    <lastmod>2025-11-01</lastmod>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- 🧰 Editor Main Page -->
-  <url>
-    <loc>https://webed-editor.github.io/WebEd/editor.html</loc>
-    <lastmod>2025-11-01</lastmod>
+    <loc>https://webed.in/index.html</loc>
     <priority>0.9</priority>
   </url>
 
-  <!-- 📞 Contact Page (agar hai) -->
   <url>
-    <loc>https://webed-editor.github.io/WebEd/contact.html</loc>
-    <lastmod>2025-11-01</lastmod>
+    <loc>https://webed.in/about.html</loc>
     <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://webed.in/design.html</loc>
+    <priority>0.8</priority>
   </url>
 
 </urlset>
