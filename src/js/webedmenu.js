@@ -60,9 +60,6 @@ function menuload(){
 }
 </style>
               <div id="templateList"></div>
-              <div>
-                 <video autoplay muted loop src="file:///storage/emulated/0/Android/data/com.teejay.trebedit/files/TrebEdit user files/Sample project - Acme/video /spider video.mp4"></video>
-              </div>
            </div>
         </div>
     </div>
