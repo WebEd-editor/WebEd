@@ -10,9 +10,17 @@ function menuload(){
          </p>
        </div>
        <div class="" style="outline: none; color: rgb(255, 255, 255); font-size: 16px; font-weight: 500; opacity: 1; display: flex; justify-content: center; align-items: center;">
-         <button onclick="closewebedmenu()" class="" id="" style="font-family: 'roboto', sans-serif; color: rgb(0, 0, 0); background: white;font-size: 16px; opacity: 1; top: 10px; right: 10px; margin: 10px; padding: 5px; border: none; border-radius: 5px; outline: none; cursor: pointer;">
+         <button onclick="closewebedmenu()" class="" id="openDesign" style="font-family: 'roboto', sans-serif; color: rgb(0, 0, 0); background: white;font-size: 16px; opacity: 1; top: 10px; right: 10px; margin: 10px; padding: 5px; border: none; border-radius: 5px; outline: none; cursor: pointer;">
            Open Editor
          </button>
+<script>
+document.getElementById("openDesign").addEventListener("click", () => {
+  gtag('event', 'desitn_is_opened', {
+    event_category: 'editor',
+    event_label: 'design_panel',
+  });
+});
+</script>
        </div>
      </header>
     <div class="" style="background: #000; width: 100%; position: sticky; top: 0; left: 0; padding: 5px 0px; opacity: 1; display: flex; overflow: auto; gap: 5px;" id="">
