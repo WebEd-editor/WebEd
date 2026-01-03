@@ -1,303 +1,173 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About • WebEd</title>
-     <link rel="icon" href="logo.png" type="image/png"/>
-  <meta name="description" content="WebEd is a modern visual web editor that blends drag‑and‑drop design with real HTML/CSS/JS control. Learn the story, mission, and roadmap." />  <!-- Open Graph / Twitter -->  <meta property="og:title" content="About • WebEd" />
-  <meta property="og:description" content="WebEd is a modern visual web editor that blends drag‑and‑drop design with real HTML/CSS/JS control." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://webed-editor.github.io/about.html" />
-  <meta name="twitter:card" content="summary_large_image" />  <!-- Fonts -->  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>
-    :root {
-      --bg: #0b1020;
-      --panel: #0f172a;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --brand: #6366f1; /* indigo */
-      --brand-2: #22d3ee; /* cyan */
-      --ring: #7c3aed; /* violet */
-      --ok: #10b981; /* emerald */
-      --card: #0b132b;
-      --border: rgba(148,163,184,.18);
-    }
-
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f8fafc;
-        --panel: #ffffff;
-        --text: #0f172a;
-        --muted: #475569;
-        --card: #ffffff;
-        --border: rgba(15,23,42,.08);
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(99,102,241,.12), transparent),
-                  radial-gradient(800px 600px at 90% 10%, rgba(34,211,238,.12), transparent),
-                  var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .container { width: min(1100px, 92%); margin: 0 auto; }
-
-    /* Header */
-    header {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: saturate(140%) blur(10px);
-      background: color-mix(in oklab, var(--bg) 85%, transparent);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
-    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
-    .logo {
-      width: 36px; height: 36px; border-radius: 12px;
-      background: conic-gradient(from 120deg, var(--brand), var(--brand-2), var(--ring));
-      box-shadow: 0 8px 24px rgba(99,102,241,.35);
-    }
-    nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-weight: 500; }
-    nav a.active, nav a:hover { color: var(--text); }
-
-    /* Hero */
-    .hero { padding: 64px 0 24px; text-align: center; }
-    .eyebrow { display:inline-block; padding: 6px 10px; border:1px solid var(--border); border-radius: 999px; font-size: 12px; color: var(--muted); }
-    h1 { font-size: clamp(28px, 3.5vw, 44px); line-height: 1.15; margin: 14px 0 10px; letter-spacing: -0.02em; }
-    .sub { color: var(--muted); font-size: clamp(14px, 1.6vw, 18px); max-width: 780px; margin: 0 auto; }
-
-    .cta-row { display:flex; gap: 12px; justify-content:center; margin-top: 22px; flex-wrap: wrap; }
-    .btn { appearance:none; border:1px solid var(--border); background: var(--panel); color: var(--text); padding: 12px 16px; border-radius: 12px; text-decoration: none; font-weight: 600; box-shadow: 0 6px 20px rgba(2,6,23,.25); }
-    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); border: none; }
-    .btn:hover { transform: translateY(-1px); }
-
-    /* Badges */
-    .badges { display:flex; gap: 16px; justify-content:center; margin: 20px 0 8px; flex-wrap: wrap; }
-    .badge { display:flex; align-items:center; gap:8px; padding:8px 10px; border:1px dashed var(--border); border-radius: 10px; color: var(--muted); font-size: 13px; }
-
-    /* Sections */
-    section { padding: 26px 0; }
-    .grid { display:grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
-
-    .card { background: color-mix(in oklab, var(--panel) 94%, transparent); border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: 0 8px 30px rgba(2,6,23,.25);
-      transition: transform .2s ease, box-shadow .2s ease; }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(2,6,23,.3); }
-
-    h2 { font-size: clamp(22px, 2.6vw, 30px); margin: 8px 0 10px; }
-    h3 { font-size: 18px; margin: 0 0 6px; }
-    p { margin: 0 0 10px; }
-
-    .muted { color: var(--muted); }
-    .pill { display:inline-block; padding:4px 10px; border-radius:999px; background: color-mix(in oklab, var(--brand) 22%, transparent); color:#fff; font-size:12px; font-weight:700; letter-spacing:.04em; }
-
-    .span-4 { grid-column: span 12; }
-    .span-6 { grid-column: span 12; }
-    .span-8 { grid-column: span 12; }
-    @media (min-width: 820px) {
-      .span-4 { grid-column: span 4; }
-      .span-6 { grid-column: span 6; }
-      .span-8 { grid-column: span 8; }
-    }
-
-    .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-    .list li { display:flex; gap:10px; align-items:flex-start; }
-
-    .icon { width: 18px; height: 18px; flex: 0 0 auto; }
-
-    footer { border-radius: 20px 20px 0 0; padding: 10px; margin: 0; background-color: color-mix(in oklab, var(--bg) 85%, transparent); color: var(--muted); font-size: 14px; }
-
-    /* Anchor jump spacing */
-    .anchor { scroll-margin-top: 90px; }
-  </style>  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "WebEd",
-    "applicationCategory": "DeveloperApplication",
-    "description": "A modern visual web editor that blends drag-and-drop design with real HTML/CSS/JS control.",
-    "creator": {"@type": "Person", "name": "Sahil Kamatkar"},
-    "operatingSystem": "Web",
-    "url": "https://webed-editor.github.io/"
-  }
-  </script></head>
+   <meta charset="UTF-8">
+   <title>About - WebEd</title>
+   <meta name="description" content="Learn about WebEd – a modern visual website builder designed to help creators build responsive websites without coding.">
+   <meta name="keywords" content="WebEd, website builder, visual editor, responsive design tool, no-code builder">
+   <meta name="author" content="WebEd Team">
+   <link rel="stylesheet" href="page.css">
+</head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="/">
-        <div class="logo" aria-hidden="true"></div>
-        <strong>WebEd</strong>
-      </a>
-      <nav aria-label="Primary">
-        <a href="/" title="Home">Home</a>
-        <a href="#what" class="active" title="About WebEd">About</a>
-        <a href="#roadmap" title="Roadmap">Roadmap</a>
-        <a href="#contact" title="Contact">Contact</a>
-      </nav>
-    </div>
-  </header>  <!-- Hero -->  
-  <section class="hero">
-    <div class="container">
-      <span class="eyebrow">Built with passion</span>
-      <h1>Design visually. Edit precisely. Publish confidently.</h1>
-      <p class="sub">WebEd is a modern web editor that blends <strong>drag‑and‑drop</strong> simplicity with the power of real <strong>HTML, CSS & JS</strong>. Perfect for beginners learning the craft and creators shipping fast.</p><div class="cta-row">
-    <a class="btn primary" href="https://webed-editor.github.io/WebEd/" target="_self" rel="noopener">Open WebEd</a>
-    <a class="btn" href="#why">Why WebEd?</a>
-    </div>
 
-  <div class="badges" aria-label="Highlights">
-    <div class="badge">🔒 Client‑side storage</div>
-    <div class="badge">⚡ Fast & lightweight</div>
-    <div class="badge">🧩 Visual tree editor</div>
-    <div class="badge">🎞️ CSS animation tools (coming soon)</div>
-  </div>
-</div>
+<header class="main-header">
+    <div class="logo">WebEd</div>
 
-  </section>  <main class="container">
-    <!-- What is WebEd -->
-    <section id="what" class="anchor">
-      <div class="grid">
-        <div class="card span-8">
-          <h2>What is WebEd?</h2>
-          <p>WebEd is a <strong>browser‑based visual web editor</strong> that helps you build pages quickly and learn by doing. Switch seamlessly between <em>visual layout</em> and <em>code view</em>, manage a live <strong>element tree</strong>, and export clean HTML/CSS/JS whenever you’re ready.</p>
-          <ul class="list" style="margin-top:10px;">
-            <li><svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Dual‑mode editing: drag‑and‑drop + source code</li>
-            <li><svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Visual HTML tree with quick actions (edit, delete, copy, paste)</li>
-            <li><svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Project save/load using</li>
-            <li><svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4l8 8-8 8M12 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>One‑click export for clean code</li>
-          </ul>
+    <nav class="nav-links">
+        <a href="#mission">Our mission</a>
+        <a href="#story">Solution</a>
+        <a href="#founder">Founder</a>
+        <a href="#faq">FAQ</a>
+        <a href="design.html" style="color:#0077ff;font-weight:600;">Open Editor</a>
+    </nav>
+
+    <div class="menu-btn" onclick="toggleMenu()">
+        ☰
+    </div>
+</header>
+
+<button id="floatingEditorBtn" class="floating-editor-btn" onclick="location.href='design.html'">
+    Open Editor
+</button>
+
+<section class="hero">
+    <h1>About WebEd</h1>
+    <p>
+       WebEd is a modern, powerful, and intuitive visual website editor created for designers, 
+       developers, and creators who want to build fast and responsive websites — without writing a single line of code.
+    </p>
+    <button onclick="location.href='design.html'">Start Editing</button>
+</section>
+
+<section id="mission" class="feature-section">
+    <div class="feature-box" style="padding: 20px;">
+        <div class="feature-content">
+            <h2>Our Mission</h2>
+            <p>Our mission is to empower designers, developers, and beginners with tools that simplify the web creation process. We aim to deliver a seamless editing experience that reduces complexity and unlocks creativity.</p>
         </div>
-        <div class="card span-4">
-          <h3><span class="pill">New</span> Quick facts</h3>
-          <p class="muted">Made for creators, students, and devs.</p>
-          <ul class="list" style="margin-top:10px;">
-            <li>🎯 Focused on learning by building</li>
-            <li>🧠 Keyboard friendly</li>
-            <li>🔌 Works fully offline after first load</li>
-            <li>🌐 No sign‑in required to start</li>
-          </ul>
+    </div>
+</section>
+
+<section id="story" class="feature-section">
+    <div class="feature-box" style="padding: 20px;">
+        <div class="feature-content">
+            <h2>Our story</h2>
+            <p>WebEd started at home, on a mobile phone, while working with hundreds of lines of code.
+A simple thought came up — what if this code could be built visually, like a website builder?
+Existing builders were powerful, but they were made mainly for PC users.
+There was no true solution focused on mobile creators.
+That gap became the idea behind WebEd.
+WebEd is a mobile-first website builder, designed to work smoothly on phones.
+At the same time, it’s fully responsive and works seamlessly on desktop as well.
+The goal is simple: make website building easy, fast, and accessible on any device.
+WebEd is built to adapt to creators — not force creators to adapt to tools.</p>
         </div>
-      </div>
-    </section><!-- Why WebEd -->
-<section id="why" class="anchor">
-  <div class="grid">
-    <div class="card span-4">
-      <h3>⚡ Fast & Lightweight</h3>
-      <p class="muted">Runs in the browser, no heavy installs. Perfect for quick prototypes and learning.</p>
     </div>
-    <div class="card span-4">
-      <h3>🎨 Visual + Code</h3>
-      <p class="muted">Design visually and fine‑tune the underlying HTML/CSS/JS without switching tools.</p>
-    </div>
-    <div class="card span-4">
-      <h3>📂 Persistent Projects</h3>
-      <p class="muted">Save & load complete projects. Pick up exactly where you left off.</p>
-    </div>
-  </div>
 </section>
 
-<!-- Story -->
-<section id="story" class="anchor">
-  <div class="grid">
-    <div class="card span-6">
-      <h2>The Story</h2>
-      <p>Hi, I’m <strong>Sahil</strong> — the creator of WebEd. I built WebEd to make website building <em>fun, easy, and accessible</em>. Beginners shouldn’t struggle with complex IDEs, and power users shouldn’t be limited by no‑code tools. WebEd is the balance.</p>
+<section id="whatwedo" class="feature-section">
+    <div class="feature-box" style="padding: 20px;">
+        <div class="feature-content">
+            <h2>What We Do</h2>
+            <p>We provide a fast, flexible, and intuitive web editing experience packed with smart tools such as drag-and-drop layouts, responsive design controls, template presets, integrated code editing, and project management. Whether you're a beginner or a pro, WebEd helps you build websites your way.</p>
+        </div>
     </div>
-    <div class="card span-6">
-      <h2>Mission & Vision</h2>
-      <p>Our mission is to help anyone turn ideas into websites — faster and with more control. We’re continuously improving with features like a <strong>CSS animation editor</strong>, smarter element controls, and export workflows.</p>
-    </div>
-  </div>
 </section>
 
-<!-- Achievements -->
-<section id="achievements" class="anchor">
-  <div class="grid">
-    <div class="card span-4">
-      <h3>🎉 100+ users</h3>
-      <p class="muted">Already exploring and building with WebEd.</p>
+<section id="founder" class="feature-section">
+    <div class="feature-box" style="padding: 20px;">
+        <div class="feature-content">
+            <h2>Meet The Founder</h2>
+            <p>WebEd was founded by Sahil with a vision to simplify web design for everyone. With a strong focus on user experience and innovation, Sahil continues to lead WebEd towards creating a more powerful and accessible web editing ecosystem.</p>
+        </div>
     </div>
-    <div class="card span-4">
-      <h3>🛠️ Feedback‑driven</h3>
-      <p class="muted">Features shaped by real user requests.</p>
-    </div>
-    <div class="card span-4">
-      <h3>🚀 Always improving</h3>
-      <p class="muted">Updates roll out frequently with quality‑of‑life tweaks.</p>
-    </div>
-  </div>
 </section>
 
-<!-- Roadmap -->
-<section id="roadmap" class="anchor">
-  <div class="grid">
-    <div class="card span-8">
-      <h2>Roadmap</h2>
-      <ul class="list" style="margin-top:8px;">
-        <li>🎞️ <strong>CSS Animation Editor</strong>: timeline based keyframes with preview</li>
-        <li>📑 <strong>Tamplates</strong>: No need to start from scratch</li>
-        <li>📦 <strong>Full Project Export</strong>: zip with HTML/CSS/JS + assets</li>
-        <li>📱 <strong>Mobile PWA</strong>: install WebEd on your phone</li>
-      </ul>
+<section id="users" class="feature-section">
+    <div class="feature-box" style="padding: 20px;">
+        <div class="feature-content">
+            <h2>WebEd users</h2>
+            <p>150+ users</p>
+        </div>
+        <div class="feature-content">
+            <h2>Version</h2>
+            <p>beta version (available)</p>
+        </div>
     </div>
-    <div class="card span-4">
-      <h3>Have an idea?</h3>
-      <p class="muted">Your feedback directly shapes what ships next. Drop a suggestion anytime.</p>
-      <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn" href="https://github.com/webed-editor" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://www.indiehackers.com/product/webed" target="_blank" rel="noopener">Indie Hackers</a>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- Contact -->
-<section id="contact" class="anchor">
-  <div class="grid">
-    <div class="card span-6">
-      <h2>Contact</h2>
-      <p>Have questions, found a bug, or want to collaborate? I’d love to hear from you.</p>
-      <p style="margin-top:8px;">
-        <a class="btn primary" href="mailto:jbkamatkar1@gmail.com?subject=Support%20Request&body=Hello%20team,">Email Support</a>
-        <a class="btn" href="https://github.com/webed-editor" target="_blank" rel="noopener">GitHub</a>
-      </p>
+<section id="faq" class="section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+        <div class="faq-item"><strong>Kya WebEd pura browser me run hota hai?</strong><br>Haan, ye 100% client-side tool hai – koi server dependency nahi.</div>
+        <div class="faq-item"><strong>Kya mere projects safe rehte hain?</strong><br>Haan! IndexedDB auto-save system data loss hone nahi deta.</div>
+        <div class="faq-item"><strong>Kya mobile me use kar sakte hain?</strong><br>Yes – UI responsive & touch-friendly hai.</div>
+        <div class="faq-item"><strong>Export kis format me hota hai?</strong><br>Complete HTML, CSS & JS files – ready to upload anywhere.</div>
     </div>
-    <div class="card span-6">
-      <h2>Credits</h2>
-      <p>Built with the open web — HTML, CSS, and JavaScript. Special thanks to early users for feedback and ideas.</p>
-    </div>
-  </div>
 </section>
 
-  <footer class="container" style="outline: none; background-blend-mode: screen; border-radius: 10px; opacity: 1; display: flex; width: 100%;" draggable="true" id="">
-    <div class="" style="outline: none; background-blend-mode: screen; border-radius: 50px; width: 50%; opacity: 1; padding: 20px 10px;" draggable="true" id="">
-      <img src="https://webed-editor.github.io/WebEd/logo.png" style="background-blend-mode: screen; border-radius: 0px; opacity: 1; object-fit: cover; margin: 0px; outline: none; width: 90px; height: 90px;"/>
-      <h3 class="" style="background-blend-mode: screen; font-size: 18.72px; outline: none;" draggable="true">
-        Integrated with
-      </h3>
-      <p class="" style="outline: none; background-blend-mode: screen; font-size: 14px; border-radius: 50px; opacity: 1; color: grey;" draggable="true" id="">
-        Google icons
-      </p>
-      <p class="" style="background-blend-mode: screen; font-size: 14px; border-radius: 50px; opacity: 1; color: grey; outline: none;" id="" draggable="true">
-        Google fonts
-      </p>
-      <p class="" id="" style="background-blend-mode: screen; border-radius: 50px; opacity: 1; color: grey; font-size: 14px; outline: none;" draggable="true">
-        Pixels gallery
-      </p>
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>WebEd</h3>
+            <p>Modern visual editor to build websites without coding. Fast, simple & powerful.</p>
+        </div>
+        
+        <div class="footer-col">
+           <h4>Product</h4>
+           <a href="index.html#features">Features</a>
+           <a href="index.html#preview">How It Works</a>
+           <a href="design.html">Open Editor</a>
+        </div>
+
+       <div class="footer-col">
+           <h4>Company</h4>
+           <a href="about.html">About Us</a>
+           <a href="#contact">Contact</a>
+           <a href="#privacy">Privacy Policy</a>
+           <a href="#terms">Terms & Conditions</a>
+       </div>
+
+       <div class="footer-col">
+           <h4>Resources</h4>
+           <a href="#docs">Documentation</a>
+           <a href="#examples">Examples</a>
+           <a href="#faq">FAQ</a>
+       </div>
     </div>
-    <div class="" style="outline: none; background-blend-mode: screen; border-radius: 50px; width: 50%; opacity: 1; padding: 20px 10px;" draggable="true" id="">
-      <h3 class="" style="outline: none;" draggable="true">
-        Follow on
-      </h3>
-      <a href="https://youtube.com/@webed-webbuildertool?si=vctD1uOKRgUNUvto" style="text-decoration: none; background-blend-mode: screen; border-radius: 50px; opacity: 1; color: grey; font-size: 14px;">
-        Youtube
-      </a>
-    </div>
-  </footer>
+    <div class="footer-bottom">© 2025 WebEd • All Rights Reserved</div>
+</footer>
+
+<script>
+
+function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("show");
+}
+
+window.addEventListener("scroll", function () {
+    const header = document.querySelector(".main-header");
+    const footer = document.querySelector(".main-footer");
+    const floatBtn = document.getElementById("floatingEditorBtn");
+    const hero = document.querySelector(".hero"); // Your hero section
+
+    if (!hero) return;
+
+    const heroHeight = hero.offsetHeight;
+    const scrolled = window.scrollY;
+
+    if (scrolled > heroHeight * 0.5) {
+        header.classList.add("hide-header");
+        floatBtn.classList.add("show-float-btn");
+    } else {
+        header.classList.remove("hide-header");
+        floatBtn.classList.remove("show-float-btn");
+    }
+    if (!footer) return;
+    if (scrolled > footer.offsetHeight * 4) {
+       floatBtn.classList.remove("show-float-btn");
+    }
+});
+</script>
 
 </body>
 </html>
