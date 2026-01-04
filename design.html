@@ -157,10 +157,6 @@
     <button class="button" onclick="openPixelMedia()">Upload from Pixels</button>
     <button onclick="document.getElementById('presets').style.display='block';">Presets</button>
 
-    <!-- 
-    <input type="text" id="customId" placeholder="ID">
-    <input type="text" id="customClass" placeholder="Class">
-    <input type="text" id="customOnclick" placeholder="Onclick JS"> -->
     <input type="file" id="mediaInput" accept="image/*,video/*,audio/*" style="display: none;" onchange="handleMediaUpload(event)">
   </div>
 </div>
@@ -236,6 +232,13 @@
    <button class="buttonnn" onclick="copyStyle()">Copy</button>
    <button class="buttonnn" onclick="pasteStyle()">Paste</button>
    <button class="buttonnn" id="addPresets">Add Preset</button>
+   <select id="respMode">
+      <option value="default">default</option>
+      <option value="320">phone</option>
+      <option value="768">tablet</option>
+      <option value="1024">computer</option>
+      <option value="hv">hover</option>
+   </select>
  <div style="overflow: auto;">
   <strong>Naming</strong>
   <input class="inputtt" type="text" id="editId" placeholder="New ID">
