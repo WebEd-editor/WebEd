@@ -1,4 +1,4 @@
-const layersContainer = document.getElementById("layers");
+    const layersContainer = document.getElementById("layers");
     const addLayerBtn = document.getElementById("addLayer");
     const removeAllBtn = document.getElementById("removeAll");
 
@@ -221,7 +221,12 @@ const layersContainer = document.getElementById("layers");
     function updateBackground() {
       if (!currentEditingElement) return;
       if (!layers || layers.length === 0) {
-        currentEditingElement.style.background = '';
+        let v = document.getElementById('respMode').value;
+        if (v === "1024" || v === "768" || v === "320" || v === "hv") {
+          respStyle(document.getElementById('respMode').value);
+          return;
+        }  
+        if (v === "default"){currentEditingElement.style.background = '';}
         return;
       }
 
@@ -245,7 +250,12 @@ const layersContainer = document.getElementById("layers");
         return '';
       }).filter(Boolean);
 
-      currentEditingElement.style.background = bgList.join(', ');
+      let v = document.getElementById('respMode').value;
+      if (v === "1024" || v === "768" || v === "320" || v === "hv") {
+        respStyle(document.getElementById('respMode').value, bgList.join(', '));
+        return;
+      }   
+      if (v === "default"){ currentEditingElement.style.background = bgList.join(', ');}
     }
 
     /* ---------- UI: color-stop UI without percent input (we keep parsed pos if present) ---------- */
