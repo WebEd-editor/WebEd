@@ -71,9 +71,22 @@ function precon(w){
 	 const p = document.querySelector('ppp');
 	 if(w === "1024"){
 	 		p.style.width = "1024px";
+	 		document.getElementById('respMode').value = w;
+	 		respMode(w);
 	 }else if(w === "768"){
 	 		p.style.width = "768px";
+	 		document.getElementById('respMode').value = w;
+	 		respMode(w);
 	 }else if(w === "320"){
 	 		p.style.width = "320px";
+	 		document.getElementById('respMode').value = w;
+	 		respMode(w);
+	 }else if(w === "default"){
+	 		document.getElementById('respMode').value = w;
+	 	  console.log('apply default styles.');
+	 }else if(w === "hv"){
+	 		document.getElementById('respMode').value = w;
+	 		respMode(w);
 	 }
 }
+
