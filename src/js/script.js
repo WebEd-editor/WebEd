@@ -914,8 +914,6 @@ function respMode(w) {
     else if (w === "hv") arr = sthover;
     else if (w === "default") return;
 
-    console.log(JSON.stringify(arr, null, 3));
-
     // Check if element already exists in this mode
     let exist = findRespEntry(arr, respid);
 
@@ -971,8 +969,6 @@ function respStyle(w, v1) {
     else if (w === "320") arr = resp320;
     else if (w === "hv") arr = sthover;
     else if (w === "default") return;
-
-    console.log("UPDATED STYLES:", JSON.stringify(arr, null, 3), w);
 
     let item = findRespEntry(arr, respid);
     console.log("item is \n"+item);
@@ -1057,8 +1053,6 @@ function respStyle(w, v1) {
     lazyReapetable(item, "filter", "filter");
     lazyReapetable(item, "clip-path", "clipPath");
 
-    console.log("UPDATED STYLES:", JSON.stringify(arr, null, 3));
-
     let finalStyle = "";finalStyle += generateResponsiveCSS(resp1024, 1024);finalStyle += generateResponsiveCSS(resp768, 768);finalStyle += generateResponsiveCSS(resp320, 320);
     var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
 
@@ -1126,14 +1120,6 @@ function loadGoogleFont(fontN) {
   link.rel = "stylesheet";
   iframeDoc.head.appendChild(link);
 }
-/*
-// links for Google icons integration 
-const ICONS = [
-  "home", "menu", "search", "account_circle", "delete", "add", "edit", "favorite",
-  "star", "settings", "check", "close", "visibility", "lock", "camera", "send",
-  "download", "info", "warning", "help", "language", "face", "phone", "email", "subscription", "add_circle",
-  "thumb_down", "thumb_up","share","arrow_back","shopping_cart"
-];*/
 
 const ICONS = [
   "home","search","bookmark","menu","settings","account_circle","favorite","favorite_border","delete","add","close",
