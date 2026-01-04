@@ -527,6 +527,7 @@ function redoEdit() {
    document.getElementById("opct").value = 1;
   function openEdit(el) {
     currentEditingElement = el;
+     document.getElementById('respMode').value = "default";
     document.getElementById('editId').value = el.id || '';
     document.getElementById('editClass').value = el.className || '';
     document.getElementById('editSrc').value = el.src || '';
@@ -624,7 +625,13 @@ function redoEdit() {
   }
 function applyEdit() {
     if (!currentEditingElement) return;
-
+    
+    if (document.getElementById('respMode').value === "default") {
+       console.log("default");
+    }else {
+       respStyle(document.getElementById('respMode').value);
+       return;
+    }
     currentEditingElement.id = document.getElementById('editId').value.trim();
     currentEditingElement.className = document.getElementById('editClass').value.trim();
     currentEditingElement.src = document.getElementById('editSrc').value.trim();
@@ -720,7 +727,22 @@ function applyEdit() {
     saveHistory();    
    // Notify("Applying All css Properties", "s");
   }
-  function apply_txtalg(vv){
+function apply_txtalg(vv){
+     let v = document.getElementById('respMode').value;
+     if (v === "1024" || v === "768" || v === "320" || v === "hv") {
+        const respid = currentEditingElement.dataset.respid; let arr; 
+        if (v === "1024") arr = resp1024;else if (v === "768") arr = resp768;else if (v === "320") arr = resp320;else if (v === "hv") arr = sthover;
+
+        let item = findRespEntry(arr, respid);
+        if (!item) {
+            console.log("item not found in array");
+            return;
+        }
+        setStyleValue(item, "text-align", document.querySelector('.'+vv).getAttribute('txt-alg'));
+        let finalStyle = "";finalStyle += generateResponsiveCSS(resp1024, 1024);finalStyle += generateResponsiveCSS(resp768, 768);finalStyle += generateResponsiveCSS(resp320, 320);var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
+        applyResponsiveCSS(finalStyle);applyHoverCSS(finalStylehv);
+        return;
+     }   
      currentEditingElement.style.textAlign = document.querySelector('.'+vv).getAttribute('txt-alg') || '';
      saveHistory();
   }
@@ -734,16 +756,362 @@ function fontS(sig) {
   } else if (sig === "decr") {
     size -= 2;
   }
+  let v = document.getElementById('respMode').value;
+  if (v === "1024" || v === "768" || v === "320" || v === "hv") {
+        const respid = currentEditingElement.dataset.respid; let arr; 
+        if (v === "1024") arr = resp1024;else if (v === "768") arr = resp768;else if (v === "320") arr = resp320;else if (v === "hv") arr = sthover;
+        let item = findRespEntry(arr, respid);
+        if (!item) {
+            console.log("item not found");
+            return;
+        }
+        setStyleValue(item, "font-size", (size+"px"));
+        let finalStyle = "";finalStyle += generateResponsiveCSS(resp1024, 1024);finalStyle += generateResponsiveCSS(resp768, 768);finalStyle += generateResponsiveCSS(resp320, 320);var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
+        applyResponsiveCSS(finalStyle);applyHoverCSS(finalStylehv);
+        return;
+  }
   t.style.fontSize = size + "px";
   saveHistory();
 }
 function txtdec(val){
+   let v = document.getElementById('respMode').value;
+   if (v === "1024" || v === "768" || v === "320" || v === "hv") {
+          const respid = currentEditingElement.dataset.respid; let arr; 
+          if (v === "1024") arr = resp1024;else if (v === "768") arr = resp768;else if (v === "320") arr = resp320;else if (v === "hv") arr = sthover;
+          let item = findRespEntry(arr, respid);
+          if (!item) {
+              console.log("item not found");
+              return;
+          }
+          setStyleValue(item, "text-decoration", val);
+          let finalStyle = "";finalStyle += generateResponsiveCSS(resp1024, 1024);finalStyle += generateResponsiveCSS(resp768, 768);finalStyle += generateResponsiveCSS(resp320, 320);var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
+          applyResponsiveCSS(finalStyle);applyHoverCSS(finalStylehv);
+          return;
+   }
    currentEditingElement.style.textDecoration = val;
    saveHistory();
 }
-function fnstl(){currentEditingElement.style.fontStyle = (currentEditingElement.style.fontStyle === 'normal') ? 'italic' : 'normal'; if(currentEditingElement.style.fontStyle === 'normal'){document.getElementById('fnstlbtn').style.background='transparent'}else{document.getElementById('fnstlbtn').style.background='rgba(100,100,100,.5)'}} 
-function fnwet(){currentEditingElement.style.fontWeight = (currentEditingElement.style.fontWeight < 600) ? '600' : '500'; if(currentEditingElement.style.fontWeight < 600){document.getElementById('fnwetbtn').style.background='transparent'}else{document.getElementById('fnwetbtn').style.background='rgba(100,100,100,.5)'} }
+function fnstl(){
+  let v = document.getElementById('respMode').value;
+  if (v === "1024" || v === "768" || v === "320" || v === "hv") {
+          const respid = currentEditingElement.dataset.respid; let arr; 
+          if (v === "1024") arr = resp1024;else if (v === "768") arr = resp768;else if (v === "320") arr = resp320;else if (v === "hv") arr = sthover;
+          let item = findRespEntry(arr, respid);
+          if (!item) {
+              return;
+          }
+          setStyleValue(item, "font-style", ((currentEditingElement.style.fontStyle === 'normal') ? 'italic' : 'normal'));
+          let finalStyle = "";finalStyle += generateResponsiveCSS(resp1024, 1024);finalStyle += generateResponsiveCSS(resp768, 768);finalStyle += generateResponsiveCSS(resp320, 320);var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
+          applyResponsiveCSS(finalStyle);applyHoverCSS(finalStylehv);
+          return;
+  }
+  currentEditingElement.style.fontStyle = (currentEditingElement.style.fontStyle === 'normal') ? 'italic' : 'normal'; if(currentEditingElement.style.fontStyle === 'normal'){document.getElementById('fnstlbtn').style.background='transparent'}else{document.getElementById('fnstlbtn').style.background='rgba(100,100,100,.5)'}
+} 
+function fnwet(){
+  let v = document.getElementById('respMode').value;
+  if (v === "1024" || v === "768" || v === "320" || v === "hv") {
+          const respid = currentEditingElement.dataset.respid; let arr; 
+          if (v === "1024") arr = resp1024;else if (v === "768") arr = resp768;else if (v === "320") arr = resp320;else if (v === "hv") arr = sthover;
+          let item = findRespEntry(arr, respid);
+          if (!item) {
+              return;
+          }
+          setStyleValue(item, "font-weight", ((currentEditingElement.style.fontWeight < 600) ? '600' : '500'));
+          let finalStyle = "";finalStyle += generateResponsiveCSS(resp1024, 1024);finalStyle += generateResponsiveCSS(resp768, 768);finalStyle += generateResponsiveCSS(resp320, 320);var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
+          applyResponsiveCSS(finalStyle);applyHoverCSS(finalStylehv);
+          return;
+  }
+  currentEditingElement.style.fontWeight = (currentEditingElement.style.fontWeight < 600) ? '600' : '500'; if(currentEditingElement.style.fontWeight < 600){document.getElementById('fnwetbtn').style.background='transparent'}else{document.getElementById('fnwetbtn').style.background='rgba(100,100,100,.5)'} 
+}
 
+/*responsive modes*/
+document.getElementById("respMode").addEventListener('input', ()=>{
+   let m = document.getElementById('respMode').value;
+   precon(m);
+});
+
+let resp1024 = [];
+let resp768 = [];
+let resp320 = [];
+let sthover = [];
+
+function generateResponsiveCSS(data, maxWidth) {
+  let css = `/* webed responsive styles */\n@media (max-width: ${maxWidth}px) {\n`;
+
+  data.forEach(item => {
+    css += `  [data-respid="${item.id}"] {\n`;
+
+    item.style.forEach(styleObj => {
+      const prop = Object.keys(styleObj)[0];
+      const value = styleObj[prop];
+      if(value === ""){
+         return;
+      }else{
+         css += `    ${prop}: ${value} !important;\n`;
+      }
+    });
+
+    css += `  }\n`;
+  });
+
+  css += `}\n\n`;
+  return css;
+}
+
+function generateHoverCSS(data) {
+  let css = `/* webed hover styles */\n`;
+
+  data.forEach(item => {
+    css += `[data-respid="${item.id}"]:hover {\n`;
+    item.style.forEach(styleObj => {
+      const prop = Object.keys(styleObj)[0];
+      const value = styleObj[prop];
+      if(value === "" || value === "undefined"){
+         return;
+      }else{
+         css += `  ${prop}: ${value} !important;\n`;
+      }
+    });
+    css += `}\n`;
+  });
+  return css;
+}
+
+function getElementRespId(el) {
+    if (!el.dataset.respid) {
+        el.dataset.respid = crypto.randomUUID();
+    }
+    return el.dataset.respid;
+}
+
+function findRespEntry(arr, respid) {
+    return arr.find(item => item.id === respid);
+}
+
+function setStyleValue(item, prop, value) {
+    let exist = item.style.find(s => s[prop] !== undefined);
+
+    if (exist) {
+        exist[prop] = value;  // update
+    } else {
+        item.style.push({ [prop]: value }); // add new
+    }
+}
+
+function getandputst(so, sk, i) {
+   let rclr = so.style.find(o => o[sk] !== undefined);
+   document.getElementById(i).value = rclr ? rclr[sk] : "";
+}
+
+function respMode(w) {
+
+    const respid = getElementRespId(currentEditingElement);
+    let arr;
+
+    if (w === "1024") arr = resp1024;
+    else if (w === "768") arr = resp768;
+    else if (w === "320") arr = resp320;
+    else if (w === "hv") arr = sthover;
+    else if (w === "default") return;
+
+    console.log(JSON.stringify(arr, null, 3));
+
+    // Check if element already exists in this mode
+    let exist = findRespEntry(arr, respid);
+
+    if (!exist) {
+        // Create a new responsive record
+        arr.push({
+            id: respid,
+            style: []
+        });
+    }
+
+    getandputst(exist, "color", "clr");
+    let rfnsz = exist.style.find(o => o["font-size"] !== undefined);
+    let txtalg = exist.style.find(o => o["text-align"] !== undefined);
+    let rtxtdec = exist.style.find(o => o["text-decoration"] !== undefined);
+    getandputst(exist, "text-transform", "txttsfm");
+    getandputst(exist, "line-height", "lnhet");
+    getandputst(exist, "letter-spacing", "ltsp");
+    
+    getandputst(exist, "margin", "mar");
+    getandputst(exist, "padding", "pad");
+    getandputst(exist, "border", "bor");
+    getandputst(exist, "border-radius", "borrd");
+    getandputst(exist, "box-sizing", "bxsz");
+    getandputst(exist, "width", "wid");
+    getandputst(exist, "height", "hei");
+    getandputst(exist, "max-width", "mwid");
+    getandputst(exist, "min-height", "mnhei");
+
+    let rbg = exist.style.find(o => o["background"] !== undefined);
+    getandputst(exist, "object-fit", "objectFit");
+    getandputst(exist, "opacity", "opct");
+    
+    getandputst(exist, "z-index", "zindex");
+    getandputst(exist, "display", "dspl");
+    getandputst(exist, "flex-direction", "flxd");
+    
+}
+
+function lazyReapetable(item, prop, id) {
+   const resp = document.getElementById(id).value;
+   setStyleValue(item, prop, resp);
+   getandputst(item, prop, id);
+}
+
+function respStyle(w, v1) {
+
+    const respid = currentEditingElement.dataset.respid;
+    let arr;
+
+    if (w === "1024") arr = resp1024;
+    else if (w === "768") arr = resp768;
+    else if (w === "320") arr = resp320;
+    else if (w === "hv") arr = sthover;
+    else if (w === "default") return;
+
+    console.log("UPDATED STYLES:", JSON.stringify(arr, null, 3), w);
+
+    let item = findRespEntry(arr, respid);
+    console.log("item is \n"+item);
+    if (!item) {
+        console.log("item not found in array");
+        return;
+    }
+
+    const respClr = document.getElementById('clr').value;
+    const respTxttsfm = document.getElementById('txttsfm').value;
+    const respLnhet = document.getElementById('lnhet').value;
+    const respLtsp = document.getElementById('ltsp').value;
+    const respMar = document.getElementById('mar').value;
+    const respPad = document.getElementById('pad').value;
+    const respBor = document.getElementById('bor').value;
+    const respBorrd = document.getElementById('borrd').value;
+    const respBxsz = document.getElementById('bxsz').value;
+    const respWid = document.getElementById('wid').value;
+    const respHei = document.getElementById('hei').value;
+    const respMwid = document.getElementById('mwid').value;
+    const respMnhei = document.getElementById('mnhei').value;
+    const respObjectFit = document.getElementById('objectFit').value;
+    const respOpct = document.getElementById('opct').value;
+    const respZindex = document.getElementById('zindex').value;
+
+    setStyleValue(item, "color", respClr);
+    setStyleValue(item, "text-transform", respTxttsfm);
+    setStyleValue(item, "line-height", respLnhet);
+    setStyleValue(item, "letter-spacing", respLtsp);
+    setStyleValue(item, "margin", respMar);
+    setStyleValue(item, "padding", respPad);
+    setStyleValue(item, "border", respBor);
+    setStyleValue(item, "border-radius", respBorrd);
+    setStyleValue(item, "box-sizing", respBxsz);
+    setStyleValue(item, "width", respWid);
+    setStyleValue(item, "height", respHei);
+    setStyleValue(item, "max-width", respMwid);
+    setStyleValue(item, "min-height", respMnhei);
+    if (v1) {setStyleValue(item, "background", v1);}
+    setStyleValue(item, "object-fit", respObjectFit);
+    setStyleValue(item, "opacity", respOpct);
+    setStyleValue(item, "z-index", respZindex);
+
+    getandputst(item, "color", "clr");
+    let rfnsz = item.style.find(o => o["font-size"] !== undefined);
+    let rtxtalg = item.style.find(o => o["text-align"] !== undefined);
+    let rtxtdec = item.style.find(o => o["text-decoration"] !== undefined);
+    getandputst(item, "text-transform", "txttsfm");
+    getandputst(item, "line-height", "lnhet");
+    getandputst(item, "letter-spacing", "ltsp");
+    
+    getandputst(item, "margin", "mar");
+    getandputst(item, "padding", "pad");
+    getandputst(item, "border", "bor");
+    getandputst(item, "border-radius", "borrd");
+    getandputst(item, "box-sizing", "bxsz");
+    getandputst(item, "width", "wid");
+    getandputst(item, "height", "hei");
+    getandputst(item, "max-width", "mwid");
+    getandputst(item, "min-height", "mnhei");
+
+    let rbg = item.style.find(o => o["background"] !== undefined);
+    getandputst(item, "object-fit", "objectFit");
+    getandputst(item, "opacity", "opct");
+    
+    getandputst(item, "z-index", "zindex");
+
+    lazyReapetable(item, "display", "dspl");
+    lazyReapetable(item, "float", "flt");
+    lazyReapetable(item, "overflow", "ovrfl");
+    lazyReapetable(item, "visibility", "vsblt");
+    lazyReapetable(item, "flex-direction", "flxd");
+    lazyReapetable(item, "justify-content", "jstfc");
+    lazyReapetable(item, "align-items", "algni");
+    lazyReapetable(item, "flex-wrap", "flxw");
+    lazyReapetable(item, "grid-template-column", "gtc");
+    lazyReapetable(item, "grid-template-row", "gtr");
+    lazyReapetable(item, "gap", "gap");
+    lazyReapetable(item, "transform", "trnsfm");
+    lazyReapetable(item, "animation", "anmtn");
+    lazyReapetable(item, "box-shadow", "bxshd");
+    lazyReapetable(item, "filter", "filter");
+    lazyReapetable(item, "clip-path", "clipPath");
+
+    console.log("UPDATED STYLES:", JSON.stringify(arr, null, 3));
+
+    let finalStyle = "";finalStyle += generateResponsiveCSS(resp1024, 1024);finalStyle += generateResponsiveCSS(resp768, 768);finalStyle += generateResponsiveCSS(resp320, 320);
+    var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
+
+    //console.log(finalStyle);
+    applyResponsiveCSS(finalStyle);
+    applyHoverCSS(finalStylehv);
+}
+
+function applyResponsiveCSS(finalStyle) {
+  const iframe = document.getElementById("canvas");
+  if (!iframe) return;
+
+  const doc = iframe.contentDocument || iframe.contentWindow.document;
+  if (!doc) return;
+
+  const head = doc.head || doc.getElementsByTagName("head")[0];
+  if (!head) return;
+
+  let styleTag = doc.getElementById("responsive-style");
+
+  // create if not exists
+  if (!styleTag) {
+    styleTag = doc.createElement("style");
+    styleTag.id = "responsive-style";
+    head.appendChild(styleTag);
+  }
+
+  styleTag.innerHTML = finalStyle;
+}
+
+function applyHoverCSS(finalStylehv) {
+  const iframe = document.getElementById("canvas");
+  if (!iframe) return;
+
+  const doc = iframe.contentDocument || iframe.contentWindow.document;
+  if (!doc) return;
+
+  const head = doc.head || doc.getElementsByTagName("head")[0];
+  if (!head) return;
+
+  let styleTag = doc.getElementById("hover-style");
+
+  // create if not exists
+  if (!styleTag) {
+    styleTag = doc.createElement("style");
+    styleTag.id = "hover-style";
+    head.appendChild(styleTag);
+  }
+
+  styleTag.innerHTML = finalStylehv;
+}
+
+/*------------*/
 
 // links for css fonts
 function loadGoogleFont(fontN) {
