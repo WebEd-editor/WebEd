@@ -248,10 +248,18 @@ function saveProject() {
   const tx = db.transaction('projects', 'readwrite');
   const store = tx.objectStore('projects');
 
+  let respData = {
+     resp1024,
+     resp768,
+     resp320,
+     sthover
+  };
+    
   store.put({
     name: currentPro,
     html: fullHTML,
-    files: customFiles
+    files: customFiles,
+    reponsive: respData
   }).onsuccess = () => {
     // showPopup("Saved", `Your Project (${currentPro}) was auto-saved.`, true, false);
     listAllProjects();
@@ -305,6 +313,18 @@ function loadProject(name) {
       tag.textContent = customFiles[file].content;
       tag.dataset.custom = 'true';
       document.body.appendChild(tag);
+    }
+
+    if(data.responsive) {
+       resp1024.length =0; resp768.length =0; resp320.length =0; sthover.length =0;
+       const { resp1024, resp768, resp320 } = data.responsive;
+       let finalStyle = "";
+       finalStyle += generateResponsiveCSS(resp1024, 1024);
+       finalStyle += generateResponsiveCSS(resp768, 768);
+       finalStyle += generateResponsiveCSS(resp320, 320);
+       applyResponsiveCSS(finalStyle);
+       var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
+       applyHoverCSS(finalStylehv);
     }
 
     updateFileList();
