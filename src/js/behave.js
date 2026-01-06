@@ -95,6 +95,7 @@ showClickOver();
   Wlabel.style.background = "purple";
   Wlabel.style.padding = "5px 10px";
   Wlabel.style.borderRadius = "3px";
+  Wlabel.className="behWlabel"; 
   controls.appendChild(Wlabel);
 
   // ✅ Resize Handles (same as before)
@@ -107,6 +108,7 @@ showClickOver();
     handle.style.border = "1px solid white";
     handle.style.position = "absolute";
     handle.style.pointerEvents = "auto";
+    handle.className="behHandle"; 
 
     if (corner.includes("n")) handle.style.top = "-5px";
     if (corner.includes("s")) handle.style.bottom = "-5px";
@@ -311,8 +313,10 @@ function updateOverlay() {
    }
    //✅
    else if(pp === 'static' && cp === 'static'){
-      o.style.top=(parseInt(r.y)+parseInt(getComputedStyle(selectedEl).borderWidth))+'px';
-      o.style.left=(parseInt(r.x)+parseInt(getComputedStyle(selectedEl).borderWidth))+'px';
+      o.style.top="";o.style.left="50%";o.style.transform="translateX(-50%)";o.style.bottom="70px";
+      o.querySelectorAll('.behHandle').forEach(h=>{ h.style.display="none" });
+      o.querySelector('.behWlabel').style.display="none";
+      o.style.border="none";
    }
       //✅
       else if(pp === 'relative' && cp === 'relative'){
