@@ -313,7 +313,7 @@ function updateOverlay() {
    }
    //✅
    else if(pp === 'static' && cp === 'static'){
-      o.style.top="";o.style.left="50%";o.style.transform="translateX(-50%)";o.style.bottom="70px";
+      o.style.top="";o.style.left="50%";o.style.transform="translateX(-50%)";o.style.bottom="85px";o.style.position="fixed";
       o.querySelectorAll('.behHandle').forEach(h=>{ h.style.display="none" });
       o.querySelector('.behWlabel').style.display="none";
       o.style.border="none";
