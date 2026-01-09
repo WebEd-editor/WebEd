@@ -357,6 +357,7 @@ function updateTree() {
 
   const canvasDoc = document.getElementById('canvas').contentDocument;
   buildTree(canvasDoc.documentElement, tree);
+  rr();
 }
 
 function isValidDropTarget(target, dragged) {
