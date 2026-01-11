@@ -67,6 +67,7 @@ document.getElementById("openDesign").addEventListener("click", () => {
   width: 180px;
 }
 </style>
+              <h3 style="margin: 0 10px;">Templates</h3>
               <div id="templateList"></div>
            </div>
         </div>
