@@ -233,13 +233,14 @@ async function loadTemplates() {
       <iframe id="${iframeId}"
         style="
           width:100%; 
-          height:160px; 
+          height:50%; 
           border:1px solid #ccc; 
           background:white;
           pointer-events:none;
           overflow:hidden;
-          transform:scale(0.1);
+          transform:scale(1);
           transform-origin:0 0;
+          zoom: 60%;
         ">
       </iframe>
 
