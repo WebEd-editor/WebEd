@@ -227,23 +227,35 @@
 
 <div id="editModal" class="tab drag-el">
    <div class="drag-handle">__</div>
-   <button class="buttonnn" onclick="applyEdit()" style="position: sticky;top: 20px;">Save</button>
-   <button class="buttonnn" style="background: #e74c3c;position: sticky;top: 20px;" onclick="MyClose('editModal')">Cancel</button>
-   <button class="buttonnn" onclick="copyStyle()">Copy</button>
-   <button class="buttonnn" onclick="pasteStyle()">Paste</button>
-   <button class="buttonnn" id="addPresets">Add Preset</button>
-   <select id="respMode">
-      <option value="default">default</option>
-      <option value="320">phone</option>
-      <option value="768">tablet</option>
-      <option value="1024">computer</option>
-      <option value="hv">hover</option>
-   </select>
- <div style="overflow: auto;">
-  <strong>Naming</strong>
-  <input class="inputtt" type="text" id="editId" placeholder="New ID">
-  <input class="inputtt" type="text" id="editClass" placeholder="New Class">
-  <input class="inputtt" type="text" id="editSrc" placeholder="Enter Source">
+   <div style="position: sticky; top: 20px; background: #333;">
+      <button class="buttonnn" onclick="applyEdit()">Save</button>
+      <button class="buttonnn" style="background: #e74c3c;position: sticky;top: 20px;" onclick="MyClose('editModal')">Cancel</button>
+      <button class="buttonnn" onclick="openco('styleco')">style</button>
+      <button class="buttonnn" onclick="openco('attrco')">attr</button>
+   </div>
+   <script>function openco(c) {document.querySelectorAll('.co').forEach(c=>{c.style.display='none'}); document.querySelector('.'+c).style.display='block';}</script>
+   <p id="tagn">tag name</p>
+
+ <div class="attrco co" style="display:none; overflow: auto;">
+    <p>Attributes</p>
+     <input style="display:none;" class="inputtt" type="text" id="editId" placeholder="New ID">
+     <input style="display:none;" class="inputtt" type="text" id="editClass" placeholder="New Class">
+     <input style="display:none;" class="inputtt" type="text" id="editSrc" placeholder="Enter Source">
+     <div class="attrList"></div>
+     <button id="addAttr">+ Add</button>
+ </div>
+
+ <div class="styleco co" style="overflow: auto;">
+     <p>Styles</p>
+     <select id="respMode">
+         <option value="default">default</option>
+         <option value="320">phone</option>
+         <option value="768">tablet</option>
+         <option value="1024">computer</option>
+         <option value="hv">hover</option>
+     </select>
+     <button class="buttonnn" onclick="copyStyle()">Copy</button>
+     <button class="buttonnn" onclick="pasteStyle()">Paste</button>
   
   <!-- TEXT & FONT -->
   <details>
