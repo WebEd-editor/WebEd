@@ -525,9 +525,35 @@ function redoEdit() {
     document.getElementById("canvas").contentDocument.body.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
   }
 
+function loadAttr(el){
+   const attrs = Array.from(el.attributes);
+   const list = document.querySelector('.attrList');
+   list.innerHTML='';
+   attrs.forEach(attr => {
+      const l = document.createElement('label');l.textContent = attr.name;
+      const i = document.createElement('input');i.value = attr.value;i.oninput = () => { el.setAttribute(attr.name, i.value) }; i.style="background: #474747; color: white; border: none;";
+      const del = document.createElement('button'); del.textContent = 'delete';del.onclick = () => { el.removeAttribute(attr.name); loadAttr(el); }; del.style="background:  #e74c3c;";
+      const d = document.createElement('div');d.style="display: grid; grid-template-columns: 25% 50% 25%; gap: 5px;";
+      d.appendChild(l); d.appendChild(i); d.appendChild(del); list.appendChild(d);
+      if(attr.name==='style' || attr.name==='data-editable' || attr.name==='contenteditable' || attr.name==='draggable' || attr.name==='data-respid') list.removeChild(d);
+      if(attr.name==='class') d.removeChild(del);
+   });
+   document.getElementById('addAttr').onclick = () => { addattr(el) }
+}
+
+function addattr(el) {
+   let n = prompt('name of attribute');
+   let v = prompt('attribute value');
+   el.setAttribute(n, v);
+   loadAttr(el);
+}
+
    document.getElementById("opct").value = 1;
   function openEdit(el) {
     currentEditingElement = el;
+
+     loadAttr(el);
+     document.getElementById('tagn').textContent = el.tagName.toUpperCase();
      document.getElementById('respMode').value = "default";
     document.getElementById('editId').value = el.id || '';
     document.getElementById('editClass').value = el.className || '';
