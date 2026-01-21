@@ -66,11 +66,11 @@ async function rr() {
     document.getElementById("htmlcssjs").textContent = '';
     document.getElementById("htmlcssjs").textContent = html4;
 
-    console.log("Conversion stats:", data.stats);
+    // console.log("Conversion stats:", data.stats);
 
   } catch (err) {
     console.error(err);
-    alert("Failed to generate code");
+    // alert("Failed to generate code");
   }
 }
 
