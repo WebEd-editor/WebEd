@@ -572,7 +572,7 @@ function addattr(el) {
     document.getElementById('ltsp').value = el.style.letterSpacing.replace('px', '') || '';
     
     // 2.
-    document.getElementById('mar').value = el.style.margin || '';
+    document.getElementById('mar').value = el.style.margin.trim() || '';
     document.getElementById('pad').value = el.style.padding || '';
     document.getElementById('bor').value = el.style.border || '';
     document.getElementById('borrd').value = el.style.borderRadius.replace('px', '') || '';
@@ -685,7 +685,7 @@ function applyEdit() {
     currentEditingElement.style.lineHeight = document.getElementById('lnhet').value || '';
     currentEditingElement.style.letterSpacing = document.getElementById('ltsp').value +'px' || '';
     
-    currentEditingElement.style.margin = document.getElementById('mar').value +'px' || '';
+    currentEditingElement.style.margin = document.getElementById('mar').value.trim() || '';
     currentEditingElement.style.padding = document.getElementById('pad').value +'px' || '';
     currentEditingElement.style.border = document.getElementById('bor').value || '';
     currentEditingElement.style.borderRadius = document.getElementById('borrd').value +'px' || '';
