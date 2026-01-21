@@ -14,8 +14,11 @@ function clickShowOverlay(){
 function showOverlay(target) {
   removeOverlay();
   selectedEl = target;
-  selectedEl.style.outline = "2px solid purple";
+
   const doc = iframe.contentDocument;  
+  
+  doc.querySelectorAll('*').forEach(e => { e.style.outline='none' });
+  selectedEl.style.outline = "2px solid purple";
 
   if(!overlay) overlay = doc.createElement("div");
   overlay.className = 'behOverlay';
