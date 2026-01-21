@@ -14,6 +14,7 @@ function clickShowOverlay(){
 function showOverlay(target) {
   removeOverlay();
   selectedEl = target;
+  selectedEl.style.outline = "2px solid purple";
   const doc = iframe.contentDocument;  
 
   if(!overlay) overlay = doc.createElement("div");
