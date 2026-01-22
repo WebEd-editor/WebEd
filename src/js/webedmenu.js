@@ -15,7 +15,7 @@ function menuload(){
          </button>
 <script>
 document.getElementById("openDesign").addEventListener("click", () => {
-  gtag('event', 'desitn_is_opened', {
+  gtag('event', 'design_is_opened', {
     event_category: 'editor',
     event_label: 'design_panel',
   });
