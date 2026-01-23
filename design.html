@@ -32,6 +32,8 @@
    
    <title>WebEd - Website editor</title>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+   <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css" />
+   <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
    <!-- Load Ace Editor -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.23.1/ace.js"></script>
    <link rel="icon" href="logo.png" type="image/png"/>
@@ -96,12 +98,12 @@
       <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M144-264v-72h672v72H144Zm0-180v-72h672v72H144Zm0-180v-72h672v72H144Z"/></svg>
    </button>
    
-   <button id="addElementEv" data-title="Add Elements" onclick="MyOpen('editor-wrapper')" class="footBtn">
+   <button id="addElementBtn" data-title="Add Elements" onclick="MyOpen('editor-wrapper')" class="footBtn">
       <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF"><path d="M444-189v-270L216-591v270l228 132Zm72 0 228-131v-270L516-459v270Zm-36-333 235-135-236-135-234 135 235 135ZM180-258q-17.1-9.88-26.55-26.06Q144-300.23 144-320v-320q0-19.77 9.45-35.94Q162.9-692.12 180-702l263-152q17-10 37-10t37 10l263 152q17.1 9.88 26.55 26.06Q816-659.77 816-640v320q0 19.77-9.45 35.94Q797.1-267.88 780-258L516-105q-17.13 10-36.07 10Q461-95 444-105L180-258Zm300-222Z"/></svg>
    </button>
 
 <script>
-document.getElementById("addElementEv").addEventListener("click", () => {
+document.getElementById("addElementBtn").addEventListener("click", () => {
   gtag('event', 'addElementEv_is_opened', {
     event_category: 'editor',
     event_label: 'addEl_panel',
