@@ -504,3 +504,46 @@ input[type="number"] {
 .layer{ display:flex;flex-direction:column;border:2px solid black; }
 .gradient-controls{ display:flex;flex-direction:column; }
 .gradient-controls > div{ width: 120px;display:flex;overflow:auto; }
+
+
+/* editor guid */
+.introjs-tooltip {
+      background: #020617 !important;
+      color: #e5e7eb !important;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    .introjs-tooltip-title {
+      color: #38bdf8 !important;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .introjs-tooltiptext {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .introjs-button {
+      background: #2563eb !important;
+      color: #fff !important;
+      border-radius: 6px !important;
+      border: none !important;
+      text-shadow: none !important;
+    }
+
+    .introjs-button:hover {
+      background: #1d4ed8 !important;
+    }
+
+    .introjs-skipbutton {
+      color: #94a3b8 !important;
+    }
+
+    .introjs-arrow {
+      border-color: #020617 !important;
+    }
+
+
+
