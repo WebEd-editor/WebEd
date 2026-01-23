@@ -278,3 +278,95 @@ function useTemplate(name, htmlCode) {
    showClickOver();
    alert(name + ' Template Loaded');
 }
+
+
+
+function startTour() {
+  if(localStorage.getItem('tour')) return;
+  localStorage.setItem('tour', 'true');
+    introJs().setOptions({
+      showProgress: true,
+      showBullets: false,
+      exitOnOverlayClick: false,
+      steps: [
+        {
+          intro: "Welcome to WebEd! Get start mini tour."
+        },
+        {
+          element: '#openDesign',
+          intro: 'Click on the open editor button to design your website.',
+          position: 'right'
+        },
+      ]
+    }).oncomplete(() => {
+      document.getElementById("webedmenu").style.display = "none";
+
+      introJs().setOptions({
+          showProgress: true,
+          showBullets: false,
+          exitOnOverlayClick: false,
+          steps: [
+            {
+              element: '#canvas',
+              intro: 'This is your website preview.',
+              position: 'left'
+            },
+            {
+              element: '#addElementBtn',
+              intro: 'Click add elements tab.',
+              position: 'top'
+            },
+          ]
+        }).oncomplete(() => {
+          document.getElementById("editor-wrapper").style.display = "block";
+
+          introJs().setOptions({
+              showProgress: true,
+              showBullets: false,
+              exitOnOverlayClick: false,
+              steps: [
+                {
+                  element: '#controls',
+                  intro: 'Add element tab for add elements into website.',
+                  position: 'right'
+                },
+              ]
+            }).oncomplete(() => {
+              document.getElementById("editor-wrapper").style.display = "none";
+
+              introJs().setOptions({
+                  showProgress: true,
+                  showBullets: false,
+                  exitOnOverlayClick: false,
+                  steps: [
+                    {
+                      element: '#IconSvg',
+                      intro: 'Click tree tab.',
+                      position: 'left'
+                    },
+                  ]
+                }).oncomplete(() => {
+                  document.getElementById("sidebar").style.display = "block";
+
+                  introJs().setOptions({
+                      showProgress: true,
+                      showBullets: false,
+                      exitOnOverlayClick: false,
+                      steps: [
+                        {
+                          element: '#sidebar',
+                          intro: 'Tree tab for select the element.',
+                          position: 'left'
+                        },
+                      ]
+                    }).start();
+                }).start();
+            }).start();
+        }).start();
+    }).start();
+}
+
+startTour();
+
+
+
