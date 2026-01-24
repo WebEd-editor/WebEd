@@ -47,7 +47,7 @@
         <a href="#features">Features</a>
         <a href="#preview">Preview</a>
         <a href="#faq">FAQ</a>
-        <a href="design.html" style="color:#0077ff;font-weight:600;">Open Editor</a>
+        <a href="design.html" style="color:#0077ff;font-weight:600;" id="openEditor">Open Editor</a>
     </nav>
 
     <div class="menu-btn" onclick="toggleMenu()">
@@ -55,14 +55,14 @@
     </div>
 </header>
 
-<button id="floatingEditorBtn" class="floating-editor-btn" onclick="location.href='design.html'">
+<button id="openEditor" class="floating-editor-btn" onclick="location.href='design.html'">
     Open Editor
 </button>
 
 <section class="hero">
     <h1>Create & Edit Websites Visually – Without Writing Code</h1>
     <p>WebEd is a modern, fast and professional-grade visual editor In which drag & drop and live preview. Beginners and developers – Both are perfect.</p>
-    <button onclick="location.href='design.html'">Start Editing</button><br>
+    <button id="openEditor" onclick="location.href='design.html'">Start Editing</button><br>
     <img src="https://webed.in/WebAssets/landing/editor.png" alt="WebEd Editor Demo" />
 </section>
 
@@ -143,7 +143,7 @@
            <h4>Product</h4>
            <a href="#features">Features</a>
            <a href="#preview">How It Works</a>
-           <a href="design.html">Open Editor</a>
+           <a href="design.html" id="openEditor">Open Editor</a>
         </div>
 
        <div class="footer-col">
@@ -169,7 +169,7 @@ function toggleMenu() {
 window.addEventListener("scroll", function () {
     const header = document.querySelector(".main-header");
     const footer = document.querySelector(".main-footer");
-    const floatBtn = document.getElementById("floatingEditorBtn");
+    const floatBtn = document.getElementById("openEditor");
     const hero = document.querySelector(".hero"); // Your hero section
 
     if (!hero) return;
@@ -188,6 +188,13 @@ window.addEventListener("scroll", function () {
     if (scrolled > footer.offsetHeight * 4) {
        floatBtn.classList.remove("show-float-btn");
     }
+});
+
+document.getElementById("openEditor").addEventListener("click", () => {
+  gtag('event', 'editor_is_opened', {
+    event_category: 'editor',
+    event_label: 'editor_home',
+  });
 });
 </script>
 
