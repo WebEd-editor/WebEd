@@ -38,9 +38,10 @@ function menuload(){
            <video autoplay muted loop style="position: absolute;top: 100px; opacity: 0.5;width: 100%;" src="https://videos.pexels.com/video-files/7438482/7438482-sd_360_624_30fps.mp4"></video>
            <div style="position: relative;top: 120px; height: 120%; width: 100%; background: linear-gradient(0deg, #000, transparent, transparent);">
               <h1>Welcome to our Website builder tool</h1>
-              <a href="https://auth-p1ny.onrender.com" style="text-decoration: none;color: black; background: white; padding: 10px;">Login</a>
-              <p id="username"></p>
-              <p>What will you design today?, use WebEd for creating a website.</p>
+              <a href="https://auth-p1ny.onrender.com" style="display: none; text-decoration: none;color: black; background: white; padding: 10px;">Login</a>
+              <p style="display: none;" id="username"></p>
+              <p>What will you design today?, Create website anywhere.</p>
+              <button class="bbbttt" onclick="createNewProject(); ooo('tt3','bb3')">+ Creat Website</button>
               <button class="bbbttt" id="installAppBtn">Try Now As App</button>
 <style>
    #templateList {
