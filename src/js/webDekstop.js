@@ -25,14 +25,14 @@
   a.style.display = "block";
   a.style.left= "42px";
   a.style.width="100px";
-  a.style.top="30px";
+  a.style.top="50px";
 		const s = document.querySelector("#sidebar");
 		s.style.display = "block"; //sidebar tree, editor-wrapper add elements
 	  s.style.left = "80%";
-	  s.style.top="30px";
+	  s.style.top="50px";
    const ed = document.getElementById("editModal");
    ed.style.left="80%";
-   ed.style.top="30px";
+   ed.style.top="50px";
 
    const icoed = document.getElementById("seticon");
    icoed.style="width:90%; height:80%; z-index:103; top: 50px; left: 50%; transform: translateX(-50%);";
