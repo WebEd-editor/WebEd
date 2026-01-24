@@ -24,15 +24,17 @@
 		const a = document.querySelector("#editor-wrapper");
   a.style.display = "block";
   a.style.left= "42px";
-  a.style.width="100px";
-  a.style.top="50px";
+  a.style.width="100px"; a.style.height="92%";
+  a.style.top="40px";
 		const s = document.querySelector("#sidebar");
 		s.style.display = "block"; //sidebar tree, editor-wrapper add elements
 	  s.style.left = "80%";
-	  s.style.top="50px";
+	  s.style.top="40px";
+	  s.style.height="92%";
    const ed = document.getElementById("editModal");
    ed.style.left="80%";
-   ed.style.top="50px";
+   ed.style.top="40px";
+   ed.style.height="92%";
 
    const icoed = document.getElementById("seticon");
    icoed.style="width:90%; height:80%; z-index:103; top: 50px; left: 50%; transform: translateX(-50%);";
