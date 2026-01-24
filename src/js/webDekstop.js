@@ -16,8 +16,8 @@
 		at.forEach(allt => {
 			allt.classList.remove('drag-el');
 			allt.style.width = "18%";
-			allt.style.height = "98%";
-			allt.style.top = "5px";
+			allt.style.height = "92%";
+			allt.style.top = "40px";
 			allt.style.right = "5px";
 			allt.style.resize = "none";
 		});
