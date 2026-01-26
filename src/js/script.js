@@ -614,8 +614,8 @@ function addattr(el) {
     document.getElementById('jstfc').value = el.style.justifyContent || '';
     document.getElementById('algni').value = el.style.alignItems || '';
     document.getElementById('flxw').value = el.style.flexWrap || '';
-    document.getElementById('gtc').value = el.style.gridTemplateColumn || '';
-    document.getElementById('gtr').value = el.style.gridTemplateRow || '';
+    document.getElementById('gtc').value = el.style.gridTemplateColumns || '';
+    document.getElementById('gtr').value = el.style.gridTemplateRows || '';
     document.getElementById('gap').value = el.style.gap || '';
     
     // 6.
@@ -732,8 +732,8 @@ function applyEdit() {
     currentEditingElement.style.justifyContent = document.getElementById('jstfc').value || '';
     currentEditingElement.style.alignItems = document.getElementById('algni').value || '';
     currentEditingElement.style.flexWrap = document.getElementById('flxw').value || '';
-    currentEditingElement.style.gridTemplateColumn = document.getElementById('gtc').value || '';
-    currentEditingElement.style.gridTemplateRow = document.getElementById('gtr').value || '';
+    currentEditingElement.style.gridTemplateColumns = document.getElementById('gtc').value || '';
+    currentEditingElement.style.gridTemplateRows = document.getElementById('gtr').value || '';
     currentEditingElement.style.gap = document.getElementById('gap').value || '';
     
     currentEditingElement.style.transform = document.getElementById('trnsfm').value || '';
@@ -1071,8 +1071,8 @@ function respStyle(w, v1) {
     lazyReapetable(item, "justify-content", "jstfc");
     lazyReapetable(item, "align-items", "algni");
     lazyReapetable(item, "flex-wrap", "flxw");
-    lazyReapetable(item, "grid-template-column", "gtc");
-    lazyReapetable(item, "grid-template-row", "gtr");
+    lazyReapetable(item, "grid-template-columns", "gtc");
+    lazyReapetable(item, "grid-template-rows", "gtr");
     lazyReapetable(item, "gap", "gap");
     lazyReapetable(item, "transform", "trnsfm");
     lazyReapetable(item, "animation", "anmtn");
