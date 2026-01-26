@@ -7,20 +7,20 @@ function openPixelMedia() {
   panel.id = "pixelPanel";
   panel.style.cssText = `
     position: fixed;
-    top: 10%;
-    left: 10%;
-    width: 80%;
-    height: 80%;
-    background: #fff;
-    border: 2px solid #ccc;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    top: 50%;left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 90%;
+    height: 90%;
+    background: #222;
+    border-radius: 5px;
+    border: 2px solid #333;
     z-index: 9999;
     padding: 10px;
     overflow-y: auto;
   `;
 
   const h = document.createElement('div');
-  h.style = "position: sticky;top:0;left:0; width: 100%; background: grey;";
+  h.style = "position: sticky;top:0;left:0; width: 100%; background: #333;";
   panel.appendChild(h);
 
   // Close Button
