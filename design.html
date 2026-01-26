@@ -602,15 +602,7 @@ document.getElementById("addElementBtn").addEventListener("click", () => {
      }
   //} 
   //window.addEventListener("load", applyResponsiveStyles); window.addEventListener("resize", applyResponsiveStyles);
-  document.addEventListener("keydown", function(e) {
-      if(e.key === "f"){
-        alert("User touched the screen! full screen mode On.");
-        e.preventDefault();
-        if (document.documentElement.requestFullscreen) {
-          document.documentElement.requestFullscreen();
-        }
-      }
-  });
+  
   </script>
 <style>.tree-label.drag-over {outline: 2px dashed #00aaff;background-color: #e6f7ff;}</style>
 
