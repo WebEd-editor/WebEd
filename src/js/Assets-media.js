@@ -89,15 +89,15 @@ function fetchPixelDefault() {
 }
 
 // Fetch by Search
-/*function fetchPixelSearch(query) {
+function fetchPixelSearch(query) {
   const url = pixelMode === "image"
     ? `${BACKEND_URL}/api/images?query=${query}`
     : `${BACKEND_URL}/api/videos?query=${query}`;
   fetch(url)
     .then(res => res.json())
     .then(renderPixelMedia);
-}*/
-
+}
+/*
 function fetchPixelSearch(query) {
   const loadingEl = document.getElementById("loading");
   loadingEl.style.display = "block";
@@ -118,7 +118,7 @@ function fetchPixelSearch(query) {
     .finally(() => {
       loadingEl.style.display = "none";
     });
-}
+}*/
 
 // Render Grid
 function renderPixelMedia(data) {
