@@ -216,6 +216,11 @@ function fetchUser() {
 // Menu load hote hi call kar do
 document.addEventListener("DOMContentLoaded", fetchUser);
 
+let resp1024 = [];
+let resp768 = [];
+let resp320 = [];
+let sthover = [];
+
 async function loadTemplates() {
   const res = await fetch("https://template-back-o4fm.onrender.com/api/templates");
   const data = await res.json();
