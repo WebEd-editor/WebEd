@@ -245,7 +245,7 @@ async function loadTemplates() {
 
       <h3>${t.name}</h3>
       <p>Category: ${t.category}</p>
-      <button onclick='useTemplate(${JSON.stringify(t.name)}, ${JSON.stringify(t.html)})'>
+      <button onclick='useTemplate(${JSON.stringify(t.name)}, ${JSON.stringify(t.html)}, ${JSON.stringify(t.resp)})'>
         Use
       </button>
     </div>
@@ -263,13 +263,40 @@ async function loadTemplates() {
 
 document.addEventListener("DOMContentLoaded", loadTemplates);
 
-function useTemplate(name, htmlCode) {
+function useTemplate(name, htmlCode, resp) {
   const iframe = document.getElementById("canvas");
    const doc = iframe.contentDocument || iframe.contentWindow.document;
    const fixedForSingleQuit = htmlCode.replace(/url\("([^"]*)"\)/g, "url('$1')");
    doc.open();
    doc.write(fixedForSingleQuit);
    doc.close();
+
+   // Remove old custom files (from parent doc)
+    //document.querySelectorAll('style[data-custom], script[data-custom]').forEach(e => e.remove());
+
+    // Inject saved custom JS/CSS into parent document again
+    /*customFiles = files || {};
+    for (const file in customFiles) {
+      const tag = document.createElement(customFiles[file].type === 'js' ? 'script' : 'style');
+      tag.textContent = customFiles[file].content;
+      tag.dataset.custom = 'true';
+      document.body.appendChild(tag);
+    }*/
+
+    if(resp) {
+       resp1024.length =0; resp768.length =0; resp320.length =0; sthover.length =0;
+       const { resp1024, resp768, resp320 } = resp;
+       let finalStyle = "";
+       finalStyle += generateResponsiveCSS(resp1024, 1024);
+       finalStyle += generateResponsiveCSS(resp768, 768);
+       finalStyle += generateResponsiveCSS(resp320, 320);
+       applyResponsiveCSS(finalStyle);
+       var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
+       applyHoverCSS(finalStylehv);
+    }
+
+    updateFileList();
+   
    const els = doc.body.querySelectorAll('*');
    els.forEach(el => {
       el.classList.add('editable');
