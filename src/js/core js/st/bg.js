@@ -261,30 +261,60 @@
     /* ---------- UI: color-stop UI without percent input (we keep parsed pos if present) ---------- */
 
     function createColorStopUI(layer, stop, index) {
-      const div = document.createElement('div');
-      div.className = 'color-stop';
+  const div = document.createElement('div');
+  div.className = 'color-stop';
 
-      const colorInput = document.createElement('input');
-      colorInput.type = 'color';
-      colorInput.value = colorToInputValue(stop.color);
-      colorInput.addEventListener('input', () => {
-        // update color text value (keep original color function if possible)
-        stop.color = colorInput.value;
-        updateBackground();
-      });
+  // 🎨 Pickr container
+  const colorDiv = document.createElement("div");
+  colorDiv.className = "color-picker";
+  div.appendChild(colorDiv);
 
-      const removeBtn = document.createElement('button');
-      removeBtn.textContent = 'X';
-      removeBtn.style.background = '#e91e63';
-      removeBtn.addEventListener('click', () => {
-        layer.stops.splice(index, 1);
-        renderLayers();
-      });
+  // 🔥 Pickr instance
+  const pickr3 = Pickr.create({
+    el: colorDiv,
+    theme: 'nano',
 
-      div.appendChild(colorInput);
-      div.appendChild(removeBtn);
-      return div;
+    // ✅ FIX: stop ka color use karo
+    default: stop.color || 'rgba(255,255,255,1)',
+
+    components: {
+      preview: true,
+      opacity: true,
+      hue: true,
+
+      interaction: {
+        rgba: true,
+        input: true,
+        save: false
+      }
     }
+  });
+
+  // 🔥 LIVE UPDATE
+  pickr3.on('change', (color) => {
+    const rgba = color.toRGBA().toString();
+
+    // ✅ FIX: stop.color update karo
+    stop.color = rgba;
+
+    updateBackground(); // gradient re-render
+  });
+
+  // ❌ Remove button
+  const removeBtn = document.createElement('button');
+  removeBtn.textContent = 'X';
+  removeBtn.style.background = '#e91e63';
+
+  removeBtn.addEventListener('click', () => {
+    layer.stops.splice(index, 1);
+    renderLayers();
+  });
+
+  div.appendChild(removeBtn);
+
+  return div;
+}
+
 
     /* ---------- UI: gradient controls (replaces previous createGradientControls) ---------- */
 
@@ -472,15 +502,38 @@
       } else if (layer.type === "image") {
         div.appendChild(createImageControls(layer));
       } else {
-        const colorInput = document.createElement("input");
-        colorInput.type = "color";
-        colorInput.value = colorToInputValue(layer.value || '#ffffff');
-        colorInput.addEventListener("input", () => {
-          layer.value = colorInput.value;
-          updateBackground();
+    const colorDiv = document.createElement("div");
+    colorDiv.className = "color-picker";
+
+    div.appendChild(colorDiv);
+
+    const pickr = Pickr.create({
+        el: colorDiv,
+        theme: 'nano',
+
+        default: layer.value || 'rgba(255,255,255,1)',
+
+        components: {
+            preview: true,
+            opacity: true, // 🔥 important
+            hue: true,
+
+            interaction: {
+                rgba: true,
+                input: true,
+                save: false // optional (live ke liye needed nahi)
+            }
+        }
+    });
+
+    // 🔥 LIVE UPDATE (oninput jaisa)
+        pickr.on('change', (color) => {
+          const rgba = color.toRGBA().toString();
+
+          layer.value = rgba;   // value store
+          updateBackground();   // live apply
         });
-        div.appendChild(colorInput);
-      }
+       }
 
       div.appendChild(removeBtn);
       return div;
