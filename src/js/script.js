@@ -1001,7 +1001,7 @@ function respStyle(w, v1) {
         return;
     }
 
-    const respClr = document.getElementById('clr').value;
+    const respClr = document.getElementById('clrt').value;
     const respTxttsfm = document.getElementById('txttsfm').value;
     const respLnhet = document.getElementById('lnhet').value;
     const respLtsp = document.getElementById('ltsp').value;
@@ -1036,7 +1036,7 @@ function respStyle(w, v1) {
     setStyleValue(item, "opacity", respOpct);
     setStyleValue(item, "z-index", respZindex);
 
-    getandputst(item, "color", "clr");
+    getandputst(item, "color", "clrt");
     let rfnsz = item.style.find(o => o["font-size"] !== undefined);
     let rtxtalg = item.style.find(o => o["text-align"] !== undefined);
     let rtxtdec = item.style.find(o => o["text-decoration"] !== undefined);
