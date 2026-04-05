@@ -561,7 +561,7 @@ function addattr(el) {
     
     // 1. 
     //document.getElementById('clr').value = el.style.color || '';
-   pickr.setColor(RGBAtoHEX(el.style.color) || '');
+   pickr.setColor(RGBtoHEX(el.style.color) || '');
      // document.getElementById('fnfml').value = el.style.fontFamily || '';
    // document.getElementById('fnsz').value = el.style.fontSize.replace('px', '') || '';
    // document.getElementById('fnwet').value = el.style.fontWeight || '';
