@@ -584,7 +584,7 @@ function addattr(el) {
     document.getElementById('mnhei').value = el.style.minHeight || '';
     
     // 3.
-    document.getElementById('bakcolt').value = el.style.backgroundColor || '';
+    //document.getElementById('bakcolt').value = el.style.backgroundColor || '';
     document.getElementById('bakpos').value = el.style.backgroundPosition || '';
     document.getElementById('baksz').value = el.style.backgroundSize || '';
     document.getElementById('bakrep').value = el.style.backgroundRepeat || '';
@@ -675,7 +675,7 @@ function applyEdit() {
     const pl = document.getElementById('pad-l').value +'px';
     
 
-    currentEditingElement.style.color = document.getElementById('clrt').value || '';
+    currentEditingElement.style.color = document.getElementById('clr').value || '';
    // currentEditingElement.style.fontFamily = document.getElementById('fnfml').value || '';
    // currentEditingElement.style.fontSize = document.getElementById('fnsz').value +'px' || '';
     //currentEditingElement.style.fontWeight = document.getElementById('fnwet').value || '';
