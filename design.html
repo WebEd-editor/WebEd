@@ -274,7 +274,15 @@ document.getElementById("addElementBtn").addEventListener("click", () => {
   <!-- TEXT & FONT -->
   <details>
     <summary>Text and Font Properties</summary>
-    <div>color <input id="clrt" oninput="document.getElementById('clr').value = document.getElementById('clrt').value; applyEdit();" type="color"><input id="clr" oninput="applyEdit()" type="text"></div>
+    <!-- <div>color <input id="clrt" oninput="document.getElementById('clr').value = document.getElementById('clrt').value; applyEdit();" type="color"><input id="clr" oninput="applyEdit()" type="text"></div> -->
+      <div>color <div id="clr"></div><input id="clrt" oninput="applyEdit()" type="text"></div>
+         <script>const pickr = Pickr.create({el: '#clr',theme: 'nano',default: 'rgba(255, 0, 0, 1)',components: {preview: true,opacity: true,hue: true,interaction: {rgba: true,input: true,save: true}}});</script>
+      <script>
+         pickr.on('change', (color) => {
+            document.getElementById("clrt").value = color.toRGBA().toString();
+            applyEdit();
+         });
+      </script>
     <div>font family
     <select onchange="applyFont(this.value)">
   <option value="Roboto">Roboto</option>
