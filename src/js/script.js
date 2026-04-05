@@ -675,7 +675,7 @@ function applyEdit() {
     const pl = document.getElementById('pad-l').value +'px';
     
 
-    currentEditingElement.style.color = document.getElementById('clr').value || '';
+    currentEditingElement.style.color = document.getElementById('clrt').value || '';
    // currentEditingElement.style.fontFamily = document.getElementById('fnfml').value || '';
    // currentEditingElement.style.fontSize = document.getElementById('fnsz').value +'px' || '';
     //currentEditingElement.style.fontWeight = document.getElementById('fnwet').value || '';
