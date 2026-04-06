@@ -1,0 +1,10 @@
+.editor-footer{
+    padding: 1px;background: #304073;border-radius: 5px;position: fixed;top: 90%;left: 50%;transform: translateX(-50%);z-index: 101; 
+    display: flex;justify-content: center;align-items: center;
+}
+.editor-footer .button{
+    background: #304080;cursor: pointer;padding: 5px 10px;
+}
+.editor-footer .button:hover{
+    background: #1c2644;
+}
