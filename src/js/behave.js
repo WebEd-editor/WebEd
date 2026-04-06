@@ -10,6 +10,7 @@ function clickShowOverlay(){
    removeOverlay();
 }
 
+let globel_element = null;
 // ✅ Overlay Function
 function showOverlay(target) {
   removeOverlay();
@@ -48,6 +49,7 @@ function showOverlay(target) {
   eBtn.innerHTML = editIcon;
   eBtn.style.cursor="pointer"; 
   eBtn.onclick = () => openEdit(target);
+  globel_element = target;
   styleBtn(eBtn, "yellow");
   controls.appendChild(eBtn);
 
@@ -89,6 +91,11 @@ showClickOver();
   }
   styleBtn(cpBtn, "khaki");
   controls.appendChild(cpBtn);
+
+  if(selectedEl.style.position === "static" || selectedEl.style.position === "") {
+     [radiusBtn, eBtn, dBtn, cpBtn].forEach(e => e.style.display='none');
+     selectedEl.style.top=""; selectedEl.style.left="";
+  }
   
   const Wlabel = doc.createElement("div");
   Wlabel.style.position = "absolute";
@@ -397,4 +404,10 @@ function hideSnapGuide() {
     snapLine.parentNode.removeChild(snapLine);
     snapLine = null;
   }
+}
+
+function editor_footer_style_open() {
+   if (globel_element) {
+      openEdit(globel_element);
+   }
 }
