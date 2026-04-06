@@ -52,6 +52,9 @@
 			f.style.padding = "10px"
 			f.style.cursor = "pointer";
 		});
+	  
+		// editor footer
+		document.querySelector('.editor-footer').style.display='flex';
 	}
 })();
 
