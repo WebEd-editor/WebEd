@@ -54,7 +54,7 @@
 		});
 	  
 		// editor footer
-		document.querySelector('.editor-footer').style.display='flex';
+		document.querySelector('.editor_button').classList.add('editor-footer');
 	}
 })();
 
