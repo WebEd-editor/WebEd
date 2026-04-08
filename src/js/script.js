@@ -560,7 +560,7 @@ function addattr(el) {
     document.getElementById('editSrc').value = el.src || '';
     
     // 1. 
-    //document.getElementById('clr').value = el.style.color || '';
+    document.getElementById('clrt').value = el.style.color || '';
    // pickr.setColor(RGBtoHEX(el.style.color) || '');
      // document.getElementById('fnfml').value = el.style.fontFamily || '';
    // document.getElementById('fnsz').value = el.style.fontSize.replace('px', '') || '';
