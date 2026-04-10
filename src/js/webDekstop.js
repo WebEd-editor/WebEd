@@ -54,7 +54,7 @@
 		});
 	  
 		// editor footer
-		document.querySelector('.editor_button').classList.add('editor-footer');
+		document.querySelector('.edit_button').classList.add('editor-footer');
 	}
 })();
 
