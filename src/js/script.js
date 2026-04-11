@@ -64,14 +64,36 @@ async function rr() {
 
     const html4 = `<!-- this code made in webed -->\n${data.html}`;
     document.getElementById("htmlcssjs").textContent = '';
-    document.getElementById("htmlcssjs").textContent = html4;
-
-    // console.log("Conversion stats:", data.stats);
-
+    // document.getElementById("htmlcssjs").textContent = html4;
+    type_animation(result.trim(), 'htmlcssjs');
   } catch (err) {
     console.error(err);
-    // alert("Failed to generate code");
   }
+}
+
+let typingTimer = null;
+
+function type_animation(t, id) {
+  var text = t;
+  let i = 0;
+  let target = document.getElementById(id);
+
+  // 🛑 previous animation stop
+  if (typingTimer) {
+    clearTimeout(typingTimer);
+  }
+
+  target.textContent = ""; // reset text
+
+  function type() {
+    if (i < text.length) {
+      target.textContent += text.charAt(i);
+      i++;
+      typingTimer = setTimeout(type, 5);
+    }
+  }
+
+  type();
 }
 
 // links for css fonts
