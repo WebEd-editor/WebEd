@@ -96,28 +96,7 @@ function menuload(){
        <textarea id="htmlcssjs" style="user-select: none;" readonly></textarea>
        <button onclick="downloadAsImg()">download as image</button>
        <div>wrap text: <input id="wrapCodeFull" onchange='document.getElementById("htmlcssjs").wrap = document.getElementById("wrapCodeFull").checked ? "off" : "hard";' type="checkbox"></div>
-       <select id="viewport">
-        <option value="desktop">Desktop</option>
-        <option value="tablet">Tablet</option>
-        <option value="mobile">Mobile</option>
-       </select>
     </div>
-    <script>
-      const iframe = document.getElementById('canvas');
-      document.getElementById('viewport').addEventListener('change', (e) => {
-        const val = e.target.value;
-        if (val === 'desktop') {
-          iframe.style.width = '1024px';
-          iframe.style.transform = 'scale(1)';
-        } else if (val === 'tablet') {
-          iframe.style.width = '768px';
-          iframe.style.transform = 'scale(1)';
-        } else if (val === 'mobile') {
-          iframe.style.width = '375px';
-          iframe.style.transform = 'scale(1)';
-        }
-      });
-    </script>
     <div class="ttt tt5" style="width: 100%;margin-top: 110px;">help page</div>
    
    `;
