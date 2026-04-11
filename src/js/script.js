@@ -64,8 +64,7 @@ async function rr() {
 
     const html4 = `<!-- this code made in webed -->\n${data.html}`;
     document.getElementById("htmlcssjs").textContent = '';
-    // document.getElementById("htmlcssjs").textContent = html4;
-    type_animation(result.trim(), 'htmlcssjs');
+    type_animation(html4, 'htmlcssjs');
   } catch (err) {
     console.error(err);
   }
