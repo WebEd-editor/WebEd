@@ -93,7 +93,7 @@ function menuload(){
        <div id="webed-extracted-css" style="display: none"></div>
     </div>
     <div class="ttt tt4" style="width: 100%;margin-top: 110px;">
-       <textarea id="htmlcssjs" style="user-select: none;" readonly></textarea>
+       <textarea id="htmlcssjs" style="user-select: none; background: transparent;" readonly></textarea>
        <button onclick="downloadAsImg()">download as image</button>
        <div>wrap text: <input id="wrapCodeFull" onchange='document.getElementById("htmlcssjs").wrap = document.getElementById("wrapCodeFull").checked ? "off" : "hard";' type="checkbox"></div>
     </div>
