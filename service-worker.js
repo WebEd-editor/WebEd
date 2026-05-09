@@ -1,10 +1,11 @@
-const CACHE_NAME = 'webed-cache-v2.1';
+const CACHE_NAME = 'webed-cache-v2.1.1';
 const FILES_TO_CACHE = [
   '/',
   '/design.html',
   '/src/css/style.css',
   '/src/js/script.js',
   '/src/js/AddElements.js',
+  '/src/js/Assets-media.js',
   '/src/js/dragable.js',
   '/src/js/FileDatabases.js',
   '/src/js/behave.js',
