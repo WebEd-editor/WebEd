@@ -1,14 +1,20 @@
-const CACHE_NAME = 'webed-cache-v2';
+const CACHE_NAME = 'webed-cache-v2.1';
 const FILES_TO_CACHE = [
   '/',
-  '/index.html',
-  '/src/js/style.css',
+  '/design.html',
+  '/src/css/style.css',
   '/src/js/script.js',
   '/src/js/AddElements.js',
   '/src/js/dragable.js',
   '/src/js/FileDatabases.js',
+  '/src/js/behave.js',
+  '/src/js/webedmenu.js',
+  '/src/js/webDekstop.js',
+  '/src/js/dragDropEl.js',
+  '/src/js/core js/st/bg.js',
+  '/src/js/FileDatabases.js',
   '/logo.png',
-  '/offline.html'
+  '/webed-icon-512.png'
 ];
 
 // Install
@@ -47,7 +53,7 @@ self.addEventListener('fetch', event => {
       return response || fetch(event.request).catch(() => {
         // Fallback for HTML requests
         if (event.request.destination === 'document') {
-          return caches.match('/offline.html');
+          return caches.match('/design.html');
         }
       });
     })
