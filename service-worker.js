@@ -3,6 +3,8 @@ const FILES_TO_CACHE = [
   '/',
   '/design.html',
   '/src/css/style.css',
+  '/src/css/editor-footer.css',
+  '/src/css/page.css',
   '/src/js/script.js',
   '/src/js/AddElements.js',
   '/src/js/Assets-media.js',
@@ -48,7 +50,46 @@ self.addEventListener('activate', event => {
 });
 
 // Fetch
-self.addEventListener('fetch', event => {
+self.addEventListener("fetch", (event) => {
+
+    const request = event.request;
+    const url = new URL(request.url);
+
+    event.respondWith(
+ caches.match(request).then((cachedResponse) => {
+
+            // Agar cache me mila
+            if (cachedResponse) {
+                return cachedResponse;
+            }
+
+            // Homepage request
+            if (
+                request.mode === "navigate" ||
+                url.pathname === "/"
+            ) {
+
+                return fetch("/design.html")
+                .catch(() => {
+                    return caches.match("/design.html");
+                });
+            }
+
+            return fetch(request)
+            .catch(() => {
+                return new Response("Offline", {
+                    status: 503,
+                    statusText: "Offline"
+                });
+            });
+
+        })
+
+    );
+
+});
+
+/*self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
       return response || fetch(event.request).catch(() => {
@@ -59,4 +100,4 @@ self.addEventListener('fetch', event => {
       });
     })
   );
-});
+});*/
