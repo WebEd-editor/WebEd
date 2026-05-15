@@ -559,7 +559,7 @@ input[type="number"] {
 
 /* Selected Box */
 
-.custom-dropdown .selected{
+.custom-dropdown .selectedfont{
     background: #1f1f1f;
     color: white;
 
@@ -579,7 +579,7 @@ input[type="number"] {
     transition: 0.25s;
 }
 
-.selected:hover{
+.selectedfont:hover{
     background: #2a2a2a;
 }
 
