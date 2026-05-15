@@ -545,5 +545,141 @@ input[type="number"] {
       border-color: #020617 !important;
     }
 
+/* custom drop down menu */
+.font-dropdown{
+    position: relative;
+    width: 220px;
+}
 
+.custom-dropdown{
+    width: 240px;
+    position: relative;
+    font-family: sans-serif;
+}
+
+/* Selected Box */
+
+.selected{
+    background: #1f1f1f;
+    color: white;
+
+    padding: 13px 16px;
+
+    border-radius: 14px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    cursor: pointer;
+    user-select: none;
+
+    border: 1px solid #333;
+
+    transition: 0.25s;
+}
+
+.selected:hover{
+    background: #2a2a2a;
+}
+
+.arrow{
+    font-size: 12px;
+    transition: 0.3s;
+}
+
+/* Dropdown */
+
+.dropdown-list{
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 150px;
+    background: #202020;
+    border-radius: 16px;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 999;
+    max-height: 320px;
+    overflow-y: auto;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.dropdown-list.show{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+/* Font Items */
+
+.dropdown-list div{
+    padding: 14px 16px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    white-space: nowrap;
+}
+
+.dropdown-list div:last-child{
+    border-bottom: none;
+}
+
+.dropdown-list div:hover{
+
+    background: #343434;
+
+    padding-left: 22px;
+}
+
+/* Scrollbar */
+
+.dropdown-list::-webkit-scrollbar{
+    width: 6px;
+}
+
+.dropdown-list::-webkit-scrollbar-track{
+    background: transparent;
+}
+
+.dropdown-list::-webkit-scrollbar-thumb{
+    background: #555;
+    border-radius: 20px;
+}
+
+/* Different font previews */
+
+.dropdown-list div:nth-child(1){font-family: "Roboto", sans-serif;}
+.dropdown-list div:nth-child(2){font-family: "Open Sans", sans-serif;}
+.dropdown-list div:nth-child(3){font-family: "Lato", sans-serif;}
+.dropdown-list div:nth-child(4){font-family: "Montserrat", sans-serif;}
+.dropdown-list div:nth-child(5){font-family: "Poppins", sans-serif;}
+.dropdown-list div:nth-child(6){font-family: "Raleway", sans-serif;}
+.dropdown-list div:nth-child(7){font-family: "Nunito", sans-serif;}
+.dropdown-list div:nth-child(8){font-family: "Playfair Display", sans-serif;}
+.dropdown-list div:nth-child(9){font-family: "Oswald", sans-serif;}
+.dropdown-list div:nth-child(10){font-family: "Merriweather", sans-serif;}
+.dropdown-list div:nth-child(11){font-family: "Inter", sans-serif;}
+.dropdown-list div:nth-child(12){font-family: "Source Sans Pro", sans-serif;}
+.dropdown-list div:nth-child(13){font-family: "Ubuntu", sans-serif;}
+.dropdown-list div:nth-child(14){font-family: "PT Sans", sans-serif;}
+.dropdown-list div:nth-child(15){font-family: "Quicksand", sans-serif;}
+.dropdown-list div:nth-child(16){font-family: "Work Sans", sans-serif;}
+.dropdown-list div:nth-child(17){font-family: "Josefin Sans", sans-serif;}
+.dropdown-list div:nth-child(18){font-family: "Rubik", sans-serif;}
+.dropdown-list div:nth-child(19){font-family: "Pacifico", sans-serif;}
+.dropdown-list div:nth-child(20){font-family: "DynaPuff", sans-serif;}
+.dropdown-list div:nth-child(21){font-family: "Crafty Girls", sans-serif;}
+.dropdown-list div:nth-child(22){font-family: "Lobster", sans-serif;}
+.dropdown-list div:nth-child(23){font-family: "Great Vibes", sans-serif;}
+.dropdown-list div:nth-child(24){font-family: "Dancing Script", sans-serif;}
+    
 
