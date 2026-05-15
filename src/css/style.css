@@ -559,7 +559,7 @@ input[type="number"] {
 
 /* Selected Box */
 
-.selected{
+.custom-dropdown .selected{
     background: #1f1f1f;
     color: white;
 
