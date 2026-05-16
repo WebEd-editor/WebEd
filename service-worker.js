@@ -1,4 +1,4 @@
-const CACHE_NAME = 'webed-cache-v2.1.2';
+const CACHE_NAME = 'webed-cache-v2.1.3';
 const FILES_TO_CACHE = [
   '/',
   '/design.html',
