@@ -244,6 +244,9 @@ function fixedString(s, l) {
 
 let currentPro = null;
 let saveInterval = null;
+const iframeForRemovingNodes = document.getElementById("projectNameTxt").createElement('iframe');
+iframeForRemovingNodes.style.display = "none";
+document.getElementById('tempNoneiframe').appendChild(iframeForRemovingNodes);
 
 // Save full project
 function saveProject() {
@@ -255,6 +258,20 @@ function saveProject() {
   const iframeDoc = document.getElementById("canvas").contentDocument;
   const fullHTML = iframeDoc.documentElement.outerHTML;
 
+  const tempDoc = iframeForRemovingNodes.contentDocument;
+  tempDoc.open();
+  tempDoc.write(fullHTML);
+  tempDoc.close();
+
+  const els = tempDoc.querySelectorAll('*');
+  els.forEach(el => {
+    if (el.draggable) el.removeAttribute('draggable');
+    if (el.classList.contains('behOverlay')) el.remove();
+    if (el.style && el.style.outline) el.style.outline = '';
+  });
+
+  const cleanedHTML = tempDoc.documentElement.outerHTML;
+    
   const tx = db.transaction('projects', 'readwrite');
   const store = tx.objectStore('projects');
 
@@ -267,7 +284,7 @@ function saveProject() {
     
   store.put({
     name: currentPro,
-    html: fullHTML,
+    html: cleanedHTML,
     files: customFiles,
     reponsive: respData
   }).onsuccess = () => {
