@@ -308,6 +308,8 @@ function updateTree() {
             cpBtn.dataset.title = 'Copy this element';
             updateTree();
             saveHistory();
+            enableDragAndNest(document.getElementById("canvas"));
+            showClickOver();
             showOverlay(pasted);
           }
         }
