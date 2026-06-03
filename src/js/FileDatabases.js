@@ -282,13 +282,6 @@ function startAutoSave(name) {
     clearInterval(saveInterval);
   }
 
-      const iframe = document.getElementById("canvas");
-    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-
-    iframeDoc.open();
-    iframeDoc.write("");  // 💾 Restore full HTML
-    iframeDoc.close();
-
   currentPro = name; // naye project ka naam set
   saveInterval = setInterval(saveProject, 1000); // har 1 sec me save
   // console.log("Auto-save started for:", name);
@@ -298,6 +291,14 @@ function startAutoSave(name) {
 function createNewProject() {
   const name = prompt("Enter new project name:");
   if (!name) return;
+
+    
+      const iframe = document.getElementById("canvas");
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+    iframeDoc.open();
+    iframeDoc.write("");  // 💾 Restore full HTML
+    iframeDoc.close();
 
   startAutoSave(name);
 }
