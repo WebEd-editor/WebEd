@@ -277,14 +277,12 @@ function saveProject() {
 
 // Start auto-save for a project
 function startAutoSave(name) {
-  // Pehle ka interval clear kar do (agar koi chal raha ho)
   if (saveInterval) {
     clearInterval(saveInterval);
   }
 
-  currentPro = name; // naye project ka naam set
-  saveInterval = setInterval(saveProject, 1000); // har 1 sec me save
-  // console.log("Auto-save started for:", name);
+  currentPro = name;
+  saveInterval = setInterval(saveProject, 1000);
 }
 
 // New Project banana
