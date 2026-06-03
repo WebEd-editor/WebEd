@@ -339,6 +339,8 @@ function loadProject(name) {
 
     updateFileList();
     startAutoSave(name);
+    enableDragAndNest(document.getElementById("canvas"));
+    showClickOver();
     showPopup("Project Loaded", `Your Project ${name} was Loaded`, true, false);
   };
 }
