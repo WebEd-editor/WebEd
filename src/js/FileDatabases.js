@@ -271,7 +271,6 @@ function saveProject() {
     files: customFiles,
     reponsive: respData
   }).onsuccess = () => {
-    // showPopup("Saved", `Your Project (${currentPro}) was auto-saved.`, true, false);
     listAllProjects();
   };
 }
@@ -282,6 +281,13 @@ function startAutoSave(name) {
   if (saveInterval) {
     clearInterval(saveInterval);
   }
+
+      const iframe = document.getElementById("canvas");
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+    iframeDoc.open();
+    iframeDoc.write("");  // 💾 Restore full HTML
+    iframeDoc.close();
 
   currentPro = name; // naye project ka naam set
   saveInterval = setInterval(saveProject, 1000); // har 1 sec me save
@@ -336,6 +342,11 @@ function loadProject(name) {
        var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
        applyHoverCSS(finalStylehv);
     }
+
+    const els = iframeDoc.querySelectorAll('*');
+    els.forEach(el => {
+       if(el.className==='behOverlay'){el.remove()}
+    });
 
     updateFileList();
     startAutoSave(name);
