@@ -233,14 +233,24 @@ function openFullPreview() {
   });
 }
 
-let currentPro = null;       // Current project ka naam
-let saveInterval = null;     // Auto-save ka reference
+function fixedString(s, l) {
+  let fix = "";
+  for (var i = 0; i < s.length; i++) {
+    fix += s.charAt(i);
+    if(i === 9){ fix += "..."; break; }
+  }
+  return fix;
+}
+
+let currentPro = null;
+let saveInterval = null;
 
 // Save full project
 function saveProject() {
-  if (!currentPro) return;   // agar project ka naam hi nahi to kuch save nahi karna
+  if (!currentPro) return;
 
-  console.log("Auto-saved:", currentPro);
+  // display project name or state
+  document.getElementById("projectNameTxt").innerHTML = `<p style="margin:0">Project: ${fixedString(currentPro, 10)}</p><div style="color: lightgreen; background: green; padding:5px 10px; border-radius: 5px; margin:0; font-size: 12px;">Saved</div>`;
 
   const iframeDoc = document.getElementById("canvas").contentDocument;
   const fullHTML = iframeDoc.documentElement.outerHTML;
