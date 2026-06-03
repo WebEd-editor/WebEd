@@ -341,11 +341,13 @@ function loadProject(name) {
        var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
        applyHoverCSS(finalStylehv);
     }
-
+    console.log("html loaded after \n"+data.html);
     const els = iframeDoc.querySelectorAll('*');
     els.forEach(el => {
        if(el.className==='behOverlay'){el.remove()}
     });
+
+    console.log("html loaded after \n"+data.html);
 
     updateFileList();
     startAutoSave(name);
