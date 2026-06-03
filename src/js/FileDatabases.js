@@ -341,17 +341,16 @@ function loadProject(name) {
        var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
        applyHoverCSS(finalStylehv);
     }
-    console.log("html loaded after \n"+data.html);
+    
     const els = iframeDoc.querySelectorAll('*');
     els.forEach(el => {
-       if(el.className==='behOverlay'){el.remove()}
+       if(el.className==='behOverlay'){console.log(el.outerHTML); el.remove();}
+       if(el.className==='behWlabel'){console.log(el.outerHTML); el.remove();}
     });
-
-    console.log("html loaded after \n"+data.html);
 
     updateFileList();
     startAutoSave(name);
-    enableDragAndNest(document.getElementById("canvas"));
+    //enableDragAndNest(document.getElementById("canvas"));
     showClickOver();
     showPopup("Project Loaded", `Your Project ${name} was Loaded`, true, false);
   };
