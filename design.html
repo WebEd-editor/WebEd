@@ -89,7 +89,8 @@
       <button onclick="openFullPreview()"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#fff"><path d="M336-216v-528l408 264-408 264Zm73-265Zm-1 133 204-132-204-132v264Z"/></svg></button>
    </div>
    <div>
-      <div class="mc">
+      <div class="mc" style="display: flex;justify-content: center;align-items: center;">
+         <div id="projectNameTxt" style="display: flex;justify-content: center;align-items: center;gap: 10px;"><p style="margin:0">Project: untitled</p><div style="color: darkred; background: red; padding:5px 10px; border-radius: 5px; font-size: 12px;">not saved</div></div>
          <button class="menuCode" onclick="document.querySelector('.m').classList.toggle('actm')">+ Code</button>
          <div class="m" style="display:none;flex-direction: column; z-index: 102;position: absolute;top: 100%;right: 0;">
             <button class="menuCode" onclick="document.getElementById('webedmenu').style.display='block';ooo('tt2','bb2')">Custom Code</button>
