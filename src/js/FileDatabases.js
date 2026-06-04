@@ -308,7 +308,7 @@ function loadProject(name) {
   const req = store.get(name);
 
   req.onsuccess = () => {
-    const data = req.result;
+    const data = req.result; console.log(data);
     if (!data) return;
 
     const iframe = document.getElementById("canvas");
