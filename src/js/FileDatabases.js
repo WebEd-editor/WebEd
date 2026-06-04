@@ -308,7 +308,7 @@ function loadProject(name) {
   const req = store.get(name);
 
   req.onsuccess = () => {
-    const data = req.result; console.log(data);
+    const data = req.result;
     if (!data) return;
 
     const iframe = document.getElementById("canvas");
@@ -344,9 +344,9 @@ function loadProject(name) {
     
     const els = iframeDoc.querySelectorAll('*');
     els.forEach(el => {
-       if(el.className==='behOverlay'){console.log(el.outerHTML); el.remove();}
-       if(el.className==='behWlabel'){console.log(el.outerHTML); el.remove();}
-       if(el.className==='behHandle'){console.log(el.outerHTML); el.remove();}
+       if(el.className==='behOverlay'){el.remove();}
+       if(el.className==='behWlabel'){el.remove();}
+       if(el.className==='behHandle'){el.remove();}
     });
 
     updateFileList();
