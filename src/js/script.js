@@ -880,7 +880,12 @@ document.getElementById("respMode").addEventListener('input', ()=>{
    let m = document.getElementById('respMode').value;
    precon(m);
 });
-////rest var
+
+////resp var
+let resp1024 = [];
+let resp768 = [];
+let resp320 = [];
+let sthover = [];
 
 function generateResponsiveCSS(data, maxWidth) {
   let css = `/* webed responsive styles */\n@media (max-width: ${maxWidth}px) {\n`;
