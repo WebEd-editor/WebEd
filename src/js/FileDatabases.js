@@ -255,24 +255,6 @@ function saveProject() {
   const iframeDoc = document.getElementById("canvas").contentDocument;
   const fullHTML = iframeDoc.documentElement.outerHTML;
 
-  const iframeForRemovingNodes = document.createElement('iframe');
-  iframeForRemovingNodes.style.display = "none";
-  document.querySelector('.headDec').appendChild(iframeForRemovingNodes);
-
-  const tempDoc = iframeForRemovingNodes.contentDocument;
-  tempDoc.open();
-  tempDoc.write(fullHTML);
-  tempDoc.close();
-
-  const els = tempDoc.querySelectorAll('*');
-  els.forEach(el => {
-    if (el.draggable) el.removeAttribute('draggable');
-    if (el.classList.contains('behOverlay')) el.remove();
-    if (el.style && el.style.outline) el.style.outline = '';
-  });
-
-  const cleanedHTML = tempDoc.documentElement.outerHTML;
-    
   const tx = db.transaction('projects', 'readwrite');
   const store = tx.objectStore('projects');
 
@@ -285,7 +267,7 @@ function saveProject() {
     
   store.put({
     name: currentPro,
-    html: cleanedHTML,
+    html: fullHTML,
     files: customFiles,
     reponsive: respData
   }).onsuccess = () => {
@@ -309,7 +291,7 @@ function createNewProject() {
   if (!name) return;
 
     
-      const iframe = document.getElementById("canvas");
+    const iframe = document.getElementById("canvas");
     const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
     iframeDoc.open();
