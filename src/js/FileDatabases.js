@@ -244,7 +244,7 @@ function fixedString(s, l) {
 
 let currentPro = null;
 let saveInterval = null;
-const iframeForRemovingNodes = document.getElementById("headDec").createElement('iframe');
+const iframeForRemovingNodes = document.querySelector(".headDec").createElement('iframe');
 iframeForRemovingNodes.style.display = "none";
 document.getElementById('tempNoneiframe').appendChild(iframeForRemovingNodes);
 
