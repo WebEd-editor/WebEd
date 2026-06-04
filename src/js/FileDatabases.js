@@ -244,9 +244,6 @@ function fixedString(s, l) {
 
 let currentPro = null;
 let saveInterval = null;
-const iframeForRemovingNodes = document.querySelector(".headDec").createElement('iframe');
-iframeForRemovingNodes.style.display = "none";
-document.getElementById('tempNoneiframe').appendChild(iframeForRemovingNodes);
 
 // Save full project
 function saveProject() {
@@ -257,6 +254,10 @@ function saveProject() {
 
   const iframeDoc = document.getElementById("canvas").contentDocument;
   const fullHTML = iframeDoc.documentElement.outerHTML;
+
+  const iframeForRemovingNodes = document.createElement('iframe');
+  iframeForRemovingNodes.style.display = "none";
+  document.querySelector('.headDec').appendChild(iframeForRemovingNodes);
 
   const tempDoc = iframeForRemovingNodes.contentDocument;
   tempDoc.open();
