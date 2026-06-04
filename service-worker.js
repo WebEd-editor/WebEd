@@ -1,4 +1,4 @@
-const CACHE_NAME = 'webed-cache-v2.1.31';
+const CACHE_NAME = 'webed-cache-v2.1.32';
 const FILES_TO_CACHE = [
   '/',
   '/design.html',
@@ -29,9 +29,9 @@ self.addEventListener('install', event => {
       for (const file of FILES_TO_CACHE) {
         try {
           await cache.add(file);
-          console.log("Cached:", file);
+          //console.log("Cached:", file);
         } catch (err) {
-          console.error("Failed:", file, err);
+          //console.error("Failed:", file, err);
         }
       }
     })
@@ -41,13 +41,13 @@ self.addEventListener('install', event => {
 
 // Activate
 self.addEventListener('activate', event => {
-  console.log('[ServiceWorker] Activate');
+  //console.log('[ServiceWorker] Activate');
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(name => {
           if (name !== CACHE_NAME) {
-            console.log('[ServiceWorker] Deleting old cache:', name);
+            //console.log('[ServiceWorker] Deleting old cache:', name);
             return caches.delete(name);
           }
         })
@@ -96,16 +96,3 @@ self.addEventListener("fetch", (event) => {
     );
 
 });
-
-/*self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request).catch(() => {
-        // Fallback for HTML requests
-        if (event.request.destination === 'document') {
-          return caches.match('/design.html');
-        }
-      });
-    })
-  );
-});*/
