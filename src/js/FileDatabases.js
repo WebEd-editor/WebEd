@@ -315,7 +315,7 @@ function createNewProject() {
     iframeDoc.open();
     iframeDoc.write("");  // 💾 Restore full HTML
     iframeDoc.close();
-
+  updateTree();
   startAutoSave(name);
 }
 
@@ -370,6 +370,7 @@ function loadProject(name) {
     updateFileList();
     startAutoSave(name);
     //enableDragAndNest(document.getElementById("canvas"));
+    updateTree();
     showClickOver();
     showPopup("Project Loaded", `Your Project ${name} was Loaded`, true, false);
   };
