@@ -168,7 +168,7 @@ ooo('tt1', 'bb1');
 
 
 // Ye function user ko fetch karega aur menu me username show karega
-function fetchUser() {
+/* function fetchUser() {
   fetch("https://auth-p1ny.onrender.com/api/me", {
     method: "GET",
     credentials: "include" // 🔹 cookie bhejega
@@ -190,15 +190,10 @@ function fetchUser() {
     console.error("Fetch error:", err);
     document.getElementById("username").innerText = "Error loading user";
   });
-}
+} */
 
 // Menu load hote hi call kar do
-document.addEventListener("DOMContentLoaded", fetchUser);
-
-let resp1024 = [];
-let resp768 = [];
-let resp320 = [];
-let sthover = [];
+// document.addEventListener("DOMContentLoaded", fetchUser);
 
 async function loadTemplates() {
   const res = await fetch("https://template-back-o4fm.onrender.com/api/templates");
@@ -208,85 +203,88 @@ async function loadTemplates() {
 
   data.forEach(t => {
 
-  const iframeId = "thumb_" + crypto.randomUUID();
+    const iframeId = "thumb_" + crypto.randomUUID();
 
-  div.innerHTML += `
-    <div style="border:1px solid #444; padding:10px; margin:10px; background:#222; width: 200px;">
-      
-      <iframe id="${iframeId}"
-        style="
-          width:100%; 
-          height:50%; 
-          border:1px solid #ccc; 
-          background:white;
-          pointer-events:none;
-          overflow:hidden;
-          transform:scale(1);
-          transform-origin:0 0;
-          zoom: 60%;
-        ">
-      </iframe>
+    div.innerHTML += `
+      <div style="border:1px solid #444; padding:10px; margin:10px; background:#222; width: 200px;">
+        
+        <iframe id="${iframeId}"
+          style="
+            width:100%; 
+            height:300px; 
+            border:1px solid #ccc; 
+            background:white;
+            pointer-events:none;
+            overflow:hidden;
+            transform:scale(1);
+            transform-origin:0 0;
+            zoom: 30%;
+          ">
+        </iframe>
 
-      <h3>${t.name}</h3>
-      <p>Category: ${t.category}</p>
-      <button onclick='useTemplate(${JSON.stringify(t.name)}, ${JSON.stringify(t.html)}, ${JSON.stringify(t.resp)})'>
-        Use
-      </button>
-    </div>
-  `;
+        <h3 style="margin:0; font-size: 16px;text-align:left;">${t.name}</h3>
+        <h4 style="margin:0; font-size: 13px;text-align:left;">Category: ${t.category}</h4>
+        <section style="display:flex;align-items:center;justify-content:space-between;">
+          <button onclick='useTemplate(${JSON.stringify(t.name)}, ${JSON.stringify(t.html)}, ${JSON.stringify(t.files)}, ${JSON.stringify(t.reponsive)})'>
+            Use Template
+          </button>
+        </section>
+      </div>
+    `;
 
-  // Load preview HTML into iframe
-  setTimeout(() => {
-    let iframe = document.getElementById(iframeId);
-    let idoc = iframe.contentDocument || iframe.contentWindow.document;
-    idoc.open();idoc.write(t.html);idoc.close();
-  }, 20);
+    // Load preview HTML into iframe
+    setTimeout(() => {
+      let iframe = document.getElementById(iframeId);
+      let idoc = iframe.contentDocument || iframe.contentWindow.document;
+      idoc.open();idoc.write(t.html);idoc.close();
+    }, 20);
 
   });
 }
 
 document.addEventListener("DOMContentLoaded", loadTemplates);
 
-function useTemplate(name, htmlCode, resp) {
-  const iframe = document.getElementById("canvas");
-   const doc = iframe.contentDocument || iframe.contentWindow.document;
-   const fixedForSingleQuit = htmlCode.replace(/url\("([^"]*)"\)/g, "url('$1')");
-   doc.open();
-   doc.write(fixedForSingleQuit);
-   doc.close();
+function useTemplate(name, htmlCode, files, resp) {
+    // load a project (teaplates)
+    const iframe = document.getElementById("canvas");
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-   // Remove old custom files (from parent doc)
-    //document.querySelectorAll('style[data-custom], script[data-custom]').forEach(e => e.remove());
+    iframeDoc.open();
+    iframeDoc.write(htmlCode);
+    iframeDoc.close();
+
+    // Remove old custom files (from parent doc)
+    document.querySelectorAll('style[data-custom], script[data-custom]').forEach(e => e.remove());
 
     // Inject saved custom JS/CSS into parent document again
-    /*customFiles = files || {};
+    customFiles = files || {};
     for (const file in customFiles) {
       const tag = document.createElement(customFiles[file].type === 'js' ? 'script' : 'style');
       tag.textContent = customFiles[file].content;
       tag.dataset.custom = 'true';
       document.body.appendChild(tag);
-    }*/
+    }
 
     if(resp) {
-       resp1024.length =0; resp768.length =0; resp320.length =0; sthover.length =0;
-       const { resp1024, resp768, resp320 } = resp;
+       let scresp1024 = resp.resp1024;
+       let scresp768 = resp.resp768;
+       let scresp320 = resp.resp320;
+       let scsthover = resp.sthover;
+
        let finalStyle = "";
-       finalStyle += generateResponsiveCSS(resp1024, 1024);
-       finalStyle += generateResponsiveCSS(resp768, 768);
-       finalStyle += generateResponsiveCSS(resp320, 320);
+       finalStyle += generateResponsiveCSS(scresp1024, 1024);
+       finalStyle += generateResponsiveCSS(scresp768, 768);
+       finalStyle += generateResponsiveCSS(scresp320, 320);
        applyResponsiveCSS(finalStyle);
-       var finalStylehv = "";finalStylehv += generateHoverCSS(sthover);
+       var finalStylehv = "";finalStylehv += generateHoverCSS(scsthover);
        applyHoverCSS(finalStylehv);
     }
 
     updateFileList();
-   
-   const els = doc.body.querySelectorAll('*');
-   els.forEach(el => {
-      el.classList.add('editable');
-   });
-   showClickOver();
-   alert(name + ' Template Loaded');
+    updateTree();
+    enableDragAndNest(document.getElementById("canvas"));
+    showClickOver();
+    showPopup("Template Loaded", `template ${name} was Loaded`, true, false);
 }
 
 
