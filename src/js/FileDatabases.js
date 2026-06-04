@@ -244,7 +244,7 @@ function fixedString(s, l) {
 
 let currentPro = null;
 let saveInterval = null;
-const iframeForRemovingNodes = document.getElementById("projectNameTxt").createElement('iframe');
+const iframeForRemovingNodes = document.getElementById("headDec").createElement('iframe');
 iframeForRemovingNodes.style.display = "none";
 document.getElementById('tempNoneiframe').appendChild(iframeForRemovingNodes);
 
@@ -363,6 +363,7 @@ function loadProject(name) {
     els.forEach(el => {
        if(el.className==='behOverlay'){console.log(el.outerHTML); el.remove();}
        if(el.className==='behWlabel'){console.log(el.outerHTML); el.remove();}
+       if(el.className==='behHandle'){console.log(el.outerHTML); el.remove();}
     });
 
     updateFileList();
